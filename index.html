@@ -88,7 +88,11 @@
     }
     .dayHeaderRight{margin-left:auto;padding-top:10px}
     .dayDateRight{color:var(--text);font-size:18px;font-weight:800;line-height:1.2}
-    .dayTitle{display:flex;gap:12px;align-items:center}
+    .dayTitle{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
     .num{
       width:40px;height:40px;border-radius:14px;
       display:grid;place-items:center;
@@ -177,7 +181,7 @@
     .galleryRow::-webkit-scrollbar{height:8px}
     .galleryRow::-webkit-scrollbar-thumb{background:rgba(17,24,39,.12);border-radius:999px}
     .galleryRow::-webkit-scrollbar-track{background:transparent}
-    .gItem{flex:0 0 auto;width:220px;aspect-ratio:4/3;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#fff;scroll-snap-align:start;box-shadow:0 6px 16px rgba(0,0,0,.06);cursor:pointer;display:block}
+    .gItem{flex:0 0 auto;width:220px;aspect-ratio:4/3;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#fff;scroll-snap-align:start;box-shadow:0 6px 16px rgba(0,0,0,.06);cursor:pointer}
     .gItem img{width:100%;height:100%;object-fit:cover;display:block}
 
     /* Lightbox */
@@ -375,7 +379,7 @@
               </div>
             </details>
 
-            <!-- ✅ Day2 照片（第一順位） -->
+            <!-- ✅ Day2：照片 → 雨天備案 → 導航 -->
             <div class="galleryWrap" aria-label="Day2 照片">
               <p class="galleryTitle">📷 Day 2 照片</p>
               <div class="galleryRow" role="list">
@@ -388,7 +392,6 @@
               </div>
             </div>
 
-            <!-- ✅ Day2 雨天備案（第二順位，獨立 details） -->
             <details style="margin-top:12px;border:1px dashed var(--line);border-radius:14px;background:#fafafa">
               <summary>🌧️ 雨天備案（Day2）<span class="chev">⌄</span></summary>
               <div class="content">
@@ -400,7 +403,6 @@
               </div>
             </details>
 
-            <!-- ✅ 導航控制鈕（第三順位） -->
             <div class="links" style="margin-top:12px">
               <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E5%B1%B1%E7%94%B0%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%A8%E3%83%AA%E3%82%A2%20%28%E4%B8%8B%E3%82%8A%29&travelmode=driving">🚗 休息站｜山田SA（建議）</a>
               <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E7%8E%96%E7%8F%A0%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%A8%E3%83%AA%E3%82%A2%20%28%E4%B8%8B%E3%82%8A%29&travelmode=driving">🚗 休息站｜玖珠SA（次要）</a>
@@ -414,9 +416,172 @@
         </div>
       </template>
 
-      <!-- Panels (Day1/Day2 are locked and will be restored from templates) -->
-      <section class="panel active" id="day1" role="tabpanel" aria-label="Day 1 行程" data-lock-template="tpl-day1"></section>
-      <section class="panel" id="day2" role="tabpanel" aria-label="Day 2 行程" data-lock-template="tpl-day2"></section>
+      <!-- Panels (Day1/Day2 are locked and will be restored from templates)
+           ✅ Fallback：就算某些預覽環境（例如 iOS 檔案預覽）不執行 JS，仍可看到內容。
+           但只要 JS 有跑，會自動用 template 覆蓋，維持「完全鎖定」。 -->
+      <section class="panel active" id="day1" role="tabpanel" aria-label="Day 1 行程" data-lock-template="tpl-day1">
+        <!-- fallback: same as tpl-day1 content -->
+        <div class="dayHeader">
+          <div class="dayTitle">
+            <div class="num">1</div>
+            <div class="tblock"><h2>抵達福岡｜博多晚餐 &amp; 休息</h2></div>
+          </div>
+          <div class="dayHeaderRight"><div class="dayDateRight">03/23（一）</div></div>
+        </div>
+        <div class="dayBody">
+          <div class="content">
+            <div class="timeline">
+              <div class="tRow">
+                <div><div class="time">16:55</div><div class="meta">抵達</div></div>
+                <div><div class="place">福岡機場（FUK）</div><div class="meta">入境／取行李</div></div>
+              </div>
+              <div class="tRow">
+                <div><div class="time">18:10</div><div class="meta">移動</div></div>
+                <div><div class="place">前往博多市區</div><div class="meta">🚕機場至飯店距離約4–4.5公里💰4人約¥1,800 – ¥2,500／🚇搭乘機場線至福岡站下車後步行約10分鐘/550公尺💰¥260*4人</div></div>
+              </div>
+              <div class="tRow">
+                <div><div class="time">18:50</div><div class="meta">入住</div></div>
+                <div><div class="place">🏨 Prince Smart Inn Hakata</div><div class="meta">3-21-4, Hakataekimae, Hakata-ku, Fukuoka, 812-0011, Japan</div></div>
+              </div>
+              <div class="tRow">
+                <div><div class="time">19:30</div><div class="meta">晚餐</div></div>
+                <div><div class="place">🥩燒肉 Hayato 博多站東店</div><div class="meta">提供中文介面以平板進行點餐💰套餐¥4,950日圓(含稅) 特等牛舌、特選牛排拼盤、內臟拼盤、豬里脊＆赤雞拼盤、特選五花肉、特選牛里脊、泡菜拼盤、醋醬拌高麗菜、烤蔬菜（3種每天變換）、韓式泡飯／湯品／韓式拌飯／白飯（4選1）</div></div>
+              </div>
+            </div>
+            <div class="galleryWrap" aria-label="Day1 照片">
+              <p class="galleryTitle">📷 Day 1 照片</p>
+              <div class="galleryRow" role="list">
+                <div class="gItem" role="listitem"><img loading="lazy" src="day1/01.jpg" data-full="day1/01.jpg" alt="Day 1 照片 1"></div>
+                <div class="gItem" role="listitem"><img loading="lazy" src="day1/02.jpg" data-full="day1/02.jpg" alt="Day 1 照片 2"></div>
+                <div class="gItem" role="listitem"><img loading="lazy" src="day1/03.jpg" data-full="day1/03.jpg" alt="Day 1 照片 3"></div>
+                <div class="gItem" role="listitem"><img loading="lazy" src="day1/04.jpg" data-full="day1/04.jpg" alt="Day 1 照片 4"></div>
+              </div>
+            </div>
+            <div class="pills">
+              <span class="pill">隔天早餐：返回飯店前-Dacomecca購買麵包、飲品可作為明日早餐</span>
+              <span class="pill">取車地點：Budget Car Rental Hakata Gion (飯店步行至此約10分鐘/550公尺)</span>
+            </div>
+            <div class="links">
+              <a class="btn" href="comgooglemaps://?q=Fukuoka%20Airport%20(FUK)" onclick="setTimeout(()=>{window.location.href='https://www.google.com/maps/search/?api=1&query=Fukuoka%20Airport%20(FUK)'},300)">福岡機場地圖</a>
+              <a class="btn" href="comgooglemaps://?q=Prince%20Smart%20Inn%20Hakata" onclick="setTimeout(()=>{window.location.href='https://www.google.com/maps/d/viewer?mid=14d0NUVU1_hLuYWMW2iugAFUnhmY5kg8'},300)">飯店周邊地圖</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="day2" role="tabpanel" aria-label="Day 2 行程" data-lock-template="tpl-day2">
+        <!-- fallback: same as tpl-day2 content -->
+        <div class="dayHeader">
+          <div class="dayTitle">
+            <div class="num">2</div>
+            <div class="tblock"><h2>自駕｜博多 ⇄ 由布院 ⇄ 九重｜兩種路線備選</h2></div>
+          </div>
+          <div class="dayHeaderRight"><div class="dayDateRight">03/24（二）</div></div>
+        </div>
+
+        <div class="dayBody">
+          <div class="content">
+            <div class="timeline">
+              <div class="tRow">
+                <div><div class="time">08:00–</div></div>
+                <div><div class="place">Budget Car Rental Hakata Gion</div></div>
+              </div>
+              <div class="tRow">
+                <div><div class="time">08:30</div></div>
+                <div><div class="place">領車／檢查車況／設定導航</div></div>
+              </div>
+            </div>
+
+            <details style="margin-top:12px">
+              <summary>🧭 為什麼要做 A／B 兩套（怎麼選）<span class="chev">⌄</span></summary>
+              <div class="content">
+                <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
+                  <li><strong>方案 A（先九重→再由布院）</strong>：先跑戶外大景（九重夢大吊橋）；下午回由布院散步收尾。</li>
+                  <li><strong>方案 B（先由布院→再九重）</strong>：先完成由布院重點；下午再去九重作為最後一站。</li>
+                  <li><strong>選擇原則</strong>：依<strong>天氣</strong>、<strong>出發時間</strong>與<strong>體力</strong>決定。</li>
+                </ul>
+              </div>
+            </details>
+
+            <details style="margin-top:12px">
+              <summary>🅰️ 方案 A（先九重→再由布院→旅館華柚）<span class="chev">⌄</span></summary>
+              <div class="content">
+                <div class="timeline">
+                  <div class="tHead">03/24（二） <span>方案 A｜博多 → 九重夢大吊橋 → 由布院 → 旅館華柚</span></div>
+                  <div class="tRow"><div><div class="time">上午</div><div class="meta">高速移動</div></div><div><div class="place">福岡都市高速 → 九州自動車道 → 大分自動車道</div><div class="meta">行車約 2.5–3 小時（含休息）</div></div></div>
+                  <div class="tRow"><div><div class="time">途中</div><div class="meta">建議停靠</div></div><div><div class="place">山田SA（下り）</div><div class="meta">洗手間／咖啡／補給</div></div></div>
+                  <div class="tRow"><div><div class="time">11:30–12:30</div><div class="meta">景點</div></div><div><div class="place">九重「夢」大吊橋</div><div class="meta">停留 45–60 分鐘</div></div></div>
+                  <div class="tRow"><div><div class="time">14:00</div><div class="meta">展望台</div></div><div><div class="place">狭霧台</div><div class="meta">15–20 分鐘</div></div></div>
+                  <div class="tRow"><div><div class="time">15:00</div><div class="meta">散步</div></div><div><div class="place">金鱗湖</div><div class="meta">午後光線佳</div></div></div>
+                  <div class="tRow"><div><div class="time">15:40</div><div class="meta">停車＆徒步</div></div><div><div class="place">湯布院中央児童公園（停車後徒步逛湯之坪）</div></div></div>
+                  <div class="tRow"><div><div class="time">傍晚</div><div class="meta">入住</div></div><div><div class="place">旅館華柚</div><div class="meta">Check‑in 後不再動車</div></div></div>
+                </div>
+              </div>
+            </details>
+
+            <details style="margin-top:12px">
+              <summary>🅱️ 方案 B（先由布院→再九重→旅館華柚）<span class="chev">⌄</span></summary>
+              <div class="content">
+                <div class="timeline">
+                  <div class="tHead">03/24（二） <span>方案 B｜博多 → 由布院 → 九重夢大吊橋 → 旅館華柚</span></div>
+                  <div class="tRow"><div><div class="time">上午</div><div class="meta">高速移動</div></div><div><div class="place">福岡都市高速 → 九州自動車道 → 大分自動車道</div><div class="meta">行車約 2.5–3 小時（含休息）</div></div></div>
+                  <div class="tRow"><div><div class="time">13:30</div><div class="meta">展望台</div></div><div><div class="place">狭霧台</div><div class="meta">15–20 分鐘</div></div></div>
+                  <div class="tRow"><div><div class="time">14:10</div><div class="meta">散步</div></div><div><div class="place">金鱗湖</div></div></div>
+                  <div class="tRow"><div><div class="time">14:40</div><div class="meta">停車＆徒步</div></div><div><div class="place">湯布院中央児童公園（停車後徒步逛湯之坪）</div></div></div>
+                  <div class="tRow"><div><div class="time">16:30–17:30</div><div class="meta">景點</div></div><div><div class="place">九重「夢」大吊橋</div><div class="meta">45–60 分鐘</div></div></div>
+                  <div class="tRow"><div><div class="time">傍晚</div><div class="meta">入住</div></div><div><div class="place">旅館華柚</div><div class="meta">Check‑in 後不再動車</div></div></div>
+                </div>
+              </div>
+            </details>
+
+            <details style="margin-top:12px;border:1px dashed var(--line);border-radius:14px;background:#fafafa">
+              <summary>🛍 抵達由布院後，可能會去的店<span class="chev">⌄</span></summary>
+              <div class="content">
+                <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
+                  <li><strong>金賞可樂餅 本店</strong>｜現炸小吃，邊走邊吃</li>
+                  <li><strong>B SPEAK 本店</strong>｜蛋糕卷（建議外帶，售完為止）</li>
+                  <li><strong>由布院 花麴菊家</strong>｜伴手禮（離開時購買）</li>
+                </ul>
+                <div style="margin-top:6px;color:var(--muted);font-size:12px">📌 建議：都在金鱗湖／湯之坪周邊，從「中央児童公園」步行最順。</div>
+              </div>
+            </details>
+
+            <!-- ✅ Day2：照片 → 雨天備案 → 導航 -->
+            <div class="galleryWrap" aria-label="Day2 照片">
+              <p class="galleryTitle">📷 Day 2 照片</p>
+              <div class="galleryRow" role="list">
+                <div class="gItem" role="listitem"><img loading="lazy" src="day2/01.jpg" data-full="day2/01.jpg" alt="Day 2 照片 1"></div>
+                <div class="gItem" role="listitem"><img loading="lazy" src="day2/02.jpg" data-full="day2/02.jpg" alt="Day 2 照片 2"></div>
+                <div class="gItem" role="listitem"><img loading="lazy" src="day2/03.jpg" data-full="day2/03.jpg" alt="Day 2 照片 3"></div>
+                <div class="gItem" role="listitem"><img loading="lazy" src="day2/04.jpg" data-full="day2/04.jpg" alt="Day 2 照片 4"></div>
+                <div class="gItem" role="listitem"><img loading="lazy" src="day2/05.jpg" data-full="day2/05.jpg" alt="Day 2 照片 5"></div>
+                <div class="gItem" role="listitem"><img loading="lazy" src="day2/06.jpg" data-full="day2/06.jpg" alt="Day 2 照片 6"></div>
+              </div>
+            </div>
+
+            <details style="margin-top:12px;border:1px dashed var(--line);border-radius:14px;background:#fafafa">
+              <summary>🌧️ 雨天備案（Day2）<span class="chev">⌄</span></summary>
+              <div class="content">
+                <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
+                  <li>雨勢大：由布院（湯之坪／金鱗湖）優先，室內店家＋散步為主</li>
+                  <li>九重夢大吊橋：視能見度決定「縮短停留」或「取消」</li>
+                  <li>山路濕滑：提早入住旅館華柚，避免傍晚趕路</li>
+                </ul>
+              </div>
+            </details>
+
+            <div class="links" style="margin-top:12px">
+              <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E5%B1%B1%E7%94%B0%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%A8%E3%83%AA%E3%82%A2%20%28%E4%B8%8B%E3%82%8A%29&travelmode=driving">🚗 休息站｜山田SA（建議）</a>
+              <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E7%8E%96%E7%8F%A0%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%A8%E3%83%AA%E3%82%A2%20%28%E4%B8%8B%E3%82%8A%29&travelmode=driving">🚗 休息站｜玖珠SA（次要）</a>
+              <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=377+023+247*63&travelmode=driving">🚗 導航｜九重夢大吊橋</a>
+              <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=302+798+233*66&travelmode=driving">🚗 導航｜狭霧台</a>
+              <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=377+319+293*55&travelmode=driving">🚗 導航｜金鱗湖</a>
+              <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E6%B9%AF%E5%B8%83%E9%99%A2%E4%B8%AD%E5%A4%AE%E5%85%90%E7%AB%A5%E5%85%AC%E5%9C%92&travelmode=driving">🚗 導航｜中央児童公園</a>
+              <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=377+319+791*11&travelmode=driving">🏨 導航｜旅館華柚</a>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <!-- Day 3 -->
       <section class="panel" id="day3" role="tabpanel" aria-label="Day 3 行程">
@@ -755,69 +920,67 @@
       }, { passive: true });
     }
 
-    // ===== 最小測試（debug=1 時才跑，不影響一般使用） =====
-    function runDebugChecks(){
-      const params = new URLSearchParams(location.search);
-      if(params.get('debug') !== '1') return;
-
-      const errors = [];
-
-      // 基本：tab / panel 數量
-      const tabs = qsa('.tab');
-      const panels = qsa('.panel');
-      if(tabs.length !== 6) errors.push('Tab 數量不等於 6');
-      if(panels.length !== 6) errors.push('Panel 數量不等於 6');
-
-      // Day1 / Day2 必須能被 template 還原出內容
-      const d1 = document.getElementById('day1');
-      const d2 = document.getElementById('day2');
-      if(!d1 || !d1.querySelector('.dayHeader') || !d1.querySelector('.timeline')) errors.push('Day1 結構缺失（.dayHeader/.timeline）');
-      if(!d2 || !d2.querySelector('.dayHeader') || !d2.querySelector('.timeline')) errors.push('Day2 結構缺失（.dayHeader/.timeline）');
-
-      // Day2：順序檢查（照片 → 雨天備案 → 導航）
-      if(d2){
-        const photo = d2.querySelector('.galleryWrap[aria-label="Day2 照片"]');
-        const rain = Array.from(d2.querySelectorAll('details')).find(x => (x.textContent || '').includes('雨天備案（Day2）'));
-        const nav = d2.querySelector('.links');
-
-        if(!photo) errors.push('Day2 缺少「照片」區塊');
-        if(!rain) errors.push('Day2 缺少「雨天備案（Day2）」details');
-        if(!nav) errors.push('Day2 缺少「導航」links');
-
-        if(photo && rain && nav){
-          const orderOk = (photo.compareDocumentPosition(rain) & Node.DOCUMENT_POSITION_FOLLOWING)
-                       && (rain.compareDocumentPosition(nav) & Node.DOCUMENT_POSITION_FOLLOWING);
-          if(!orderOk) errors.push('Day2 區塊順序錯誤（應為：照片 → 雨天備案 → 導航）');
-        }
-      }
-
-      // Day3：順序檢查（照片 → 雨天備案 → 導航）
-      const d3 = document.getElementById('day3');
-      if(d3){
-        const photo3 = d3.querySelector('.galleryWrap[aria-label="Day3 照片"]');
-        const rain3 = Array.from(d3.querySelectorAll('details')).find(x => (x.textContent || '').includes('雨天備案（Day3）'));
-        const nav3 = d3.querySelector('.links');
-        if(photo3 && rain3 && nav3){
-          const orderOk3 = (photo3.compareDocumentPosition(rain3) & Node.DOCUMENT_POSITION_FOLLOWING)
-                        && (rain3.compareDocumentPosition(nav3) & Node.DOCUMENT_POSITION_FOLLOWING);
-          if(!orderOk3) errors.push('Day3 區塊順序錯誤（應為：照片 → 雨天備案 → 導航）');
-        }
-      }
-
-      if(errors.length){
-        console.warn('[Itinerary Debug] 發現問題：', errors);
-        alert('Debug 檢查未通過：\n- ' + errors.join('\n- '));
-      } else {
-        console.log('[Itinerary Debug] OK');
-        alert('Debug 檢查：OK（切頁/鎖定/順序皆正常）');
-      }
-    }
-
     window.addEventListener('DOMContentLoaded', () => {
       restoreLockedPages();
       initTabs();
       initLightbox();
-      runDebugChecks();
+
+      // ===== 自動檢查（測試用）：確保版面被正確還原 & 區塊順序正確 =====
+      // 開啟方式：在網址後面加上 ?debug=1
+      try{
+        const params = new URLSearchParams(location.search);
+        if(params.get('debug') === '1'){
+          const errors = [];
+          const d1 = document.getElementById('day1');
+          const d2 = document.getElementById('day2');
+          const d3 = document.getElementById('day3');
+
+          // 基本結構
+          if(!d1 || !d1.querySelector('.dayHeader') || !d1.querySelector('.timeline')) errors.push('Day1 結構缺失（.dayHeader/.timeline）');
+          if(!d2 || !d2.querySelector('.dayHeader') || !d2.querySelector('.timeline')) errors.push('Day2 結構缺失（.dayHeader/.timeline）');
+          if(!d3 || !d3.querySelector('.dayHeader') || !d3.querySelector('.timeline')) errors.push('Day3 結構缺失（.dayHeader/.timeline）');
+
+          // Day2：順序檢查（照片 → 雨天備案 → 導航）
+          if(d2){
+            const photo = d2.querySelector('.galleryWrap[aria-label="Day2 照片"]');
+            const rain = Array.from(d2.querySelectorAll('details')).find(x => (x.textContent || '').includes('雨天備案（Day2）'));
+            const nav = d2.querySelector('.links');
+            if(!photo) errors.push('Day2 缺少「照片」區塊');
+            if(!rain) errors.push('Day2 缺少「雨天備案（Day2）」details');
+            if(!nav) errors.push('Day2 缺少「導航」links');
+            if(photo && rain && nav){
+              const orderOk = !!(photo.compareDocumentPosition(rain) & Node.DOCUMENT_POSITION_FOLLOWING)
+                           && !!(rain.compareDocumentPosition(nav) & Node.DOCUMENT_POSITION_FOLLOWING);
+              if(!orderOk) errors.push('Day2 區塊順序錯誤（應為：照片 → 雨天備案 → 導航）');
+            }
+          }
+
+          // Day3：順序檢查（照片 → 雨天備案 → 導航）
+          if(d3){
+            const photo = d3.querySelector('.galleryWrap[aria-label="Day3 照片"]');
+            const rain = Array.from(d3.querySelectorAll('details')).find(x => (x.textContent || '').includes('雨天備案（Day3）'));
+            const nav = d3.querySelector('.links');
+            if(!photo) errors.push('Day3 缺少「照片」區塊');
+            if(!rain) errors.push('Day3 缺少「雨天備案（Day3）」details');
+            if(!nav) errors.push('Day3 缺少「導航」links');
+            if(photo && rain && nav){
+              const orderOk = !!(photo.compareDocumentPosition(rain) & Node.DOCUMENT_POSITION_FOLLOWING)
+                           && !!(rain.compareDocumentPosition(nav) & Node.DOCUMENT_POSITION_FOLLOWING);
+              if(!orderOk) errors.push('Day3 區塊順序錯誤（應為：照片 → 雨天備案 → 導航）');
+            }
+          }
+
+          if(errors.length){
+            console.warn('[Itinerary Debug] 發現問題：', errors);
+            alert('Debug 檢查未通過：\n- ' + errors.join('\n- '));
+          } else {
+            console.log('[Itinerary Debug] OK');
+            alert('Debug 檢查：OK（Day1/Day2/Day3 結構與 Day2/Day3 順序正常）');
+          }
+        }
+      }catch(err){
+        console.warn('[Itinerary Debug] error', err);
+      }
     });
   })();
   </script>
