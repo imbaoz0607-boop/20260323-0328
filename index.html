@@ -88,11 +88,7 @@
     }
     .dayHeaderRight{margin-left:auto;padding-top:10px}
     .dayDateRight{color:var(--text);font-size:18px;font-weight:800;line-height:1.2}
-    .dayTitle{
-      display:flex;
-      gap:12px;
-      align-items:center;
-    }
+    .dayTitle{display:flex;gap:12px;align-items:center}
     .num{
       width:40px;height:40px;border-radius:14px;
       display:grid;place-items:center;
@@ -102,18 +98,6 @@
     }
     .tblock{min-width:0;padding-top:2px}
     .tblock h2{margin:0;font-size:18px;line-height:1.2}
-    .tblock .date{margin-top:4px;color:var(--muted);font-size:12px}
-
-    .collapseBtn{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      color:var(--muted);
-      border-radius:12px;
-      padding:8px 10px;
-      cursor:pointer;
-      user-select:none;
-      min-width:40px;
-    }
 
     /* Accordion sections */
     details{
@@ -131,7 +115,6 @@
       font-weight:700;
     }
     summary::-webkit-details-marker{display:none}
-    .sMuted{font-weight:500;color:var(--muted);font-size:12px}
     .chev{color:var(--muted);transition:transform .15s ease}
     details[open] .chev{transform:rotate(180deg)}
 
@@ -161,15 +144,8 @@
       border-bottom:1px solid rgba(255,255,255,.08);
     }
     .tRow:last-child{border-bottom:none}
-    .time{
-      font-variant-numeric: tabular-nums;
-      font-weight:800;
-    }
-    .meta{
-      color:var(--muted);
-      font-size:12px;
-      margin-top:3px;
-    }
+    .time{font-variant-numeric: tabular-nums;font-weight:800}
+    .meta{color:var(--muted);font-size:12px;margin-top:3px}
     .place{font-weight:750}
 
     /* Small chips */
@@ -183,43 +159,7 @@
       border-radius:999px;
     }
 
-    /* Day2 A/B 顯示切換 */
-    .abToggle{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-    .abBtn{
-      appearance:none;
-      border:1px solid var(--line);
-      background:#fff;
-      color:var(--text);
-      padding:8px 10px;
-      border-radius:999px;
-      font-size:12px;
-      cursor:pointer;
-    }
-    .abBtn[aria-pressed="true"]{border-color:var(--accent);background:#eef2ff}
-    .abHint{color:var(--muted);font-size:12px;margin-top:6px}
-
-    .pill{
-      border:1px solid var(--line);
-      background:var(--chip);
-      color:var(--muted);
-      font-size:12px;
-      padding:6px 10px;
-      border-radius:999px;
-    }
-
     .links{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-    .links button.btn{cursor:pointer}
-
-    /* Modal for hotel area map */
-    .poiModal{position:fixed;inset:0;z-index:50}
-    .poiBackdrop{position:absolute;inset:0;background:rgba(17,24,39,.45)}
-    .poiSheet{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(520px,92vw);background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
-    .poiHead{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 12px;border-bottom:1px solid var(--line)}
-    .poiTitle{font-weight:800}
-    .poiClose{border:1px solid var(--line);background:#fff;border-radius:12px;padding:6px 10px;cursor:pointer}
-    .poiBody{padding:12px}
-    .poiHint{color:var(--muted);font-size:12px;margin-bottom:10px}
-    .poiGrid{display:flex;flex-wrap:wrap;gap:8px}
 
     .btn{
       text-decoration:none;
@@ -229,16 +169,15 @@
       border:1px solid var(--line);
       background:rgba(96,165,250,.10);
     }
-    .btn.secondary{background:rgba(96,165,250,.10);} 
 
-    /* Photo gallery (Day1 only) */
+    /* Photo gallery */
     .galleryWrap{margin-top:12px}
     .galleryTitle{font-weight:800;margin:0 0 8px;font-size:13px;color:var(--text)}
     .galleryRow{display:flex;gap:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;padding-bottom:6px}
     .galleryRow::-webkit-scrollbar{height:8px}
     .galleryRow::-webkit-scrollbar-thumb{background:rgba(17,24,39,.12);border-radius:999px}
     .galleryRow::-webkit-scrollbar-track{background:transparent}
-    .gItem{flex:0 0 auto;width:220px;aspect-ratio:4/3;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#fff;scroll-snap-align:start;box-shadow:0 6px 16px rgba(0,0,0,.06);cursor:pointer}
+    .gItem{flex:0 0 auto;width:220px;aspect-ratio:4/3;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#fff;scroll-snap-align:start;box-shadow:0 6px 16px rgba(0,0,0,.06);cursor:pointer;display:block}
     .gItem img{width:100%;height:100%;object-fit:cover;display:block}
 
     /* Lightbox */
@@ -264,7 +203,6 @@
     <header>
       <div>
         <h1>福岡・由布院・阿蘇｜6日行程</h1>
-
       </div>
       <div class="sub">03/23（一）→ 03/28（六）</div>
     </header>
@@ -301,334 +239,133 @@
         <button class="tab" role="tab" aria-selected="false" data-day="day6">Day 6</button>
       </nav>
 
-    <!-- 🔒 DAY HEADER TEMPLATE（請勿改結構，只改文字/日期）
-         使用方式：複製一整段 <div class="dayHeader">…</div>（含 dayHeaderRight）到各 Day。
-         注意：不要把日期放回 .tblock 裡的 <div class="date">；日期只放在右側 .dayDateRight。
-    -->
-
-    <!-- 🔒 LOCKED PAGES (Day 1 / Day 2)
-         目的：把 Day1/Day2 變成「自動回復」的鎖定頁。
-         規則：不要改 Day1/Day2 的結構（section/dayHeader/dayBody…），除非我（ChatGPT）明確說要改。
-         你若不小心改壞 Day1/Day2 內容，頁面載入時會自動用下方 template 還原。
-         真的要改 Day1/Day2：只改 template 內容（tpl-day1 / tpl-day2），其他地方不要動。
-    -->
-    <template id="tpl-day1">
-  <div class="dayHeader">
-    <div class="dayTitle">
-      <div class="num">1</div>
-      <div class="tblock">
-        <h2>抵達福岡｜博多晚餐 &amp; 休息</h2>
-      </div>
-    </div>
-    <div class="dayHeaderRight">
-      <div class="dayDateRight">03/23（一）</div>
-    </div>
-  </div>
-
-  <div class="dayBody">
-    <div class="content">
-      <div class="timeline">
-        <div class="tRow">
-          <div>
-            <div class="time">16:55</div>
-            <div class="meta">抵達</div>
+      <!-- LOCKED templates (Day1 / Day2) -->
+      <template id="tpl-day1">
+        <div class="dayHeader">
+          <div class="dayTitle">
+            <div class="num">1</div>
+            <div class="tblock"><h2>抵達福岡｜博多晚餐 &amp; 休息</h2></div>
           </div>
-          <div>
-            <div class="place">福岡機場（FUK）</div>
-            <div class="meta">入境／取行李</div>
-          </div>
+          <div class="dayHeaderRight"><div class="dayDateRight">03/23（一）</div></div>
         </div>
 
-        <div class="tRow">
-          <div>
-            <div class="time">18:10</div>
-            <div class="meta">移動</div>
-          </div>
-          <div>
-            <div class="place">前往博多市區</div>
-            <div class="meta">🚕機場至飯店距離約4–4.5公里💰4人約¥1,800 – ¥2,500／🚇搭乘機場線至福岡站下車後步行約10分鐘/550公尺💰¥260*4人</div>
+        <div class="dayBody">
+          <div class="content">
+            <div class="timeline">
+              <div class="tRow">
+                <div><div class="time">16:55</div><div class="meta">抵達</div></div>
+                <div><div class="place">福岡機場（FUK）</div><div class="meta">入境／取行李</div></div>
+              </div>
+              <div class="tRow">
+                <div><div class="time">18:10</div><div class="meta">移動</div></div>
+                <div><div class="place">前往博多市區</div><div class="meta">🚕機場至飯店距離約4–4.5公里💰4人約¥1,800 – ¥2,500／🚇搭乘機場線至福岡站下車後步行約10分鐘/550公尺💰¥260*4人</div></div>
+              </div>
+              <div class="tRow">
+                <div><div class="time">18:50</div><div class="meta">入住</div></div>
+                <div><div class="place">🏨 Prince Smart Inn Hakata</div><div class="meta">3-21-4, Hakataekimae, Hakata-ku, Fukuoka, 812-0011, Japan</div></div>
+              </div>
+              <div class="tRow">
+                <div><div class="time">19:30</div><div class="meta">晚餐</div></div>
+                <div><div class="place">🥩燒肉 Hayato 博多站東店</div><div class="meta">提供中文介面以平板進行點餐💰套餐¥4,950日圓(含稅) 特等牛舌、特選牛排拼盤、內臟拼盤、豬里脊＆赤雞拼盤、特選五花肉、特選牛里脊、泡菜拼盤、醋醬拌高麗菜、烤蔬菜（3種每天變換）、韓式泡飯／湯品／韓式拌飯／白飯（4選1）</div></div>
+              </div>
+            </div>
+
+            <div class="galleryWrap" aria-label="Day1 照片">
+              <p class="galleryTitle">📷 Day 1 照片</p>
+              <div class="galleryRow" role="list">
+                <div class="gItem" role="listitem"><img loading="lazy" src="day1/01.jpg" data-full="day1/01.jpg" alt="Day 1 照片 1"></div>
+                <div class="gItem" role="listitem"><img loading="lazy" src="day1/02.jpg" data-full="day1/02.jpg" alt="Day 1 照片 2"></div>
+                <div class="gItem" role="listitem"><img loading="lazy" src="day1/03.jpg" data-full="day1/03.jpg" alt="Day 1 照片 3"></div>
+                <div class="gItem" role="listitem"><img loading="lazy" src="day1/04.jpg" data-full="day1/04.jpg" alt="Day 1 照片 4"></div>
+              </div>
+            </div>
+
+            <div class="pills">
+              <span class="pill">隔天早餐：返回飯店前-Dacomecca購買麵包、飲品可作為明日早餐</span>
+              <span class="pill">取車地點：Budget Car Rental Hakata Gion (飯店步行至此約10分鐘/550公尺)</span>
+            </div>
+
+            <div class="links">
+              <a class="btn" href="comgooglemaps://?q=Fukuoka%20Airport%20(FUK)" onclick="setTimeout(()=>{window.location.href='https://www.google.com/maps/search/?api=1&query=Fukuoka%20Airport%20(FUK)'},300)">福岡機場地圖</a>
+              <a class="btn" href="comgooglemaps://?q=Prince%20Smart%20Inn%20Hakata" onclick="setTimeout(()=>{window.location.href='https://www.google.com/maps/d/viewer?mid=14d0NUVU1_hLuYWMW2iugAFUnhmY5kg8'},300)">飯店周邊地圖</a>
+            </div>
           </div>
         </div>
+      </template>
 
-        <div class="tRow">
-          <div>
-            <div class="time">18:50</div>
-            <div class="meta">入住</div>
-          </div>
-          <div>
-            <div class="place">🏨 Prince Smart Inn Hakata</div>
-            <div class="meta">3-21-4, Hakataekimae, Hakata-ku, Fukuoka, 812-0011, Japan</div>
-          </div>
-        </div>
-
-        <div class="tRow">
-          <div>
-            <div class="time">19:30</div>
-            <div class="meta">晚餐</div>
-          </div>
-          <div>
-            <div class="place">🥩燒肉 Hayato 博多站東店</div>
-            <div class="meta">提供中文介面以平板進行點餐💰套餐¥4,950日圓(含稅) 特等牛舌、特選牛排拼盤、內臟拼盤、豬里脊＆赤雞拼盤、特選五花肉、特選牛里脊、泡菜拼盤、醋醬拌高麗菜、烤蔬菜（3種每天變換）、韓式泡飯／湯品／韓式拌飯／白飯（4選1）</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 📷 Day1 照片（橫向滑動 + 點擊放大） -->
-      <div class="galleryWrap" aria-label="Day1 照片">
-        <p class="galleryTitle">📷 Day 1 照片</p>
-        <div class="galleryRow" role="list">
-          <div class="gItem" role="listitem"><img loading="lazy" src="day1/01.jpg" data-full="day1/01.jpg" alt="Day 1 照片 1"></div>
-          <div class="gItem" role="listitem"><img loading="lazy" src="day1/02.jpg" data-full="day1/02.jpg" alt="Day 1 照片 2"></div>
-          <div class="gItem" role="listitem"><img loading="lazy" src="day1/03.jpg" data-full="day1/03.jpg" alt="Day 1 照片 3"></div>
-          <div class="gItem" role="listitem"><img loading="lazy" src="day1/04.jpg" data-full="day1/04.jpg" alt="Day 1 照片 4"></div>
-        </div>
-      </div>
-
-      <div class="pills">
-        <span class="pill">隔天早餐：返回飯店前-Dacomecca購買麵包、飲品可作為明日早餐</span>
-        <span class="pill">取車地點：Budget Car Rental Hakata Gion (飯店步行至此約10分鐘/550公尺)</span>
-      </div>
-
-      <div class="links">
-        <a class="btn" href="comgooglemaps://?q=Fukuoka%20Airport%20(FUK)" onclick="setTimeout(()=>{window.location.href='https://www.google.com/maps/search/?api=1&query=Fukuoka%20Airport%20(FUK)'},300)">福岡機場地圖</a>
-        <a class="btn" href="comgooglemaps://?q=Prince%20Smart%20Inn%20Hakata" onclick="setTimeout(()=>{window.location.href='https://www.google.com/maps/d/viewer?mid=14d0NUVU1_hLuYWMW2iugAFUnhmY5kg8'},300)">飯店周邊地圖</a>
-      </div>
-    </div>
-  </div>
-</template>
-
-      <!-- Day 1 -->
-<section class="panel active" id="day1" role="tabpanel" aria-label="Day 1 行程" data-lock-template="tpl-day1">
-  <div class="dayHeader">
-    <div class="dayTitle">
-      <div class="num">1</div>
-      <div class="tblock">
-        <h2>抵達福岡｜博多晚餐 &amp; 休息</h2>
-      </div>
-    </div>
-    <div class="dayHeaderRight">
-      <div class="dayDateRight">03/23（一）</div>
-    </div>
-  </div>
-
-  <div class="dayBody">
-    <div class="content">
-      <div class="timeline">
-        <div class="tRow">
-          <div>
-            <div class="time">16:55</div>
-            <div class="meta">抵達</div>
-          </div>
-          <div>
-            <div class="place">福岡機場（FUK）</div>
-            <div class="meta">入境／取行李</div>
-          </div>
-        </div>
-
-        <div class="tRow">
-          <div>
-            <div class="time">18:10</div>
-            <div class="meta">移動</div>
-          </div>
-          <div>
-            <div class="place">前往博多市區</div>
-            <div class="meta">🚕機場至飯店距離約4–4.5公里💰4人約¥1,800 – ¥2,500🚇搭乘機場線至福岡站下車後步行約10分鐘/550公尺💰¥260*4人</div>
-          </div>
-        </div>
-
-        <div class="tRow">
-          <div>
-            <div class="time">18:50</div>
-            <div class="meta">入住</div>
-          </div>
-          <div>
-            <div class="place">🏨 Prince Smart Inn Hakata</div>
-            <div class="meta">3-21-4, Hakataekimae, Hakata-ku, Fukuoka, 812-0011, Japan</div>
-          </div>
-        </div>
-
-        <div class="tRow">
-          <div>
-            <div class="time">19:30</div>
-            <div class="meta">晚餐</div>
-          </div>
-          <div>
-            <div class="place">🥩燒肉 Hayato 博多站東店</div>
-            <div class="meta">提供中文介面以平板進行點餐💰套餐¥4,950日圓(含稅) 特等牛舌、特選牛排拼盤、內臟拼盤、豬里脊＆赤雞拼盤、特選五花肉、特選牛里脊、泡菜拼盤、醋醬拌高麗菜、烤蔬菜（3種每天變換）、韓式泡飯／湯品／韓式拌飯／白飯（4選1）</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="pills">
-        <span class="pill">隔天早餐：返回飯店前-Dacomecca購買麵包、飲品可作為明日早餐</span>
-        <span class="pill">取車地點：Budget Car Rental Hakata Gion (飯店步行至此約10分鐘/550公尺)</span>
-      </div>
-
-      <div class="links">
-        <a class="btn" href="comgooglemaps://?q=Fukuoka%20Airport%20(FUK)" onclick="setTimeout(()=>{window.location.href='https://www.google.com/maps/search/?api=1&query=Fukuoka%20Airport%20(FUK)'},300)">福岡機場地圖</a>
-        <a class="btn" href="comgooglemaps://?q=Prince%20Smart%20Inn%20Hakata" onclick="setTimeout(()=>{window.location.href='https://www.google.com/maps/d/viewer?mid=14d0NUVU1_hLuYWMW2iugAFUnhmY5kg8'},300)">飯店周邊地圖</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Day 2 -->
-      <section class="panel" id="day2" role="tabpanel" aria-label="Day 2 行程" data-lock-template="tpl-day2">
+      <!-- ✅ Day2 template (LOCKED) - 順序：照片 → 雨天備案 → 導航按鈕 -->
+      <template id="tpl-day2">
         <div class="dayHeader">
           <div class="dayTitle">
             <div class="num">2</div>
-            <div class="tblock">
-              <h2>自駕｜博多 ⇄ 由布院 ⇄ 九重｜兩種路線備選  </h2>
-            </div>
+            <div class="tblock"><h2>自駕｜博多 ⇄ 由布院 ⇄ 九重｜兩種路線備選</h2></div>
           </div>
-
-          <div class="dayHeaderRight">
-            <div class="dayDateRight">03/24（二）</div>
-          </div>
+          <div class="dayHeaderRight"><div class="dayDateRight">03/24（二）</div></div>
         </div>
 
         <div class="dayBody">
           <div class="content">
 
-   <!-- 共通：取車（兩方案都一樣） -->
-<div class="timeline">
+            <!-- 共通：取車 -->
+            <div class="timeline">
+              <div class="tRow">
+                <div><div class="time">08:00–</div></div>
+                <div><div class="place">Budget Car Rental Hakata Gion</div></div>
+              </div>
+              <div class="tRow">
+                <div><div class="time">08:30</div></div>
+                <div><div class="place">領車／檢查車況／設定導航</div></div>
+              </div>
+            </div>
 
-  <div class="tRow">
-    <div><div class="time">08:00–</div></div>
-    <div><div class="place">Budget Car Rental Hakata Gion</div></div>
-  </div>
-
-  <div class="tRow">
-    <div><div class="time">08:30</div></div>
-    <div><div class="place">領車／檢查車況／設定導航</div></div>
-  </div>
-</div>
-
-
-            <!-- A／B 安排理由（可收合） -->
-            <details style="margin-top:12px;border:1px solid var(--line);border-radius:14px;background:#ffffff">
-              <summary style="padding:10px 12px;font-weight:800;display:flex;align-items:center;justify-content:space-between;cursor:pointer">
-                🧭 為什麼要做 A／B 兩套（怎麼選）
-                <span class="chev">⌄</span>
-              </summary>
-              <div style="padding:10px 12px">
+            <!-- A/B 說明 -->
+            <details style="margin-top:12px">
+              <summary>🧭 為什麼要做 A／B 兩套（怎麼選）<span class="chev">⌄</span></summary>
+              <div class="content">
                 <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-                  <li><strong>方案 A（先九重→再由布院）</strong>：早上精神最好、能見度通常較佳，先跑戶外大景（九重夢大吊橋）；下午回到由布院以散步、逛街收尾，節奏穩定，也較不受由布院午後人潮與塞車影響。</li>
-                  <li><strong>方案 B（先由布院→再九重）</strong>：若想避開由布院中午人潮，或上午天氣較好適合拍攝狭霧台／金鱗湖，先完成由布院重點；下午再前往九重作為最後一站，結束後直接回旅館休息。</li>
-                  <li><strong>選擇原則</strong>：依<strong>天氣（能見度／是否降雨）</strong>、<strong>當天出發時間</strong>與<strong>體力</strong>彈性決定。</li>
+                  <li><strong>方案 A（先九重→再由布院）</strong>：先跑戶外大景（九重夢大吊橋）；下午回由布院散步收尾。</li>
+                  <li><strong>方案 B（先由布院→再九重）</strong>：先完成由布院重點；下午再去九重作為最後一站。</li>
+                  <li><strong>選擇原則</strong>：依<strong>天氣</strong>、<strong>出發時間</strong>與<strong>體力</strong>決定。</li>
                 </ul>
               </div>
             </details>
 
-            <!-- 方案 A：先九重 → 再由布院 → 旅館華柚（可收合） -->
-            <details style="margin-top:12px;border:1px solid var(--line);border-radius:14px;background:#ffffff">
-              <summary style="padding:10px 12px;font-weight:800;display:flex;align-items:center;justify-content:space-between;cursor:pointer">
-                🅰️ 方案 A（先九重→再由布院→旅館華柚）
-                <span class="chev">⌄</span>
-              </summary>
-              <div style="padding:10px 12px">
+            <!-- 方案 A -->
+            <details style="margin-top:12px">
+              <summary>🅰️ 方案 A（先九重→再由布院→旅館華柚）<span class="chev">⌄</span></summary>
+              <div class="content">
                 <div class="timeline">
-                  <div class="tHead">03/24（二） <span>方案 A｜博多 → 九重夢大吊橋 → 由布院（金鱗湖／狭霧台／中央児童公園）→ 旅館華柚</span></div>
-
-                  <div class="tRow">
-                    <div><div class="time">上午</div><div class="meta">高速移動</div></div>
-                    <div><div class="place">福岡都市高速 → 九州自動車道 → 大分自動車道</div><div class="meta">行車約 2.5–3 小時（含休息）</div></div>
-                  </div>
-                  <div class="tRow">
-                    <div><div class="time">途中</div><div class="meta">建議停靠</div></div>
-                    <div><div class="place">山田SA（下り）</div><div class="meta">洗手間／咖啡／補給（適合當主要休息站）</div></div>
-                  </div>
-                  <div class="tRow">
-                    <div><div class="time">途中</div><div class="meta">次要停靠</div></div>
-                    <div><div class="place">玖珠SA（下り）</div><div class="meta">靠近由布院・九重一帶（視體力／時間彈性）</div></div>
-                  </div>
-
-                  <div class="tRow">
-                    <div><div class="time">11:30–12:30</div><div class="meta">景點</div></div>
-                    <div><div class="place">九重「夢」大吊橋</div><div class="meta">🅿️ 官方停車場：可停約 230 台（一般車）｜停車費約 ¥300/次｜停留 45–60 分鐘</div></div>
-                  </div>
-
-                  <div class="tRow">
-                    <div><div class="time">14:00</div><div class="meta">展望台</div></div>
-                    <div><div class="place">狭霧台</div><div class="meta">🅿️ 免費停車（約 15 台）｜15–20 分鐘</div></div>
-                  </div>
-                  <div class="tRow">
-                    <div><div class="time">15:00</div><div class="meta">散步</div></div>
-                    <div><div class="place">金鱗湖</div><div class="meta">🅿️ 周邊多為付費停車場（建議停：Times 湯布院金鱗湖 等）｜午後光線佳</div></div>
-                  </div>
-                  <div class="tRow">
-                    <div><div class="time">15:40</div><div class="meta">停車＆徒步</div></div>
-                    <div><div class="place">湯布院中央児童公園（停車後徒步逛湯之坪）</div><div class="meta">🅿️ 周邊停車位（旺季易滿）｜作為徒步起點最順</div></div>
-                  </div>
-                  <div class="tRow">
-                    <div><div class="time">傍晚</div><div class="meta">入住</div></div>
-                    <div><div class="place">旅館華柚</div><div class="meta">Check‑in 後不再動車</div></div>
-                  </div>
+                  <div class="tHead">03/24（二） <span>方案 A｜博多 → 九重夢大吊橋 → 由布院 → 旅館華柚</span></div>
+                  <div class="tRow"><div><div class="time">上午</div><div class="meta">高速移動</div></div><div><div class="place">福岡都市高速 → 九州自動車道 → 大分自動車道</div><div class="meta">行車約 2.5–3 小時（含休息）</div></div></div>
+                  <div class="tRow"><div><div class="time">途中</div><div class="meta">建議停靠</div></div><div><div class="place">山田SA（下り）</div><div class="meta">洗手間／咖啡／補給</div></div></div>
+                  <div class="tRow"><div><div class="time">11:30–12:30</div><div class="meta">景點</div></div><div><div class="place">九重「夢」大吊橋</div><div class="meta">停留 45–60 分鐘</div></div></div>
+                  <div class="tRow"><div><div class="time">14:00</div><div class="meta">展望台</div></div><div><div class="place">狭霧台</div><div class="meta">15–20 分鐘</div></div></div>
+                  <div class="tRow"><div><div class="time">15:00</div><div class="meta">散步</div></div><div><div class="place">金鱗湖</div><div class="meta">午後光線佳</div></div></div>
+                  <div class="tRow"><div><div class="time">15:40</div><div class="meta">停車＆徒步</div></div><div><div class="place">湯布院中央児童公園（停車後徒步逛湯之坪）</div></div></div>
+                  <div class="tRow"><div><div class="time">傍晚</div><div class="meta">入住</div></div><div><div class="place">旅館華柚</div><div class="meta">Check‑in 後不再動車</div></div></div>
                 </div>
               </div>
             </details>
 
-            <!-- 方案 B：先由布院 → 再九重 → 旅館華柚（可收合） -->
-            <details style="margin-top:12px;border:1px solid var(--line);border-radius:14px;background:#ffffff">
-              <summary style="padding:10px 12px;font-weight:800;display:flex;align-items:center;justify-content:space-between;cursor:pointer">
-                🅱️ 方案 B（先由布院→再九重→旅館華柚）
-                <span class="chev">⌄</span>
-              </summary>
-              <div style="padding:10px 12px">
+            <!-- 方案 B -->
+            <details style="margin-top:12px">
+              <summary>🅱️ 方案 B（先由布院→再九重→旅館華柚）<span class="chev">⌄</span></summary>
+              <div class="content">
                 <div class="timeline">
-                  <div class="tHead">03/24（二） <span>方案 B｜博多 → 由布院（金鱗湖／狭霧台／中央児童公園）→ 九重夢大吊橋 → 旅館華柚</span></div>
-
-                  <div class="tRow">
-                    <div><div class="time">上午</div><div class="meta">高速移動</div></div>
-                    <div><div class="place">福岡都市高速 → 九州自動車道 → 大分自動車道</div><div class="meta">行車約 2.5–3 小時（含休息）</div></div>
-                  </div>
-                  <div class="tRow">
-                    <div><div class="time">途中</div><div class="meta">建議停靠</div></div>
-                    <div><div class="place">山田SA（下り）</div><div class="meta">洗手間／咖啡／補給（適合當主要休息站）</div></div>
-                  </div>
-                  <div class="tRow">
-                    <div><div class="time">途中</div><div class="meta">次要停靠</div></div>
-                    <div><div class="place">玖珠SA（下り）</div><div class="meta">接近由布院（視體力／時間彈性）</div></div>
-                  </div>
-
-                  <div class="tRow">
-                    <div><div class="time">13:30</div><div class="meta">展望台</div></div>
-                    <div><div class="place">狭霧台</div><div class="meta">🅿️ 免費停車（約 15 台）｜15–20 分鐘</div></div>
-                  </div>
-                  <div class="tRow">
-                    <div><div class="time">14:10</div><div class="meta">散步</div></div>
-                    <div><div class="place">金鱗湖</div><div class="meta">🅿️ 周邊多為付費停車場（建議停：Times 湯布院金鱗湖 等）</div></div>
-                  </div>
-                  <div class="tRow">
-                    <div><div class="time">14:40</div><div class="meta">停車＆徒步</div></div>
-                    <div><div class="place">湯布院中央児童公園（停車後徒步逛湯之坪）</div><div class="meta">🅿️ 周邊停車位（旺季易滿）｜作為徒步起點最順</div></div>
-                  </div>
-
-                  <div class="tRow">
-                    <div><div class="time">16:30–17:30</div><div class="meta">景點</div></div>
-                    <div><div class="place">九重「夢」大吊橋</div><div class="meta">🅿️ 官方停車場：可停約 230 台（一般車）｜停車費約 ¥300/次｜45–60 分鐘</div></div>
-                  </div>
-
-                  <div class="tRow">
-                    <div><div class="time">傍晚</div><div class="meta">入住</div></div>
-                    <div><div class="place">旅館華柚</div><div class="meta">Check‑in 後不再動車</div></div>
-                  </div>
+                  <div class="tHead">03/24（二） <span>方案 B｜博多 → 由布院 → 九重夢大吊橋 → 旅館華柚</span></div>
+                  <div class="tRow"><div><div class="time">上午</div><div class="meta">高速移動</div></div><div><div class="place">福岡都市高速 → 九州自動車道 → 大分自動車道</div><div class="meta">行車約 2.5–3 小時（含休息）</div></div></div>
+                  <div class="tRow"><div><div class="time">13:30</div><div class="meta">展望台</div></div><div><div class="place">狭霧台</div><div class="meta">15–20 分鐘</div></div></div>
+                  <div class="tRow"><div><div class="time">14:10</div><div class="meta">散步</div></div><div><div class="place">金鱗湖</div></div></div>
+                  <div class="tRow"><div><div class="time">14:40</div><div class="meta">停車＆徒步</div></div><div><div class="place">湯布院中央児童公園（停車後徒步逛湯之坪）</div></div></div>
+                  <div class="tRow"><div><div class="time">16:30–17:30</div><div class="meta">景點</div></div><div><div class="place">九重「夢」大吊橋</div><div class="meta">45–60 分鐘</div></div></div>
+                  <div class="tRow"><div><div class="time">傍晚</div><div class="meta">入住</div></div><div><div class="place">旅館華柚</div><div class="meta">Check‑in 後不再動車</div></div></div>
                 </div>
               </div>
             </details>
 
-            <div class="pills">
-
-              <span class="pill">徒步逛湯之坪：以「湯布院中央児童公園」作停車起點最順</span>
-            </div>
-
-            <!-- Yufuin Shops Note（兩方案共用｜可收合） -->
             <details style="margin-top:12px;border:1px dashed var(--line);border-radius:14px;background:#fafafa">
-              <summary style="padding:10px 12px;font-weight:700;display:flex;align-items:center;justify-content:space-between;cursor:pointer">
-                🛍 抵達由布院後，可能會去的店
-                <span class="chev">⌄</span>
-              </summary>
-              <div style="padding:10px 12px">
+              <summary>🛍 抵達由布院後，可能會去的店<span class="chev">⌄</span></summary>
+              <div class="content">
                 <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
                   <li><strong>金賞可樂餅 本店</strong>｜現炸小吃，邊走邊吃</li>
                   <li><strong>B SPEAK 本店</strong>｜蛋糕卷（建議外帶，售完為止）</li>
@@ -638,10 +375,7 @@
               </div>
             </details>
 
-            <!-- 雨天備案（A／B 共用｜可收合） -->
-            
-
-            <!-- 📷 Day2 照片（橫向滑動 + 點擊放大） -->
+            <!-- ✅ Day2 照片（第一順位） -->
             <div class="galleryWrap" aria-label="Day2 照片">
               <p class="galleryTitle">📷 Day 2 照片</p>
               <div class="galleryRow" role="list">
@@ -654,8 +388,20 @@
               </div>
             </div>
 
-            
-            <div class="links">
+            <!-- ✅ Day2 雨天備案（第二順位，獨立 details） -->
+            <details style="margin-top:12px;border:1px dashed var(--line);border-radius:14px;background:#fafafa">
+              <summary>🌧️ 雨天備案（Day2）<span class="chev">⌄</span></summary>
+              <div class="content">
+                <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
+                  <li>雨勢大：由布院（湯之坪／金鱗湖）優先，室內店家＋散步為主</li>
+                  <li>九重夢大吊橋：視能見度決定「縮短停留」或「取消」</li>
+                  <li>山路濕滑：提早入住旅館華柚，避免傍晚趕路</li>
+                </ul>
+              </div>
+            </details>
+
+            <!-- ✅ 導航控制鈕（第三順位） -->
+            <div class="links" style="margin-top:12px">
               <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E5%B1%B1%E7%94%B0%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%A8%E3%83%AA%E3%82%A2%20%28%E4%B8%8B%E3%82%8A%29&travelmode=driving">🚗 休息站｜山田SA（建議）</a>
               <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E7%8E%96%E7%8F%A0%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%A8%E3%83%AA%E3%82%A2%20%28%E4%B8%8B%E3%82%8A%29&travelmode=driving">🚗 休息站｜玖珠SA（次要）</a>
               <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=377+023+247*63&travelmode=driving">🚗 導航｜九重夢大吊橋</a>
@@ -664,371 +410,131 @@
               <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E6%B9%AF%E5%B8%83%E9%99%A2%E4%B8%AD%E5%A4%AE%E5%85%90%E7%AB%A5%E5%85%AC%E5%9C%92&travelmode=driving">🚗 導航｜中央児童公園</a>
               <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=377+319+791*11&travelmode=driving">🏨 導航｜旅館華柚</a>
             </div>
-
           </div>
         </div>
-      </section>
+      </template>
 
+      <!-- Panels (Day1/Day2 are locked and will be restored from templates) -->
+      <section class="panel active" id="day1" role="tabpanel" aria-label="Day 1 行程" data-lock-template="tpl-day1"></section>
+      <section class="panel" id="day2" role="tabpanel" aria-label="Day 2 行程" data-lock-template="tpl-day2"></section>
+
+      <!-- Day 3 -->
       <section class="panel" id="day3" role="tabpanel" aria-label="Day 3 行程">
-        <!-- 🔒 Day Header（Template Instance） -->
         <div class="dayHeader">
           <div class="dayTitle">
             <div class="num">3</div>
-            <div class="tblock">
-              <h2>黑川溫泉周邊｜瀑布・水源</h2>
-            </div>
+            <div class="tblock"><h2>黑川溫泉周邊｜瀑布・水源</h2></div>
           </div>
-          <div class="dayHeaderRight">
-            <div class="dayDateRight">03/25（三）</div>
-          </div>
+          <div class="dayHeaderRight"><div class="dayDateRight">03/25（三）</div></div>
         </div>
 
         <div class="dayBody">
-<div class="content">
-
-    <div class="timeline">
-      <div class="tRow">
-        <div>
-          <div class="time">10:00</div>
-          <div class="meta">出發</div>
-        </div>
-        <div>
-          <div class="place">旅館華柚</div>
-          <div class="meta">早餐後退房，整理行李再出發</div>
-        </div>
-      </div>
-
-      <div class="tRow">
-        <div>
-          <div class="time">10:25–10:50</div>
-          <div class="meta">景點</div>
-        </div>
-        <div>
-          <div class="place">夫妻瀑布</div>
-          <div class="meta">行車約 20–25 分鐘｜停留 15–25 分鐘</div>
-        </div>
-      </div>
-
-      <div class="tRow">
-        <div>
-          <div class="time">11:40–13:10</div>
-          <div class="meta">散步 / 午餐</div>
-        </div>
-        <div>
-          <div class="place">黑川溫泉（第三駐車場）</div>
-          <div class="meta">溫泉街散步＋午餐（現場決定）</div>
-
-          <details style="margin-top:8px">
-            <summary>
-              🍽 午餐備註（Au Pan &amp; Coffee 週三公休）
-              <span class="chev">⌄</span>
-            </summary>
-            <div class="content">
-              <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-                <li><strong>いこい旅館 食事処</strong>｜釜飯、日式定食</li>
-                <li><strong>山みず木 食事処</strong>｜鄉土料理（若對外開放）</li>
-                <li><strong>パティスリー 麓</strong>｜輕食、甜點</li>
-                <li><strong>後藤酒店</strong>｜地酒、小點心</li>
-              </ul>
-              <div style="margin-top:6px;color:var(--muted);font-size:12px">※ 不指定店家，依現場人潮決定</div>
+          <div class="content">
+            <div class="timeline">
+              <div class="tRow"><div><div class="time">10:00</div><div class="meta">出發</div></div><div><div class="place">旅館華柚</div><div class="meta">早餐後退房，整理行李再出發</div></div></div>
+              <div class="tRow"><div><div class="time">10:25–10:50</div><div class="meta">景點</div></div><div><div class="place">夫妻瀑布</div><div class="meta">行車約 20–25 分鐘｜停留 15–25 分鐘</div></div></div>
+              <div class="tRow"><div><div class="time">11:40–13:10</div><div class="meta">散步 / 午餐</div></div><div><div class="place">黑川溫泉（第三駐車場）</div><div class="meta">溫泉街散步＋午餐（現場決定）</div></div></div>
+              <div class="tRow"><div><div class="time">13:50–14:30</div><div class="meta">景點</div></div><div><div class="place">池山水源</div><div class="meta">行車約 35–40 分鐘｜停留 30–40 分鐘｜平坦好走</div></div></div>
+              <div class="tRow"><div><div class="time">15:00–15:20</div><div class="meta">入住</div></div><div><div class="place">Kamenoi Hotel Aso</div><div class="meta">抵達後休息、泡湯</div></div></div>
             </div>
-          </details>
 
-          <details style="margin-top:8px">
-            <summary>
-              🌧️ 雨天備案
-              <span class="chev">⌄</span>
-            </summary>
-            <div class="content">
-              <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-                <li>方案 A：夫妻瀑布 → 黑川溫泉（拉長散步＋用餐）→ 直接前往飯店</li>
-                <li>方案 B：黑川只散步不吃 → 提早往阿蘇 → 飯店附近或飯店內用餐</li>
-                <li>池山水源：視雨勢與路況縮短或略過</li>
-              </ul>
+            <!-- ✅ Day3：照片 → 雨天備案 → 導航 -->
+            <div class="galleryWrap" aria-label="Day3 照片">
+              <p class="galleryTitle">📷 Day 3 照片</p>
+              <div class="galleryRow" role="list">
+                <div class="gItem" role="listitem"><img loading="lazy" src="day3/01.jpg" data-full="day3/01.jpg" alt="Day 3 照片 1"></div>
+                <div class="gItem" role="listitem"><img loading="lazy" src="day3/02.jpg" data-full="day3/02.jpg" alt="Day 3 照片 2"></div>
+                <div class="gItem" role="listitem"><img loading="lazy" src="day3/03.jpg" data-full="day3/03.jpg" alt="Day 3 照片 3"></div>
+              </div>
             </div>
-          </details>
-        </div>
-      </div>
 
-      <div class="tRow">
-        <div>
-          <div class="time">13:50–14:30</div>
-          <div class="meta">景點</div>
-        </div>
-        <div>
-          <div class="place">池山水源</div>
-          <div class="meta">行車約 35–40 分鐘｜停留 30–40 分鐘｜平坦好走</div>
-        </div>
-      </div>
+            <details style="margin-top:12px;border:1px dashed var(--line);border-radius:14px;background:#fafafa">
+              <summary>🌧️ 雨天備案（Day3）<span class="chev">⌄</span></summary>
+              <div class="content">
+                <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
+                  <li>夫妻瀑布雨勢大：改為黑川溫泉街散步＋用餐拉長</li>
+                  <li>池山水源：視雨勢與路況縮短或略過</li>
+                  <li>提早抵達飯店休息泡湯</li>
+                </ul>
+              </div>
+            </details>
 
-      <div class="tRow">
-        <div>
-          <div class="time">15:00–15:20</div>
-          <div class="meta">入住</div>
+            <div class="links" style="margin-top:12px">
+              <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E5%A4%AB%E5%A6%BB%E7%80%91%E5%B8%83%E9%99%A2">🚗 導航｜夫妻瀑布</a>
+              <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E9%BB%92%E5%B7%9D%E6%B8%A9%E6%B3%89%20%E7%AC%AC%E4%B8%89%E9%A7%90%E8%BB%8A%E5%A0%B4">🚗 導航｜黒川温泉 第三駐車場</a>
+              <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E6%B1%A0%E5%B1%B1%E6%B0%B4%E6%BA%90">🚗 導航｜池山水源</a>
+              <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Kamenoi%20Hotel%20Aso">🏨 導航｜Kamenoi Hotel Aso</a>
+            </div>
+          </div>
         </div>
-        <div>
-          <div class="place">Kamenoi Hotel Aso</div>
-          <div class="meta">抵達後休息、泡湯</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 🚗 導航（Google Maps） -->
-    <div class="links" style="margin-top:12px">
-      <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E5%A4%AB%E5%A6%BB%E7%80%91%E5%B8%83%E9%99%A2">🚗 導航｜夫妻瀑布</a>
-      <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E9%BB%92%E5%B7%9D%E6%B8%A9%E6%B3%89%20%E7%AC%AC%E4%B8%89%E9%A7%90%E8%BB%8A%E5%A0%B4">🚗 導航｜黒川温泉 第三駐車場</a>
-      <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E6%B1%A0%E5%B1%B1%E6%B0%B4%E6%BA%90">🚗 導航｜池山水源</a>
-      <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Kamenoi%20Hotel%20Aso">🏨 導航｜Kamenoi Hotel Aso</a>
-    </div>
-
-    <!-- 📷 Day3 照片（橫向滑動 + 點擊放大） -->
-    <div class="galleryWrap" aria-label="Day3 照片">
-      <p class="galleryTitle">📷 Day 3 照片</p>
-      <div class="galleryRow" role="list">
-        <div class="gItem" role="listitem"><img loading="lazy" src="day3/01.jpg" data-full="day3/01.jpg" alt="Day 3 照片 1"></div>
-        <div class="gItem" role="listitem"><img loading="lazy" src="day3/02.jpg" data-full="day3/02.jpg" alt="Day 3 照片 2"></div>
-        <div class="gItem" role="listitem"><img loading="lazy" src="day3/03.jpg" data-full="day3/03.jpg" alt="Day 3 照片 3"></div>
-      </div>
-    </div>
-
-  </div>
-</div>
       </section>
 
       <!-- Day 4 -->
       <section class="panel" id="day4" role="tabpanel" aria-label="Day 4 行程">
-        <!-- 🔒 Day Header（Template Instance） -->
         <div class="dayHeader">
-          <div class="dayTitle">
-            <div class="num">4</div>
-            <div class="tblock">
-              <h2>阿蘇｜神社・水源・草千里｜回福岡還車</h2>
-            </div>
-          </div>
-          <div class="dayHeaderRight">
-            <div class="dayDateRight">03/26（四）</div>
-          </div>
+          <div class="dayTitle"><div class="num">4</div><div class="tblock"><h2>阿蘇｜神社・水源・草千里｜回福岡還車</h2></div></div>
+          <div class="dayHeaderRight"><div class="dayDateRight">03/26（四）</div></div>
         </div>
-
-        <div class="dayBody">
-<div class="content">
-    <div class="timeline">
-      <div class="tHead">03/26（四） <span>阿蘇｜神社・水源・草千里｜回福岡還車</span></div>
-
-      <div class="tRow">
-        <div><div class="time">09:00</div><div class="meta">出發</div></div>
-        <div><div class="place">Kamenoi Hotel Aso</div><div class="meta">早餐後出發（依實際用餐時間彈性）</div></div>
-      </div>
-
-      <div class="tRow">
-        <div><div class="time">09:30–10:20</div><div class="meta">神社</div></div>
-        <div><div class="place">阿蘇神社</div><div class="meta">停留 40–60 分鐘｜周邊散步、買小點心</div></div>
-      </div>
-
-      <div class="tRow">
-        <div><div class="time">10:45–11:25</div><div class="meta">水源</div></div>
-        <div><div class="place">白川水源（或同級水源點）</div><div class="meta">停留 30–40 分鐘｜若前一天已看足水源，可縮短</div></div>
-      </div>
-
-      <div class="tRow">
-        <div><div class="time">12:00–13:10</div><div class="meta">午餐</div></div>
-        <div><div class="place">阿蘇市區用餐</div><div class="meta">建議：蕎麥麵／赤牛相關（現場決定）</div></div>
-      </div>
-
-      <div class="tRow">
-        <div><div class="time">13:40–14:30</div><div class="meta">景點</div></div>
-        <div><div class="place">草千里ヶ浜</div><div class="meta">停留 40–60 分鐘｜風大請帶外套</div></div>
-      </div>
-
-      <div class="tRow">
-        <div><div class="time">15:00–18:00</div><div class="meta">移動</div></div>
-        <div><div class="place">阿蘇 → 福岡市區</div><div class="meta">行車約 2.5–3 小時（含休息站）</div></div>
-      </div>
-
-      <div class="tRow">
-        <div><div class="time">18:30</div><div class="meta">還車</div></div>
-        <div><div class="place">Budget Car Rental Hakata Gion（或租車門市）</div><div class="meta">還車／結算</div></div>
-      </div>
-
-      <div class="tRow">
-        <div><div class="time">19:30</div><div class="meta">入住</div></div>
-        <div><div class="place">福岡市區飯店</div><div class="meta">Check-in 後自由活動／晚餐</div></div>
-      </div>
-    </div>
-
-    <details style="margin-top:12px;border:1px dashed var(--line);border-radius:14px;background:#fafafa">
-      <summary style="padding:10px 12px;font-weight:700;display:flex;align-items:center;justify-content:space-between;cursor:pointer">
-        🌧️ 雨天備案（Day4）
-        <span class="chev">⌄</span>
-      </summary>
-      <div style="padding:10px 12px">
-        <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-          <li>草千里風大／雨勢大：改以阿蘇市區咖啡/伴手禮、提早出發回福岡</li>
-          <li>移動時間留彈性：避免太晚還車</li>
-        </ul>
-      </div>
-    </details>
-
-    <div class="links">
-      <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E9%98%BF%E8%98%87%E7%A5%9E%E7%A4%BE">🚗 導航｜阿蘇神社</a>
-      <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E7%99%BD%E5%B7%9D%E6%B0%B4%E6%BA%90">🚗 導航｜白川水源</a>
-      <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E8%8D%89%E5%8D%83%E9%87%8C%E3%83%B6%E6%B5%9C">🚗 導航｜草千里ヶ浜</a>
-    </div>
-
-    <div class="galleryWrap" aria-label="Day4 照片">
-      <p class="galleryTitle">📷 Day 4 照片</p>
-      <div class="galleryRow" role="list">
-        <div class="gItem" role="listitem"><img loading="lazy" src="day4/01.jpg" data-full="day4/01.jpg" alt="Day 4 照片 1"></div>
-        <div class="gItem" role="listitem"><img loading="lazy" src="day4/02.jpg" data-full="day4/02.jpg" alt="Day 4 照片 2"></div>
-        <div class="gItem" role="listitem"><img loading="lazy" src="day4/03.jpg" data-full="day4/03.jpg" alt="Day 4 照片 3"></div>
-      </div>
-    </div>
-  </div>
-</div>
+        <div class="dayBody"><div class="content">
+          <div class="timeline">
+            <div class="tHead">03/26（四） <span>阿蘇｜神社・水源・草千里｜回福岡還車</span></div>
+            <div class="tRow"><div><div class="time">09:00</div><div class="meta">出發</div></div><div><div class="place">Kamenoi Hotel Aso</div><div class="meta">早餐後出發（依實際用餐時間彈性）</div></div></div>
+            <div class="tRow"><div><div class="time">09:30–10:20</div><div class="meta">神社</div></div><div><div class="place">阿蘇神社</div><div class="meta">停留 40–60 分鐘</div></div></div>
+            <div class="tRow"><div><div class="time">10:45–11:25</div><div class="meta">水源</div></div><div><div class="place">白川水源（或同級水源點）</div><div class="meta">停留 30–40 分鐘</div></div></div>
+            <div class="tRow"><div><div class="time">12:00–13:10</div><div class="meta">午餐</div></div><div><div class="place">阿蘇市區用餐</div><div class="meta">現場決定</div></div></div>
+            <div class="tRow"><div><div class="time">13:40–14:30</div><div class="meta">景點</div></div><div><div class="place">草千里ヶ浜</div><div class="meta">停留 40–60 分鐘</div></div></div>
+            <div class="tRow"><div><div class="time">15:00–18:00</div><div class="meta">移動</div></div><div><div class="place">阿蘇 → 福岡市區</div><div class="meta">行車約 2.5–3 小時（含休息站）</div></div></div>
+            <div class="tRow"><div><div class="time">18:30</div><div class="meta">還車</div></div><div><div class="place">Budget Car Rental Hakata Gion（或租車門市）</div><div class="meta">還車／結算</div></div></div>
+            <div class="tRow"><div><div class="time">19:30</div><div class="meta">入住</div></div><div><div class="place">福岡市區飯店</div><div class="meta">Check-in 後自由活動／晚餐</div></div></div>
+          </div>
+          <div class="links">
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E9%98%BF%E8%98%87%E7%A5%9E%E7%A4%BE">🚗 導航｜阿蘇神社</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E7%99%BD%E5%B7%9D%E6%B0%B4%E6%BA%90">🚗 導航｜白川水源</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E8%8D%89%E5%8D%83%E9%87%8C%E3%83%B6%E6%B5%9C">🚗 導航｜草千里ヶ浜</a>
+          </div>
+        </div></div>
       </section>
 
       <!-- Day 5 -->
       <section class="panel" id="day5" role="tabpanel" aria-label="Day 5 行程">
-        <!-- 🔒 Day Header（Template Instance） -->
         <div class="dayHeader">
-          <div class="dayTitle">
-            <div class="num">5</div>
-            <div class="tblock">
-              <h2>福岡市區散步｜天神・博多</h2>
-            </div>
-          </div>
-          <div class="dayHeaderRight">
-            <div class="dayDateRight">03/27（五）</div>
-          </div>
+          <div class="dayTitle"><div class="num">5</div><div class="tblock"><h2>福岡市區散步｜天神・博多</h2></div></div>
+          <div class="dayHeaderRight"><div class="dayDateRight">03/27（五）</div></div>
         </div>
-
-        <div class="dayBody">
-<div class="content">
-    <div class="timeline">
-      <div class="tHead">03/27（五） <span>福岡市區散步｜天神・博多</span></div>
-
-      <div class="tRow">
-        <div><div class="time">上午</div><div class="meta">散步</div></div>
-        <div><div class="place">天神／大名</div><div class="meta">咖啡、逛街、百貨（依你們想逛的店彈性）</div></div>
-      </div>
-
-      <div class="tRow">
-        <div><div class="time">12:00</div><div class="meta">午餐</div></div>
-        <div><div class="place">天神/博多 周邊用餐</div><div class="meta">拉麵／丼飯／燒肉（現場決定）</div></div>
-      </div>
-
-      <div class="tRow">
-        <div><div class="time">下午</div><div class="meta">選配</div></div>
-        <div><div class="place">博多運河城／櫛田神社／川端商店街</div><div class="meta">想走路就排這段；想購物就留在天神</div></div>
-      </div>
-
-      <div class="tRow">
-        <div><div class="time">傍晚</div><div class="meta">採買</div></div>
-        <div><div class="place">伴手禮／最後補貨</div><div class="meta">超市、藥妝、車站內伴手禮區</div></div>
-      </div>
-
-      <div class="tRow">
-        <div><div class="time">晚餐</div><div class="meta">自由</div></div>
-        <div><div class="place">福岡市區</div><div class="meta">建議：不要排太遠，留力隔天早起</div></div>
-      </div>
-    </div>
-
-    <details style="margin-top:12px;border:1px dashed var(--line);border-radius:14px;background:#fafafa">
-      <summary style="padding:10px 12px;font-weight:700;display:flex;align-items:center;justify-content:space-between;cursor:pointer">
-        ✅ Day5 小提醒
-        <span class="chev">⌄</span>
-      </summary>
-      <div style="padding:10px 12px">
-        <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-          <li>隔天 03/28 早班機：晚餐別吃太晚、回飯店先整理行李</li>
-          <li>若要買伴手禮：可集中在下午/傍晚一次搞定</li>
-        </ul>
-      </div>
-    </details>
-
-    <div class="links">
-      <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A9%E7%A5%9E%20%E7%A6%8F%E5%B2%A1">📍 地圖｜天神</a>
-      <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E5%8D%9A%E5%A4%9A%E9%81%8B%E6%B2%B3%E5%9F%8E">📍 地圖｜博多運河城</a>
-      <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E6%AB%9B%E7%94%B0%E7%A5%9E%E7%A4%BE%20%E7%A6%8F%E5%B2%A1">📍 地圖｜櫛田神社</a>
-    </div>
-
-    <div class="galleryWrap" aria-label="Day5 照片">
-      <p class="galleryTitle">📷 Day 5 照片</p>
-      <div class="galleryRow" role="list">
-        <div class="gItem" role="listitem"><img loading="lazy" src="day5/01.jpg" data-full="day5/01.jpg" alt="Day 5 照片 1"></div>
-        <div class="gItem" role="listitem"><img loading="lazy" src="day5/02.jpg" data-full="day5/02.jpg" alt="Day 5 照片 2"></div>
-        <div class="gItem" role="listitem"><img loading="lazy" src="day5/03.jpg" data-full="day5/03.jpg" alt="Day 5 照片 3"></div>
-      </div>
-    </div>
-  </div>
-</div>
+        <div class="dayBody"><div class="content">
+          <div class="timeline">
+            <div class="tHead">03/27（五） <span>福岡市區散步｜天神・博多</span></div>
+            <div class="tRow"><div><div class="time">上午</div><div class="meta">散步</div></div><div><div class="place">天神／大名</div><div class="meta">咖啡、逛街、百貨</div></div></div>
+            <div class="tRow"><div><div class="time">12:00</div><div class="meta">午餐</div></div><div><div class="place">天神/博多 周邊用餐</div><div class="meta">現場決定</div></div></div>
+            <div class="tRow"><div><div class="time">下午</div><div class="meta">選配</div></div><div><div class="place">博多運河城／櫛田神社／川端商店街</div><div class="meta">想走路就排這段；想購物就留在天神</div></div></div>
+            <div class="tRow"><div><div class="time">傍晚</div><div class="meta">採買</div></div><div><div class="place">伴手禮／最後補貨</div><div class="meta">超市、藥妝、車站內伴手禮區</div></div></div>
+          </div>
+        </div></div>
       </section>
 
       <!-- Day 6 -->
       <section class="panel" id="day6" role="tabpanel" aria-label="Day 6 行程">
-        <!-- 🔒 Day Header（Template Instance） -->
         <div class="dayHeader">
-          <div class="dayTitle">
-            <div class="num">6</div>
-            <div class="tblock">
-              <h2>回程｜福岡機場 → 桃園</h2>
-            </div>
-          </div>
-          <div class="dayHeaderRight">
-            <div class="dayDateRight">03/28（六）</div>
-          </div>
+          <div class="dayTitle"><div class="num">6</div><div class="tblock"><h2>回程｜福岡機場 → 桃園</h2></div></div>
+          <div class="dayHeaderRight"><div class="dayDateRight">03/28（六）</div></div>
         </div>
-
-        <div class="dayBody">
-<div class="content">
-    <div class="timeline">
-      <div class="tHead">03/28（六） <span>回程｜福岡機場 → 桃園</span></div>
-
-      <div class="tRow">
-        <div><div class="time">07:00</div><div class="meta">起床</div></div>
-        <div><div class="place">飯店</div><div class="meta">退房準備／確認護照、機票、行李</div></div>
-      </div>
-
-      <div class="tRow">
-        <div><div class="time">07:30</div><div class="meta">出發</div></div>
-        <div><div class="place">前往福岡機場（FUK）</div><div class="meta">建議提早（你們預計 08:00 抵達）</div></div>
-      </div>
-
-      <div class="tRow">
-        <div><div class="time">08:00</div><div class="meta">抵達</div></div>
-        <div><div class="place">福岡機場</div><div class="meta">報到／托運／安檢</div></div>
-      </div>
-
-      <div class="tRow">
-        <div><div class="time">10:55</div><div class="meta">起飛</div></div>
-        <div><div class="place">虎航 IT241</div><div class="meta">FUK → TPE</div></div>
-      </div>
-
-      <div class="tRow">
-        <div><div class="time">12:40</div><div class="meta">抵達</div></div>
-        <div><div class="place">桃園國際機場（TPE）</div><div class="meta">第一航廈</div></div>
-      </div>
-    </div>
-
-    <div class="links">
-      <a class="btn" href="comgooglemaps://?q=Fukuoka%20Airport%20(FUK)" onclick="setTimeout(()=>{window.location.href='https://www.google.com/maps/search/?api=1&query=Fukuoka%20Airport%20(FUK)'},300)">福岡機場地圖</a>
-    </div>
-
-    <div class="galleryWrap" aria-label="Day6 照片">
-      <p class="galleryTitle">📷 Day 6 照片</p>
-      <div class="galleryRow" role="list">
-        <div class="gItem" role="listitem"><img loading="lazy" src="day6/01.jpg" data-full="day6/01.jpg" alt="Day 6 照片 1"></div>
-        <div class="gItem" role="listitem"><img loading="lazy" src="day6/02.jpg" data-full="day6/02.jpg" alt="Day 6 照片 2"></div>
-        <div class="gItem" role="listitem"><img loading="lazy" src="day6/03.jpg" data-full="day6/03.jpg" alt="Day 6 照片 3"></div>
-      </div>
-    </div>
-
-  </div>
-</div>
+        <div class="dayBody"><div class="content">
+          <div class="timeline">
+            <div class="tHead">03/28（六） <span>回程｜福岡機場 → 桃園</span></div>
+            <div class="tRow"><div><div class="time">07:00</div><div class="meta">起床</div></div><div><div class="place">飯店</div><div class="meta">退房準備／確認護照、機票、行李</div></div></div>
+            <div class="tRow"><div><div class="time">07:30</div><div class="meta">出發</div></div><div><div class="place">前往福岡機場（FUK）</div><div class="meta">建議提早（你們預計 08:00 抵達）</div></div></div>
+            <div class="tRow"><div><div class="time">08:00</div><div class="meta">抵達</div></div><div><div class="place">福岡機場</div><div class="meta">報到／托運／安檢</div></div></div>
+            <div class="tRow"><div><div class="time">10:55</div><div class="meta">起飛</div></div><div><div class="place">虎航 IT241</div><div class="meta">FUK → TPE</div></div></div>
+            <div class="tRow"><div><div class="time">12:40</div><div class="meta">抵達</div></div><div><div class="place">桃園國際機場（TPE）</div><div class="meta">第一航廈</div></div></div>
+          </div>
+          <div class="links">
+            <a class="btn" href="comgooglemaps://?q=Fukuoka%20Airport%20(FUK)" onclick="setTimeout(()=>{window.location.href='https://www.google.com/maps/search/?api=1&query=Fukuoka%20Airport%20(FUK)'},300)">福岡機場地圖</a>
+          </div>
+        </div></div>
       </section>
 
     </div>
-</div>
+  </div>
 
   <script>
   (function(){
@@ -1206,7 +712,7 @@
         if(e.key === 'ArrowLeft') prev();
       });
 
-      // 點縮圖開啟（事件委派，Day1 template 反覆還原也不怕）
+      // 點縮圖開啟（事件委派，template 反覆還原也不怕）
       document.addEventListener('click', (e) => {
         const thumb = e.target && e.target.closest && e.target.closest('.galleryRow .gItem img');
         if(!thumb) return;
@@ -1249,10 +755,69 @@
       }, { passive: true });
     }
 
+    // ===== 最小測試（debug=1 時才跑，不影響一般使用） =====
+    function runDebugChecks(){
+      const params = new URLSearchParams(location.search);
+      if(params.get('debug') !== '1') return;
+
+      const errors = [];
+
+      // 基本：tab / panel 數量
+      const tabs = qsa('.tab');
+      const panels = qsa('.panel');
+      if(tabs.length !== 6) errors.push('Tab 數量不等於 6');
+      if(panels.length !== 6) errors.push('Panel 數量不等於 6');
+
+      // Day1 / Day2 必須能被 template 還原出內容
+      const d1 = document.getElementById('day1');
+      const d2 = document.getElementById('day2');
+      if(!d1 || !d1.querySelector('.dayHeader') || !d1.querySelector('.timeline')) errors.push('Day1 結構缺失（.dayHeader/.timeline）');
+      if(!d2 || !d2.querySelector('.dayHeader') || !d2.querySelector('.timeline')) errors.push('Day2 結構缺失（.dayHeader/.timeline）');
+
+      // Day2：順序檢查（照片 → 雨天備案 → 導航）
+      if(d2){
+        const photo = d2.querySelector('.galleryWrap[aria-label="Day2 照片"]');
+        const rain = Array.from(d2.querySelectorAll('details')).find(x => (x.textContent || '').includes('雨天備案（Day2）'));
+        const nav = d2.querySelector('.links');
+
+        if(!photo) errors.push('Day2 缺少「照片」區塊');
+        if(!rain) errors.push('Day2 缺少「雨天備案（Day2）」details');
+        if(!nav) errors.push('Day2 缺少「導航」links');
+
+        if(photo && rain && nav){
+          const orderOk = (photo.compareDocumentPosition(rain) & Node.DOCUMENT_POSITION_FOLLOWING)
+                       && (rain.compareDocumentPosition(nav) & Node.DOCUMENT_POSITION_FOLLOWING);
+          if(!orderOk) errors.push('Day2 區塊順序錯誤（應為：照片 → 雨天備案 → 導航）');
+        }
+      }
+
+      // Day3：順序檢查（照片 → 雨天備案 → 導航）
+      const d3 = document.getElementById('day3');
+      if(d3){
+        const photo3 = d3.querySelector('.galleryWrap[aria-label="Day3 照片"]');
+        const rain3 = Array.from(d3.querySelectorAll('details')).find(x => (x.textContent || '').includes('雨天備案（Day3）'));
+        const nav3 = d3.querySelector('.links');
+        if(photo3 && rain3 && nav3){
+          const orderOk3 = (photo3.compareDocumentPosition(rain3) & Node.DOCUMENT_POSITION_FOLLOWING)
+                        && (rain3.compareDocumentPosition(nav3) & Node.DOCUMENT_POSITION_FOLLOWING);
+          if(!orderOk3) errors.push('Day3 區塊順序錯誤（應為：照片 → 雨天備案 → 導航）');
+        }
+      }
+
+      if(errors.length){
+        console.warn('[Itinerary Debug] 發現問題：', errors);
+        alert('Debug 檢查未通過：\n- ' + errors.join('\n- '));
+      } else {
+        console.log('[Itinerary Debug] OK');
+        alert('Debug 檢查：OK（切頁/鎖定/順序皆正常）');
+      }
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
       restoreLockedPages();
       initTabs();
       initLightbox();
+      runDebugChecks();
     });
   })();
   </script>
