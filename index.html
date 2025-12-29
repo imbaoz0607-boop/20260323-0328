@@ -88,11 +88,7 @@
     }
     .dayHeaderRight{margin-left:auto;padding-top:10px}
     .dayDateRight{color:var(--text);font-size:18px;font-weight:800;line-height:1.2}
-    .dayTitle{
-      display:flex;
-      gap:12px;
-      align-items:center;
-    }
+    .dayTitle{display:flex;gap:12px;align-items:center;}
     .num{
       width:40px;height:40px;border-radius:14px;
       display:grid;place-items:center;
@@ -345,7 +341,6 @@
                 <div class="timeline">
                   <div class="tHead">03/24（二） <span>方案 A｜博多 → 九重夢大吊橋 → 由布院 → 旅館華柚</span></div>
                   <div class="tRow"><div><div class="time">上午</div><div class="meta">高速移動</div></div><div><div class="place">福岡都市高速 → 九州自動車道 → 大分自動車道</div><div class="meta">行車約 2.5–3 小時（含休息）</div></div></div>
-                 
                   <div class="tRow"><div><div class="time">途中</div><div class="meta">建議停靠</div></div><div><div class="place">山田 SA（首選）</div><div class="meta">洗手間／咖啡／補給｜備選：玖珠 SA</div></div></div>
                   <div class="tRow"><div><div class="time">11:30–12:30</div><div class="meta">景點</div></div><div><div class="place">九重「夢」大吊橋</div><div class="meta">停留 45–60 分鐘</div></div></div>
                   <div class="tRow"><div><div class="time">14:00</div><div class="meta">展望台</div></div><div><div class="place">狭霧台</div><div class="meta">15–20 分鐘</div></div></div>
@@ -422,172 +417,9 @@
         </div>
       </template>
 
-      <!-- Panels (Day1/Day2 are locked and will be restored from templates)
-           ✅ Fallback：就算某些預覽環境（例如 iOS 檔案預覽）不執行 JS，仍可看到內容。
-           但只要 JS 有跑，會自動用 template 覆蓋，維持「完全鎖定」。 -->
-      <section class="panel active" id="day1" role="tabpanel" aria-label="Day 1 行程" data-lock-template="tpl-day1">
-        <!-- fallback: same as tpl-day1 content -->
-        <div class="dayHeader">
-          <div class="dayTitle">
-            <div class="num">1</div>
-            <div class="tblock"><h2>抵達福岡｜博多晚餐 &amp; 休息</h2></div>
-          </div>
-          <div class="dayHeaderRight"><div class="dayDateRight">03/23（一）</div></div>
-        </div>
-        <div class="dayBody">
-          <div class="content">
-            <div class="timeline">
-              <div class="tRow">
-                <div><div class="time">16:55</div><div class="meta">抵達</div></div>
-                <div><div class="place">福岡機場（FUK）</div><div class="meta">入境／取行李</div></div>
-              </div>
-              <div class="tRow">
-                <div><div class="time">18:10</div><div class="meta">移動</div></div>
-                <div><div class="place">前往博多市區</div><div class="meta">🚕機場至飯店距離約4–4.5公里💰4人約¥1,800 – ¥2,500／🚇搭乘機場線至福岡站下車後步行約10分鐘/550公尺💰¥260*4人</div></div>
-              </div>
-              <div class="tRow">
-                <div><div class="time">18:50</div><div class="meta">入住</div></div>
-                <div><div class="place">🏨 Prince Smart Inn Hakata</div><div class="meta">3-21-4, Hakataekimae, Hakata-ku, Fukuoka, 812-0011, Japan</div></div>
-              </div>
-              <div class="tRow">
-                <div><div class="time">19:30</div><div class="meta">晚餐</div></div>
-                <div><div class="place">🥩燒肉 Hayato 博多站東店</div><div class="meta">提供中文介面以平板進行點餐💰套餐¥4,950日圓(含稅) 特等牛舌、特選牛排拼盤、內臟拼盤、豬里脊＆赤雞拼盤、特選五花肉、特選牛里脊、泡菜拼盤、醋醬拌高麗菜、烤蔬菜（3種每天變換）、韓式泡飯／湯品／韓式拌飯／白飯（4選1）</div></div>
-              </div>
-            </div>
-            <div class="galleryWrap" aria-label="Day1 照片">
-              <p class="galleryTitle">📷 Day 1 照片</p>
-              <div class="galleryRow" role="list">
-                <div class="gItem" role="listitem"><img loading="lazy" src="day1/01.jpg" data-full="day1/01.jpg" alt="Day 1 照片 1"></div>
-                <div class="gItem" role="listitem"><img loading="lazy" src="day1/02.jpg" data-full="day1/02.jpg" alt="Day 1 照片 2"></div>
-                <div class="gItem" role="listitem"><img loading="lazy" src="day1/03.jpg" data-full="day1/03.jpg" alt="Day 1 照片 3"></div>
-                <div class="gItem" role="listitem"><img loading="lazy" src="day1/04.jpg" data-full="day1/04.jpg" alt="Day 1 照片 4"></div>
-              </div>
-            </div>
-            <div class="pills">
-              <span class="pill">隔天早餐：返回飯店前-Dacomecca購買麵包、飲品可作為明日早餐</span>
-              <span class="pill">取車地點：Budget Car Rental Hakata Gion (飯店步行至此約10分鐘/550公尺)</span>
-            </div>
-            <div class="links">
-              <a class="btn" href="comgooglemaps://?q=Fukuoka%20Airport%20(FUK)" onclick="setTimeout(()=>{window.location.href='https://www.google.com/maps/search/?api=1&query=Fukuoka%20Airport%20(FUK)'},300)">福岡機場地圖</a>
-              <a class="btn" href="comgooglemaps://?q=Prince%20Smart%20Inn%20Hakata" onclick="setTimeout(()=>{window.location.href='https://www.google.com/maps/d/viewer?mid=14d0NUVU1_hLuYWMW2iugAFUnhmY5kg8'},300)">飯店周邊地圖</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="panel" id="day2" role="tabpanel" aria-label="Day 2 行程" data-lock-template="tpl-day2">
-        <!-- fallback: same as tpl-day2 content -->
-        <div class="dayHeader">
-          <div class="dayTitle">
-            <div class="num">2</div>
-            <div class="tblock"><h2>自駕｜博多 ⇄ 由布院 ⇄ 九重｜兩種路線備選</h2></div>
-          </div>
-          <div class="dayHeaderRight"><div class="dayDateRight">03/24（二）</div></div>
-        </div>
-
-        <div class="dayBody">
-          <div class="content">
-            <div class="timeline">
-              <div class="tRow">
-                <div><div class="time">08:00–</div></div>
-                <div><div class="place">Budget Car Rental Hakata Gion</div></div>
-              </div>
-              <div class="tRow">
-                <div><div class="time">08:30</div></div>
-                <div><div class="place">領車／檢查車況／設定導航</div></div>
-              </div>
-            </div>
-
-            <details style="margin-top:12px">
-              <summary>🧭 為什麼要做 A／B 兩套（怎麼選）<span class="chev">⌄</span></summary>
-              <div class="content">
-                <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-                  <li><strong>方案 A（先九重→再由布院）</strong>：先跑戶外大景（九重夢大吊橋）；下午回由布院散步收尾。</li>
-                  <li><strong>方案 B（先由布院→再九重）</strong>：先完成由布院重點；下午再去九重作為最後一站。</li>
-                  <li><strong>選擇原則</strong>：依<strong>天氣</strong>、<strong>出發時間</strong>與<strong>體力</strong>決定。</li>
-                </ul>
-              </div>
-            </details>
-
-            <details style="margin-top:12px">
-              <summary>🅰️ 方案 A（先九重→再由布院→旅館華柚）<span class="chev">⌄</span></summary>
-              <div class="content">
-                <div class="timeline">
-                  <div class="tHead">03/24（二） <span>方案 A｜博多 → 九重夢大吊橋 → 由布院 → 旅館華柚</span></div>
-                  <div class="tRow"><div><div class="time">上午</div><div class="meta">高速移動</div></div><div><div class="place">福岡都市高速 → 九州自動車道 → 大分自動車道</div><div class="meta">行車約 2.5–3 小時（含休息）</div></div></div>
-                  <div class="tRow"><div><div class="time">途中</div><div class="meta">建議停靠</div></div><div><div class="place">山田SA（下り）</div><div class="meta">洗手間／咖啡／補給</div></div></div>
-                  <div class="tRow"><div><div class="time">11:30–12:30</div><div class="meta">景點</div></div><div><div class="place">九重「夢」大吊橋</div><div class="meta">停留 45–60 分鐘</div></div></div>
-                  <div class="tRow"><div><div class="time">14:00</div><div class="meta">展望台</div></div><div><div class="place">狭霧台</div><div class="meta">15–20 分鐘</div></div></div>
-                  <div class="tRow"><div><div class="time">15:00</div><div class="meta">散步</div></div><div><div class="place">金鱗湖</div><div class="meta">午後光線佳</div></div></div>
-                  <div class="tRow"><div><div class="time">15:40</div><div class="meta">停車＆徒步</div></div><div><div class="place">湯布院中央児童公園（停車後徒步逛湯之坪）</div></div></div>
-                  <div class="tRow"><div><div class="time">傍晚</div><div class="meta">入住</div></div><div><div class="place">旅館華柚</div><div class="meta">Check‑in 後不再動車</div></div></div>
-                </div>
-              </div>
-            </details>
-
-            <details style="margin-top:12px">
-              <summary>🅱️ 方案 B（先由布院→再九重→旅館華柚）<span class="chev">⌄</span></summary>
-              <div class="content">
-                <div class="timeline">
-                  <div class="tHead">03/24（二） <span>方案 B｜博多 → 由布院 → 九重夢大吊橋 → 旅館華柚</span></div>
-                  <div class="tRow"><div><div class="time">上午</div><div class="meta">高速移動</div></div><div><div class="place">福岡都市高速 → 九州自動車道 → 大分自動車道</div><div class="meta">行車約 2.5–3 小時（含休息）</div></div></div>
-                  <div class="tRow"><div><div class="time">13:30</div><div class="meta">展望台</div></div><div><div class="place">狭霧台</div><div class="meta">15–20 分鐘</div></div></div>
-                  <div class="tRow"><div><div class="time">14:10</div><div class="meta">散步</div></div><div><div class="place">金鱗湖</div></div></div>
-                  <div class="tRow"><div><div class="time">14:40</div><div class="meta">停車＆徒步</div></div><div><div class="place">湯布院中央児童公園（停車後徒步逛湯之坪）</div></div></div>
-                  <div class="tRow"><div><div class="time">16:30–17:30</div><div class="meta">景點</div></div><div><div class="place">九重「夢」大吊橋</div><div class="meta">45–60 分鐘</div></div></div>
-                  <div class="tRow"><div><div class="time">傍晚</div><div class="meta">入住</div></div><div><div class="place">旅館華柚</div><div class="meta">Check‑in 後不再動車</div></div></div>
-                </div>
-              </div>
-            </details>
-
-            <details style="margin-top:12px;border:1px dashed var(--line);border-radius:14px;background:#fafafa">
-              <summary>🛍 抵達由布院後，可能會去的店<span class="chev">⌄</span></summary>
-              <div class="content">
-                <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-                  <li><strong>金賞可樂餅 本店</strong>｜現炸小吃，邊走邊吃</li>
-                  <li><strong>B SPEAK 本店</strong>｜蛋糕卷（建議外帶，售完為止）</li>
-                  <li><strong>由布院 花麴菊家</strong>｜伴手禮（離開時購買）</li>
-                </ul>
-                <div style="margin-top:6px;color:var(--muted);font-size:12px">📌 建議：都在金鱗湖／湯之坪周邊，從「中央児童公園」步行最順。</div>
-              </div>
-            </details>
-
-            <!-- ✅ Day2：照片 → 雨天備案 → 導航 -->
-            <div class="galleryWrap" aria-label="Day2 照片">
-              <p class="galleryTitle">📷 Day 2 照片</p>
-              <div class="galleryRow" role="list">
-                <div class="gItem" role="listitem"><img loading="lazy" src="day2/01.jpg" data-full="day2/01.jpg" alt="Day 2 照片 1"></div>
-                <div class="gItem" role="listitem"><img loading="lazy" src="day2/02.jpg" data-full="day2/02.jpg" alt="Day 2 照片 2"></div>
-                <div class="gItem" role="listitem"><img loading="lazy" src="day2/03.jpg" data-full="day2/03.jpg" alt="Day 2 照片 3"></div>
-                <div class="gItem" role="listitem"><img loading="lazy" src="day2/04.jpg" data-full="day2/04.jpg" alt="Day 2 照片 4"></div>
-                <div class="gItem" role="listitem"><img loading="lazy" src="day2/05.jpg" data-full="day2/05.jpg" alt="Day 2 照片 5"></div>
-                <div class="gItem" role="listitem"><img loading="lazy" src="day2/06.jpg" data-full="day2/06.jpg" alt="Day 2 照片 6"></div>
-              </div>
-            </div>
-
-            <details style="margin-top:12px;border:1px dashed var(--line);border-radius:14px;background:#fafafa">
-              <summary>🌧️ 雨天備案（Day2）<span class="chev">⌄</span></summary>
-              <div class="content">
-                <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-                  <li>雨勢大：由布院（湯之坪／金鱗湖）優先，室內店家＋散步為主</li>
-                  <li>九重夢大吊橋：視能見度決定「縮短停留」或「取消」</li>
-                  <li>山路濕滑：提早入住旅館華柚，避免傍晚趕路</li>
-                </ul>
-              </div>
-            </details>
-
-            <div class="links" style="margin-top:12px">
-              <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E5%B1%B1%E7%94%B0%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%A8%E3%83%AA%E3%82%A2%20%28%E4%B8%8B%E3%82%8A%29&travelmode=driving">🚗 休息站｜山田SA（建議）</a>
-              <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E7%8E%96%E7%8F%A0%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%A8%E3%83%AA%E3%82%A2%20%28%E4%B8%8B%E3%82%8A%29&travelmode=driving">🚗 休息站｜玖珠SA（次要）</a>
-              <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=377+023+247*63&travelmode=driving">🚗 導航｜九重夢大吊橋</a>
-              <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=302+798+233*66&travelmode=driving">🚗 導航｜狭霧台</a>
-              <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=377+319+293*55&travelmode=driving">🚗 導航｜金鱗湖</a>
-              <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E6%B9%AF%E5%B8%83%E9%99%A2%E4%B8%AD%E5%A4%AE%E5%85%90%E7%AB%A5%E5%85%AC%E5%9C%92&travelmode=driving">🚗 導航｜中央児童公園</a>
-              <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=377+319+791*11&travelmode=driving">🏨 導航｜旅館華柚</a>
-            </div>
-          </div>
-        </div>
-      </section>
+      <!-- Panels (Day1/Day2 are locked and will be restored from templates) -->
+      <section class="panel active" id="day1" role="tabpanel" aria-label="Day 1 行程" data-lock-template="tpl-day1"></section>
+      <section class="panel" id="day2" role="tabpanel" aria-label="Day 2 行程" data-lock-template="tpl-day2"></section>
 
       <!-- Day 3 -->
       <section class="panel" id="day3" role="tabpanel" aria-label="Day 3 行程">
@@ -606,26 +438,22 @@
               <div class="tRow"><div><div class="time">10:25–10:50</div><div class="meta">景點</div></div><div><div class="place">夫妻瀑布</div><div class="meta">行車約 20–25 分鐘｜停留 15–25 分鐘</div></div></div>
               <div class="tRow"><div><div class="time">11:40–13:10</div><div class="meta">散步 / 午餐</div></div><div><div class="place">黑川溫泉（第三駐車場）</div><div class="meta">溫泉街散步＋午餐（現場決定）</div></div></div>
 
-            <!-- 黑川溫泉 周邊可逛景點 -->
-            <details style="margin-top:12px;border:1px dashed var(--line);border-radius:14px;background:#fafafa">
-              <summary>📍 黑川溫泉 周邊可逛景點（散步為主）<span class="chev">⌄</span></summary>
-              <div class="content">
-                <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-                  <li><strong>黑川溫泉老街</strong>｜溫泉街本身就是景點，木造建築、小店、足湯，適合慢慢散步。<span style="color:var(--muted)">（川端通り為老街的核心區段）</span></li>
-                  
-                  <li><strong>黑川地藏尊</strong>｜老街內的小神社，順路停留即可。</li>
-                  <li><strong>免費足湯／溫泉蛋</strong>｜邊走邊泡腳、吃小點，行程彈性高。</li>
-                </ul>
-                <div style="margin-top:8px;color:var(--muted);font-size:12px">📌 建議順序：老街散步 → 丸鈴橋拍照 → 午餐 → 足湯或甜點。</div>
-                <div class="links" style="margin-top:8px">
-                  <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E9%BB%92%E5%B7%9D%E6%B8%A9%E6%B3%89">➞ 黑川溫泉 Google Map</a>
-                  <a class="btn" href="day3/官方地圖.pdf" target="_blank" rel="noopener">🗺 官方地圖（PDF）</a>
-                  <a class="btn" href="day3/kurokawa-onsen-map.pdf" target="_blank" rel="noopener">📄 散步地圖（PDF）</a>
-                  <a class="btn" href="javascript:history.back()">← 返回行程表</a>
+              <details style="margin-top:12px;border:1px dashed var(--line);border-radius:14px;background:#fafafa">
+                <summary>📍 黑川溫泉 周邊可逛景點（散步為主）<span class="chev">⌄</span></summary>
+                <div class="content">
+                  <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
+                    <li><strong>黑川溫泉老街</strong>｜溫泉街本身就是景點，木造建築、小店、足湯，適合慢慢散步。<span style="color:var(--muted)">（川端通り為老街的核心區段）</span></li>
+                    <li><strong>黑川地藏尊</strong>｜老街內的小神社，順路停留即可。</li>
+                    <li><strong>免費足湯／溫泉蛋</strong>｜邊走邊泡腳、吃小點，行程彈性高。</li>
+                  </ul>
+                  <div style="margin-top:8px;color:var(--muted);font-size:12px">📌 建議順序：老街散步 → 丸鈴橋拍照 → 午餐 → 足湯或甜點。</div>
+                  <div class="links" style="margin-top:8px">
+                    <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E9%BB%92%E5%B7%9D%E6%B8%A9%E6%B3%89">➞ 黑川溫泉 Google Map</a>
+                    <a class="btn" href="day3/官方地圖.pdf" target="_blank" rel="noopener">🗺 官方地圖（PDF）</a>
+                    <a class="btn" href="day3/kurokawa-onsen-map.pdf" target="_blank" rel="noopener">📄 散步地圖（PDF）</a>
+                  </div>
                 </div>
-              </div>
 
-                <!-- 景點照片（依介紹順序） -->
                 <div class="galleryWrap" aria-label="黑川溫泉 景點照片">
                   <div class="galleryRow" role="list">
                     <div class="gItem" role="listitem"><img loading="lazy" src="day3/01.jpg" data-full="day3/01.jpg" alt="黑川溫泉老街與丸鈴橋"></div>
@@ -633,35 +461,32 @@
                     <div class="gItem" role="listitem"><img loading="lazy" src="day3/03.jpg" data-full="day3/03.jpg" alt="黑川地藏尊"></div>
                   </div>
                 </div>
-              </div>
-            </details>
+              </details>
 
-            
+              <details style="margin-top:12px;border:1px dashed var(--line);border-radius:14px;background:#fafafa">
+                <summary>🍽 黑川溫泉 午餐・咖啡 Top Picks<span class="chev">⌄</span></summary>
+                <div class="content">
+                  <p style="margin:0 0 6px;font-weight:700">⭐ 午餐首選</p>
+                  <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
+                    <li><strong>Warokuya Restaurant</strong>｜人氣最穩定的定食餐廳，口味不雷很安全。</li>
+                    <li><strong>Yamatake - Natural Root Vegetable Cuisine（Yama no Ibuki）</strong>｜自然薯與在地蔬菜料理，清爽不油。</li>
+                    <li><strong>Tsuji no Chaya</strong>｜傳統日式定食與輕食，節奏慢，適合悠閒用餐。</li>
+                    <li><strong>nez（ネズ）</strong>｜小而美的和食店，料理細緻、評價高，想吃得有質感可選。</li>
+                    <li><strong>うな北 黒川温泉店</strong>｜鰻魚飯／天丼份量扎實，早上走景點較累時補體力。</li>
+                  </ul>
 
-            <!-- 黑川溫泉 午餐・咖啡 Top Picks -->
-            <details style="margin-top:12px;border:1px dashed var(--line);border-radius:14px;background:#fafafa">
-              <summary>🍽 黑川溫泉 午餐・咖啡 Top Picks<span class="chev">⌄</span></summary>
-              <div class="content">
-                <p style="margin:0 0 6px;font-weight:700">⭐ 午餐首選</p>
-                <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-                  <li><strong>Warokuya Restaurant</strong>｜人氣最穩定的定食餐廳，口味不雷很安全。</li>
-                  <li><strong>Yamatake - Natural Root Vegetable Cuisine（Yama no Ibuki）</strong>｜自然薯與在地蔬菜料理，清爽不油。</li>
-                  <li><strong>Tsuji no Chaya</strong>｜傳統日式定食與輕食，節奏慢，適合悠閒用餐。</li>
-                  <li><strong>nez（ネズ）</strong>｜小而美的和食店，料理細緻、評價高，想吃得有質感可選。</li>
-                  <li><strong>うな北 黒川温泉店</strong>｜鰻魚飯／天丼份量扎實，早上走景點較累時補體力。</li>
-                </ul>
+                  <p style="margin:10px 0 6px;font-weight:700">☕ 咖啡・甜點・輕食</p>
+                  <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
+                    <li><strong>Pâtisserie Roku</strong>｜人氣甜點店，泡芙、蛋糕適合午餐後邊走邊吃。</li>
+                    <li><strong>SLOW WALK CAFE</strong>｜咖啡＋輕食，適合拉長休息時間或下雨備用。</li>
+                    <li><strong>Au Pan & Coffee</strong>｜麵包＋咖啡為主的輕食型選擇，適合當早午餐或不想吃太飽的午餐。</li>
+                  </ul>
 
-                <p style="margin:10px 0 6px;font-weight:700">☕ 咖啡・甜點・輕食</p>
-                <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-                  <li><strong>Pâtisserie Roku</strong>｜人氣甜點店，泡芙、蛋糕適合午餐後邊走邊吃。</li>
-                  <li><strong>SLOW WALK CAFE</strong>｜咖啡＋輕食，適合拉長休息時間或下雨備用。</li>
-                  <li><strong>Au Pan & Coffee</strong>｜麵包＋咖啡為主的輕食型選擇，適合當早午餐或不想吃太飽的午餐。</li>
-                </ul>
+                  <div style="margin-top:8px;color:var(--muted);font-size:12px">📌 午餐時段多為 11:00–14:00，客滿可直接改下一家；品質差距不大，不需執著單一店。</div>
+                  <div style="margin-top:4px;color:var(--muted);font-size:12px">❌ 需事前預約之餐廳未列入，維持行程彈性。</div>
+                </div>
+              </details>
 
-                <div style="margin-top:8px;color:var(--muted);font-size:12px">📌 午餐時段多為 11:00–14:00，客滿可直接改下一家；品質差距不大，不需執著單一店。</div>
-                <div style="margin-top:4px;color:var(--muted);font-size:12px">❌ 需事前預約之餐廳未列入，維持行程彈性。</div>
-              </div>
-            </details>
               <div class="tRow"><div><div class="time">13:50–14:30</div><div class="meta">景點</div></div><div><div class="place">池山水源</div><div class="meta">行車約 35–40 分鐘｜停留 30–40 分鐘｜平坦好走</div></div></div>
               <div class="tRow"><div><div class="time">15:00–15:20</div><div class="meta">入住</div></div><div><div class="place">Kamenoi Hotel Aso</div><div class="meta">抵達後休息、泡湯</div></div></div>
             </div>
@@ -694,8 +519,6 @@
           <div class="dayHeaderRight"><div class="dayDateRight">03/26（四）</div></div>
         </div>
         <div class="dayBody"><div class="content">
-
-          <!-- A/B 選擇說明 -->
           <details>
             <summary>🧭 Day4 怎麼選 A / B？<span class="chev">⌄</span></summary>
             <div class="content">
@@ -707,7 +530,6 @@
             </div>
           </details>
 
-          <!-- 方案 A -->
           <details style="margin-top:12px">
             <summary>🅰️ 方案 A｜阿蘇自然景點 → 回福岡還車<span class="chev">⌄</span></summary>
             <div class="content">
@@ -724,7 +546,6 @@
             </div>
           </details>
 
-          <!-- 方案 B -->
           <details style="margin-top:12px">
             <summary>🅱️ 方案 B｜阿蘇火山 → 太宰府 → 福岡<span class="chev">⌄</span></summary>
             <div class="content">
@@ -739,7 +560,6 @@
               </div>
             </div>
           </details>
-
         </div></div>
       </section>
 
@@ -785,287 +605,287 @@
   </div>
 
   <script>
-  (function(){
-    if(window.__itineraryInit) return;
-    window.__itineraryInit = true;
+    (function(){
+      if(window.__itineraryInit) return;
+      window.__itineraryInit = true;
 
-    function qs(sel, root=document){ return root.querySelector(sel); }
-    function qsa(sel, root=document){ return Array.from(root.querySelectorAll(sel)); }
+      function qs(sel, root=document){ return root.querySelector(sel); }
+      function qsa(sel, root=document){ return Array.from(root.querySelectorAll(sel)); }
 
-    function restoreLockedPages(){
-      qsa('[data-lock-template]').forEach(panel => {
-        const tplId = panel.getAttribute('data-lock-template');
-        const tpl = tplId ? document.getElementById(tplId) : null;
-        if(!tpl || !tpl.content) return;
-        panel.innerHTML = '';
-        panel.appendChild(tpl.content.cloneNode(true));
-      });
-    }
-
-    function initTabs(){
-      const tabs = qsa('.tab');
-      const panels = qsa('.panel');
-      const dayIds = panels.map(p => p.id);
-
-      function setActive(dayId){
-        tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.day === dayId)));
-        panels.forEach(p => p.classList.toggle('active', p.id === dayId));
-
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-
-        const activeTab = tabs.find(t => t.dataset.day === dayId);
-        if(activeTab) activeTab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      function restoreLockedPages(){
+        qsa('[data-lock-template]').forEach(panel => {
+          const tplId = panel.getAttribute('data-lock-template');
+          const tpl = tplId ? document.getElementById(tplId) : null;
+          if(!tpl || !tpl.content) return;
+          panel.innerHTML = '';
+          panel.appendChild(tpl.content.cloneNode(true));
+        });
       }
 
-      tabs.forEach(btn => btn.addEventListener('click', () => setActive(btn.dataset.day)));
+      function initTabs(){
+        const tabs = qsa('.tab');
+        const panels = qsa('.panel');
+        const dayIds = panels.map(p => p.id);
 
-      // ===== 手機左右滑動切換 Day =====
-      (function enableSwipeToSwitchDays(){
-        const swipeArea = qs('.board') || document.body;
-        let startX=0, startY=0, lastX=0, lastY=0;
-        let tracking=false;
-        let lockedHorizontal=false;
+        function setActive(dayId){
+          tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.day === dayId)));
+          panels.forEach(p => p.classList.toggle('active', p.id === dayId));
 
-        const THRESHOLD = 60;
-        const SLOPE = 1.5;
+          window.scrollTo({ top: 0, behavior: 'smooth' });
 
-        function getActiveIndex(){
-          const i = panels.findIndex(p => p.classList.contains('active'));
-          return i >= 0 ? i : 0;
-        }
-        function setActiveByIndex(idx){
-          const clamped = Math.max(0, Math.min(dayIds.length - 1, idx));
-          setActive(dayIds[clamped]);
-        }
-        function isInTabs(target){
-          return !!(target && target.closest && target.closest('.tabs'));
-        }
-        function isInLightbox(target){
-          return !!(target && target.closest && target.closest('.lbModal.open'));
-        }
-        function isInGallery(target){
-          // 在照片橫向滑動區（縮圖列）時，不要觸發「左右滑換 Day」
-          return !!(target && target.closest && target.closest('.galleryRow'));
+          const activeTab = tabs.find(t => t.dataset.day === dayId);
+          if(activeTab) activeTab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
         }
 
-        swipeArea.addEventListener('touchstart', (e) => {
-          if(!e.touches || e.touches.length !== 1) return;
-          if(isInTabs(e.target)) return;
-          if(isInLightbox(e.target)) return;
-          if(isInGallery(e.target)) return;
+        tabs.forEach(btn => btn.addEventListener('click', () => setActive(btn.dataset.day)));
 
-          const t = e.touches[0];
-          startX = lastX = t.clientX;
-          startY = lastY = t.clientY;
-          tracking = true;
-          lockedHorizontal = false;
+        // ===== 手機左右滑動切換 Day =====
+        (function enableSwipeToSwitchDays(){
+          const swipeArea = qs('.board') || document.body;
+          let startX=0, startY=0, lastX=0, lastY=0;
+          let tracking=false;
+          let lockedHorizontal=false;
+
+          const THRESHOLD = 60;
+          const SLOPE = 1.5;
+
+          function getActiveIndex(){
+            const i = panels.findIndex(p => p.classList.contains('active'));
+            return i >= 0 ? i : 0;
+          }
+          function setActiveByIndex(idx){
+            const clamped = Math.max(0, Math.min(dayIds.length - 1, idx));
+            setActive(dayIds[clamped]);
+          }
+          function isInTabs(target){
+            return !!(target && target.closest && target.closest('.tabs'));
+          }
+          function isInLightbox(target){
+            return !!(target && target.closest && target.closest('.lbModal.open'));
+          }
+          function isInGallery(target){
+            // 在照片橫向滑動區（縮圖列）時，不要觸發「左右滑換 Day」
+            return !!(target && target.closest && target.closest('.galleryRow'));
+          }
+
+          swipeArea.addEventListener('touchstart', (e) => {
+            if(!e.touches || e.touches.length !== 1) return;
+            if(isInTabs(e.target)) return;
+            if(isInLightbox(e.target)) return;
+            if(isInGallery(e.target)) return;
+
+            const t = e.touches[0];
+            startX = lastX = t.clientX;
+            startY = lastY = t.clientY;
+            tracking = true;
+            lockedHorizontal = false;
+          }, { passive: true });
+
+          swipeArea.addEventListener('touchmove', (e) => {
+            if(!tracking || !e.touches || e.touches.length !== 1) return;
+            const t = e.touches[0];
+            lastX = t.clientX;
+            lastY = t.clientY;
+
+            const dx = lastX - startX;
+            const dy = lastY - startY;
+
+            if(!lockedHorizontal && Math.abs(dx) > 10){
+              if(Math.abs(dx) > Math.abs(dy) * SLOPE){
+                lockedHorizontal = true;
+              } else {
+                tracking = false;
+                return;
+              }
+            }
+
+            if(lockedHorizontal){
+              e.preventDefault();
+            }
+          }, { passive: false });
+
+          swipeArea.addEventListener('touchend', () => {
+            if(!tracking) return;
+
+            const dx = lastX - startX;
+            const dy = lastY - startY;
+
+            if(Math.abs(dx) > THRESHOLD && Math.abs(dx) > Math.abs(dy) * SLOPE){
+              const idx = getActiveIndex();
+              if(dx < 0) setActiveByIndex(idx + 1);
+              else setActiveByIndex(idx - 1);
+            }
+
+            tracking = false;
+            lockedHorizontal = false;
+          }, { passive: true });
+        })();
+      }
+
+      function initLightbox(){
+        // 建立一次 Lightbox DOM
+        if(!qs('.lbModal')){
+          const lb = document.createElement('div');
+          lb.className = 'lbModal';
+          lb.innerHTML = `
+            <div class="lbBackdrop" data-lb-close></div>
+            <div class="lbStage"><img class="lbImg" alt="" /></div>
+            <div class="lbNav">
+              <button class="lbBtn" type="button" data-lb-prev aria-label="上一張">‹</button>
+              <button class="lbBtn" type="button" data-lb-next aria-label="下一張">›</button>
+              <span class="lbCount" data-lb-count>0/0</span>
+            </div>
+            <button class="lbClose" type="button" data-lb-close aria-label="關閉">✕</button>
+          `;
+          document.body.appendChild(lb);
+        }
+
+        const modal = qs('.lbModal');
+        const stage = qs('.lbStage', modal);
+        const imgEl = qs('.lbImg', modal);
+        const countEl = qs('[data-lb-count]', modal);
+
+        let list = [];
+        let idx = 0;
+
+        function openAt(i){
+          if(!list.length) return;
+          idx = (i + list.length) % list.length;
+          imgEl.src = list[idx];
+          countEl.textContent = `${idx + 1}/${list.length}`;
+          modal.classList.add('open');
+          document.body.style.overflow = 'hidden';
+        }
+        function close(){
+          modal.classList.remove('open');
+          document.body.style.overflow = '';
+        }
+        function next(){ openAt(idx + 1); }
+        function prev(){ openAt(idx - 1); }
+
+        // 點黑底或右上角 ✕ 關閉
+        modal.addEventListener('click', (e) => {
+          if(e.target && e.target.closest && e.target.closest('[data-lb-close]')) close();
+        });
+
+        // 上一張/下一張
+        qs('[data-lb-next]', modal).addEventListener('click', (e) => { e.stopPropagation(); next(); });
+        qs('[data-lb-prev]', modal).addEventListener('click', (e) => { e.stopPropagation(); prev(); });
+
+        // 鍵盤支援
+        window.addEventListener('keydown', (e) => {
+          if(!modal.classList.contains('open')) return;
+          if(e.key === 'Escape') close();
+          if(e.key === 'ArrowRight') next();
+          if(e.key === 'ArrowLeft') prev();
+        });
+
+        // 點縮圖開啟（事件委派，template 反覆還原也不怕）
+        document.addEventListener('click', (e) => {
+          const thumb = e.target && e.target.closest && e.target.closest('.galleryRow .gItem img');
+          if(!thumb) return;
+
+          const row = thumb.closest('.galleryRow');
+          const imgs = qsa('.gItem img', row);
+          list = imgs.map(x => x.getAttribute('data-full') || x.currentSrc || x.src);
+          openAt(imgs.indexOf(thumb));
         }, { passive: true });
 
-        swipeArea.addEventListener('touchmove', (e) => {
+        // 手機：放大後左右滑切換
+        let tsx=0, tsy=0, tlx=0, tly=0, tracking=false;
+        const LB_TH = 50;
+
+        stage.addEventListener('touchstart', (e) => {
+          if(!modal.classList.contains('open')) return;
+          if(!e.touches || e.touches.length !== 1) return;
+          const t = e.touches[0];
+          tsx = tlx = t.clientX;
+          tsy = tly = t.clientY;
+          tracking = true;
+        }, { passive: true });
+
+        stage.addEventListener('touchmove', (e) => {
           if(!tracking || !e.touches || e.touches.length !== 1) return;
           const t = e.touches[0];
-          lastX = t.clientX;
-          lastY = t.clientY;
-
-          const dx = lastX - startX;
-          const dy = lastY - startY;
-
-          if(!lockedHorizontal && Math.abs(dx) > 10){
-            if(Math.abs(dx) > Math.abs(dy) * SLOPE){
-              lockedHorizontal = true;
-            } else {
-              tracking = false;
-              return;
-            }
-          }
-
-          if(lockedHorizontal){
-            e.preventDefault();
-          }
-        }, { passive: false });
-
-        swipeArea.addEventListener('touchend', () => {
-          if(!tracking) return;
-
-          const dx = lastX - startX;
-          const dy = lastY - startY;
-
-          if(Math.abs(dx) > THRESHOLD && Math.abs(dx) > Math.abs(dy) * SLOPE){
-            const idx = getActiveIndex();
-            if(dx < 0) setActiveByIndex(idx + 1);
-            else setActiveByIndex(idx - 1);
-          }
-
-          tracking = false;
-          lockedHorizontal = false;
+          tlx = t.clientX;
+          tly = t.clientY;
         }, { passive: true });
-      })();
-    }
 
-    function initLightbox(){
-      // 建立一次 Lightbox DOM
-      if(!qs('.lbModal')){
-        const lb = document.createElement('div');
-        lb.className = 'lbModal';
-        lb.innerHTML = `
-          <div class="lbBackdrop" data-lb-close></div>
-          <div class="lbStage"><img class="lbImg" alt="" /></div>
-          <div class="lbNav">
-            <button class="lbBtn" type="button" data-lb-prev aria-label="上一張">‹</button>
-            <button class="lbBtn" type="button" data-lb-next aria-label="下一張">›</button>
-            <span class="lbCount" data-lb-count>0/0</span>
-          </div>
-          <button class="lbClose" type="button" data-lb-close aria-label="關閉">✕</button>
-        `;
-        document.body.appendChild(lb);
+        stage.addEventListener('touchend', () => {
+          if(!tracking) return;
+          const dx = tlx - tsx;
+          const dy = tly - tsy;
+          if(Math.abs(dx) > LB_TH && Math.abs(dx) > Math.abs(dy) * 1.2){
+            if(dx < 0) next();
+            else prev();
+          }
+          tracking = false;
+        }, { passive: true });
       }
 
-      const modal = qs('.lbModal');
-      const stage = qs('.lbStage', modal);
-      const imgEl = qs('.lbImg', modal);
-      const countEl = qs('[data-lb-count]', modal);
+      window.addEventListener('DOMContentLoaded', () => {
+        restoreLockedPages();
+        initTabs();
+        initLightbox();
 
-      let list = [];
-      let idx = 0;
+        // ===== 自動檢查（測試用）：確保版面被正確還原 & 區塊順序正確 =====
+        // 開啟方式：在網址後面加上 ?debug=1
+        try{
+          const params = new URLSearchParams(location.search);
+          if(params.get('debug') === '1'){
+            const errors = [];
+            const d1 = document.getElementById('day1');
+            const d2 = document.getElementById('day2');
+            const d3 = document.getElementById('day3');
 
-      function openAt(i){
-        if(!list.length) return;
-        idx = (i + list.length) % list.length;
-        imgEl.src = list[idx];
-        countEl.textContent = `${idx + 1}/${list.length}`;
-        modal.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      }
-      function close(){
-        modal.classList.remove('open');
-        document.body.style.overflow = '';
-      }
-      function next(){ openAt(idx + 1); }
-      function prev(){ openAt(idx - 1); }
+            // 基本結構
+            if(!d1 || !d1.querySelector('.dayHeader') || !d1.querySelector('.timeline')) errors.push('Day1 結構缺失（.dayHeader/.timeline）');
+            if(!d2 || !d2.querySelector('.dayHeader') || !d2.querySelector('.timeline')) errors.push('Day2 結構缺失（.dayHeader/.timeline）');
+            if(!d3 || !d3.querySelector('.dayHeader') || !d3.querySelector('.timeline')) errors.push('Day3 結構缺失（.dayHeader/.timeline）');
 
-      // 點黑底或右上角 ✕ 關閉
-      modal.addEventListener('click', (e) => {
-        if(e.target && e.target.closest && e.target.closest('[data-lb-close]')) close();
-      });
+            // Day2：順序檢查（照片 → 雨天備案 → 導航）
+            if(d2){
+              const photo = d2.querySelector('.galleryWrap[aria-label="Day2 照片"]');
+              const rain = Array.from(d2.querySelectorAll('details')).find(x => (x.textContent || '').includes('雨天備案（Day2）'));
+              const nav = d2.querySelector('.links');
+              if(!photo) errors.push('Day2 缺少「照片」區塊');
+              if(!rain) errors.push('Day2 缺少「雨天備案（Day2）」details');
+              if(!nav) errors.push('Day2 缺少「導航」links');
+              if(photo && rain && nav){
+                const orderOk = !!(photo.compareDocumentPosition(rain) & Node.DOCUMENT_POSITION_FOLLOWING)
+                            && !!(rain.compareDocumentPosition(nav) & Node.DOCUMENT_POSITION_FOLLOWING);
+                if(!orderOk) errors.push('Day2 區塊順序錯誤（應為：照片 → 雨天備案 → 導航）');
+              }
+            }
 
-      // 上一張/下一張
-      qs('[data-lb-next]', modal).addEventListener('click', (e) => { e.stopPropagation(); next(); });
-      qs('[data-lb-prev]', modal).addEventListener('click', (e) => { e.stopPropagation(); prev(); });
+            // Day3：順序檢查（照片 → 雨天備案 → 導航）
+            if(d3){
+              const photo = d3.querySelector('.galleryWrap[aria-label="Day3 照片"]');
+              const rain = Array.from(d3.querySelectorAll('details')).find(x => (x.textContent || '').includes('雨天備案（Day3）'));
+              const nav = d3.querySelector('.links');
+              if(!photo) errors.push('Day3 缺少「照片」區塊');
+              if(!rain) errors.push('Day3 缺少「雨天備案（Day3）」details');
+              if(!nav) errors.push('Day3 缺少「導航」links');
+              if(photo && rain && nav){
+                const orderOk = !!(photo.compareDocumentPosition(rain) & Node.DOCUMENT_POSITION_FOLLOWING)
+                            && !!(rain.compareDocumentPosition(nav) & Node.DOCUMENT_POSITION_FOLLOWING);
+                if(!orderOk) errors.push('Day3 區塊順序錯誤（應為：照片 → 雨天備案 → 導航）');
+              }
+            }
 
-      // 鍵盤支援
-      window.addEventListener('keydown', (e) => {
-        if(!modal.classList.contains('open')) return;
-        if(e.key === 'Escape') close();
-        if(e.key === 'ArrowRight') next();
-        if(e.key === 'ArrowLeft') prev();
-      });
-
-      // 點縮圖開啟（事件委派，template 反覆還原也不怕）
-      document.addEventListener('click', (e) => {
-        const thumb = e.target && e.target.closest && e.target.closest('.galleryRow .gItem img');
-        if(!thumb) return;
-
-        const row = thumb.closest('.galleryRow');
-        const imgs = qsa('.gItem img', row);
-        list = imgs.map(x => x.getAttribute('data-full') || x.currentSrc || x.src);
-        openAt(imgs.indexOf(thumb));
-      }, { passive: true });
-
-      // 手機：放大後左右滑切換
-      let tsx=0, tsy=0, tlx=0, tly=0, tracking=false;
-      const LB_TH = 50;
-
-      stage.addEventListener('touchstart', (e) => {
-        if(!modal.classList.contains('open')) return;
-        if(!e.touches || e.touches.length !== 1) return;
-        const t = e.touches[0];
-        tsx = tlx = t.clientX;
-        tsy = tly = t.clientY;
-        tracking = true;
-      }, { passive: true });
-
-      stage.addEventListener('touchmove', (e) => {
-        if(!tracking || !e.touches || e.touches.length !== 1) return;
-        const t = e.touches[0];
-        tlx = t.clientX;
-        tly = t.clientY;
-      }, { passive: true });
-
-      stage.addEventListener('touchend', () => {
-        if(!tracking) return;
-        const dx = tlx - tsx;
-        const dy = tly - tsy;
-        if(Math.abs(dx) > LB_TH && Math.abs(dx) > Math.abs(dy) * 1.2){
-          if(dx < 0) next();
-          else prev();
-        }
-        tracking = false;
-      }, { passive: true });
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      restoreLockedPages();
-      initTabs();
-      initLightbox();
-
-      // ===== 自動檢查（測試用）：確保版面被正確還原 & 區塊順序正確 =====
-      // 開啟方式：在網址後面加上 ?debug=1
-      try{
-        const params = new URLSearchParams(location.search);
-        if(params.get('debug') === '1'){
-          const errors = [];
-          const d1 = document.getElementById('day1');
-          const d2 = document.getElementById('day2');
-          const d3 = document.getElementById('day3');
-
-          // 基本結構
-          if(!d1 || !d1.querySelector('.dayHeader') || !d1.querySelector('.timeline')) errors.push('Day1 結構缺失（.dayHeader/.timeline）');
-          if(!d2 || !d2.querySelector('.dayHeader') || !d2.querySelector('.timeline')) errors.push('Day2 結構缺失（.dayHeader/.timeline）');
-          if(!d3 || !d3.querySelector('.dayHeader') || !d3.querySelector('.timeline')) errors.push('Day3 結構缺失（.dayHeader/.timeline）');
-
-          // Day2：順序檢查（照片 → 雨天備案 → 導航）
-          if(d2){
-            const photo = d2.querySelector('.galleryWrap[aria-label="Day2 照片"]');
-            const rain = Array.from(d2.querySelectorAll('details')).find(x => (x.textContent || '').includes('雨天備案（Day2）'));
-            const nav = d2.querySelector('.links');
-            if(!photo) errors.push('Day2 缺少「照片」區塊');
-            if(!rain) errors.push('Day2 缺少「雨天備案（Day2）」details');
-            if(!nav) errors.push('Day2 缺少「導航」links');
-            if(photo && rain && nav){
-              const orderOk = !!(photo.compareDocumentPosition(rain) & Node.DOCUMENT_POSITION_FOLLOWING)
-                           && !!(rain.compareDocumentPosition(nav) & Node.DOCUMENT_POSITION_FOLLOWING);
-              if(!orderOk) errors.push('Day2 區塊順序錯誤（應為：照片 → 雨天備案 → 導航）');
+            if(errors.length){
+              console.warn('[Itinerary Debug] 發現問題：', errors);
+              alert('Debug 檢查未通過：\n- ' + errors.join('\n- '));
+            } else {
+              console.log('[Itinerary Debug] OK');
+              alert('Debug 檢查：OK（Day1/Day2/Day3 結構與 Day2/Day3 順序正常）');
             }
           }
-
-          // Day3：順序檢查（照片 → 雨天備案 → 導航）
-          if(d3){
-            const photo = d3.querySelector('.galleryWrap[aria-label="Day3 照片"]');
-            const rain = Array.from(d3.querySelectorAll('details')).find(x => (x.textContent || '').includes('雨天備案（Day3）'));
-            const nav = d3.querySelector('.links');
-            if(!photo) errors.push('Day3 缺少「照片」區塊');
-            if(!rain) errors.push('Day3 缺少「雨天備案（Day3）」details');
-            if(!nav) errors.push('Day3 缺少「導航」links');
-            if(photo && rain && nav){
-              const orderOk = !!(photo.compareDocumentPosition(rain) & Node.DOCUMENT_POSITION_FOLLOWING)
-                           && !!(rain.compareDocumentPosition(nav) & Node.DOCUMENT_POSITION_FOLLOWING);
-              if(!orderOk) errors.push('Day3 區塊順序錯誤（應為：照片 → 雨天備案 → 導航）');
-            }
-          }
-
-          if(errors.length){
-            console.warn('[Itinerary Debug] 發現問題：', errors);
-            alert('Debug 檢查未通過：\n- ' + errors.join('\n- '));
-          } else {
-            console.log('[Itinerary Debug] OK');
-            alert('Debug 檢查：OK（Day1/Day2/Day3 結構與 Day2/Day3 順序正常）');
-          }
+        }catch(err){
+          console.warn('[Itinerary Debug] error', err);
         }
-      }catch(err){
-        console.warn('[Itinerary Debug] error', err);
-      }
-    });
-  })();
+      });
+    })();
   </script>
 </body>
 </html>
