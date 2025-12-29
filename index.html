@@ -177,8 +177,29 @@
     .galleryRow::-webkit-scrollbar{height:8px}
     .galleryRow::-webkit-scrollbar-thumb{background:rgba(17,24,39,.12);border-radius:999px}
     .galleryRow::-webkit-scrollbar-track{background:transparent}
-    .gItem{flex:0 0 auto;width:220px;aspect-ratio:4/3;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#fff;scroll-snap-align:start;box-shadow:0 6px 16px rgba(0,0,0,.06);cursor:pointer}
+    .gItem{flex:0 0 auto;width:220px;aspect-ratio:4/3;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#fff;scroll-snap-align:start;box-shadow:0 6px 16px rgba(0,0,0,.06);cursor:pointer;position:relative}
     .gItem img{width:100%;height:100%;object-fit:cover;display:block}
+
+    /* ✅ 縮圖文字說明（不依賴 JS；iOS 檔案預覽不跑 JS 也能顯示）
+       用法：在 .gItem 上加 data-caption="..." */
+    .gItem[data-caption]::after{
+      content: attr(data-caption);
+      position:absolute;
+      left:8px; right:8px; bottom:8px;
+      padding:6px 8px;
+      border-radius:12px;
+      background:rgba(17,24,39,.62);
+      color:#fff;
+      font-size:12px;
+      line-height:1.35;
+      letter-spacing:.2px;
+      pointer-events:none;
+      text-shadow:0 1px 2px rgba(0,0,0,.25);
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
 
     /* Lightbox */
     .lbModal{position:fixed;inset:0;z-index:60;display:none}
@@ -273,10 +294,10 @@
             <div class="galleryWrap" aria-label="Day1 照片">
               <p class="galleryTitle">📷 Day 1 照片</p>
               <div class="galleryRow" role="list">
-                <div class="gItem" role="listitem"><img loading="lazy" src="day1/01.jpg" data-full="day1/01.jpg" alt="Day 1 照片 1"></div>
-                <div class="gItem" role="listitem"><img loading="lazy" src="day1/02.jpg" data-full="day1/02.jpg" alt="Day 1 照片 2"></div>
-                <div class="gItem" role="listitem"><img loading="lazy" src="day1/03.jpg" data-full="day1/03.jpg" alt="Day 1 照片 3"></div>
-                <div class="gItem" role="listitem"><img loading="lazy" src="day1/04.jpg" data-full="day1/04.jpg" alt="Day 1 照片 4"></div>
+                <div class="gItem" role="listitem" data-caption="Prince Smart Inn Hakata"><img loading="lazy" src="day1/01.jpg" data-full="day1/01.jpg" alt="Prince Smart Inn Hakata"></div>
+                <div class="gItem" role="listitem" data-caption="燒肉 Hayato 博多站東店"><img loading="lazy" src="day1/02.jpg" data-full="day1/02.jpg" alt="燒肉 Hayato 博多站東店"></div>
+                <div class="gItem" role="listitem" data-caption="店內點菜平板"><img loading="lazy" src="day1/03.jpg" data-full="day1/03.jpg" alt="店內點菜平板"></div>
+                <div class="gItem" role="listitem" data-caption="此為兩人份量"><img loading="lazy" src="day1/04.jpg" data-full="day1/04.jpg" alt="此為兩人份量"></div>
               </div>
             </div>
 
@@ -384,12 +405,12 @@
             <div class="galleryWrap" aria-label="Day2 照片">
               <p class="galleryTitle">📷 Day 2 照片</p>
               <div class="galleryRow" role="list">
-                <div class="gItem" role="listitem"><img loading="lazy" src="day2/01.jpg" data-full="day2/01.jpg" alt="九重「夢」大吊橋｜步行段與景觀"></div>
-                <div class="gItem" role="listitem"><img loading="lazy" src="day2/02.jpg" data-full="day2/02.jpg" alt="狭霧台｜由布院盆地展望"></div>
-                <div class="gItem" role="listitem"><img loading="lazy" src="day2/03.jpg" data-full="day2/03.jpg" alt="金鱗湖｜湖畔散步與午後光線"></div>
-                <div class="gItem" role="listitem"><img loading="lazy" src="day2/04.jpg" data-full="day2/04.jpg" alt="湯之坪街道｜小店散步與吃吃喝喝"></div>
-                <div class="gItem" role="listitem"><img loading="lazy" src="day2/05.jpg" data-full="day2/05.jpg" alt="由布院周邊｜咖啡甜點／伴手禮路線"></div>
-                <div class="gItem" role="listitem"><img loading="lazy" src="day2/06.jpg" data-full="day2/06.jpg" alt="山田SA／玖珠SA｜中途休息補給"></div>
+                <div class="gItem" role="listitem" data-caption="九重「夢」大吊橋｜步行段與景觀"><img loading="lazy" src="day2/01.jpg" data-full="day2/01.jpg" alt="九重「夢」大吊橋｜步行段與景觀"></div>
+                <div class="gItem" role="listitem" data-caption="狭霧台｜由布院盆地展望"><img loading="lazy" src="day2/02.jpg" data-full="day2/02.jpg" alt="狭霧台｜由布院盆地展望"></div>
+                <div class="gItem" role="listitem" data-caption="金鱗湖｜湖畔散步與午後光線"><img loading="lazy" src="day2/03.jpg" data-full="day2/03.jpg" alt="金鱗湖｜湖畔散步與午後光線"></div>
+                <div class="gItem" role="listitem" data-caption="旅館華柚"><img loading="lazy" src="day2/04.jpg" data-full="day2/04.jpg" alt="旅館華柚"></div>
+                <div class="gItem" role="listitem" data-caption="旅館華柚"><img loading="lazy" src="day2/05.jpg" data-full="day2/05.jpg" alt="旅館華柚"></div>
+                <div class="gItem" role="listitem" data-caption="旅館華柚"><img loading="lazy" src="day2/06.jpg" data-full="day2/06.jpg" alt="旅館華柚"></div>
               </div>
             </div>
 
@@ -434,7 +455,7 @@
         <div class="dayBody">
           <div class="content">
             <div class="timeline">
-              <div class="tRow"><div><div class="time">10:00</div><div class="meta">出發</div></div><div><div class="place">旅館華柚</div><div class="meta">早餐後退房，整理行李再出發</div></div></div>
+              <div class="tRow"><div><div class="time">10:00</div><div class="meta">出發</div></div><div><div class="place">旅館華柚</div><div class="meta">早餐後退房</div></div></div>
               <div class="tRow"><div><div class="time">10:25–10:50</div><div class="meta">景點</div></div><div><div class="place">夫妻瀑布</div><div class="meta">行車約 20–25 分鐘｜停留 15–25 分鐘</div></div></div>
               <div class="tRow"><div><div class="time">11:40–13:10</div><div class="meta">散步 / 午餐</div></div><div><div class="place">黑川溫泉（第三駐車場）</div><div class="meta">溫泉街散步＋午餐（現場決定）</div></div></div>
 
@@ -456,9 +477,9 @@
 
                 <div class="galleryWrap" aria-label="黑川溫泉 景點照片">
                   <div class="galleryRow" role="list">
-                    <div class="gItem" role="listitem"><img loading="lazy" src="day3/01.jpg" data-full="day3/01.jpg" alt="黑川溫泉老街與丸鈴橋"></div>
-                    <div class="gItem" role="listitem"><img loading="lazy" src="day3/02.jpg" data-full="day3/02.jpg" alt="川端通り／いご坂一帶街景"></div>
-                    <div class="gItem" role="listitem"><img loading="lazy" src="day3/03.jpg" data-full="day3/03.jpg" alt="黑川地藏尊"></div>
+                    <div class="gItem" role="listitem" data-caption="黑川溫泉老街與丸鈴橋"><img loading="lazy" src="day3/01.jpg" data-full="day3/01.jpg" alt="黑川溫泉老街與丸鈴橋"></div>
+                    <div class="gItem" role="listitem" data-caption="川端通り／いご坂一帶街景"><img loading="lazy" src="day3/02.jpg" data-full="day3/02.jpg" alt="川端通り／いご坂一帶街景"></div>
+                    <div class="gItem" role="listitem" data-caption="黑川地藏尊"><img loading="lazy" src="day3/03.jpg" data-full="day3/03.jpg" alt="黑川地藏尊"></div>
                   </div>
                 </div>
               </details>
@@ -632,6 +653,19 @@
       function removeBackLinks(){
         qsa('a[href^="javascript:history.back"], a.btn[href^="javascript:history.back"]').forEach(function(a){
           a.remove();
+        });
+      }
+
+      function syncGalleryCaptions(){
+        // 若有跑 JS：把 img 的 alt 同步到 .gItem 的 data-caption（避免每張都要手打）
+        qsa('.galleryRow .gItem').forEach(function(item){
+          var img = item.querySelector('img');
+          if(!img) return;
+          var cap = (item.getAttribute('data-caption') || '').trim();
+          if(cap) return;
+          var alt = (img.getAttribute('alt') || '').trim();
+          if(!alt) return;
+          item.setAttribute('data-caption', alt);
         });
       }
 
@@ -845,6 +879,7 @@
 
       window.addEventListener('DOMContentLoaded', function(){
         restoreLockedPages();
+        syncGalleryCaptions();
         removeBackLinks();
         initTabs();
         initLightbox();
