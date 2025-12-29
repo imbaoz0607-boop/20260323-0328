@@ -179,26 +179,6 @@
     .galleryRow::-webkit-scrollbar-track{background:transparent}
     .gItem{flex:0 0 auto;width:220px;aspect-ratio:4/3;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#fff;scroll-snap-align:start;box-shadow:0 6px 16px rgba(0,0,0,.06);cursor:pointer}
     .gItem img{width:100%;height:100%;object-fit:cover;display:block}
-    /* Caption overlay (use img alt / data-caption) */
-    .gItem{position:relative}
-    .gCap{
-      position:absolute;
-      left:8px; right:8px; bottom:8px;
-      padding:6px 8px;
-      border-radius:12px;
-      background:rgba(17,24,39,.62);
-      color:#fff;
-      font-size:12px;
-      line-height:1.35;
-      letter-spacing:.2px;
-      pointer-events:none;
-      text-shadow:0 1px 2px rgba(0,0,0,.25);
-      display:-webkit-box;
-      -webkit-line-clamp:2;
-      -webkit-box-orient:vertical;
-      overflow:hidden;
-    }
-
 
     /* Lightbox */
     .lbModal{position:fixed;inset:0;z-index:60;display:none}
@@ -404,12 +384,12 @@
             <div class="galleryWrap" aria-label="Day2 照片">
               <p class="galleryTitle">📷 Day 2 照片</p>
               <div class="galleryRow" role="list">
-                <div class="gItem" role="listitem"><img loading="lazy" src="day2/01.jpg" data-full="day2/01.jpg" alt="Day 2 照片 1"></div>
-                <div class="gItem" role="listitem"><img loading="lazy" src="day2/02.jpg" data-full="day2/02.jpg" alt="Day 2 照片 2"></div>
-                <div class="gItem" role="listitem"><img loading="lazy" src="day2/03.jpg" data-full="day2/03.jpg" alt="Day 2 照片 3"></div>
-                <div class="gItem" role="listitem"><img loading="lazy" src="day2/04.jpg" data-full="day2/04.jpg" alt="Day 2 照片 4"></div>
-                <div class="gItem" role="listitem"><img loading="lazy" src="day2/05.jpg" data-full="day2/05.jpg" alt="Day 2 照片 5"></div>
-                <div class="gItem" role="listitem"><img loading="lazy" src="day2/06.jpg" data-full="day2/06.jpg" alt="Day 2 照片 6"></div>
+                <div class="gItem" role="listitem"><img loading="lazy" src="day2/01.jpg" data-full="day2/01.jpg" alt="九重「夢」大吊橋｜步行段與景觀"></div>
+                <div class="gItem" role="listitem"><img loading="lazy" src="day2/02.jpg" data-full="day2/02.jpg" alt="狭霧台｜由布院盆地展望"></div>
+                <div class="gItem" role="listitem"><img loading="lazy" src="day2/03.jpg" data-full="day2/03.jpg" alt="金鱗湖｜湖畔散步與午後光線"></div>
+                <div class="gItem" role="listitem"><img loading="lazy" src="day2/04.jpg" data-full="day2/04.jpg" alt="湯之坪街道｜小店散步與吃吃喝喝"></div>
+                <div class="gItem" role="listitem"><img loading="lazy" src="day2/05.jpg" data-full="day2/05.jpg" alt="由布院周邊｜咖啡甜點／伴手禮路線"></div>
+                <div class="gItem" role="listitem"><img loading="lazy" src="day2/06.jpg" data-full="day2/06.jpg" alt="山田SA／玖珠SA｜中途休息補給"></div>
               </div>
             </div>
 
@@ -629,52 +609,73 @@
       if(window.__itineraryInit) return;
       window.__itineraryInit = true;
 
-      function qs(sel, root=document){ return root.querySelector(sel); }
-      function qsa(sel, root=document){ return Array.from(root.querySelectorAll(sel)); }
+      function qs(sel, root){
+        if(root === void 0) root = document;
+        return root.querySelector(sel);
+      }
+      function qsa(sel, root){
+        if(root === void 0) root = document;
+        return Array.from(root.querySelectorAll(sel));
+      }
 
       function restoreLockedPages(){
-        qsa('[data-lock-template]').forEach(panel => {
-          const tplId = panel.getAttribute('data-lock-template');
-          const tpl = tplId ? document.getElementById(tplId) : null;
+        qsa('[data-lock-template]').forEach(function(panel){
+          var tplId = panel.getAttribute('data-lock-template');
+          var tpl = tplId ? document.getElementById(tplId) : null;
           if(!tpl || !tpl.content) return;
           panel.innerHTML = '';
           panel.appendChild(tpl.content.cloneNode(true));
         });
       }
 
+      // ✅ 保險：移除任何「javascript:history.back()」連結（避免舊版快取/複製貼上又冒出來）
+      function removeBackLinks(){
+        qsa('a[href^="javascript:history.back"], a.btn[href^="javascript:history.back"]').forEach(function(a){
+          a.remove();
+        });
+      }
+
       function initTabs(){
-        const tabs = qsa('.tab');
-        const panels = qsa('.panel');
-        const dayIds = panels.map(p => p.id);
+        var tabs = qsa('.tab');
+        var panels = qsa('.panel');
+        var dayIds = panels.map(function(p){ return p.id; });
 
         function setActive(dayId){
-          tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.day === dayId)));
-          panels.forEach(p => p.classList.toggle('active', p.id === dayId));
+          tabs.forEach(function(t){
+            t.setAttribute('aria-selected', String(t.dataset.day === dayId));
+          });
+          panels.forEach(function(p){
+            p.classList.toggle('active', p.id === dayId);
+          });
 
           window.scrollTo({ top: 0, behavior: 'smooth' });
 
-          const activeTab = tabs.find(t => t.dataset.day === dayId);
+          var activeTab = tabs.find(function(t){ return t.dataset.day === dayId; });
           if(activeTab) activeTab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
         }
 
-        tabs.forEach(btn => btn.addEventListener('click', () => setActive(btn.dataset.day)));
+        tabs.forEach(function(btn){
+          btn.addEventListener('click', function(){
+            setActive(btn.dataset.day);
+          });
+        });
 
         // ===== 手機左右滑動切換 Day =====
         (function enableSwipeToSwitchDays(){
-          const swipeArea = qs('.board') || document.body;
-          let startX=0, startY=0, lastX=0, lastY=0;
-          let tracking=false;
-          let lockedHorizontal=false;
+          var swipeArea = qs('.board') || document.body;
+          var startX=0, startY=0, lastX=0, lastY=0;
+          var tracking=false;
+          var lockedHorizontal=false;
 
-          const THRESHOLD = 60;
-          const SLOPE = 1.5;
+          var THRESHOLD = 60;
+          var SLOPE = 1.5;
 
           function getActiveIndex(){
-            const i = panels.findIndex(p => p.classList.contains('active'));
+            var i = panels.findIndex(function(p){ return p.classList.contains('active'); });
             return i >= 0 ? i : 0;
           }
           function setActiveByIndex(idx){
-            const clamped = Math.max(0, Math.min(dayIds.length - 1, idx));
+            var clamped = Math.max(0, Math.min(dayIds.length - 1, idx));
             setActive(dayIds[clamped]);
           }
           function isInTabs(target){
@@ -688,27 +689,27 @@
             return !!(target && target.closest && target.closest('.galleryRow'));
           }
 
-          swipeArea.addEventListener('touchstart', (e) => {
+          swipeArea.addEventListener('touchstart', function(e){
             if(!e.touches || e.touches.length !== 1) return;
             if(isInTabs(e.target)) return;
             if(isInLightbox(e.target)) return;
             if(isInGallery(e.target)) return;
 
-            const t = e.touches[0];
+            var t = e.touches[0];
             startX = lastX = t.clientX;
             startY = lastY = t.clientY;
             tracking = true;
             lockedHorizontal = false;
           }, { passive: true });
 
-          swipeArea.addEventListener('touchmove', (e) => {
+          swipeArea.addEventListener('touchmove', function(e){
             if(!tracking || !e.touches || e.touches.length !== 1) return;
-            const t = e.touches[0];
+            var t = e.touches[0];
             lastX = t.clientX;
             lastY = t.clientY;
 
-            const dx = lastX - startX;
-            const dy = lastY - startY;
+            var dx = lastX - startX;
+            var dy = lastY - startY;
 
             if(!lockedHorizontal && Math.abs(dx) > 10){
               if(Math.abs(dx) > Math.abs(dy) * SLOPE){
@@ -724,14 +725,14 @@
             }
           }, { passive: false });
 
-          swipeArea.addEventListener('touchend', () => {
+          swipeArea.addEventListener('touchend', function(){
             if(!tracking) return;
 
-            const dx = lastX - startX;
-            const dy = lastY - startY;
+            var dx = lastX - startX;
+            var dy = lastY - startY;
 
             if(Math.abs(dx) > THRESHOLD && Math.abs(dx) > Math.abs(dy) * SLOPE){
-              const idx = getActiveIndex();
+              var idx = getActiveIndex();
               if(dx < 0) setActiveByIndex(idx + 1);
               else setActiveByIndex(idx - 1);
             }
@@ -742,52 +743,36 @@
         })();
       }
 
-      function injectGalleryCaptions(){
-        // 讓縮圖「永遠」顯示文字說明（預設取 img 的 alt；也可用 data-caption 覆蓋）
-        qsa('.galleryRow .gItem').forEach(item => {
-          if(item.querySelector('.gCap')) return;
-          const img = item.querySelector('img');
-          if(!img) return;
-          const cap = (img.getAttribute('data-caption') || img.getAttribute('alt') || '').trim();
-          if(!cap) return;
-          const el = document.createElement('div');
-          el.className = 'gCap';
-          el.textContent = cap;
-          item.appendChild(el);
-        });
-      }
-
       function initLightbox(){
         // 建立一次 Lightbox DOM
         if(!qs('.lbModal')){
-          const lb = document.createElement('div');
+          var lb = document.createElement('div');
           lb.className = 'lbModal';
-          lb.innerHTML = `
-            <div class="lbBackdrop" data-lb-close></div>
-            <div class="lbStage"><img class="lbImg" alt="" /></div>
-            <div class="lbNav">
-              <button class="lbBtn" type="button" data-lb-prev aria-label="上一張">‹</button>
-              <button class="lbBtn" type="button" data-lb-next aria-label="下一張">›</button>
-              <span class="lbCount" data-lb-count>0/0</span>
-            </div>
-            <button class="lbClose" type="button" data-lb-close aria-label="關閉">✕</button>
-          `;
+          lb.innerHTML = ''
+            + '<div class="lbBackdrop" data-lb-close></div>'
+            + '<div class="lbStage"><img class="lbImg" alt="" /></div>'
+            + '<div class="lbNav">'
+            + '  <button class="lbBtn" type="button" data-lb-prev aria-label="上一張">‹</button>'
+            + '  <button class="lbBtn" type="button" data-lb-next aria-label="下一張">›</button>'
+            + '  <span class="lbCount" data-lb-count>0/0</span>'
+            + '</div>'
+            + '<button class="lbClose" type="button" data-lb-close aria-label="關閉">✕</button>';
           document.body.appendChild(lb);
         }
 
-        const modal = qs('.lbModal');
-        const stage = qs('.lbStage', modal);
-        const imgEl = qs('.lbImg', modal);
-        const countEl = qs('[data-lb-count]', modal);
+        var modal = qs('.lbModal');
+        var stage = qs('.lbStage', modal);
+        var imgEl = qs('.lbImg', modal);
+        var countEl = qs('[data-lb-count]', modal);
 
-        let list = [];
-        let idx = 0;
+        var list = [];
+        var idx = 0;
 
         function openAt(i){
           if(!list.length) return;
           idx = (i + list.length) % list.length;
           imgEl.src = list[idx];
-          countEl.textContent = `${idx + 1}/${list.length}`;
+          countEl.textContent = String(idx + 1) + '/' + String(list.length);
           modal.classList.add('open');
           document.body.style.overflow = 'hidden';
         }
@@ -799,16 +784,16 @@
         function prev(){ openAt(idx - 1); }
 
         // 點黑底或右上角 ✕ 關閉
-        modal.addEventListener('click', (e) => {
+        modal.addEventListener('click', function(e){
           if(e.target && e.target.closest && e.target.closest('[data-lb-close]')) close();
         });
 
         // 上一張/下一張
-        qs('[data-lb-next]', modal).addEventListener('click', (e) => { e.stopPropagation(); next(); });
-        qs('[data-lb-prev]', modal).addEventListener('click', (e) => { e.stopPropagation(); prev(); });
+        qs('[data-lb-next]', modal).addEventListener('click', function(e){ e.stopPropagation(); next(); });
+        qs('[data-lb-prev]', modal).addEventListener('click', function(e){ e.stopPropagation(); prev(); });
 
         // 鍵盤支援
-        window.addEventListener('keydown', (e) => {
+        window.addEventListener('keydown', function(e){
           if(!modal.classList.contains('open')) return;
           if(e.key === 'Escape') close();
           if(e.key === 'ArrowRight') next();
@@ -816,40 +801,40 @@
         });
 
         // 點縮圖開啟（事件委派，template 反覆還原也不怕）
-        document.addEventListener('click', (e) => {
-          const thumb = e.target && e.target.closest && e.target.closest('.galleryRow .gItem img');
+        document.addEventListener('click', function(e){
+          var thumb = e.target && e.target.closest && e.target.closest('.galleryRow .gItem img');
           if(!thumb) return;
 
-          const row = thumb.closest('.galleryRow');
-          const imgs = qsa('.gItem img', row);
-          list = imgs.map(x => x.getAttribute('data-full') || x.currentSrc || x.src);
+          var row = thumb.closest('.galleryRow');
+          var imgs = qsa('.gItem img', row);
+          list = imgs.map(function(x){ return x.getAttribute('data-full') || x.currentSrc || x.src; });
           openAt(imgs.indexOf(thumb));
         }, { passive: true });
 
         // 手機：放大後左右滑切換
-        let tsx=0, tsy=0, tlx=0, tly=0, tracking=false;
-        const LB_TH = 50;
+        var tsx=0, tsy=0, tlx=0, tly=0, tracking=false;
+        var LB_TH = 50;
 
-        stage.addEventListener('touchstart', (e) => {
+        stage.addEventListener('touchstart', function(e){
           if(!modal.classList.contains('open')) return;
           if(!e.touches || e.touches.length !== 1) return;
-          const t = e.touches[0];
+          var t = e.touches[0];
           tsx = tlx = t.clientX;
           tsy = tly = t.clientY;
           tracking = true;
         }, { passive: true });
 
-        stage.addEventListener('touchmove', (e) => {
+        stage.addEventListener('touchmove', function(e){
           if(!tracking || !e.touches || e.touches.length !== 1) return;
-          const t = e.touches[0];
+          var t = e.touches[0];
           tlx = t.clientX;
           tly = t.clientY;
         }, { passive: true });
 
-        stage.addEventListener('touchend', () => {
+        stage.addEventListener('touchend', function(){
           if(!tracking) return;
-          const dx = tlx - tsx;
-          const dy = tly - tsy;
+          var dx = tlx - tsx;
+          var dy = tly - tsy;
           if(Math.abs(dx) > LB_TH && Math.abs(dx) > Math.abs(dy) * 1.2){
             if(dx < 0) next();
             else prev();
@@ -858,27 +843,21 @@
         }, { passive: true });
       }
 
-      window.addEventListener('DOMContentLoaded', () => {
-        // 防呆：移除任何「← 返回行程表」(history.back) 連結（避免舊版本/快取殘留時又看到）
-        try{
-          document.querySelectorAll('a.btn[href^="javascript:history.back"], a.btn[href="javascript:history.back()"], a[href^="javascript:history.back"], a[href="javascript:history.back()"]')
-            .forEach(a => a.remove());
-        }catch(e){}
-
+      window.addEventListener('DOMContentLoaded', function(){
         restoreLockedPages();
-        injectGalleryCaptions();
+        removeBackLinks();
         initTabs();
         initLightbox();
 
         // ===== 自動檢查（測試用）：確保版面被正確還原 & 區塊順序正確 =====
         // 開啟方式：在網址後面加上 ?debug=1
         try{
-          const params = new URLSearchParams(location.search);
+          var params = new URLSearchParams(location.search);
           if(params.get('debug') === '1'){
-            const errors = [];
-            const d1 = document.getElementById('day1');
-            const d2 = document.getElementById('day2');
-            const d3 = document.getElementById('day3');
+            var errors = [];
+            var d1 = document.getElementById('day1');
+            var d2 = document.getElementById('day2');
+            var d3 = document.getElementById('day3');
 
             // 基本結構
             if(!d1 || !d1.querySelector('.dayHeader') || !d1.querySelector('.timeline')) errors.push('Day1 結構缺失（.dayHeader/.timeline）');
@@ -887,40 +866,44 @@
 
             // Day2：順序檢查（照片 → 雨天備案 → 導航）
             if(d2){
-              const photo = d2.querySelector('.galleryWrap[aria-label="Day2 照片"]');
-              const rain = Array.from(d2.querySelectorAll('details')).find(x => (x.textContent || '').includes('雨天備案（Day2）'));
-              const nav = d2.querySelector('.links');
-              if(!photo) errors.push('Day2 缺少「照片」區塊');
-              if(!rain) errors.push('Day2 缺少「雨天備案（Day2）」details');
-              if(!nav) errors.push('Day2 缺少「導航」links');
-              if(photo && rain && nav){
-                const orderOk = !!(photo.compareDocumentPosition(rain) & Node.DOCUMENT_POSITION_FOLLOWING)
-                            && !!(rain.compareDocumentPosition(nav) & Node.DOCUMENT_POSITION_FOLLOWING);
-                if(!orderOk) errors.push('Day2 區塊順序錯誤（應為：照片 → 雨天備案 → 導航）');
+              var photo2 = d2.querySelector('.galleryWrap[aria-label="Day2 照片"]');
+              var rain2 = Array.from(d2.querySelectorAll('details')).find(function(x){ return (x.textContent || '').includes('雨天備案（Day2）'); });
+              var nav2 = d2.querySelector('.links');
+              if(!photo2) errors.push('Day2 缺少「照片」區塊');
+              if(!rain2) errors.push('Day2 缺少「雨天備案（Day2）」details');
+              if(!nav2) errors.push('Day2 缺少「導航」links');
+              if(photo2 && rain2 && nav2){
+                var orderOk2 = !!(photo2.compareDocumentPosition(rain2) & Node.DOCUMENT_POSITION_FOLLOWING)
+                          && !!(rain2.compareDocumentPosition(nav2) & Node.DOCUMENT_POSITION_FOLLOWING);
+                if(!orderOk2) errors.push('Day2 區塊順序錯誤（應為：照片 → 雨天備案 → 導航）');
               }
             }
 
             // Day3：順序檢查（照片 → 雨天備案 → 導航）
             if(d3){
-              const photo = d3.querySelector('.galleryWrap[aria-label="Day3 照片"]');
-              const rain = Array.from(d3.querySelectorAll('details')).find(x => (x.textContent || '').includes('雨天備案（Day3）'));
-              const nav = d3.querySelector('.links');
-              if(!photo) errors.push('Day3 缺少「照片」區塊');
-              if(!rain) errors.push('Day3 缺少「雨天備案（Day3）」details');
-              if(!nav) errors.push('Day3 缺少「導航」links');
-              if(photo && rain && nav){
-                const orderOk = !!(photo.compareDocumentPosition(rain) & Node.DOCUMENT_POSITION_FOLLOWING)
-                            && !!(rain.compareDocumentPosition(nav) & Node.DOCUMENT_POSITION_FOLLOWING);
-                if(!orderOk) errors.push('Day3 區塊順序錯誤（應為：照片 → 雨天備案 → 導航）');
+              var photo3 = d3.querySelector('.galleryWrap[aria-label="Day3 照片"]');
+              var rain3 = Array.from(d3.querySelectorAll('details')).find(function(x){ return (x.textContent || '').includes('雨天備案（Day3）'); });
+              var nav3 = d3.querySelector('.links');
+              if(!photo3) errors.push('Day3 缺少「照片」區塊');
+              if(!rain3) errors.push('Day3 缺少「雨天備案（Day3）」details');
+              if(!nav3) errors.push('Day3 缺少「導航」links');
+              if(photo3 && rain3 && nav3){
+                var orderOk3 = !!(photo3.compareDocumentPosition(rain3) & Node.DOCUMENT_POSITION_FOLLOWING)
+                          && !!(rain3.compareDocumentPosition(nav3) & Node.DOCUMENT_POSITION_FOLLOWING);
+                if(!orderOk3) errors.push('Day3 區塊順序錯誤（應為：照片 → 雨天備案 → 導航）');
               }
             }
+
+            // ✅ 新增測試：不可出現 history.back 連結
+            var backLinks = qsa('a[href^="javascript:history.back"]');
+            if(backLinks.length) errors.push('仍存在「javascript:history.back()」連結（應已移除）');
 
             if(errors.length){
               console.warn('[Itinerary Debug] 發現問題：', errors);
               alert('Debug 檢查未通過：\n- ' + errors.join('\n- '));
             } else {
               console.log('[Itinerary Debug] OK');
-              alert('Debug 檢查：OK（Day1/Day2/Day3 結構與 Day2/Day3 順序正常）');
+              alert('Debug 檢查：OK（結構、順序、history.back 皆正常）');
             }
           }
         }catch(err){
