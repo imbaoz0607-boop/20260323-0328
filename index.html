@@ -179,6 +179,26 @@
     .galleryRow::-webkit-scrollbar-track{background:transparent}
     .gItem{flex:0 0 auto;width:220px;aspect-ratio:4/3;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#fff;scroll-snap-align:start;box-shadow:0 6px 16px rgba(0,0,0,.06);cursor:pointer}
     .gItem img{width:100%;height:100%;object-fit:cover;display:block}
+    /* Caption overlay (use img alt / data-caption) */
+    .gItem{position:relative}
+    .gCap{
+      position:absolute;
+      left:8px; right:8px; bottom:8px;
+      padding:6px 8px;
+      border-radius:12px;
+      background:rgba(17,24,39,.62);
+      color:#fff;
+      font-size:12px;
+      line-height:1.35;
+      letter-spacing:.2px;
+      pointer-events:none;
+      text-shadow:0 1px 2px rgba(0,0,0,.25);
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
+
 
     /* Lightbox */
     .lbModal{position:fixed;inset:0;z-index:60;display:none}
@@ -722,6 +742,21 @@
         })();
       }
 
+      function injectGalleryCaptions(){
+        // 讓縮圖「永遠」顯示文字說明（預設取 img 的 alt；也可用 data-caption 覆蓋）
+        qsa('.galleryRow .gItem').forEach(item => {
+          if(item.querySelector('.gCap')) return;
+          const img = item.querySelector('img');
+          if(!img) return;
+          const cap = (img.getAttribute('data-caption') || img.getAttribute('alt') || '').trim();
+          if(!cap) return;
+          const el = document.createElement('div');
+          el.className = 'gCap';
+          el.textContent = cap;
+          item.appendChild(el);
+        });
+      }
+
       function initLightbox(){
         // 建立一次 Lightbox DOM
         if(!qs('.lbModal')){
@@ -824,7 +859,14 @@
       }
 
       window.addEventListener('DOMContentLoaded', () => {
+        // 防呆：移除任何「← 返回行程表」(history.back) 連結（避免舊版本/快取殘留時又看到）
+        try{
+          document.querySelectorAll('a.btn[href^="javascript:history.back"], a.btn[href="javascript:history.back()"], a[href^="javascript:history.back"], a[href="javascript:history.back()"]')
+            .forEach(a => a.remove());
+        }catch(e){}
+
         restoreLockedPages();
+        injectGalleryCaptions();
         initTabs();
         initLightbox();
 
