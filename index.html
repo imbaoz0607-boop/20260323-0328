@@ -612,7 +612,7 @@
           <div class="timeline">
             <div class="tHead">03/28（六） <span>回程｜福岡機場 → 桃園</span></div>
             <div class="tRow"><div><div class="time">06:00</div><div class="meta">起床</div></div><div><div class="place">飯店</div><div class="meta">退房準備／確認護照、機票、行李</div></div></div>
-            <div class="tRow"><div><div class="time">07:00</div><div class="meta">出發</div></div><div><div class="place">前往福岡機場（FUK）</div><div class="meta">預計 07:30 抵達機場）</div></div></div>
+            <div class="tRow"><div><div class="time">07:00</div><div class="meta">出發</div></div><div><div class="place">前往福岡機場（FUK）</div><div class="meta">預計 07:30 抵達機場</div></div></div>
             <div class="tRow"><div><div class="time">07:30</div><div class="meta">抵達</div></div><div><div class="place">福岡機場</div><div class="meta">報到／托運／安檢</div></div></div>
             <div class="tRow"><div><div class="time">10:55</div><div class="meta">起飛</div></div><div><div class="place">虎航 IT241</div><div class="meta">FUK → TPE</div></div></div>
             <div class="tRow"><div><div class="time">12:40</div><div class="meta">抵達</div></div><div><div class="place">桃園國際機場（TPE）</div><div class="meta">第一航廈</div></div></div>
@@ -894,11 +894,25 @@
             var d1 = document.getElementById('day1');
             var d2 = document.getElementById('day2');
             var d3 = document.getElementById('day3');
+            var d4 = document.getElementById('day4');
 
             // 基本結構
             if(!d1 || !d1.querySelector('.dayHeader') || !d1.querySelector('.timeline')) errors.push('Day1 結構缺失（.dayHeader/.timeline）');
             if(!d2 || !d2.querySelector('.dayHeader') || !d2.querySelector('.timeline')) errors.push('Day2 結構缺失（.dayHeader/.timeline）');
             if(!d3 || !d3.querySelector('.dayHeader') || !d3.querySelector('.timeline')) errors.push('Day3 結構缺失（.dayHeader/.timeline）');
+            if(!d4 || !d4.querySelector('.dayHeader')) errors.push('Day4 結構缺失（.dayHeader）');
+
+            // Tabs / Panels 對齊檢查
+            try{
+              var tabs = qsa('.tab');
+              var panels = qsa('.panel');
+              var panelIds = panels.map(function(p){ return p.id; });
+              if(tabs.length !== panels.length) errors.push('Tab 與 Panel 數量不一致（可能導致切換異常）');
+              tabs.forEach(function(t){
+                var id = t.getAttribute('data-day');
+                if(!id || panelIds.indexOf(id) === -1) errors.push('Tab data-day 找不到對應 Panel：' + String(id));
+              });
+            }catch(_e){}
 
             // Day2：順序檢查（照片 → 雨天備案 → 導航）
             if(d2){
@@ -917,7 +931,9 @@
 
             // Day3：順序檢查（照片 → 雨天備案 → 導航）
             if(d3){
-              var photo3 = d3.querySelector('.galleryWrap[aria-label="Day3 照片"]');
+              // Day3 目前把照片放在「黑川溫泉 景點照片」區塊（不一定有獨立的 Day3 照片）
+              var photo3 = d3.querySelector('.galleryWrap[aria-label="Day3 照片"]')
+                        || d3.querySelector('.galleryWrap[aria-label="黑川溫泉 景點照片"]');
               var rain3 = Array.from(d3.querySelectorAll('details')).find(function(x){ return (x.textContent || '').includes('雨天備案（Day3）'); });
               var nav3 = d3.querySelector('.links');
               if(!photo3) errors.push('Day3 缺少「照片」區塊');
