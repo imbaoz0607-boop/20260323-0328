@@ -314,8 +314,9 @@
         </div>
       </template>
 
-      <!-- Panels (Day1/Day2 are locked and will be restored from templates) -->
+      <!-- Panels -->
       <section class="panel active" id="day1" role="tabpanel" aria-label="Day 1 行程" data-lock-template="tpl-day1"></section>
+      <!-- Day 2 -->
       <section class="panel" id="day2" role="tabpanel" aria-label="Day 2 行程">
         <div class="dayHeader">
           <div class="dayTitle">
@@ -510,17 +511,18 @@
 
               <div class="tRow"><div><div class="time">13:50–14:30</div><div class="meta">景點</div></div><div><div class="place">池山水源</div><div class="meta">行車約 35–40 分鐘｜停留 30–40 分鐘｜平坦好走</div></div></div>
 
-            <p style="margin:6px 12px 0;color:var(--text);font-size:13px;line-height:1.6">每年夏天限定的「點燈活動」將青苔覆蓋的溪畔、清澈見底的湧泉與四周的森林，整個區域都會被水和光的夢幻空間所圍繞。</p>
+              <p style="margin:6px 12px 0;color:var(--text);font-size:13px;line-height:1.6">每年夏天限定的「點燈活動」將青苔覆蓋的溪畔、清澈見底的湧泉與四周的森林，整個區域都會被水和光的夢幻空間所圍繞。</p>
 
-            <div class="galleryWrap" aria-label="池山水源 照片">
-              <p class="galleryTitle">📷 池山水源</p>
-              <div class="galleryRow" role="list">
-                <div class="gItem" role="listitem" data-caption="清澈湧泉與林間倒影"><img loading="lazy" src="day3/06.jpg" data-full="day3/06.jpg" alt="池山水源｜清澈湧泉與林間倒影"></div>
-                <div class="gItem" role="listitem" data-caption="水色層次與苔蘚"><img loading="lazy" src="day3/07.jpg" data-full="day3/07.jpg" alt="池山水源｜水色層次與苔蘚"></div>
-                <div class="gItem" role="listitem" data-caption="夏季限定點燈活動"><img loading="lazy" src="day3/08.jpg" data-full="day3/08.jpg" alt="池山水源｜林間夜色燈籠（示意）"></div>
-                <div class="gItem" role="listitem" data-caption="夏季限定點燈活動"><img loading="lazy" src="day3/09.jpg" data-full="day3/09.jpg" alt="池山水源｜石橋與夜間水色"></div>
+              <div class="galleryWrap" aria-label="池山水源 照片">
+                <p class="galleryTitle">📷 池山水源</p>
+                <div class="galleryRow" role="list">
+                  <div class="gItem" role="listitem" data-caption="清澈湧泉與林間倒影"><img loading="lazy" src="day3/06.jpg" data-full="day3/06.jpg" alt="池山水源｜清澈湧泉與林間倒影"></div>
+                  <div class="gItem" role="listitem" data-caption="水色層次與苔蘚"><img loading="lazy" src="day3/07.jpg" data-full="day3/07.jpg" alt="池山水源｜水色層次與苔蘚"></div>
+                  <div class="gItem" role="listitem" data-caption="夏季限定點燈活動"><img loading="lazy" src="day3/08.jpg" data-full="day3/08.jpg" alt="池山水源｜林間夜色燈籠（示意）"></div>
+                  <div class="gItem" role="listitem" data-caption="夏季限定點燈活動"><img loading="lazy" src="day3/09.jpg" data-full="day3/09.jpg" alt="池山水源｜石橋與夜間水色"></div>
+                </div>
               </div>
-            </div>
+
               <div class="tRow"><div><div class="time">15:00–15:20</div><div class="meta">入住</div></div><div><div class="place">Kamenoi Hotel Aso</div><div class="meta">抵達後休息、泡湯</div></div></div>
             </div>
 
@@ -633,8 +635,7 @@
           </div>
         </div></div>
       </section>
-
-    </div>
+</div>
   </div>
 
   <script>
@@ -893,85 +894,10 @@
         restoreLockedPages();
         syncGalleryCaptions();
         removeBackLinks();
-        initTabs();
-        initLightbox();
 
-        // ===== 自動檢查（測試用）：確保版面被正確還原 & 區塊順序正確 =====
-        // 開啟方式：在網址後面加上 ?debug=1
-        try{
-          var params = new URLSearchParams(location.search);
-          if(params.get('debug') === '1'){
-            var errors = [];
-            var d1 = document.getElementById('day1');
-            var d2 = document.getElementById('day2');
-            var d3 = document.getElementById('day3');
-            var d4 = document.getElementById('day4');
-
-            // 基本結構
-            if(!d1 || !d1.querySelector('.dayHeader') || !d1.querySelector('.timeline')) errors.push('Day1 結構缺失（.dayHeader/.timeline）');
-            if(!d2 || !d2.querySelector('.dayHeader') || !d2.querySelector('.timeline')) errors.push('Day2 結構缺失（.dayHeader/.timeline）');
-            if(!d3 || !d3.querySelector('.dayHeader') || !d3.querySelector('.timeline')) errors.push('Day3 結構缺失（.dayHeader/.timeline）');
-            if(!d4 || !d4.querySelector('.dayHeader')) errors.push('Day4 結構缺失（.dayHeader）');
-
-            // Tabs / Panels 對齊檢查
-            try{
-              var tabs = qsa('.tab');
-              var panels = qsa('.panel');
-              var panelIds = panels.map(function(p){ return p.id; });
-              if(tabs.length !== panels.length) errors.push('Tab 與 Panel 數量不一致（可能導致切換異常）');
-              tabs.forEach(function(t){
-                var id = t.getAttribute('data-day');
-                if(!id || panelIds.indexOf(id) === -1) errors.push('Tab data-day 找不到對應 Panel：' + String(id));
-              });
-            }catch(_e){}
-
-            // Day2：順序檢查（照片 → 雨天備案 → 導航）
-            if(d2){
-              var photo2 = d2.querySelector('.galleryWrap[aria-label="Day2 照片"]');
-              var rain2 = Array.from(d2.querySelectorAll('details')).find(function(x){ return (x.textContent || '').includes('雨天備案（Day2）'); });
-              var nav2 = d2.querySelector('.links');
-              if(!photo2) errors.push('Day2 缺少「照片」區塊');
-              if(!rain2) errors.push('Day2 缺少「雨天備案（Day2）」details');
-              if(!nav2) errors.push('Day2 缺少「導航」links');
-              if(photo2 && rain2 && nav2){
-                var orderOk2 = !!(photo2.compareDocumentPosition(rain2) & Node.DOCUMENT_POSITION_FOLLOWING)
-                          && !!(rain2.compareDocumentPosition(nav2) & Node.DOCUMENT_POSITION_FOLLOWING);
-                if(!orderOk2) errors.push('Day2 區塊順序錯誤（應為：照片 → 雨天備案 → 導航）');
-              }
-            }
-
-            // Day3：順序檢查（照片 → 雨天備案 → 導航）
-            if(d3){
-              // Day3 目前把照片放在「黑川溫泉 景點照片」區塊（不一定有獨立的 Day3 照片）
-              var photo3 = d3.querySelector('.galleryWrap[aria-label="Day3 照片"]')
-                        || d3.querySelector('.galleryWrap[aria-label="黑川溫泉 景點照片"]');
-              var rain3 = Array.from(d3.querySelectorAll('details')).find(function(x){ return (x.textContent || '').includes('雨天備案（Day3）'); });
-              var nav3 = d3.querySelector('.links');
-              if(!photo3) errors.push('Day3 缺少「照片」區塊');
-              if(!rain3) errors.push('Day3 缺少「雨天備案（Day3）」details');
-              if(!nav3) errors.push('Day3 缺少「導航」links');
-              if(photo3 && rain3 && nav3){
-                var orderOk3 = !!(photo3.compareDocumentPosition(rain3) & Node.DOCUMENT_POSITION_FOLLOWING)
-                          && !!(rain3.compareDocumentPosition(nav3) & Node.DOCUMENT_POSITION_FOLLOWING);
-                if(!orderOk3) errors.push('Day3 區塊順序錯誤（應為：照片 → 雨天備案 → 導航）');
-              }
-            }
-
-            // ✅ 新增測試：不可出現 history.back 連結
-            var backLinks = qsa('a[href^="javascript:history.back"]');
-            if(backLinks.length) errors.push('仍存在「javascript:history.back()」連結（應已移除）');
-
-            if(errors.length){
-              console.warn('[Itinerary Debug] 發現問題：', errors);
-              alert('Debug 檢查未通過：\n- ' + errors.join('\n- '));
-            } else {
-              console.log('[Itinerary Debug] OK');
-              alert('Debug 檢查：OK（結構、順序、history.back 皆正常）');
-            }
-          }
-        }catch(err){
-          console.warn('[Itinerary Debug] error', err);
-        }
+        // ✅ 先初始化 Tabs：就算 Lightbox 壞掉，Tab 切換也不會死
+        try{ initTabs(); }catch(e){ console.warn('[Itinerary] initTabs error', e); }
+        try{ initLightbox(); }catch(e){ console.warn('[Itinerary] initLightbox error', e); }
       });
     })();
   </script>
