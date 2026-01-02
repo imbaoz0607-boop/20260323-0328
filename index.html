@@ -144,6 +144,14 @@
       border-bottom:1px solid rgba(255,255,255,.08);
     }
     .tRow:last-child{border-bottom:none}
+
+    /* 讓「照片＋說明」在同一格內垂直排列，避免被兩欄擠壓 */
+    .tRowStack{grid-template-columns:1fr}
+    .tRowStack > div{min-width:0}
+
+    /* 讓「照片＋說明」在同一格內垂直排列，避免被兩欄擠壓 */
+    .tRowStack{grid-template-columns:1fr}
+    .tRowStack > div{min-width:0}
     .time{font-variant-numeric: tabular-nums;font-weight:800}
     .meta{color:var(--muted);font-size:12px;margin-top:3px}
     .place{font-weight:750}
@@ -360,7 +368,7 @@
 
             <!-- 方案 A -->
             <details style="margin-top:12px">
-              <summary>🅰️ 方案 A（先九重→再由布院→旅館華柚）<span style="margin-left:auto;color:var(--muted);font-weight:600;font-size:12px">博多 → 九重 → 由布院 → 旅館華柚</span><span class="chev">⌄</span></summary>
+              <summary>🅰️ 方案 A（先九重→再由布院→旅館華柚）<span class="chev">⌄</span></summary>
               <div class="content">
                 <div class="timeline">
                   <div class="tRow"><div><div class="time">上午</div><div class="meta">高速移動</div></div><div><div class="place">福岡都市高速 → 九州自動車道 → 大分自動車道</div><div class="meta">行車約 2.5–3 小時（含休息）</div></div></div>
@@ -376,7 +384,7 @@
 
             <!-- 方案 B -->
             <details style="margin-top:12px">
-              <summary>🅱️ 方案 B（先由布院→再九重→旅館華柚）<span style="margin-left:auto;color:var(--muted);font-weight:600;font-size:12px">博多 → 由布院 → 九重 → 旅館華柚</span><span class="chev">⌄</span></summary>
+              <summary>🅱️ 方案 B（先由布院→再九重→旅館華柚）<span class="chev">⌄</span></summary>
               <div class="content">
                 <div class="timeline">
                   
@@ -475,7 +483,7 @@
                 <div style="margin-top:8px;color:var(--muted);font-size:12px">📌 建議順序：老街散步 → 丸鈴橋拍照 → 午餐 → 足湯或甜點。</div>
 
                 <div style="margin-top:10px;font-size:12px;line-height:1.7;color:var(--text)">
-                  📌 <strong>黑川溫泉・湯明（湯あかり）我覺得很漂亮，但時間應該無法配合，先看看照片。</strong><br>
+                  📌 黑川溫泉・湯明（湯あかり）我覺得很漂亮，但時間應該無法配合（照片 4、5）。<br>
                   點燈時間：每天傍晚 <strong>17:00–21:30</strong><br>
                   活動期間：<strong>2025年12月20日（六）</strong> 至 <strong>2026年3月31日（二）</strong><br>
                   溫泉街上會擺放約 <strong>300 個</strong>由當地旅館與商店人員手工製作的球狀「鞠燈籠」，
@@ -517,10 +525,12 @@
 
             <div class="timeline" style="margin-top:12px">
               <div class="tRow"><div><div class="time">13:50–14:30</div><div class="meta">景點</div></div><div><div class="place">池山水源</div><div class="meta">行車約 35–40 分鐘｜停留 30–40 分鐘｜平坦好走</div></div></div>
-              <div class="tRow">
+
+              <!-- ✅ 圖片改為全寬直向排列（避免 JPG 在 iPhone 被擠成小圖或跑版） -->
+              <div class="tRow tRowStack">
                 <div>
-                  <div class="time"></div>
-                  <div class="galleryWrap" aria-label="池山水源 照片" style="margin-top:4px">
+                  <div class="galleryWrap" aria-label="池山水源 照片">
+                    <p style="margin:0 0 8px;color:var(--text);font-size:13px;line-height:1.6">📌 每年夏天限定的「點燈活動」將青苔覆蓋的溪畔、清澈見底的湧泉與四周的森林，整個區域都會被水和光的夢幻空間所圍繞（照片 3、4）。</p>
                     <p class="galleryTitle">📷 池山水源</p>
                     <div class="galleryRow" role="list">
                       <div class="gItem" role="listitem" data-caption="清澈湧泉與林間倒影"><img loading="lazy" src="day3/06.jpg" data-full="day3/06.jpg" alt="池山水源｜清澈湧泉與林間倒影"></div>
@@ -529,9 +539,7 @@
                       <div class="gItem" role="listitem" data-caption="夏季限定點燈活動"><img loading="lazy" src="day3/09.jpg" data-full="day3/09.jpg" alt="池山水源｜石橋與夜間水色"></div>
                     </div>
                   </div>
-                </div>
-                <div>
-                  <p style="margin:0;color:var(--text);font-size:13px;line-height:1.6">每年夏天限定的「點燈活動」將青苔覆蓋的溪畔、清澈見底的湧泉與四周的森林，整個區域都會被水和光的夢幻空間所圍繞。</p>
+                  
                 </div>
               </div>
             </div>
@@ -580,7 +588,7 @@
           </details>
 
           <details style="margin-top:12px">
-            <summary>🅰️ 方案 A｜阿蘇自然景點 → 回福岡還車<span style="margin-left:auto;color:var(--muted);font-weight:600;font-size:12px">阿蘇 → 高森 → 白川水源 → 草千里 → 福岡</span><span class="chev">⌄</span></summary>
+            <summary>🅰️ 方案 A｜阿蘇自然景點 → 回福岡還車<span class="chev">⌄</span></summary>
             <div class="content">
               <div class="timeline">
 
@@ -609,7 +617,7 @@
           </details>
 
           <details style="margin-top:12px">
-            <summary>🅱️ 方案 B｜阿蘇火山 → 太宰府 → 福岡<span style="margin-left:auto;color:var(--muted);font-weight:600;font-size:12px">阿蘇 → 阿蘇火山 → 太宰府 → 福岡</span><span class="chev">⌄</span></summary>
+            <summary>🅱️ 方案 B｜阿蘇火山 → 太宰府 → 福岡<span class="chev">⌄</span></summary>
             <div class="content">
               <div class="timeline">
                 
@@ -697,303 +705,41 @@
                 </div>
                 <div class="tRow">
                   <div><div class="time">住宿</div><div class="meta">旅館</div></div>
-                  <div><div class="place">旅館華柚</div><div class="meta">Mapcode：<code style="font-weight:800">377 319 791*11</code></div></div>
-                </div>
-              </div>
-            </details>
+                  <div><div class="place">旅館華柚</div><div class="meta"
 
-            <!-- Day 3 Mapcode（無外框，直接展開/收合） -->
-            <details style="margin-top:12px">
-              <summary>Day 3｜黑川溫泉・阿蘇<span class="chev">⌄</span></summary>
-              <div class="content">
-                <div class="tRow">
-                  <div><div class="time">黑川</div><div class="meta">瀑布</div></div>
-                  <div><div class="place">夫妻瀑布</div><div class="meta">Mapcode：<code style="font-weight:800">440 542 844*74</code></div></div>
-                </div>
-                <div class="tRow">
-                  <div><div class="time">黑川</div><div class="meta">停車</div></div>
-                  <div><div class="place">黑川溫泉 第三駐車場</div><div class="meta">Mapcode：<code style="font-weight:800">440 542 844*74</code></div></div>
-                </div>
-                <div class="tRow">
-                  <div><div class="time">阿蘇</div><div class="meta">水源</div></div>
-                  <div><div class="place">池山水源</div><div class="meta">Mapcode：<code style="font-weight:800">256 801 799*55</code></div></div>
-                </div>
-                <div class="tRow">
-                  <div><div class="time">住宿</div><div class="meta">飯店</div></div>
-                  <div><div class="place">Kamenoi Hotel Aso</div><div class="meta">Mapcode：<code style="font-weight:800">256 551 569*74</code></div></div>
-                </div>
-              </div>
-            </details>
+<!-- 🔧 自動補上 Tab 與 Day1 注入用的 JS（由系統加入） -->
+<script>
+  // Tab 切換
+  (function(){
+    const tabs = document.querySelectorAll('.tab');
+    const panels = document.querySelectorAll('.panel');
+    if(!tabs.length || !panels.length) return;
 
-          </div>
-        </div>
-      </section>
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+        panels.forEach(p => p.classList.remove('active'));
 
-    </div>
-  </div>
-
-  <script>
-    (function(){
-      if(window.__itineraryInit) return;
-      window.__itineraryInit = true;
-
-      function qs(sel, root){
-        if(root === void 0) root = document;
-        return root.querySelector(sel);
-      }
-      function qsa(sel, root){
-        if(root === void 0) root = document;
-        return Array.from(root.querySelectorAll(sel));
-      }
-
-      function restoreLockedPages(){
-        qsa('[data-lock-template]').forEach(function(panel){
-          var tplId = panel.getAttribute('data-lock-template');
-          var tpl = tplId ? document.getElementById(tplId) : null;
-          if(!tpl || !tpl.content) return;
-          panel.innerHTML = '';
-          panel.appendChild(tpl.content.cloneNode(true));
-        });
-      }
-
-      // ✅ 保險：移除任何「javascript:history.back()」連結（避免舊版快取/複製貼上又冒出來）
-      function removeBackLinks(){
-        qsa('a[href^="javascript:history.back"], a.btn[href^="javascript:history.back"]').forEach(function(a){
-          a.remove();
-        });
-      }
-
-      function syncGalleryCaptions(){
-        // 若有跑 JS：把 img 的 alt 同步到 .gItem 的 data-caption（避免每張都要手打）
-        qsa('.galleryRow .gItem').forEach(function(item){
-          var img = item.querySelector('img');
-          if(!img) return;
-          var cap = (item.getAttribute('data-caption') || '').trim();
-          if(cap) return;
-          var alt = (img.getAttribute('alt') || '').trim();
-          if(!alt) return;
-          item.setAttribute('data-caption', alt);
-        });
-      }
-
-      function initTabs(){
-        var tabs = qsa('.tab');
-        var panels = qsa('.panel');
-        var dayIds = panels.map(function(p){ return p.id; });
-
-        function setActive(dayId){
-          tabs.forEach(function(t){
-            t.setAttribute('aria-selected', String(t.dataset.day === dayId));
-          });
-          panels.forEach(function(p){
-            p.classList.toggle('active', p.id === dayId);
-          });
-
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-
-          var activeTab = tabs.find(function(t){ return t.dataset.day === dayId; });
-          if(activeTab) activeTab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-        }
-
-        tabs.forEach(function(btn){
-          btn.addEventListener('click', function(){
-            setActive(btn.dataset.day);
-          });
-        });
-
-        // ===== 手機左右滑動切換 Day =====
-        (function enableSwipeToSwitchDays(){
-          var swipeArea = qs('.board') || document.body;
-          var startX=0, startY=0, lastX=0, lastY=0;
-          var tracking=false;
-          var lockedHorizontal=false;
-
-          var THRESHOLD = 60;
-          var SLOPE = 1.5;
-
-          function getActiveIndex(){
-            var i = panels.findIndex(function(p){ return p.classList.contains('active'); });
-            return i >= 0 ? i : 0;
-          }
-          function setActiveByIndex(idx){
-            var clamped = Math.max(0, Math.min(dayIds.length - 1, idx));
-            setActive(dayIds[clamped]);
-          }
-          function isInTabs(target){
-            return !!(target && target.closest && target.closest('.tabs'));
-          }
-          function isInLightbox(target){
-            return !!(target && target.closest && target.closest('.lbModal.open'));
-          }
-          function isInGallery(target){
-            // 在照片橫向滑動區（縮圖列）時，不要觸發「左右滑換 Day」
-            return !!(target && target.closest && target.closest('.galleryRow'));
-          }
-
-          swipeArea.addEventListener('touchstart', function(e){
-            if(!e.touches || e.touches.length !== 1) return;
-            if(isInTabs(e.target)) return;
-            if(isInLightbox(e.target)) return;
-            if(isInGallery(e.target)) return;
-
-            var t = e.touches[0];
-            startX = lastX = t.clientX;
-            startY = lastY = t.clientY;
-            tracking = true;
-            lockedHorizontal = false;
-          }, { passive: true });
-
-          swipeArea.addEventListener('touchmove', function(e){
-            if(!tracking || !e.touches || e.touches.length !== 1) return;
-            var t = e.touches[0];
-            lastX = t.clientX;
-            lastY = t.clientY;
-
-            var dx = lastX - startX;
-            var dy = lastY - startY;
-
-            if(!lockedHorizontal && Math.abs(dx) > 10){
-              if(Math.abs(dx) > Math.abs(dy) * SLOPE){
-                lockedHorizontal = true;
-              } else {
-                tracking = false;
-                return;
-              }
-            }
-
-            if(lockedHorizontal){
-              e.preventDefault();
-            }
-          }, { passive: false });
-
-          swipeArea.addEventListener('touchend', function(){
-            if(!tracking) return;
-
-            var dx = lastX - startX;
-            var dy = lastY - startY;
-
-            if(Math.abs(dx) > THRESHOLD && Math.abs(dx) > Math.abs(dy) * SLOPE){
-              var idx = getActiveIndex();
-              if(dx < 0) setActiveByIndex(idx + 1);
-              else setActiveByIndex(idx - 1);
-            }
-
-            tracking = false;
-            lockedHorizontal = false;
-          }, { passive: true });
-        })();
-      }
-
-      function initLightbox(){
-        // 建立一次 Lightbox DOM
-        if(!qs('.lbModal')){
-          var lb = document.createElement('div');
-          lb.className = 'lbModal';
-          lb.innerHTML = ''
-            + '<div class="lbBackdrop" data-lb-close></div>'
-            + '<div class="lbStage"><img class="lbImg" alt="" /></div>'
-            + '<div class="lbNav">'
-            + '  <button class="lbBtn" type="button" data-lb-prev aria-label="上一張">‹</button>'
-            + '  <button class="lbBtn" type="button" data-lb-next aria-label="下一張">›</button>'
-            + '  <span class="lbCount" data-lb-count>0/0</span>'
-            + '</div>'
-            + '<button class="lbClose" type="button" data-lb-close aria-label="關閉">✕</button>';
-          document.body.appendChild(lb);
-        }
-
-        var modal = qs('.lbModal');
-        var stage = qs('.lbStage', modal);
-        var imgEl = qs('.lbImg', modal);
-        var countEl = qs('[data-lb-count]', modal);
-
-        var list = [];
-        var idx = 0;
-
-        function openAt(i){
-          if(!list.length) return;
-          idx = (i + list.length) % list.length;
-          imgEl.src = list[idx];
-          countEl.textContent = String(idx + 1) + '/' + String(list.length);
-          modal.classList.add('open');
-          document.body.style.overflow = 'hidden';
-        }
-        function close(){
-          modal.classList.remove('open');
-          document.body.style.overflow = '';
-        }
-        function next(){ openAt(idx + 1); }
-        function prev(){ openAt(idx - 1); }
-
-        // 點黑底或右上角 ✕ 關閉
-        modal.addEventListener('click', function(e){
-          if(e.target && e.target.closest && e.target.closest('[data-lb-close]')) close();
-        });
-
-        // 上一張/下一張
-        qs('[data-lb-next]', modal).addEventListener('click', function(e){ e.stopPropagation(); next(); });
-        qs('[data-lb-prev]', modal).addEventListener('click', function(e){ e.stopPropagation(); prev(); });
-
-        // 鍵盤支援
-        window.addEventListener('keydown', function(e){
-          if(!modal.classList.contains('open')) return;
-          if(e.key === 'Escape') close();
-          if(e.key === 'ArrowRight') next();
-          if(e.key === 'ArrowLeft') prev();
-        });
-
-        // 點縮圖開啟（事件委派，template 反覆還原也不怕）
-        document.addEventListener('click', function(e){
-          var thumb = e.target && e.target.closest && e.target.closest('.galleryRow .gItem img');
-          if(!thumb) return;
-
-          var row = thumb.closest('.galleryRow');
-          var imgs = qsa('.gItem img', row);
-          list = imgs.map(function(x){ return x.getAttribute('data-full') || x.currentSrc || x.src; });
-          openAt(imgs.indexOf(thumb));
-        }, { passive: true });
-
-        // 手機：放大後左右滑切換
-        var tsx=0, tsy=0, tlx=0, tly=0, tracking=false;
-        var LB_TH = 50;
-
-        stage.addEventListener('touchstart', function(e){
-          if(!modal.classList.contains('open')) return;
-          if(!e.touches || e.touches.length !== 1) return;
-          var t = e.touches[0];
-          tsx = tlx = t.clientX;
-          tsy = tly = t.clientY;
-          tracking = true;
-        }, { passive: true });
-
-        stage.addEventListener('touchmove', function(e){
-          if(!tracking || !e.touches || e.touches.length !== 1) return;
-          var t = e.touches[0];
-          tlx = t.clientX;
-          tly = t.clientY;
-        }, { passive: true });
-
-        stage.addEventListener('touchend', function(){
-          if(!tracking) return;
-          var dx = tlx - tsx;
-          var dy = tly - tsy;
-          if(Math.abs(dx) > LB_TH && Math.abs(dx) > Math.abs(dy) * 1.2){
-            if(dx < 0) next();
-            else prev();
-          }
-          tracking = false;
-        }, { passive: true });
-      }
-
-      window.addEventListener('DOMContentLoaded', function(){
-        restoreLockedPages();
-        syncGalleryCaptions();
-        removeBackLinks();
-
-        // ✅ 先初始化 Tabs：就算 Lightbox 壞掉，Tab 切換也不會死
-        try{ initTabs(); }catch(e){ console.warn('[Itinerary] initTabs error', e); }
-        try{ initLightbox(); }catch(e){ console.warn('[Itinerary] initLightbox error', e); }
+        tab.setAttribute('aria-selected', 'true');
+        const panel = document.getElementById(tab.dataset.day);
+        if (panel) panel.classList.add('active');
       });
-    })();
-  </script>
-</body>
-</html>
+    });
+
+    // 預設顯示 Day1
+    const first = document.querySelector('.tab[aria-selected="true"]') || tabs[0];
+    if(first){
+      const p = document.getElementById(first.dataset.day);
+      if(p) p.classList.add('active');
+    }
+
+    // Day1 template 注入
+    const day1Panel = document.getElementById('day1');
+    if(day1Panel && day1Panel.dataset.lockTemplate && day1Panel.children.length === 0){
+      const tpl = document.getElementById(day1Panel.dataset.lockTemplate);
+      if(tpl && tpl.content){
+        day1Panel.appendChild(tpl.content.cloneNode(true));
+      }
+    }
+  })();
+</script>
