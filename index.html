@@ -181,7 +181,7 @@
     .gItem img{width:100%;height:100%;object-fit:cover;display:block}
 
     /* ✅ 縮圖文字說明（不依賴 JS；iOS 檔案預覽不跑 JS 也能顯示）
-       用法：在 .gItem 上加 data-caption="..." */
+       用法：在 .gItem 上加 data-caption=\"...\" */
     .gItem[data-caption]::after{
       content: attr(data-caption);
       position:absolute;
@@ -262,7 +262,7 @@
         <button class="tab" role="tab" aria-selected="false" data-day="mapcodes">Mapcode</button>
       </nav>
 
-      <!-- LOCKED templates (Day1 / Day2) -->
+      <!-- LOCKED templates (Day1) -->
       <template id="tpl-day1">
         <div class="dayHeader">
           <div class="dayTitle">
@@ -311,8 +311,6 @@
               <span class="pill">隔天早餐：返回飯店前-Dacomecca購買麵包、飲品可作為明日早餐</span>
               <span class="pill">取車地點：Budget Car Rental Hakata Gion (飯店步行至此約10分鐘/550公尺)</span>
             </div>
-
-            
           </div>
         </div>
       </template>
@@ -354,7 +352,7 @@
                   <li><strong>方案 A 的優點</strong>：博多出發後長時間走高速與幹道；下交流道後直接到九重，<strong>山路集中在上午／中午</strong>、視線好；下午進由布院只剩市區慢行與找停車。</li>
                   <li><strong>方案 B 的特性</strong>：地圖視覺上看起來順，但會變成<strong>下午～傍晚跑九重一帶山路</strong>；若天氣轉差、起霧或疲勞，駕駛壓力較高。</li>
                   <li><strong>何時選方案 B</strong>：天氣非常好、出發時間早、駕駛不排斥山路，且想把由布院當今天重點時。</li>
-                  <li><strong></strong><em>想開得輕鬆選 A；想路線看起來直覺、但能接受傍晚山路才選 B。</em></li>
+                  <li><em>想開得輕鬆選 A；想路線看起來直覺、但能接受傍晚山路才選 B。</em></li>
                 </ul>
               </div>
             </details>
@@ -364,7 +362,6 @@
               <summary>🅰️ 方案 A（先九重→再由布院→旅館華柚）<span class="chev">⌄</span></summary>
               <div class="content">
                 <div class="timeline">
-                  
                   <div class="tRow"><div><div class="time">上午</div><div class="meta">高速移動</div></div><div><div class="place">福岡都市高速 → 九州自動車道 → 大分自動車道</div><div class="meta">行車約 2.5–3 小時（含休息）</div></div></div>
                   <div class="tRow"><div><div class="time">途中</div><div class="meta">建議停靠</div></div><div><div class="place">山田 SA（首選）</div><div class="meta">洗手間／咖啡／補給｜備選：玖珠 SA</div></div></div>
                   <div class="tRow"><div><div class="time">11:30–12:30</div><div class="meta">景點</div></div><div><div class="place">九重「夢」大吊橋</div><div class="meta">停留 45–60 分鐘</div></div></div>
@@ -381,7 +378,6 @@
               <summary>🅱️ 方案 B（先由布院→再九重→旅館華柚）<span class="chev">⌄</span></summary>
               <div class="content">
                 <div class="timeline">
-                  
                   <div class="tRow"><div><div class="time">上午</div><div class="meta">高速移動</div></div><div><div class="place">福岡都市高速 → 九州自動車道 → 大分自動車道</div><div class="meta">行車約 2.5–3 小時（含休息）</div></div></div>
                   <div class="tRow"><div><div class="time">途中</div><div class="meta">建議停靠</div></div><div><div class="place">山田 SA（首選）</div><div class="meta">洗手間／咖啡／補給｜備選：玖珠 SA</div></div></div>
                   <div class="tRow"><div><div class="time">13:30</div><div class="meta">展望台</div></div><div><div class="place">狭霧台</div><div class="meta">15–20 分鐘</div></div></div>
@@ -572,7 +568,7 @@
             </div>
           </details>
 
-          <!-- 🔎 共通：火山／官方資訊快速查詢 -->
+          <!-- 共通：火山資訊（不破壞框架，只調整順序） -->
           <div class="links" style="margin:10px 0 6px">
             <a class="btn" href="https://www.jma.go.jp/bosai/volcano/" target="_blank" rel="noopener">🌋 日本氣象廳｜火山資訊</a>
             <a class="btn" href="https://www.aso-volcano.jp/chinese/index.html" target="_blank" rel="noopener">🏔 阿蘇火山情報</a>
@@ -630,6 +626,7 @@
                   <div><div class="place">阿蘇市區</div><div class="meta">赤牛丼／定食（現場決定）</div></div>
                 </div>
               </div>
+
               <!-- 午餐備選（折疊） -->
               <details style="margin-top:12px;border:1px dashed var(--line);border-radius:14px;background:#fafafa">
                 <summary>🍽 阿蘇市區 午餐備選<span class="chev">⌄</span></summary>
@@ -641,6 +638,7 @@
                   </ul>
                 </div>
               </details>
+
               <!-- 13:40–14:20 阿蘇火山（中岳） -->
               <div class="timeline" style="border:none;background:transparent;border-radius:0">
                 <div class="tRow">
@@ -652,15 +650,13 @@
                 </div>
               </div>
 
-              
-
               <!-- 14:00–15:00 草千里ヶ浜（文字 + 圖） -->
               <div class="timeline" style="border:none;background:transparent;border-radius:0">
                 <div class="tRow">
                   <div><div class="time">14:00–15:00</div><div class="meta">景點</div></div>
                   <div>
                     <div class="place">草千里ヶ浜</div>
-                    <div class="meta">這句海拔約1100米，可以欣賞到悠閒漫步的馬匹和氣勢磅礴、冒著煙的阿蘇山中岳火山口的景色。</div>
+                    <div class="meta">海拔約 1100 米，可以欣賞到悠閒漫步的馬匹和氣勢磅礴、冒著煙的阿蘇山中岳火山口的景色。</div>
                   </div>
                 </div>
               </div>
@@ -701,6 +697,15 @@
                   <div><div class="time">09:00</div><div class="meta">出發</div></div>
                   <div><div class="place">Kamenoi Hotel Aso</div><div class="meta">退房後出發，行李上車</div></div>
                 </div>
+
+                <!-- ✅ 插入在 09:00 下一列（保持原框架） -->
+                <div class="tRow">
+                  <div><div class="time">上午</div><div class="meta">火山（視情況）</div></div>
+                  <div>
+                    <div class="place">阿蘇火山（中岳）</div>
+                    <div class="meta">⚠️ 需視當日開放與火山警戒狀況</div>
+                  </div>
+                </div>
               </div>
 
               <!-- 景觀餐廳/咖啡（備選，折疊） -->
@@ -723,7 +728,7 @@
                 </div>
               </details>
 
-              <!-- 阿蘇火山（中岳）+ 查詢折疊 -->
+              <!-- 阿蘇火山（中岳）+ 文字提示（保留原有段落） -->
               <div class="timeline" style="border:none;background:transparent;border-radius:0">
                 <div class="tRow">
                   <div><div class="time">上午</div><div class="meta">火山（視情況）</div></div>
@@ -733,8 +738,6 @@
                   </div>
                 </div>
               </div>
-
-              
 
               <!-- 午餐：阿蘇市區（備註） -->
               <div class="timeline" style="border:none;background:transparent;border-radius:0">
