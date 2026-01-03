@@ -672,11 +672,13 @@
 
               <div class="galleryWrap" aria-label="草千里ヶ浜 照片">
                 <div class="galleryRow" role="list">
-                  <div class="gItem" role="listitem" data-caption="草千里ヶ浜｜草原與馬匹"><img loading="lazy" src="day4/11.jpg" data-full="day4/11.jpg" alt="草千里ヶ浜｜草原與馬匹"></div>
-                  <div class="gItem" role="listitem" data-caption="草千里ヶ浜｜水面倒影"><img loading="lazy" src="day4/12.jpg" data-full="day4/12.jpg" alt="草千里ヶ浜｜水面倒影"></div>
-                  <div class="gItem" role="listitem" data-caption="草千里ヶ浜｜夕景與火山煙"><img loading="lazy" src="day4/13.jpg" data-full="day4/13.jpg" alt="草千里ヶ浜｜夕景與火山煙"></div>
-                  <div class="gItem" role="listitem" data-caption="草千里ヶ浜｜星空（示意）"><img loading="lazy" src="day4/14.jpg" data-full="day4/14.jpg" alt="草千里ヶ浜｜星空（示意）"></div>
+                  <div class="gItem" role="listitem" data-caption="草千里ヶ浜｜草原與馬匹"><img loading="lazy" src="day4/06.jpg" data-full="day4/06.jpg" alt="草千里ヶ浜｜草原與馬匹"></div>
+                  <div class="gItem" role="listitem" data-caption="草千里ヶ浜｜水面倒影"><img loading="lazy" src="day4/07.jpg" data-full="day4/07.jpg" alt="草千里ヶ浜｜水面倒影"></div>
+                  <div class="gItem" role="listitem" data-caption="草千里ヶ浜｜夕景與火山煙"><img loading="lazy" src="day4/08.jpg" data-full="day4/08.jpg" alt="草千里ヶ浜｜夕景與火山煙"></div>
+                  <div class="gItem" role="listitem" data-caption="草千里ヶ浜｜星空（示意）"><img loading="lazy" src="day4/09.jpg" data-full="day4/09.jpg" alt="草千里ヶ浜｜星空（示意）"></div>
                 </div>
+              </div>
+              </div>
               </div>
 
               <!-- 15:30–18:30 回福岡 + 還車 -->
@@ -938,6 +940,22 @@
         });
       }
 
+      // ✅ 圖片備援：GitHub Pages 路徑大小寫/資料夾錯放時，讓圖片自動嘗試第二路徑
+      function initImageFallbacks(){
+        qsa('img[data-fallback]').forEach(function(img){
+          var tried = false;
+          img.addEventListener('error', function(){
+            if(tried) return;
+            tried = true;
+            var fb = (img.getAttribute('data-fallback') || '').trim();
+            if(!fb) return;
+            img.src = fb;
+            // Lightbox 也要能打開：同步 data-full
+            if(img.hasAttribute('data-full')) img.setAttribute('data-full', fb);
+          });
+        });
+      }
+
       function initTabs(){
         var tabs = qsa('.tab');
         var panels = qsa('.panel');
@@ -1149,6 +1167,8 @@
       window.addEventListener('DOMContentLoaded', function(){
         restoreLockedPages();
         syncGalleryCaptions();
+        initImageFallbacks();
+        removeBackLinks();
         removeBackLinks();
 
         // ✅ 先初始化 Tabs：就算 Lightbox 壞掉，Tab 切換也不會死
