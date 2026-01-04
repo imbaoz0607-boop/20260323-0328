@@ -1110,29 +1110,8 @@
 
         // 點縮圖開啟（事件委派，template 反覆還原也不怕）
         document.addEventListener('click', function(e){
-          var thumb = e.target && e.target.closest && e.target.closest('.galleryRow .gItem img');    </div>
-              </div>
-
-
-
-              <!-- 午餐選擇（折疊） -->
-              <details style="margin-top:10px">
-                <summary>🍽 午餐選擇（阿蘇市區）<span class="chev">⌄</span></summary>
-                <div class="content">
-                  <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-                    <li><strong>赤牛丼／赤牛定食</strong>：阿蘇最代表性的在地選擇（現場看候位決定）。</li>
-                    <li><strong>赤牛丼の店 赤牛屋</strong>｜最人氣赤牛丼名店，肉香濃、份量足；尖峰時段需排隊。</li>
-                    <li><strong>あそ路</strong>｜在地食堂風，赤牛定食穩定，節奏快、不易踩雷。</li>
-                    <li><strong>レストラン アスペクタ</strong>｜靠近火山動線，可邊看山景邊吃赤牛。</li>
-                    <li><strong>赤牛丼屋 たらお</strong>｜小店型，價格親切，適合想快速用餐。</li>
-                    <li><strong>定食／蕎麥麵</strong>：想吃清爽、速度快可選。</li>
-                  </ul>
-                </div>
-              </details>
-                </div>
-              </details>
-
-              <!-- 13:40–14:20 阿蘇火山（中岳） -->          if(!thumb) return;
+          var thumb = e.target && e.target.closest && e.target.closest('.galleryRow .gItem img');
+          if(!thumb) return;
 
           var row = thumb.closest('.galleryRow');
           var imgs = qsa('.gItem img', row);
