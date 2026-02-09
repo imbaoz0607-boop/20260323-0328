@@ -869,8 +869,10 @@
         </div>
         <div class="dayBody"><div class="content">
 
-          <!-- ✅ Day5：先放「食堂光」那一列（維持原本 timeline 版型） -->
+          <!-- ✅ Day5：同一個框內（timeline 內依序：食堂光 → 照片 → 午餐/下午/傍晚） -->
           <div class="timeline">
+
+            <!-- 10:00 食堂光（維持既有版型） -->
             <div class="tRow">
               <div><div class="time">10:00</div><div class="meta">早／午餐</div></div>
               <div>
@@ -881,25 +883,41 @@
                 <div class="meta">在地市場食堂，新鮮海鮮定食、生魚片丼為主；10點開始營業，9點多可以到店門口候位置表先填寫資料。</div>
               </div>
             </div>
-          </div>
 
-          <!-- ✅ Day5：食堂光照片（與前幾天相同的相簿列樣式＋可點開放大） -->
-          <div class="galleryWrap" aria-label="柳橋連合市場｜食堂 光 照片" style="margin-top:10px">
-            <p class="galleryTitle">📷 柳橋連合市場｜食堂 光</p>
-            <div class="galleryRow" role="list">
-              <div class="gItem" role="listitem" data-caption="食堂 光｜店外觀"><img loading="lazy" src="day5/01.jpg" data-full="day5/01.jpg" alt="食堂 光｜店外觀"></div>
-              <div class="gItem" role="listitem" data-caption="鮪魚丼定食"><img loading="lazy" src="day5/02.jpg" data-full="day5/02.jpg" alt="鮪魚丼定食"></div>
-              <div class="gItem" role="listitem" data-caption="鮭魚卵丼"><img loading="lazy" src="day5/03.jpg" data-full="day5/03.jpg" alt="鮭魚卵丼"></div>
-              <div class="gItem" role="listitem" data-caption="菜單"><img loading="lazy" src="day5/04.jpg" data-full="day5/04.jpg" alt="菜單"></div>
+            <!-- 照片：放在同一個 timeline 框內（全寬列，不影響其他天） -->
+            <div class="tRow tRow--full">
+              <div class="galleryWrap" aria-label="柳橋連合市場｜食堂 光 照片" style="margin:0">
+                <p class="galleryTitle">📷 柳橋連合市場｜食堂 光</p>
+                <div class="galleryRow" role="list">
+                  <div class="gItem" role="listitem" data-caption="食堂 光｜店外觀"><img loading="lazy" src="day5/01.jpg" data-full="day5/01.jpg" alt="食堂 光｜店外觀"></div>
+                  <div class="gItem" role="listitem" data-caption="鮪魚丼定食"><img loading="lazy" src="day5/02.jpg" data-full="day5/02.jpg" alt="鮪魚丼定食"></div>
+                  <div class="gItem" role="listitem" data-caption="鮭魚卵丼"><img loading="lazy" src="day5/03.jpg" data-full="day5/03.jpg" alt="鮭魚卵丼"></div>
+                  <div class="gItem" role="listitem" data-caption="菜單"><img loading="lazy" src="day5/04.jpg" data-full="day5/04.jpg" alt="菜單"></div>
+                </div>
+              </div>
             </div>
-          </div>
 
-          <!-- ✅ Day5：其餘行程維持原本 timeline 版型 -->
-          <div class="timeline" style="margin-top:10px">
-            <div class="tRow"><div><div class="time">上午</div><div class="meta">散步</div></div><div><div class="place">天神／大名</div><div class="meta">咖啡、逛街、百貨</div></div></div>
-            <div class="tRow"><div><div class="time">12:00</div><div class="meta">午餐</div></div><div><div class="place">天神/博多 周邊用餐</div><div class="meta">現場決定</div></div></div>
-            <div class="tRow"><div><div class="time">下午</div><div class="meta">選配</div></div><div><div class="place">博多運河城／櫛田神社／川端商店街</div><div class="meta">想走路就排這段；想購物就留在天神</div></div></div>
-            <div class="tRow"><div><div class="time">傍晚</div><div class="meta">採買</div></div><div><div class="place">伴手禮／最後補貨</div><div class="meta">超市、藥妝、車站內伴手禮區</div></div></div>
+            <!-- 上午～傍晚：全部留在同一個框內 -->
+            <div class="tRow">
+              <div><div class="time">上午</div><div class="meta">散步</div></div>
+              <div><div class="place">天神／大名</div><div class="meta">咖啡、逛街、百貨</div></div>
+            </div>
+
+            <div class="tRow">
+              <div><div class="time">12:00</div><div class="meta">午餐</div></div>
+              <div><div class="place">天神/博多 周邊用餐</div><div class="meta">現場決定</div></div>
+            </div>
+
+            <div class="tRow">
+              <div><div class="time">下午</div><div class="meta">選配</div></div>
+              <div><div class="place">博多運河城／櫛田神社／川端商店街</div><div class="meta">想走路就排這段；想購物就留在天神</div></div>
+            </div>
+
+            <div class="tRow">
+              <div><div class="time">傍晚</div><div class="meta">採買</div></div>
+              <div><div class="place">伴手禮／最後補貨</div><div class="meta">超市、藥妝、車站內伴手禮區</div></div>
+            </div>
+
           </div>
 
         </div></div>
