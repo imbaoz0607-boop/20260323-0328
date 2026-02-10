@@ -111,8 +111,16 @@
       list-style:none;
       cursor:pointer;
       padding:12px 12px;
-      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
       font-weight:700;
+    }
+    /* 修正手機版 summary 文字被擠成直排 */
+    summary span.sumText{
+      flex:1;
+      min-width:0;
+      white-space:normal;
+      word-break:break-word;
+      line-height:1.5;
     }
     summary::-webkit-details-marker{display:none}
     .chev{color:var(--muted);transition:transform .15s ease}
@@ -377,7 +385,7 @@
 
             <!-- 方案 A -->
             <details style="margin-top:12px">
-              <summary>🅰️ 方案 A（先九重→再由布院→旅館華柚）<span class="chev">⌄</span></summary>
+              <summary><span class="sumText">🅰️ $1</span><span class="chev">⌄</span></summary>
               <div class="content">
                 <div class="timeline">
                   <div class="tRow"><div><div class="time">上午</div><div class="meta">高速移動</div></div><div><div class="place">福岡都市高速 → 九州自動車道 → 大分自動車道</div><div class="meta">行車約 2.5–3 小時（含休息）</div></div></div>
@@ -919,7 +927,7 @@
                 </details>
 
                 <details style="margin-top:10px;opacity:.6">
-                  <summary>🅱️ 路線 B（待討論）<span class="chev">⌄</span></summary>
+                  <summary><span class="sumText">🅱️ 路線 B（待討論）</span><span class="chev">⌄</span></summary>
                   <div class="content">
                     <p style="margin:0;color:var(--muted);font-size:13px">此路線內容之後再補，先保留位置。</p>
                   </div>
