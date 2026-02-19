@@ -151,6 +151,8 @@
       padding:12px;
       border-bottom:1px solid rgba(255,255,255,.08);
     }
+    /* ✅ 讓 grid 子元素可以被縮小，避免內容把整列撐爆導致「看起來不能滑」(iOS 特別常見) */
+    .tRow > *{min-width:0;}
     /* ✅ 單列全寬（僅在需要的地方加 class，不影響其他天） */
     .tRow--full{grid-template-columns: 1fr;}
     .tRow:last-child{border-bottom:none}
