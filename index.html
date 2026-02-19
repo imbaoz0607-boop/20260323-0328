@@ -237,10 +237,12 @@
 
     @media (max-width: 640px){
       .tRow{grid-template-columns: 72px 1fr; gap:8px; padding:12px}
+      /* ✅ 手機版也要維持全寬列（避免 Day5 等區塊被擠窄） */
+      .tRow.tRow--full{grid-template-columns: 1fr;}
       .num{width:38px;height:38px}
       .tblock h2{font-size:17px}
     }
-  </style>
+</style>
 </head>
 <body>
   <div class="wrap">
@@ -836,6 +838,7 @@
             </div>
           </details>
 
+          <!-- 🍽 Day4 晚餐選擇（入住 Cross Life 博多柳橋 後） -->
           <details style="margin-top:14px;border:1px dashed var(--line);border-radius:14px;background:#fafafa">
             <summary>🍽 Day 4 晚餐選擇（飯店周邊）<span class="chev">⌄</span></summary>
             <div class="content">
@@ -873,8 +876,10 @@
         </div>
         <div class="dayBody"><div class="content">
 
+          <!-- ✅ Day5：同一個框內（timeline 內依序：食堂光 → 照片 → 餐後動線 → 餐後二選一 → 傍晚補貨） -->
           <div class="timeline">
 
+            <!-- 10:00 食堂光 -->
             <div class="tRow">
               <div><div class="time">10:00</div><div class="meta">早／午餐</div></div>
               <div>
@@ -886,24 +891,22 @@
               </div>
             </div>
 
+            <!-- ✅ 食堂光｜照片（放在同一個 timeline 框內；手機不會把左側時間欄撐高） -->
             <div class="tRow tRow--full">
               <div class="galleryWrap" aria-label="柳橋連合市場｜食堂光 照片" style="margin-top:0">
                 <p class="galleryTitle">📷 柳橋連合市場｜食堂 光</p>
-                <div class="galleryRow" role="list">
+                <div class="galleryRow galleryRow--flush" role="list">
                   <div class="gItem" role="listitem" data-caption="食堂 光｜店外觀"><img loading="lazy" src="day5/01.jpg" data-full="day5/01.jpg" alt="食堂 光｜店外觀"></div>
                   <div class="gItem" role="listitem" data-caption="鮪魚丼定食"><img loading="lazy" src="day5/02.jpg" data-full="day5/02.jpg" alt="鮪魚丼定食"></div>
-                  <div class="gItem" role="listitem" data-caption="鮭魚卵丼"><img loading="lazy" src="day5/03.jpg" data-full="day5/03.jpg" alt="鮭魚卵丼"></div>
                 </div>
               </div>
             </div>
 
+            <!-- ✅ 路線 A / B：直接放在「食堂光照片」下方（避免手機版左側時間欄被撐高） -->
             <div class="tRow tRow--full">
               <div style="margin:0">
                 <details style="margin-top:0">
-  <summary>
-    <span class="sumText">🅰️ 柳橋 → 春吉 → 那珂川河岸 → 天神南 → 天神地下街 → 百貨＆大型商場 → 西鐵福岡站</span>
-    <span class="chev">⌄</span>
-  </summary>
+                  <summary>🅰️ 柳橋 → 春吉 → 那珂川河岸 → 天神南 → 天神地下街 → 百貨＆大型商場 → 西鐵福岡站<span class="chev">⌄</span></summary>
                   <div class="content">
                     <p style="margin:0 0 8px;color:var(--muted);font-size:13px;line-height:1.6">從柳橋市場出發，步行穿過春吉住宅街，沿那珂川河岸至天神南全程距離約 1.4–1.6 公里，慢慢走沿途拍照約 30–40 分鐘。</p>
 
@@ -929,6 +932,7 @@
               </div>
             </div>
 
+            <!-- 傍晚補貨 -->
             <div class="tRow">
               <div><div class="time">傍晚</div><div class="meta">採買</div></div>
               <div><div class="place">伴手禮／最後補貨</div><div class="meta">超市、藥妝、車站內伴手禮區</div></div>
@@ -941,12 +945,86 @@
 
       <!-- Day 6 -->
       <section class="panel" id="day6" role="tabpanel" aria-label="Day 6 行程">
-        (內容同你貼的原始版本，這裡因更新工具字數限制未能完整重貼。)
+        <div class="dayHeader">
+          <div class="dayTitle"><div class="num">6</div><div class="tblock"><h2>回程｜福岡機場 → 桃園</h2></div></div>
+          <div class="dayHeaderRight"><div class="dayDateRight">03/28（六）</div></div>
+        </div>
+        <div class="dayBody"><div class="content">
+          <div class="timeline">
+            <div class="tRow"><div><div class="time">06:00</div><div class="meta">起床</div></div><div><div class="place">飯店</div><div class="meta">退房準備／確認護照、機票、行李</div></div></div>
+            <div class="tRow"><div><div class="time">07:00</div><div class="meta">出發</div></div><div><div class="place">前往福岡機場（FUK）</div><div class="meta">預計 07:30 抵達機場</div></div></div>
+            <div class="tRow"><div><div class="time">07:30</div><div class="meta">抵達</div></div><div><div class="place">福岡機場</div><div class="meta">報到／托運／安檢</div></div></div>
+            <div class="tRow"><div><div class="time">10:55</div><div class="meta">起飛</div></div><div><div class="place">虎航 IT241</div><div class="meta">FUK → TPE</div></div></div>
+            <div class="tRow">
+              <div><div class="time">12:40</div></div>
+              <div>
+                <div class="place">桃園國際機場（TPE）</div>
+                <div class="meta">第一航廈</div>
+              </div>
+            </div>
+          </div>
+        </div></div>
       </section>
 
-      <!-- Mapcode -->
+      <!-- Mapcode 集中頁 -->
       <section class="panel" id="mapcodes" role="tabpanel" aria-label="Mapcode 集中頁">
-        (內容同你貼的原始版本，這裡因更新工具字數限制未能完整重貼。)
+        <div class="dayHeader">
+          <div class="dayTitle">
+            <div class="num">★</div>
+            <div class="tblock"><h2>Mapcode （車上導航用）</h2></div>
+          </div>
+          <div class="dayHeaderRight"><div class="dayDateRight"></div></div>
+        </div>
+
+        <div class="dayBody">
+          <div class="content">
+
+            <details open style="margin-top:12px">
+              <summary>Day 2｜由布院・九重<span class="chev">⌄</span></summary>
+              <div class="content">
+                <div class="tRow">
+                  <div><div class="time">九重</div><div class="meta">景點</div></div>
+                  <div><div class="place">九重「夢」大吊橋</div><div class="meta">Mapcode：<code style="font-weight:800">377 023 247*63</code></div></div>
+                </div>
+                <div class="tRow">
+                  <div><div class="time">由布院</div><div class="meta">展望</div></div>
+                  <div><div class="place">狭霧台</div><div class="meta">Mapcode：<code style="font-weight:800">302 798 233*66</code></div></div>
+                </div>
+                <div class="tRow">
+                  <div><div class="time">由布院</div><div class="meta">散步</div></div>
+                  <div><div class="place">金鱗湖</div><div class="meta">Mapcode：<code style="font-weight:800">377 319 293*55</code></div></div>
+                </div>
+                <div class="tRow">
+                  <div><div class="time">住宿</div><div class="meta">旅館</div></div>
+                  <div><div class="place">旅館華柚</div><div class="meta">Mapcode：<code style="font-weight:800">377 319 791*11</code></div></div>
+                </div>
+              </div>
+            </details>
+
+            <details style="margin-top:12px">
+              <summary>Day 3｜黑川溫泉・阿蘇<span class="chev">⌄</span></summary>
+              <div class="content">
+                <div class="tRow">
+                  <div><div class="time">黑川</div><div class="meta">瀑布</div></div>
+                  <div><div class="place">夫妻瀑布</div><div class="meta">Mapcode：<code style="font-weight:800">440 542 844*74</code></div></div>
+                </div>
+                <div class="tRow">
+                  <div><div class="time">黑川</div><div class="meta">停車</div></div>
+                  <div><div class="place">黑川溫泉 第三駐車場</div><div class="meta">Mapcode：<code style="font-weight:800">440 542 844*74</code></div></div>
+                </div>
+                <div class="tRow">
+                  <div><div class="time">阿蘇</div><div class="meta">水源</div></div>
+                  <div><div class="place">池山水源</div><div class="meta">Mapcode：<code style="font-weight:800">256 801 799*55</code></div></div>
+                </div>
+                <div class="tRow">
+                  <div><div class="time">住宿</div><div class="meta">飯店</div></div>
+                  <div><div class="place">Kamenoi Hotel Aso</div><div class="meta">Mapcode：<code style="font-weight:800">256 551 569*74</code></div></div>
+                </div>
+              </div>
+            </details>
+
+          </div>
+        </div>
       </section>
 
     </div>
