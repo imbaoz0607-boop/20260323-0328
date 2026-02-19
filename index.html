@@ -197,7 +197,19 @@
 
     /* ✅ 單一區塊需要時：讓照片列與外框齊（不影響其他天） */
     .galleryRow--flush{padding-left:0;padding-right:0;margin-left:0;margin-right:0}
-    .galleryRow{display:flex;flex-direction:row;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory}
+
+    /* ✅ iOS：讓橫向捲動真的生效（不被 board 的 pan-y 影響） */
+    .galleryRow{
+      display:flex;
+      flex-direction:row;
+      gap:12px;
+      overflow-x:auto;
+      overflow-y:hidden;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-x;
+      overscroll-behavior-x: contain;
+    }
     .galleryRow::-webkit-scrollbar{height:8px}
     .galleryRow::-webkit-scrollbar-thumb{background:rgba(17,24,39,.12);border-radius:999px}
     .galleryRow::-webkit-scrollbar-track{background:transparent}
