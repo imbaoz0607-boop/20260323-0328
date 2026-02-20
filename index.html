@@ -215,7 +215,19 @@
     .galleryRow::-webkit-scrollbar{height:8px}
     .galleryRow::-webkit-scrollbar-thumb{background:rgba(17,24,39,.12);border-radius:999px}
     .galleryRow::-webkit-scrollbar-track{background:transparent}
-    .gItem{flex:0 0 auto;width:220px;aspect-ratio:4/3;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#fff;scroll-snap-align:start;box-shadow:0 6px 16px rgba(0,0,0,.06);cursor:pointer;position:relative}
+    .gItem{
+      flex:0 0 auto;
+      width:220px !important;
+      aspect-ratio:4/3 !important;
+      border-radius:14px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background:#fff;
+      scroll-snap-align:start;
+      box-shadow:0 6px 16px rgba(0,0,0,.06);
+      cursor:pointer;
+      position:relative
+    }
     .gItem img{width:100%;height:100%;object-fit:cover;display:block}
 
     /* ✅ 縮圖文字說明（不依賴 JS；iOS 檔案預覽不跑 JS 也能顯示） */
@@ -937,7 +949,7 @@
             
 
             <div class="tRow">
-              <div><div class="time">11:20</div><div class="meta">參拜</div></div>
+              <div><div class="time">11:20</div><div class="meta">參拜/櫻花      </div></div>
               <div>
                 <div class="place">櫛田神社</div>
                 <div class="meta">擁有古老歷史的櫛田神社為博多總鎮守(守護神)，以櫛田桑的暱稱受當地居民愛戴。櫻花數量不多屬於點綴型，垂櫻與八重櫻在滿開時在傳統建築的襯托下非常精緻。</div>
@@ -957,10 +969,25 @@
             </div>
 
 <div class="tRow">
-              <div><div class="time">11:50</div><div class="meta">休息</div></div>
+              <div><div class="time">11:50</div><div class="meta"></div></div>
               <div>
-                <div class="place">冷泉公園（福岡）</div>
-                <div class="meta">神社旁的小型市區公園，短暫休息拍照約 10–15 分鐘。</div>
+                <div class="place">冷泉公園</div>
+                <div class="meta">神社旁的小型市區公園，櫻花以吉野櫻居多，櫻花盛開的時候，許多人會坐在櫻花樹下野餐。</div>
+              </div>
+            </div>
+
+            <!-- 📷 冷泉公園 照片 -->
+            <div class="tRow tRow--full">
+              <div class="galleryWrap" aria-label="冷泉公園 照片" style="margin-top:0">
+                <p class="galleryTitle">📷 冷泉公園</p>
+                <div class="galleryRow galleryRow--flush" role="list">
+                  <div class="gItem" role="listitem" data-caption="冷泉公園櫻花步道">
+                    <img loading="lazy" src="day5/11.jpg" data-full="day5/11.jpg" alt="冷泉公園櫻花步道">
+                  </div>
+                  <div class="gItem" role="listitem" data-caption="冷泉公園鐘塔與櫻花">
+                    <img loading="lazy" src="day5/12.jpg" data-full="day5/12.jpg" alt="冷泉公園鐘塔與櫻花">
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -969,6 +996,30 @@
               <div>
                 <div class="place">真言宗 東長寺</div>
                 <div class="meta">可參觀福岡大佛，環境清幽；停留約 15–20 分鐘。</div>
+              </div>
+            </div>
+
+            <!-- 📷 真言宗 東長寺 照片 -->
+            <div class="tRow tRow--full">
+              <div class="galleryWrap" aria-label="真言宗 東長寺 照片" style="margin-top:0">
+                <p class="galleryTitle">📷 真言宗 東長寺</p>
+                <div class="galleryRow galleryRow--flush" role="list">
+                  <div class="gItem" role="listitem" data-caption="福岡大佛 入口看板">
+                    <img loading="lazy" src="day5/13.jpg" data-full="day5/13.jpg" alt="福岡大佛 入口看板">
+                  </div>
+                  <div class="gItem" role="listitem" data-caption="東長寺 櫻花與境內">
+                    <img loading="lazy" src="day5/14.jpg" data-full="day5/14.jpg" alt="東長寺 櫻花與境內">
+                  </div>
+                  <div class="gItem" role="listitem" data-caption="五重塔與櫻花">
+                    <img loading="lazy" src="day5/15.jpg" data-full="day5/15.jpg" alt="五重塔與櫻花">
+                  </div>
+                  <div class="gItem" role="listitem" data-caption="櫻花與五重塔">
+                    <img loading="lazy" src="day5/17.jpg" data-full="day5/17.jpg" alt="櫻花與五重塔">
+                  </div>
+                  <div class="gItem" role="listitem" data-caption="櫻花特寫">
+                    <img loading="lazy" src="day5/16.jpg" data-full="day5/16.jpg" alt="櫻花特寫">
+                  </div>
+                </div>
               </div>
             </div>
 
