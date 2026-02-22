@@ -122,6 +122,12 @@
       word-break:break-word;
       line-height:1.5;
     }
+    /* ✅ 需要固定成單行的收合標題（避免兩個收合層高度不一） */
+    summary span.sumText--nowrap{
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
     summary::-webkit-details-marker{display:none}
     .chev{color:var(--muted);transition:transform .15s ease}
     details[open] .chev{transform:rotate(180deg)}
@@ -922,6 +928,8 @@
 
               
             </div>
+
+            </div>
           </details>
 
         </div></div>
@@ -970,8 +978,8 @@
             <div class="tRow tRow--full">
               <div style="margin:0">
                 <details style="margin-top:0">
-                  <summary>
-                    <span class="sumText" style="font-weight:800;font-size:16px;">前往櫛田神社、冷泉公園、真言宗 東長寺 →</span>
+                  <summary style="align-items:center;">
+                    <span class="sumText sumText--nowrap" style="font-weight:800;font-size:16px;">前往櫛田神社、冷泉公園、真言宗 東長寺 →</span>
                     <span class="chev">⌄</span>
                   </summary>
                   <div class="content" style="padding-top:0">
@@ -1052,9 +1060,20 @@
               </div>
             </div>
 
-          </div>
-
-        </div></div>
+            <!-- ✅ 收合層：→ 舞鶴公園／福岡城跡（放在 Day5 timeline 內，接在「前往櫛田神社…」之後） -->
+            <div class="tRow tRow--full">
+              <div style="margin:0">
+                <details style="margin-top:8px">
+                  <summary style="align-items:center;">
+                    <span class="sumText sumText--nowrap" style="font-weight:800;font-size:16px;">→ 舞鶴公園／福岡城跡</span>
+                    <span class="chev">⌄</span>
+                  </summary>
+                  <div class="content" style="padding-top:10px">
+                    <!-- 之後把舞鶴公園／福岡城跡（賞櫻）行程與照片放在這裡 -->
+                  </div>
+                </details>
+              </div>
+            </div></div>
       </section>
 
       <!-- Day 6 -->
