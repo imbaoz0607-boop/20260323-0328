@@ -1060,12 +1060,12 @@
                       <div class="galleryWrap" aria-label="舞鶴公園／福岡城跡 照片" style="margin-top:0">
                         <p class="galleryTitle">📷 舞鶴公園／福岡城跡</p>
                         <div class="galleryRow galleryRow--flush" role="list">
-                          <div class="gItem" role="listitem" data-caption="照片 18"><img loading="lazy" src="day5/018.jpg" data-full="day5/18.jpg" alt="照片 18"></div>
-                          <div class="gItem" role="listitem" data-caption="照片 19"><img loading="lazy" src="day5/019.jpg" data-full="day5/19.jpg" alt="照片 19"></div>
-                          <div class="gItem" role="listitem" data-caption="照片 20"><img loading="lazy" src="day5/020.jpg" data-full="day5/20.jpg" alt="照片 20"></div>
-                          <div class="gItem" role="listitem" data-caption="照片 21"><img loading="lazy" src="day5/021.jpg" data-full="day5/21.jpg" alt="照片 21"></div>
-                          <div class="gItem" role="listitem" data-caption="照片 22"><img loading="lazy" src="day5/022.jpg" data-full="day5/22.jpg" alt="照片 22"></div>
-                          <div class="gItem" role="listitem" data-caption="照片 23"><img loading="lazy" src="day5/023.jpg" data-full="day5/23.jpg" alt="照片 23"></div>
+                          <div class="gItem" role="listitem" data-caption="照片 18"><img loading="lazy" src="day5/18.jpg" data-full="day5/18.jpg" alt="照片 18"></div>
+                          <div class="gItem" role="listitem" data-caption="照片 19"><img loading="lazy" src="day5/19.jpg" data-full="day5/19.jpg" alt="照片 19"></div>
+                          <div class="gItem" role="listitem" data-caption="照片 20"><img loading="lazy" src="day5/20.jpg" data-full="day5/20.jpg" alt="照片 20"></div>
+                          <div class="gItem" role="listitem" data-caption="照片 21"><img loading="lazy" src="day5/21.jpg" data-full="day5/21.jpg" alt="照片 21"></div>
+                          <div class="gItem" role="listitem" data-caption="照片 22"><img loading="lazy" src="day5/22.jpg" data-full="day5/22.jpg" alt="照片 22"></div>
+                          <div class="gItem" role="listitem" data-caption="照片 23"><img loading="lazy" src="day5/23.jpg" data-full="day5/23.jpg" alt="照片 23"></div>
                         </div>
                       </div>
                     </div>
@@ -1220,6 +1220,29 @@
             if(img.hasAttribute('data-full')) img.setAttribute('data-full', fb);
           });
         });
+      }
+
+      // ✅ 修正：<details> 內的 lazy 圖片（尤其是收合層剛打開時）可能不會觸發載入，導致縮圖空白
+      function forceLoadImages(root){
+        qsa('img[loading="lazy"]', root).forEach(function(img){
+          // 讓瀏覽器不要再延後
+          try{ img.loading = 'eager'; }catch(e){}
+          // 若因為元素先前不可見導致沒有開始下載，重新指派一次 src 觸發載入
+          var src = img.getAttribute('src');
+          if(src && !img.complete){
+            img.setAttribute('src', src);
+          }
+        });
+      }
+      function initDetailsLazyFix(){
+        // 監聽所有 details 的展開
+        qsa('details').forEach(function(d){
+          d.addEventListener('toggle', function(){
+            if(d.open) forceLoadImages(d);
+          });
+        });
+        // 頁面初始化：已經是 open 的 details 也先補一次
+        qsa('details[open]').forEach(function(d){ forceLoadImages(d); });
       }
 
       function initTabs(){
@@ -1426,6 +1449,7 @@
         restoreLockedPages();
         syncGalleryCaptions();
         initImageFallbacks();
+        initDetailsLazyFix();
         removeBackLinks();
         removeBackLinks();
 
