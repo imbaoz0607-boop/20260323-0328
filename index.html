@@ -222,7 +222,6 @@
     /* Gallery */
     .galleryWrap{margin-top:10px}
     .galleryTitle{margin:0 0 8px;padding:0 2px;font-weight:800;font-size:13px}
-    .galleryRow{display:flex;gap:12px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;padding:0 12px 12px;margin:0;white-space:nowrap;align-items:stretch}
 
     /* ✅ 單一區塊需要時：讓照片列與外框齊（不影響其他天） */
     .galleryRow--flush{padding-left:0;padding-right:0;margin-left:0;margin-right:0}
@@ -424,23 +423,10 @@
               </div>
             </div>
 
-            <!-- A/B 說明 -->
             <details style="margin-top:12px">
               <summary><span class="sumText">🧭 Day2 怎麼選 A / B？</span><span class="chev">⌄</span></summary>
               <div class="content">
-                <div class="timeline" style="border:none;background:transparent;border-radius:0">
-                  <div class="tRow">
-                    <div><div class="time"></div></div>
-                    <div>
-                      <div class="meta" style="line-height:1.7;font-size:14px;">
-                        🚶‍♂️ 步行　經春吉街區－位於天神與博多之間，在地生活氣息濃厚的巷弄小店與靜謐住宅區。距離約 1.5 公里／步行時間約 20–25 分鐘。<br>
-                        🚌 公車　／　🚇 地鐵　／　🚕 計程車
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px;line-height:1.7">
+                <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
                   <li><strong>結論</strong>：<strong>方案 A（先九重→再由布院）比較好開</strong>，高速比例高、山路集中在白天，駕駛壓力較小。</li>
                   <li><strong>方案 A 的優點</strong>：博多出發後長時間走高速與幹道；下交流道後直接到九重，<strong>山路集中在上午／中午</strong>、視線好；下午進由布院只剩市區慢行與找停車。</li>
                   <li><strong>方案 B 的特性</strong>：地圖視覺上看起來順，但會變成<strong>下午～傍晚跑九重一帶山路</strong>；若天氣轉差、起霧或疲勞，駕駛壓力較高。</li>
@@ -975,7 +961,7 @@
                     </div>
 
                     <div class="tRow" style="padding-left:0;padding-right:0">
-                      <div><div class="time">11:20</div><div class="meta"></div></div>
+                      <div><div class="time">11:20</div></div>
                       <div>
                         <div class="place">櫛田神社</div>
                         <div class="meta">擁有古老歷史的櫛田神社為博多總鎮守(守護神)，以櫛田桑的暱稱受當地居民愛戴。櫻花數量不多屬於點綴型，垂櫻與八重櫻在滿開時在傳統建築的襯托下非常精緻。</div>
@@ -1504,7 +1490,6 @@
         syncGalleryCaptions();
         initImageFallbacks();
         initDetailsLazyFix();
-        removeBackLinks();
         removeBackLinks();
 
         try{ initTabs(); }catch(e){ console.warn('[Itinerary] initTabs error', e); }
