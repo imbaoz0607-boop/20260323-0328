@@ -197,6 +197,10 @@
     .moveMode{font-weight:700}
     .moveDur{color:var(--muted);font-size:12px;margin-top:3px;line-height:1.3}
 
+    /* ✅ Day5 交通/說明文字：統一字級與緊貼行距 */
+    .noteTransit{margin:14px 0 6px 0;font-size:14px;color:var(--muted);line-height:1.5}
+    .noteTransit--tight{margin-top:10px;line-height:1.5;font-size:14px}
+
     /* Small chips */
     .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
     .pill{
@@ -1025,7 +1029,7 @@
                   </summary>
                   <div class="content" style="padding-top:0">
 
-                    <div style="margin-top:10px;line-height:1.7;font-size:14px;">
+                    <div class="noteTransit--tight">
   <div>搭乘公車／地鐵步行時間仍長，進入公園也要走，故直接搭乘計程車 🚕。</div>
   <div>行車時間：約 12–20 分／費用：約 1500–2000 円（實際依交通、時間略有差）</div>
 </div>
@@ -1065,10 +1069,9 @@
     </div>
   </div>
 </div>
-<div style="margin:14px 0 6px 0;font-size:14px;color:var(--muted);line-height:1.7">
-  🚇 <strong>舞鶴公園 → 天神地下街：</strong>
-  由赤坂站（空港線）搭乘 1 站至天神站，
-  約 5 分鐘（210 円）。步行約 15–20 分鐘。
+<div class="noteTransit">
+  🚇 <strong>舞鶴公園 → 天神地下街：</strong><br>
+  由赤坂站（空港線）搭乘 1 站至天神站，約 5 分鐘（210 円）。步行約 15–20 分鐘。
 </div>
                         <div class="desc">
   🔎 <strong>補充：</strong>
@@ -1088,8 +1091,15 @@
                             <div class="gItem" role="listitem" data-caption="草間彌生南瓜"><img loading="lazy" src="day5/31.jpg" data-full="day5/31.jpg" alt="草間彌生南瓜"></div>
                           </div>
                         </div>
+                    <div class="noteTransit">
+  🚇 <strong>大濠公園 → 天神地下街：</strong><br>
+  由「大濠公園站」（空港線）搭乘 1 站至「天神站」，約 3 分鐘（210 円）。出站後可直接銜接天神地下街。<br>
+  🚶‍♂️ 步行：約 1.8–2 公里／約 25–30 分鐘。<br>
+  🚕 計程車：約 10–15 分鐘／約 1200–1800 円（依交通狀況略有差異）。
+</div>
                       </div>
                     </div>
+              
                 </details>
               </div>
             </div>
