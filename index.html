@@ -225,6 +225,17 @@
 
     /* Gallery */
     .galleryWrap{margin-top:10px}
+
+    /* ✅ Day2 需要：時間軸內的右欄對齊主內容（不影響其他天） */
+    .timeline{--timeCol:92px;--tGap:12px;--tPad:12px}
+    .timeline .alignWithMain{margin-left:calc(-1*(var(--timeCol) + var(--tGap) + var(--tPad)));margin-right:calc(-1*var(--tPad))}
+    .timeline .alignPad{margin-left:calc(-1*var(--tPad));margin-right:calc(-1*var(--tPad))}
+    .tRow .subline{grid-column:1 / -1;margin-top:2px}
+    .timeline details > summary{font-size:16px;font-weight:700}
+    .dSplit{padding-top:6px}
+    .dLabel{font-size:12px;font-weight:800;color:var(--text);opacity:.78;letter-spacing:.2px;margin:6px 0 4px}
+    .dList{margin:0;padding-left:18px;color:var(--muted);font-size:13px;line-height:1.6}
+    .dDivider{height:1px;background:rgba(0,0,0,.06);margin:10px 0}
     .galleryTitle{margin:0 0 8px;padding:0 2px;font-weight:800;font-size:13px}
 
     /* ✅ 單一區塊需要時：讓照片列與外框齊（不影響其他天） */
@@ -404,7 +415,7 @@
         <div class="dayHeader">
           <div class="dayTitle">
             <div class="num">2</div>
-            <div class="tblock"><h2>自駕｜博多 ⇄ 由布院 ⇄ 九重｜兩種路線備選</h2></div>
+            <div class="tblock"><h2>自駕｜博多 ➝ 由布院 ➝ 九重</h2></div>
           </div>
           <div class="dayHeaderRight"><div class="dayDateRight">03/24（二）</div></div>
         </div>
@@ -414,106 +425,184 @@
 
             <div class="timeline">
               <div class="tRow">
-                <div><div class="time">08:00–</div></div>
-                <div><div class="place">Budget Car Rental Hakata Gion</div></div>
+                <div><div class="time">08:00–08:30</div></div>
+                <div>
+                  <div class="place">Budget Car Rental Hakata Gion 取車</div>
+                  <div class="meta">上博多東或半道橋交流道 → 接大分自動車道</div>
+                </div>
               </div>
+
               <div class="tRow">
-                <div><div class="time">08:30</div></div>
-                <div><div class="place">領車／檢查車況／設定導航</div></div>
-              </div>
-            </div>
+                <div><div class="time"></div></div>
+                <div>
+                  <details class="alignWithMain" style="margin-top:0">
+                    <summary><span class="sumText">🚗 取車前注意事項 / 行車重點提醒</span><span class="chev">⌄</span></summary>
+                    <div class="dContent">
+                      <div class="dSplit">
+                        <div class="dLabel">取車前注意事項</div>
+                        <ul class="dList">
+                          <li><strong>外觀拍照錄影：</strong>取車時與店員巡視車身，若有任何細微刮痕或凹痕應立即提出，並建議自行拍照或錄影存證，避免還車糾紛。</li>
+                          <li><strong>功能確認：</strong>檢查燈光（頭燈、轉向燈）、雨刷、空調是否正常，並熟悉導航系統的操作。</li>
+                          <li><strong>油量確認：</strong>確認取車時油箱是否加滿。</li>
+                        </ul>
 
-            <details style="margin-top:12px">
-              <summary><span class="sumText">🧭 Day2 怎麼選 A / B？</span><span class="chev">⌄</span></summary>
-              <div class="content">
-                <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-                  <li><strong>結論</strong>：<strong>方案 A（先九重→再由布院）比較好開</strong>，高速比例高、山路集中在白天，駕駛壓力較小。</li>
-                  <li><strong>方案 A 的優點</strong>：博多出發後長時間走高速與幹道；下交流道後直接到九重，<strong>山路集中在上午／中午</strong>、視線好；下午進由布院只剩市區慢行與找停車。</li>
-                  <li><strong>方案 B 的特性</strong>：地圖視覺上看起來順，但會變成<strong>下午～傍晚跑九重一帶山路</strong>；若天氣轉差、起霧或疲勞，駕駛壓力較高。</li>
-                  <li><strong>何時選方案 B</strong>：天氣非常好、出發時間早、駕駛不排斥山路，且想把由布院當今天重點時。</li>
-                  <li>想開得輕鬆選 A；想路線看起來直覺、但能接受傍晚山路才選 B。</li>
-                </ul>
-              </div>
-            </details>
+                        <div class="dDivider" role="separator" aria-hidden="true"></div>
 
-            <details style="margin-top:12px">
-              <summary><span class="sumText">🅰️ 方案 A（先九重→再由布院→旅館華柚）</span><span class="chev">⌄</span></summary>
-              <div class="content">
-                <div class="timeline">
-                  <div class="tRow"><div><div class="time">上午</div><div class="meta">高速移動</div></div><div><div class="place">福岡都市高速 → 九州自動車道 → 大分自動車道</div><div class="meta">行車約 2.5–3 小時（含休息）</div></div></div>
-                  <div class="tRow"><div><div class="time">途中</div><div class="meta">建議停靠</div></div><div><div class="place">山田 SA（首選）</div><div class="meta">洗手間／咖啡／補給｜備選：玖珠 SA</div></div></div>
-                  <div class="tRow"><div><div class="time">11:30–12:30</div><div class="meta">景點</div></div><div><div class="place">九重「夢」大吊橋</div><div class="meta">停留 45–60 分鐘</div></div></div>
-                  <div class="tRow"><div><div class="time">14:00</div><div class="meta">展望台</div></div><div><div class="place">狭霧台</div><div class="meta">15–20 分鐘</div></div></div>
-                  <div class="tRow"><div><div class="time">15:00</div><div class="meta">散步</div></div><div><div class="place">金鱗湖</div><div class="meta">午後光線佳</div></div></div>
-                  <div class="tRow"><div><div class="time">15:40</div><div class="meta">停車＆徒步</div></div><div><div class="place">湯布院中央児童公園（停車後徒步逛湯之坪）</div></div></div>
-                  <div class="tRow"><div><div class="time">傍晚</div><div class="meta">入住</div></div><div><div class="place">旅館華柚</div><div class="meta">Check‑in 後不再動車</div></div></div>
+                        <div class="dLabel">行車重點提醒</div>
+                        <ul class="dList">
+                          <li>高速路段為主：注意速限與測速照相，保持車距。</li>
+                          <li>由布院 IC 下交流道後，市區車流較慢，預留停車時間。</li>
+                          <li>山並快速道路為景觀道路，彎道較多，避免超速。</li>
+                          <li>九重一帶午後易起霧，若天氣不佳可縮短吊橋停留。</li>
+                          <li>入住後不再動車，晚間避免山路駕駛。</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </details>
                 </div>
               </div>
-            </details>
 
-            <details style="margin-top:12px">
-              <summary>🅱️ 方案 B（先由布院→再九重→旅館華柚）<span class="chev">⌄</span></summary>
-              <div class="content">
-                <div class="timeline">
-                  <div class="tRow"><div><div class="time">上午</div><div class="meta">高速移動</div></div><div><div class="place">福岡都市高速 → 九州自動車道 → 大分自動車道</div><div class="meta">行車約 2.5–3 小時（含休息）</div></div></div>
-                  <div class="tRow"><div><div class="time">途中</div><div class="meta">建議停靠</div></div><div><div class="place">山田 SA（首選）</div><div class="meta">洗手間／咖啡／補給｜備選：玖珠 SA</div></div></div>
-                  <div class="tRow"><div><div class="time">13:30</div><div class="meta">展望台</div></div><div><div class="place">狭霧台</div><div class="meta">15–20 分鐘</div></div></div>
-                  <div class="tRow"><div><div class="time">14:10</div><div class="meta">散步</div></div><div><div class="place">金鱗湖</div></div></div>
-                  <div class="tRow"><div><div class="time">14:40</div><div class="meta">停車＆徒步</div></div><div><div class="place">湯布院中央児童公園（停車後徒步逛湯之坪）</div></div></div>
-                  <div class="tRow"><div><div class="time">16:30–17:30</div><div class="meta">景點</div></div><div><div class="place">九重「夢」大吊橋</div><div class="meta">45–60 分鐘</div></div></div>
-                  <div class="tRow"><div><div class="time">傍晚</div><div class="meta">入住</div></div><div><div class="place">旅館華柚</div><div class="meta">Check‑in 後不再動車</div></div></div>
+              <div class="tRow">
+                <div><div class="time">09:20–<br>09:40</div></div>
+                <div>
+                  <div class="place">山田服務區（首選）／玖珠（第2選擇）</div>
+                  <div class="meta">福岡到由布院行車時間約 1.5 小時。</div>
                 </div>
               </div>
-            </details>
 
-            <details style="margin-top:12px;border:1px dashed var(--line);border-radius:14px;background:#fafafa">
-              <summary>🛍 由布院小食<span class="chev">⌄</span></summary>
-              <div class="content">
-                <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-                  <li><strong>金賞可樂餅 本店</strong>｜現炸小吃，邊走邊吃</li>
-                  <li><strong>B SPEAK 本店</strong>｜蛋糕卷（建議外帶，售完為止）</li>
-                  <li><strong>由布院 花麴菊家</strong>｜伴手禮（離開時購買）</li>
-                </ul>
-                <div style="margin-top:6px;color:var(--muted);font-size:12px">📌 建議：都在金鱗湖／湯之坪周邊，從「中央児童公園」步行最順。</div>
-              </div>
-            </details>
+              <div class="tRow">
+                <div><div class="time">10:30–<br>13:30</div></div>
+                <div>
+                  <div class="place">由布院 ＆ 金鱗湖</div>
+                  <div class="meta">下「由布院 IC」交流道</div>
+                </div>
+                <div class="subline">
+                  <details class="alignPad" style="margin-top:0">
+                    <summary><span class="sumText">🅿 停車建議</span><span class="chev">⌄</span></summary>
+                    <div class="dContent">
+                      <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px;line-height:1.6">
+                        <li>導航至湯布院中央児童公園，周邊：湯布院停車場 (Yufuin Parking Lot)，不限時平日￥300，需自行準備零錢投進料金箱，步行至觀光大街約 3 分鐘。如遇停滿：NPC24H 湯布院湯之坪街道停車場。</li>
+                        <li>金鱗湖入口處：金鱗湖入口前駐車場 (Kinrinkoiriguchizen Parking Lot)，位置在湖畔入口正對面，單日￥400。如遇停滿：Times 湯布院金鱗湖 (Times Yufuin Lake Kinrin)、湯布院停車場 (Yufuin Parking Lot)。</li>
+                      </ul>
 
-            <div class="galleryWrap" aria-label="Day2 照片">
-              <p class="galleryTitle">📷 Day 2 照片</p>
-              <div class="galleryRow" role="list">
-                <div class="gItem" role="listitem" data-caption="九重「夢」大吊橋｜步行段與景觀"><img loading="lazy" src="day2/01.jpg" data-full="day2/01.jpg" alt="九重「夢」大吊橋｜步行段與景觀"></div>
-                <div class="gItem" role="listitem" data-caption="狭霧台｜由布院盆地展望"><img loading="lazy" src="day2/02.jpg" data-full="day2/02.jpg" alt="狭霧台｜由布院盆地展望"></div>
-                <div class="gItem" role="listitem" data-caption="金鱗湖｜湖畔散步與午後光線"><img loading="lazy" src="day2/03.jpg" data-full="day2/03.jpg" alt="金鱗湖｜湖畔散步與午後光線"></div>
-                <div class="gItem" role="listitem" data-caption="旅館華柚"><img loading="lazy" src="day2/04.jpg" data-full="day2/04.jpg" alt="旅館華柚"></div>
-                <div class="gItem" role="listitem" data-caption="旅館華柚"><img loading="lazy" src="day2/05.jpg" data-full="day2/05.jpg" alt="旅館華柚"></div>
-                <div class="gItem" role="listitem" data-caption="旅館華柚"><img loading="lazy" src="day2/06.jpg" data-full="day2/06.jpg" alt="旅館華柚"></div>
+                      <div class="galleryWrap" aria-label="停車照片">
+                        <p class="galleryTitle">📷 停車位置參考</p>
+                        <div class="galleryRow" role="list">
+                          <div class="gItem" role="listitem" data-caption="湯布院停車場｜外觀與車位"><img loading="lazy" src="day2/1.jpg" data-full="day2/1.jpg" alt="湯布院停車場 外觀"></div>
+                          <div class="gItem" role="listitem" data-caption="料金箱｜請自備零錢投幣"><img loading="lazy" src="day2/2.jpg" data-full="day2/2.jpg" alt="料金箱"></div>
+                          <div class="gItem" role="listitem" data-caption="金鱗湖入口前駐車場｜入口前小屋"><img loading="lazy" src="day2/3.jpg" data-full="day2/3.jpg" alt="金鱗湖入口前駐車場"></div>
+                          <div class="gItem" role="listitem" data-caption="金鱗湖停車｜單日￥400 指示牌"><img loading="lazy" src="day2/4.jpg" data-full="day2/4.jpg" alt="金鱗湖停車 400円"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </details>
+                </div>
               </div>
+
+              <div class="tRow">
+                <div class="alignPad" style="grid-column:1 / -1; padding:6px 12px 2px 12px; font-size:16px; font-weight:600; color:var(--text); opacity:.85; line-height:1.6;">
+                  📍 由布院（又稱湯布院），是全日本湧泉量第二大的著名溫泉度假勝地，環境清幽，以夢幻的「金鱗湖」、時尚的「湯之坪街道」和精緻的溫泉旅館聞名。
+                </div>
+              </div>
+
+              <div class="tRow">
+                <div><div class="time"></div></div>
+                <div>
+                  <div class="galleryWrap alignWithMain" aria-label="由布院照片">
+                    <p class="galleryTitle">📷 由布院散策</p>
+                    <div class="galleryRow" role="list">
+                      <div class="gItem" role="listitem" data-caption="由布院導覽手冊(中文)">
+                        <a href="day2/由布院導覽手冊(中文).pdf" target="_blank" rel="noopener" style="display:block;width:100%;height:100%;text-decoration:none">
+                          <img loading="lazy" src="day2/封面.jpg" alt="由布院導覽手冊 封面" data-no-lightbox="1">
+                        </a>
+                      </div>
+                      <div class="gItem" role="listitem" data-caption="湯之坪街道與由布岳"><img loading="lazy" src="day2/5.jpg" data-full="day2/5.jpg" alt="湯之坪街道與由布岳"></div>
+                      <div class="gItem" role="listitem" data-caption="金鱗湖鳥居與湖景"><img loading="lazy" src="day2/6.jpg" data-full="day2/6.jpg" alt="金鱗湖鳥居"></div>
+                      <div class="gItem" role="listitem" data-caption="童話風小店街景"><img loading="lazy" src="day2/7.jpg" data-full="day2/7.jpg" alt="由布院特色小店"></div>
+                      <div class="gItem" role="listitem" data-caption="湯之坪街道散策"><img loading="lazy" src="day2/8.jpg" data-full="day2/8.jpg" alt="湯之坪街道"></div>
+                      <div class="gItem" role="listitem" data-caption="湯布院花卉村"><img loading="lazy" src="day2/9.jpg" data-full="day2/9.jpg" alt="湯布院花卉村"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tRow">
+                <div class="alignPad" style="grid-column:1 / -1; padding:6px 12px 2px 12px; font-size:16px; font-weight:600; color:var(--text); opacity:.85; line-height:1.6;">
+                  🍢 由布院小食：金賞可樂餅 本店／B SPEAK 本店（蛋糕卷，建議外帶）／由布院 花麴菊家（伴手禮，離開時購買）。
+                </div>
+              </div>
+
+              <div class="tRow">
+                <div><div class="time"></div></div>
+                <div>
+                  <div class="galleryWrap alignWithMain" aria-label="由布院小食照片">
+                    <p class="galleryTitle">📷 由布院小食</p>
+                    <div class="galleryRow" role="list">
+                      <div class="gItem" role="listitem" data-caption="湯之坪街道美食地圖"><img loading="lazy" src="day2/10.jpg" data-full="day2/10.jpg" alt="湯之坪街道地圖"></div>
+                      <div class="gItem" role="listitem" data-caption="B SPEAK 本店｜蛋糕卷"><img loading="lazy" src="day2/11.jpg" data-full="day2/11.jpg" alt="B SPEAK 蛋糕卷"></div>
+                      <div class="gItem" role="listitem" data-caption="金賞可樂餅｜現炸熱食"><img loading="lazy" src="day2/12.jpg" data-full="day2/12.jpg" alt="金賞可樂餅"></div>
+                      <div class="gItem" role="listitem" data-caption="花麴菊家｜銅鑼燒"><img loading="lazy" src="day2/13.jpg" data-full="day2/13.jpg" alt="花麴菊家"></div>
+                      <div class="gItem" role="listitem" data-caption="SNOOPY 茶屋｜由布院"><img loading="lazy" src="day2/14.jpg" data-full="day2/14.jpg" alt="SNOOPY 茶屋"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tRow">
+                <div><div class="time">13:45–<br>14:15</div></div>
+                <div>
+                  <div class="place">狭霧台</div>
+                  <div class="meta">車程約 10 分鐘｜欣賞由布岳壯闊山景</div>
+                </div>
+              </div>
+
+              <div class="tRow">
+                <div><div class="time">15:00–<br>16:00</div></div>
+                <div>
+                  <div class="place">九重「夢」大吊橋</div>
+                  <div class="meta">經由景觀公路「山並快速道路」前往。為日本最高的人行吊橋，成人門票￥500可體驗如同在天上行走一般的感受。</div>
+                </div>
+              </div>
+
+              <div class="tRow">
+                <div><div class="time">18:00</div></div>
+                <div>
+                  <div class="place">抵達 旅館華柚</div>
+                </div>
+              </div>
+
+              <div class="tRow">
+                <div><div class="time"></div></div>
+                <div>
+                  <div class="galleryWrap alignWithMain" aria-label="Day2 照片">
+                    <p class="galleryTitle">📷 Day 2 照片</p>
+                    <div class="galleryRow" role="list">
+                      <div class="gItem" role="listitem" data-caption="狭霧台｜由布院盆地展望"><img loading="lazy" src="day2/15.jpg" data-full="day2/15.jpg" alt="狭霧台｜由布院盆地展望"></div>
+                      <div class="gItem" role="listitem" data-caption="九重夢大吊橋｜壯闊吊橋景觀"><img loading="lazy" src="day2/16.jpg" data-full="day2/16.jpg" alt="九重夢大吊橋"></div>
+                      <div class="gItem" role="listitem" data-caption="旅館華柚｜庭園入口"><img loading="lazy" src="day2/17.jpg" data-full="day2/17.jpg" alt="旅館華柚 庭園"></div>
+                      <div class="gItem" role="listitem" data-caption="旅館華柚｜櫻花景色"><img loading="lazy" src="day2/18.jpg" data-full="day2/18.jpg" alt="旅館華柚 櫻花"></div>
+                      <div class="gItem" role="listitem" data-caption="旅館華柚｜庭園與建築"><img loading="lazy" src="day2/19.jpg" data-full="day2/19.jpg" alt="旅館華柚 外觀"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
 
-            <details style="margin-top:12px;border:1px dashed var(--line);border-radius:14px;background:#fafafa">
-              <summary>🌧️ 雨天備案（Day2）<span class="chev">⌄</span></summary>
-              <div class="content">
-                <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-                  <li>雨勢大：由布院（湯之坪／金鱗湖）優先，室內店家＋散步為主</li>
-                  <li>九重夢大吊橋：視能見度決定「縮短停留」或「取消」</li>
-                  <li>山路濕滑：提早入住旅館華柚，避免傍晚趕路</li>
-                </ul>
-              </div>
-            </details>
-
-            <div class="links" style="margin-top:12px">
+            <div class="links">
+              <!-- ✅ Day2 導航按鈕依行程順序排列 -->
               <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E5%B1%B1%E7%94%B0%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%A8%E3%83%AA%E3%82%A2%20%28%E4%B8%8B%E3%82%8A%29&travelmode=driving">🚗 休息站｜山田SA（建議）</a>
               <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E7%8E%96%E7%8F%A0%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%A8%E3%83%AA%E3%82%A2%20%28%E4%B8%8B%E3%82%8A%29&travelmode=driving">🚗 休息站｜玖珠SA（次要）</a>
-              <a class="btn" target="_blank" rel="noopener" href="https://maps.google.com/?daddr=%E4%B9%9D%E9%87%8D%E5%A4%A2%E5%A4%A7%E5%90%8A%E6%A9%8B&directionsmode=driving">🚗 導航｜九重夢大吊橋</a>
-              <a class="btn" target="_blank" rel="noopener" href="https://maps.google.com/?daddr=%E7%8B%AD%E9%9C%A7%E5%8F%B0&directionsmode=driving">🚗 導航｜狭霧台</a>
-              <a class="btn" target="_blank" rel="noopener" href="https://maps.google.com/?daddr=%E9%87%91%E9%B1%97%E6%B9%96&directionsmode=driving">🚗 導航｜金鱗湖</a>
               <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E6%B9%AF%E5%B8%83%E9%99%A2%E4%B8%AD%E5%A4%AE%E5%85%90%E7%AB%A5%E5%85%AC%E5%9C%92&travelmode=driving">🚗 導航｜中央児童公園</a>
+              <a class="btn" target="_blank" rel="noopener" href="https://maps.google.com/?daddr=%E9%87%91%E9%B1%97%E6%B9%96&directionsmode=driving">🚗 導航｜金鱗湖</a>
+              <a class="btn" target="_blank" rel="noopener" href="https://maps.google.com/?daddr=%E7%8B%AD%E9%9C%A7%E5%8F%B0&directionsmode=driving">🚗 導航｜狭霧台</a>
+              <a class="btn" target="_blank" rel="noopener" href="https://maps.google.com/?daddr=%E4%B9%9D%E9%87%8D%E5%A4%A2%E5%A4%A7%E5%90%8A%E6%A9%8B&directionsmode=driving">🚗 導航｜九重夢大吊橋</a>
               <a class="btn" target="_blank" rel="noopener" href="https://maps.google.com/?daddr=%E6%97%85%E9%A4%A8%E8%8F%AF%E6%9F%9A%20%E7%94%B1%E5%B8%83%E9%99%A2&directionsmode=driving">🏨 導航｜旅館華柚</a>
             </div>
+
           </div>
         </div>
       </section>
-
       <section class="panel" id="day3" role="tabpanel" aria-label="Day 3 行程">
         <div class="dayHeader">
           <div class="dayTitle">
@@ -1141,7 +1230,10 @@
   </div>
 </div>
 
-<section class="panel" id="day6" role="tabpanel" aria-label="Day 6 行程">
+        </div></div>
+      </section>
+
+      <section class="panel" id="day6" role="tabpanel" aria-label="Day 6 行程">
         <div class="dayHeader">
           <div class="dayTitle"><div class="num">6</div><div class="tblock"><h2>回程｜福岡機場 → 桃園</h2></div></div>
           <div class="dayHeaderRight"><div class="dayDateRight">03/28（六）</div></div>
@@ -1178,17 +1270,18 @@
             <details style="margin-top:12px">
               <summary>Day 2｜由布院・九重<span class="chev">⌄</span></summary>
               <div class="content">
+                <!-- ✅ Day2 Mapcode 依更新後行程順序排列：金鱗湖 → 狭霧台 → 九重夢大吊橋 → 旅館華柚 -->
                 <div class="tRow">
-                  <div><div class="time">九重</div><div class="meta">景點</div></div>
-                  <div><div class="place">九重「夢」大吊橋</div><div class="meta">Mapcode：<code style="font-weight:800">377 023 247*63</code></div></div>
+                  <div><div class="time">由布院</div><div class="meta">散步</div></div>
+                  <div><div class="place">金鱗湖</div><div class="meta">Mapcode：<code style="font-weight:800">377 319 293*55</code></div></div>
                 </div>
                 <div class="tRow">
                   <div><div class="time">由布院</div><div class="meta">展望</div></div>
                   <div><div class="place">狭霧台</div><div class="meta">Mapcode：<code style="font-weight:800">302 798 233*66</code></div></div>
                 </div>
                 <div class="tRow">
-                  <div><div class="time">由布院</div><div class="meta">散步</div></div>
-                  <div><div class="place">金鱗湖</div><div class="meta">Mapcode：<code style="font-weight:800">377 319 293*55</code></div></div>
+                  <div><div class="time">九重</div><div class="meta">景點</div></div>
+                  <div><div class="place">九重「夢」大吊橋</div><div class="meta">Mapcode：<code style="font-weight:800">377 023 247*63</code></div></div>
                 </div>
                 <div class="tRow">
                   <div><div class="time">住宿</div><div class="meta">旅館</div></div>
@@ -1508,6 +1601,8 @@
         document.addEventListener('click', function(e){
           var thumb = e.target && e.target.closest && e.target.closest('.galleryRow .gItem img');
           if(!thumb) return;
+          // ✅ 允許縮圖當作「連結封面」：點了就照常開 PDF，不進 lightbox
+          if(thumb.getAttribute('data-no-lightbox') === '1') return;
 
           var row = thumb.closest('.galleryRow');
           var imgs = qsa('.gItem img', row);
