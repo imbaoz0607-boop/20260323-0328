@@ -137,10 +137,15 @@
     /* ✅ Day2「取車前注意事項／行車重點提醒」使用 dContent：增加左側內距但不影響其他區塊 */
     .dContent{padding:0 14px 12px}
 
-    /* ✅ Day2 三個 gallery 區塊左側間距微調（不影響其他天） */
-    #day2 .galleryWrap.alignWithMain{
-      padding-left:34px;
-    }
+    /* ✅ Day2：三個 gallery 與外框保持安全距離（避免縮圖圓角被裁切；不影響其他天） */
+#day2 .timeline .galleryWrap.alignWithMain{
+  /* 原本 alignWithMain 會往左拉齊主內容，iOS 上容易被 timeline 的 overflow 裁到圓角 */
+  margin-left: calc(-1*(var(--timeCol) + var(--tGap) + var(--tPad)) + 18px);
+  margin-right: calc(-1*var(--tPad));
+  /* 避免被 Day2 內距強化規則影響到 alignWithMain 的幾何 */
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
 
     /* Timeline */
     .timeline{
@@ -327,9 +332,20 @@
   padding-right: 14px !important;
 }
 
+/* Day2：一般 galleryRow 先保留小內距（避免貼邊） */
 #day2 .galleryRow {
   padding-left: 6px;
   padding-right: 6px;
+}
+
+/* ✅ Day2：三個 alignWithMain gallery（由布院散策／由布院小食／Day2 照片）
+   在時間軸內會被外框裁到圓角 → 這裡加更大的安全內距
+   （只改 CSS，不動任何結構/版面） */
+#day2 .galleryWrap.alignWithMain .galleryRow{
+  padding-left: 14px !important;
+  padding-right: 14px !important;
+  scroll-padding-left: 14px;
+  scroll-padding-right: 14px;
 }
 /* ====================================== */
 
