@@ -385,11 +385,11 @@
 
 
 
-/* ✅ Mapcode 區塊改為極簡單欄模式（隱藏左欄說明，不動結構） */
-.content .tRow{
+/* ✅ Mapcode 區塊改為極簡單欄模式（只作用在 Mapcode 區塊，不影響其他 Day） */
+#day2 details[data-type="mapcode"] .tRow{
   grid-template-columns: 1fr !important;
 }
-.content .tRow > div:first-child{
+#day2 details[data-type="mapcode"] .tRow > div:first-child{
   display:none;
 }
 
