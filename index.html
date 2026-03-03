@@ -371,16 +371,26 @@
 /* ✅ Day2：讓「📍 由布院介紹」→「📷 由布院散策」gallery 的間距
    與「由布院小食」區塊相同（壓縮為原本約 1/3；不動結構） */
 @supports selector(.tRow:has(.galleryWrap)){
-  #day2 .timeline .tRow:has(.galleryWrap[aria-label="由布院散策照片"]) {
-    padding-top: 2px;
-    padding-bottom: 4px;
+  #day2 .timeline .tRow:has(.galleryWrap[aria-label="由布院照片"]) {
+    padding-top: 0px;
+    padding-bottom: 2px;
   }
 }
-#day2 .timeline .galleryWrap[aria-label="由布院散策照片"]{
-  margin-top: 0px;
+#day2 .timeline .galleryWrap[aria-label="由布院照片"]{
+  margin-top: -10px;   /* ✅ 再貼近：把上方空隙拉掉一截 */
 }
 @supports not selector(.tRow:has(.galleryWrap)){
-  #day2 .timeline .galleryWrap[aria-label="由布院散策照片"]{ margin-top: -10px; }
+  #day2 .timeline .galleryWrap[aria-label="由布院照片"]{ margin-top: -10px; }
+}
+
+
+
+/* ✅ Mapcode 區塊改為極簡單欄模式（隱藏左欄說明，不動結構） */
+.content .tRow{
+  grid-template-columns: 1fr !important;
+}
+.content .tRow > div:first-child{
+  display:none;
 }
 
 </style>
@@ -554,8 +564,8 @@
                     <summary><span class="sumText">🅿 停車建議</span><span class="chev">⌄</span></summary>
                     <div class="dContent">
                       <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px;line-height:1.6">
-                        <li>導航至湯布院中央児童公園，周邊：湯布院停車場 (Yufuin Parking Lot)，不限時平日￥300，需自行準備零錢投進料金箱，步行至觀光大街約 3 分鐘。如遇停滿：NPC24H 湯布院湯之坪街道停車場。</li>
-                        <li>金鱗湖入口處：金鱗湖入口前駐車場 (Kinrinkoiriguchizen Parking Lot)，位置在湖畔入口正對面，單日￥400。如遇停滿：Times 湯布院金鱗湖 (Times Yufuin Lake Kinrin)、湯布院停車場 (Yufuin Parking Lot)。</li>
+                        <li>至湯布院中央児童公園，周邊：湯布院停車場 (Yufuin Parking Lot)，不限時平日￥300，需自行準備零錢投進料金箱，步行至觀光大街約 3 分鐘。如遇停滿：NPC24H 湯布院湯之坪街道停車場。</li>
+                        <li>金鱗湖入口處：金鱗湖入口前駐車場 (Kinrinkoiriguchizen Parking Lot)，位置在湖畔入口正對面，單日￥400，進場道路較窄，行駛時請多加留意行人。如遇停滿：Times 湯布院金鱗湖 (Times Yufuin Lake Kinrin)、湯布院停車場 (Yufuin Parking Lot)。</li>
                       </ul>
 
                       <div class="galleryWrap" aria-label="停車照片">
@@ -574,7 +584,7 @@
 
               <div class="tRow">
                 <div class="alignPad" style="grid-column:1 / -1; padding:6px 12px 2px 12px; font-size:16px; font-weight:600; color:var(--text); opacity:.85; line-height:1.6;">
-                  📍 由布院（又稱湯布院），是全日本湧泉量第二大的著名溫泉度假勝地，環境清幽，以夢幻的「金鱗湖」、時尚的「湯之坪街道」和精緻的溫泉旅館聞名。
+                  📍由布院（又稱湯布院），以夢幻的「金鱗湖」、時尚的「湯之坪街道」和精緻的溫泉旅館聞名，是日本湧泉量第二大的著名溫泉勝地。
                 </div>
               </div>
 
@@ -1341,27 +1351,91 @@
           <div class="content">
 
             <details style="margin-top:12px">
-              <summary>Day 2｜由布院・九重<span class="chev">⌄</span></summary>
-              <div class="content">
-                <!-- ✅ Day2 Mapcode 依更新後行程順序排列：金鱗湖 → 狭霧台 → 九重夢大吊橋 → 旅館華柚 -->
+              
+                <!-- ✅ Day2 Mapcode（已更新） -->
                 <div class="tRow">
-                  <div><div class="time">由布院</div><div class="meta">散步</div></div>
-                  <div><div class="place">金鱗湖</div><div class="meta">Mapcode：<code style="font-weight:800">377 319 293*55</code></div></div>
+                  <div><div class="time">途中</div><div class="meta">休息站</div></div>
+                  <div>
+                    <div class="place">山田服務區 (Yamada SA) 下行</div>
+                    <div class="meta">Mapcode：<code style="font-weight:800">166 626 503*52</code><br>電話：0946-52-3103</div>
+                  </div>
                 </div>
+                <div class="tRow">
+                  <div><div class="time">途中</div><div class="meta">休息站</div></div>
+                  <div>
+                    <div class="place">玖珠服務區 (Kusu SA) 下行</div>
+                    <div class="meta">Mapcode：<code style="font-weight:800">269 095 861*85</code><br>電話：0973-72-6177</div>
+                  </div>
+                </div>
+
+                <div class="tRow">
+                  <div><div class="time">由布院</div><div class="meta">停車</div></div>
+                  <div>
+                    <div class="place">湯布院中央兒童公園</div>
+                    <div class="meta">Mapcode：<code style="font-weight:800">269 358 469*18</code><br>電話：0977-84-3111</div>
+                  </div>
+                </div>
+                <div class="tRow">
+                  <div><div class="time">由布院</div><div class="meta">停車</div></div>
+                  <div>
+                    <div class="place">湯布院停車場 (Yufuin Parking Lot / 由布院駅前)</div>
+                    <div class="meta">Mapcode：<code style="font-weight:800">269 358 409*00</code><br>電話：0977-84-5559</div>
+                  </div>
+                </div>
+                <div class="tRow">
+                  <div><div class="time">由布院</div><div class="meta">停車</div></div>
+                  <div>
+                    <div class="place">NPC24H 湯布院湯之坪街道停車場</div>
+                    <div class="meta">Mapcode：<code style="font-weight:800">269 358 376*36</code><br>電話：0120-48-0015 (NPC 管理中心專線)</div>
+                  </div>
+                </div>
+
+                <div class="tRow">
+                  <div><div class="time">由布院</div><div class="meta">景點</div></div>
+                  <div>
+                    <div class="place">金鱗湖</div>
+                    <div class="meta">Mapcode：<code style="font-weight:800">377 319 293*55</code><br>電話：0977-84-3111 (由布市觀光案內所)</div>
+                  </div>
+                </div>
+                <div class="tRow">
+                  <div><div class="time">由布院</div><div class="meta">停車</div></div>
+                  <div>
+                    <div class="place">金鱗湖入口前駐車場 (私營)</div>
+                    <div class="meta">Mapcode：<code style="font-weight:800">269 359 553*20</code><br>電話：(無固定電話，直接使用 Mapcode 導航)</div>
+                  </div>
+                </div>
+                <div class="tRow">
+                  <div><div class="time">由布院</div><div class="meta">停車</div></div>
+                  <div>
+                    <div class="place">Times 湯布院金鱗湖 (Times Yufuin Lake Kinrin)</div>
+                    <div class="meta">Mapcode：<code style="font-weight:800">269 359 584*77</code><br>電話：0120-72-8924 (Times 管理中心)</div>
+                  </div>
+                </div>
+
                 <div class="tRow">
                   <div><div class="time">由布院</div><div class="meta">展望</div></div>
-                  <div><div class="place">狭霧台</div><div class="meta">Mapcode：<code style="font-weight:800">302 798 233*66</code></div></div>
+                  <div>
+                    <div class="place">狭霧台 (展望台)</div>
+                    <div class="meta">Mapcode：<code style="font-weight:800">302 798 233*66</code><br>電話：0977-84-3111 (由布市役所代管)</div>
+                  </div>
                 </div>
+
                 <div class="tRow">
                   <div><div class="time">九重</div><div class="meta">景點</div></div>
-                  <div><div class="place">九重「夢」大吊橋</div><div class="meta">Mapcode：<code style="font-weight:800">377 023 247*63</code></div></div>
+                  <div>
+                    <div class="place">九重「夢」大吊橋</div>
+                    <div class="meta">Mapcode：<code style="font-weight:800">377 023 247*63</code><br>電話：0973-73-3800</div>
+                  </div>
                 </div>
+
                 <div class="tRow">
                   <div><div class="time">住宿</div><div class="meta">旅館</div></div>
-                  <div><div class="place">旅館華柚</div><div class="meta">Mapcode：<code style="font-weight:800">377 319 791*11</code></div></div>
+                  <div>
+                    <div class="place">旅館華柚 (Hanayoshi)</div>
+                    <div class="meta">Mapcode：<code style="font-weight:800">377 319 791*11</code><br>電話：0973-79-3330</div>
+                  </div>
                 </div>
-              </div>
-            </details>
+              
 
             <details style="margin-top:12px">
               <summary>Day 3｜黑川溫泉・阿蘇<span class="chev">⌄</span></summary>
