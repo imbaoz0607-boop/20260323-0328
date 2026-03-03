@@ -385,13 +385,13 @@
 
 
 
-/* ✅ Mapcode 區塊改為極簡單欄模式（只作用在 Mapcode 區塊，不影響其他 Day） */
-#day2 details[data-type="mapcode"] .tRow{
-  grid-template-columns: 1fr !important;
-}
-#day2 details[data-type="mapcode"] .tRow > div:first-child{
-  display:none;
-}
+/* ✅ Mapcode 集中頁：極簡清單（不走時間軸，避免跑版） */
+.mapPage .mapSection{margin-top:12px}
+.mapPage .mapSection > summary{padding:12px 12px; font-size:15px}
+.mapList{display:flex;flex-direction:column;gap:10px}
+.mapItem{border:1px solid var(--line);border-radius:14px;background:#fff;padding:10px 12px}
+.mapName{font-weight:800;line-height:1.35}
+.mapMeta{margin-top:4px;color:var(--muted);font-size:12px;line-height:1.5}
 
 </style>
 </head>
@@ -1342,161 +1342,109 @@
         <div class="dayHeader">
           <div class="dayTitle">
             <div class="num">★</div>
-            <div class="tblock"><h2>Mapcode （車上導航用）</h2></div>
+            <div class="tblock"><h2>Mapcode（車上導航用）</h2></div>
           </div>
           <div class="dayHeaderRight"><div class="dayDateRight"></div></div>
         </div>
 
         <div class="dayBody">
-          <div class="content">
+          <div class="content mapPage">
+            
 
-            <details style="margin-top:12px">
-              
-                <!-- ✅ Day2 Mapcode（已更新） -->
-                <div class="tRow">
-                  <div><div class="time">途中</div><div class="meta">休息站</div></div>
-                  <div>
-                    <div class="place">山田服務區 (Yamada SA) 下行</div>
-                    <div class="meta">Mapcode：<code style="font-weight:800">166 626 503*52</code><br>電話：0946-52-3103</div>
-                  </div>
-                </div>
-                <div class="tRow">
-                  <div><div class="time">途中</div><div class="meta">休息站</div></div>
-                  <div>
-                    <div class="place">玖珠服務區 (Kusu SA) 下行</div>
-                    <div class="meta">Mapcode：<code style="font-weight:800">269 095 861*85</code><br>電話：0973-72-6177</div>
-                  </div>
-                </div>
-
-                <div class="tRow">
-                  <div><div class="time">由布院</div><div class="meta">停車</div></div>
-                  <div>
-                    <div class="place">湯布院中央兒童公園</div>
-                    <div class="meta">Mapcode：<code style="font-weight:800">269 358 469*18</code><br>電話：0977-84-3111</div>
-                  </div>
-                </div>
-                <div class="tRow">
-                  <div><div class="time">由布院</div><div class="meta">停車</div></div>
-                  <div>
-                    <div class="place">湯布院停車場 (Yufuin Parking Lot / 由布院駅前)</div>
-                    <div class="meta">Mapcode：<code style="font-weight:800">269 358 409*00</code><br>電話：0977-84-5559</div>
-                  </div>
-                </div>
-                <div class="tRow">
-                  <div><div class="time">由布院</div><div class="meta">停車</div></div>
-                  <div>
-                    <div class="place">NPC24H 湯布院湯之坪街道停車場</div>
-                    <div class="meta">Mapcode：<code style="font-weight:800">269 358 376*36</code><br>電話：0120-48-0015 (NPC 管理中心專線)</div>
-                  </div>
-                </div>
-
-                <div class="tRow">
-                  <div><div class="time">由布院</div><div class="meta">景點</div></div>
-                  <div>
-                    <div class="place">金鱗湖</div>
-                    <div class="meta">Mapcode：<code style="font-weight:800">377 319 293*55</code><br>電話：0977-84-3111 (由布市觀光案內所)</div>
-                  </div>
-                </div>
-                <div class="tRow">
-                  <div><div class="time">由布院</div><div class="meta">停車</div></div>
-                  <div>
-                    <div class="place">金鱗湖入口前駐車場 (私營)</div>
-                    <div class="meta">Mapcode：<code style="font-weight:800">269 359 553*20</code><br>電話：(無固定電話，直接使用 Mapcode 導航)</div>
-                  </div>
-                </div>
-                <div class="tRow">
-                  <div><div class="time">由布院</div><div class="meta">停車</div></div>
-                  <div>
-                    <div class="place">Times 湯布院金鱗湖 (Times Yufuin Lake Kinrin)</div>
-                    <div class="meta">Mapcode：<code style="font-weight:800">269 359 584*77</code><br>電話：0120-72-8924 (Times 管理中心)</div>
-                  </div>
-                </div>
-
-                <div class="tRow">
-                  <div><div class="time">由布院</div><div class="meta">展望</div></div>
-                  <div>
-                    <div class="place">狭霧台 (展望台)</div>
-                    <div class="meta">Mapcode：<code style="font-weight:800">302 798 233*66</code><br>電話：0977-84-3111 (由布市役所代管)</div>
-                  </div>
-                </div>
-
-                <div class="tRow">
-                  <div><div class="time">九重</div><div class="meta">景點</div></div>
-                  <div>
-                    <div class="place">九重「夢」大吊橋</div>
-                    <div class="meta">Mapcode：<code style="font-weight:800">377 023 247*63</code><br>電話：0973-73-3800</div>
-                  </div>
-                </div>
-
-                <div class="tRow">
-                  <div><div class="time">住宿</div><div class="meta">旅館</div></div>
-                  <div>
-                    <div class="place">旅館華柚 (Hanayoshi)</div>
-                    <div class="meta">Mapcode：<code style="font-weight:800">377 319 791*11</code><br>電話：0973-79-3330</div>
-                  </div>
-                </div>
-              
-
-            <details style="margin-top:12px">
-              <summary>Day 3｜黑川溫泉・阿蘇<span class="chev">⌄</span></summary>
+            <details class="mapSection" open>
+              <summary><span class="sumText sumText--nowrap">Day 2｜由布院・九重</span><span class="chev">⌄</span></summary>
               <div class="content">
-                <div class="tRow">
-                  <div><div class="time">黑川</div><div class="meta">瀑布</div></div>
-                  <div><div class="place">夫妻瀑布（建議導航：第三駐車場）</div><div class="meta">Mapcode：<code style="font-weight:800">440 542 844*74</code></div></div>
-                </div>
-                <div class="tRow">
-                  <div><div class="time">黑川</div><div class="meta">停車</div></div>
-                  <div><div class="place">黒川温泉 第三駐車場（夫妻瀑布入口停車場）</div><div class="meta">Mapcode：<code style="font-weight:800">440 542 844*74</code></div></div>
-                </div>
-                <div class="tRow">
-                  <div><div class="time">阿蘇</div><div class="meta">水源</div></div>
-                  <div><div class="place">池山水源</div><div class="meta">Mapcode：<code style="font-weight:800">256 801 799*55</code></div></div>
-                </div>
-                <div class="tRow">
-                  <div><div class="time">住宿</div><div class="meta">飯店</div></div>
-                  <div><div class="place">Kamenoi Hotel Aso</div><div class="meta">Mapcode：<code style="font-weight:800">256 551 569*74</code></div></div>
+                <div class="mapList">
+                  <div class="mapItem">
+                    <div class="mapName">山田服務區 (Yamada SA) 下行</div>
+                    <div class="mapMeta">Mapcode：<code style="font-weight:800">166 626 503*52</code>｜電話：0946-52-3103</div>
+                  </div>
+                  <div class="mapItem">
+                    <div class="mapName">玖珠服務區 (Kusu SA) 下行</div>
+                    <div class="mapMeta">Mapcode：<code style="font-weight:800">269 095 861*85</code>｜電話：0973-72-6177</div>
+                  </div>
+
+                  <div class="mapItem">
+                    <div class="mapName">湯布院中央兒童公園</div>
+                    <div class="mapMeta">Mapcode：<code style="font-weight:800">269 358 469*18</code>｜電話：0977-84-3111</div>
+                  </div>
+                  <div class="mapItem">
+                    <div class="mapName">湯布院停車場 (Yufuin Parking Lot / 由布院駅前)</div>
+                    <div class="mapMeta">Mapcode：<code style="font-weight:800">269 358 409*00</code>｜電話：0977-84-5559</div>
+                  </div>
+                  <div class="mapItem">
+                    <div class="mapName">NPC24H 湯布院湯之坪街道停車場</div>
+                    <div class="mapMeta">Mapcode：<code style="font-weight:800">269 358 376*36</code>｜電話：0120-48-0015（NPC 管理中心）</div>
+                  </div>
+
+                  <div class="mapItem">
+                    <div class="mapName">金鱗湖</div>
+                    <div class="mapMeta">Mapcode：<code style="font-weight:800">377 319 293*55</code>｜電話：0977-84-3111（由布市觀光案內所）</div>
+                  </div>
+                  <div class="mapItem">
+                    <div class="mapName">金鱗湖入口前駐車場（私營）</div>
+                    <div class="mapMeta">Mapcode：<code style="font-weight:800">269 359 553*20</code>｜電話：無（直接用 Mapcode 導航）</div>
+                  </div>
+                  <div class="mapItem">
+                    <div class="mapName">Times 湯布院金鱗湖 (Times Yufuin Lake Kinrin)</div>
+                    <div class="mapMeta">Mapcode：<code style="font-weight:800">269 359 584*77</code>｜電話：0120-72-8924（Times 管理中心）</div>
+                  </div>
+
+                  <div class="mapItem">
+                    <div class="mapName">狭霧台（展望台）</div>
+                    <div class="mapMeta">Mapcode：<code style="font-weight:800">302 798 233*66</code>｜電話：0977-84-3111（由布市役所代管）</div>
+                  </div>
+
+                  <div class="mapItem">
+                    <div class="mapName">九重「夢」大吊橋</div>
+                    <div class="mapMeta">Mapcode：<code style="font-weight:800">377 023 247*63</code>｜電話：0973-73-3800</div>
+                  </div>
+
+                  <div class="mapItem">
+                    <div class="mapName">旅館華柚 (Hanayoshi)</div>
+                    <div class="mapMeta">Mapcode：<code style="font-weight:800">377 319 791*11</code>｜電話：0973-79-3330</div>
+                  </div>
                 </div>
               </div>
             </details>
 
-            <details style="margin-top:12px">
-              <summary>Day 4｜阿蘇・太宰府・博多<span class="chev">⌄</span></summary>
+            <details class="mapSection">
+              <summary><span class="sumText sumText--nowrap">Day 3｜黑川溫泉・阿蘇</span><span class="chev">⌄</span></summary>
               <div class="content">
-                <div class="tRow">
-                  <div><div class="time">阿蘇</div><div class="meta">神社</div></div>
-                  <div><div class="place">上色見熊野座神社</div><div class="meta">Mapcode：<code style="font-weight:800">256 547 232*77</code></div></div>
+                <div class="mapList">
+                  <div class="mapItem">
+                    <div class="mapName">夫妻瀑布（建議導航：第三駐車場）</div>
+                    <div class="mapMeta">Mapcode：<code style="font-weight:800">440 542 844*74</code></div>
+                  </div>
+                  <div class="mapItem">
+                    <div class="mapName">黒川温泉 第三駐車場（夫妻瀑布入口停車場）</div>
+                    <div class="mapMeta">Mapcode：<code style="font-weight:800">440 542 844*74</code></div>
+                  </div>
+                  <div class="mapItem">
+                    <div class="mapName">池山水源</div>
+                    <div class="mapMeta">Mapcode：<code style="font-weight:800">256 801 799*55</code></div>
+                  </div>
+                  <div class="mapItem">
+                    <div class="mapName">Kamenoi Hotel Aso</div>
+                    <div class="mapMeta">Mapcode：<code style="font-weight:800">256 551 569*74</code></div>
+                  </div>
                 </div>
-                <div class="tRow">
-                  <div><div class="time">阿蘇</div><div class="meta">水源</div></div>
-                  <div><div class="place">白川水源</div><div class="meta">Mapcode：<code style="font-weight:800">256 460 589*26</code></div></div>
-                </div>
-                <div class="tRow">
-                  <div><div class="time">阿蘇</div><div class="meta">火山</div></div>
-                  <div><div class="place">阿蘇火山（中岳）</div><div class="meta">Mapcode：<code style="font-weight:800">449 576 626*12</code></div></div>
-                </div>
-                <div class="tRow">
-                  <div><div class="time">阿蘇</div><div class="meta">草原</div></div>
-                  <div><div class="place">草千里ヶ浜</div><div class="meta">Mapcode：<code style="font-weight:800">449 575 012*63</code></div></div>
-                </div>
-                <div class="tRow">
-                  <div><div class="time">途中</div><div class="meta">休息站</div></div>
-                  <div><div class="place">山田SA（下り）</div><div class="meta">Mapcode：<code style="font-weight:800">202 774 655*14</code></div></div>
-                </div>
-                <div class="tRow">
-                  <div><div class="time">途中</div><div class="meta">休息站</div></div>
-                  <div><div class="place">玖珠SA（下り）</div><div class="meta">Mapcode：<code style="font-weight:800">269 097 210*33</code></div></div>
-                </div>
-                <div class="tRow">
-                  <div><div class="time">福岡</div><div class="meta">參拜</div></div>
-                  <div><div class="place">太宰府天滿宮</div><div class="meta">Mapcode：<code style="font-weight:800">55 452 706*41</code></div></div>
-                </div>
-                <div class="tRow">
-                  <div><div class="time">福岡</div><div class="meta">還車</div></div>
-                  <div><div class="place">Budget Rent-a-car Tenjin-kita</div><div class="meta">Mapcode：<code style="font-weight:800">13 318 669*04</code></div></div>
-                </div>
-                <div class="tRow">
-                  <div><div class="time">福岡</div><div class="meta">住宿</div></div>
-                  <div><div class="place">Cross Life 博多柳橋</div><div class="meta">Mapcode：<code style="font-weight:800">13 290 880*21</code></div></div>
+              </div>
+            </details>
+
+            <details class="mapSection">
+              <summary><span class="sumText sumText--nowrap">Day 4｜阿蘇・太宰府・博多</span><span class="chev">⌄</span></summary>
+              <div class="content">
+                <div class="mapList">
+                  <div class="mapItem"><div class="mapName">上色見熊野座神社</div><div class="mapMeta">Mapcode：<code style="font-weight:800">256 547 232*77</code></div></div>
+                  <div class="mapItem"><div class="mapName">白川水源</div><div class="mapMeta">Mapcode：<code style="font-weight:800">256 460 589*26</code></div></div>
+                  <div class="mapItem"><div class="mapName">阿蘇火山（中岳）</div><div class="mapMeta">Mapcode：<code style="font-weight:800">449 576 626*12</code></div></div>
+                  <div class="mapItem"><div class="mapName">草千里ヶ浜</div><div class="mapMeta">Mapcode：<code style="font-weight:800">449 575 012*63</code></div></div>
+                  <div class="mapItem"><div class="mapName">山田SA（下り）</div><div class="mapMeta">Mapcode：<code style="font-weight:800">202 774 655*14</code></div></div>
+                  <div class="mapItem"><div class="mapName">玖珠SA（下り）</div><div class="mapMeta">Mapcode：<code style="font-weight:800">269 097 210*33</code></div></div>
+                  <div class="mapItem"><div class="mapName">太宰府天滿宮</div><div class="mapMeta">Mapcode：<code style="font-weight:800">55 452 706*41</code></div></div>
+                  <div class="mapItem"><div class="mapName">Budget Rent-a-car Tenjin-kita</div><div class="mapMeta">Mapcode：<code style="font-weight:800">13 318 669*04</code></div></div>
+                  <div class="mapItem"><div class="mapName">Cross Life 博多柳橋</div><div class="mapMeta">Mapcode：<code style="font-weight:800">13 290 880*21</code></div></div>
                 </div>
               </div>
             </details>
