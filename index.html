@@ -447,7 +447,7 @@
         <button class="tab" role="tab" aria-selected="true" data-day="day1">Day 1</button>
         <button class="tab" role="tab" aria-selected="false" data-day="day2">Day 2</button>
         <button class="tab" role="tab" aria-selected="false" data-day="day3">Day 3</button>
-        <button class="tab" role="tab" aria-selected="false" data-day="day4">Day 4</button>
+<button class="tab" role="tab" aria-selected="false" data-day="day4">Day 4</button>
         <button class="tab" role="tab" aria-selected="false" data-day="day5">Day 5</button>
         <button class="tab" role="tab" aria-selected="false" data-day="day6">Day 6</button>
         <button class="tab" role="tab" aria-selected="false" data-day="mapcodes">Mapcode</button>
@@ -749,7 +749,9 @@
           </div>
         </div>
       </section>
-      <section class="panel" id="day3" role="tabpanel" aria-label="Day 3 行程">
+      <template id="tpl-day3">
+<section class="day3Tpl">
+
   <div class="dayHeader">
     <div class="dayTitle">
       <div class="num">3</div>
@@ -882,8 +884,10 @@
     </div><!-- /.content -->
   </div><!-- /.dayBody -->
 </section>
+</template>
 
-      <!-- =================== Day 4 =================== -->
+<section class="panel" id="day3" role="tabpanel" aria-label="Day 3 行程" data-lock-template="tpl-day3"></section>
+<!-- =================== Day 4 =================== -->
       <section class="panel" id="day4" role="tabpanel" aria-label="Day 4 行程">
         <div class="dayHeader">
           <div class="dayTitle"><div class="num">4</div><div class="tblock"><h2>阿蘇 → 福岡｜A / B 兩套方案</h2></div></div>
@@ -1678,6 +1682,15 @@
       }
 
       tabs.forEach(function(btn){ btn.addEventListener('click', function(){ setActive(btn.dataset.day); }); });
+
+      // ✅ 讓頁面內的「回 Day3 / 下一天」按鈕也能切換分頁（不需要寫額外 JS）
+      document.addEventListener('click', function(e){
+        var t = e.target && e.target.closest && e.target.closest('[data-go-tab]');
+        if(!t) return;
+        var id = t.getAttribute('data-go-tab');
+        if(!id) return;
+        setActive(id);
+      }, { passive:true });
 
       (function enableSwipeToSwitchDays(){
         var swipeArea = qs('.board') || document.body;
