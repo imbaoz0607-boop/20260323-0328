@@ -27,7 +27,11 @@
     }
     a{color:inherit}
 
-    .wrap{max-width:1100px;margin:0 auto;padding:22px 16px 26px}
+    .wrap{
+  max-width:1100px;
+  margin:0 auto;
+  padding:22px 8px 26px;
+}
 
     header{
       display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;
@@ -80,6 +84,7 @@
 
     /* Panels */
     .panel{
+  display:none;
   padding:16px 8px 18px;
 }
     .panel.active{display:block}
@@ -471,6 +476,49 @@
         <button class="tab" role="tab" aria-selected="false" data-day="mapcodes">Mapcode</button>
       </nav>
 
+      <script>
+  document.addEventListener('DOMContentLoaded', function(){
+    var tabs = document.querySelectorAll('.tab');
+    var panels = document.querySelectorAll('.panel');
+
+    function hydrateLockedPanels(){
+      document.querySelectorAll('[data-lock-template]').forEach(function(panel){
+        var tplId = panel.getAttribute('data-lock-template');
+        var tpl = tplId ? document.getElementById(tplId) : null;
+        if(!tpl || !tpl.content) return;
+        if(panel.children.length === 0){
+          panel.appendChild(tpl.content.cloneNode(true));
+        }
+      });
+    }
+
+    function setActive(day){
+      tabs.forEach(function(t){
+        t.setAttribute('aria-selected', String(t.getAttribute('data-day') === day));
+      });
+      panels.forEach(function(p){
+        p.classList.toggle('active', p.id === day);
+      });
+    }
+
+    hydrateLockedPanels();
+
+    tabs.forEach(function(tab){
+      tab.addEventListener('click', function(){
+        var day = tab.getAttribute('data-day');
+        setActive(day);
+      });
+    });
+
+    var activePanel = document.querySelector('.panel.active');
+    if(activePanel){
+      setActive(activePanel.id);
+    }else if(panels.length){
+      setActive(panels[0].id);
+    }
+  });
+</script>
+
       <div class="panelsWrap">
 
       <template id="tpl-day1">
@@ -777,1155 +825,873 @@
         </div>
       </section>
       <section class="panel" id="day3" role="tabpanel" aria-label="Day 3 行程">
-        <div class="dayHeader">
-          <div class="dayTitle">
-            <div class="num">3</div>
-            <div class="tblock"><h2>黑川溫泉周邊｜瀑布・水源</h2></div>
+  <div class="dayHeader">
+    <div class="dayTitle">
+      <div class="num">3</div>
+      <div class="tblock"><h2>黑川溫泉周邊｜瀑布・水源</h2></div>
+    </div>
+    <div class="dayHeaderRight"><div class="dayDateRight">03/25（三）</div></div>
+  </div>
+
+  <div class="dayBody">
+    <div class="content">
+      <div class="timeline">
+
+        <div class="tRow">
+          <div><div class="time">10:00</div><div class="meta"></div></div>
+          <div><div class="place">旅館華柚</div><div class="meta">早餐後退房</div></div>
+        </div>
+
+        <div class="tRow">
+          <div><div class="time">10:25–10:50</div><div class="meta"></div></div>
+          <div><div class="place">夫妻瀑布</div><div class="meta">行車約 20–25 分鐘｜停留 15–25 分鐘</div></div>
+        </div>
+
+        <div class="tRow">
+          <div><div class="time">11:40–13:10</div><div class="meta"></div></div>
+          <div>
+            <div class="place">黑川溫泉新停車場</div>
+            <div class="meta">黑川溫泉新停車場雖距離較遠(約950m~1.1Km，步行時間15分鐘)，但位置最順路、車位最充足且不需開進狹窄危險的溫泉街小巷。</div>
           </div>
-          <div class="dayHeaderRight"><div class="dayDateRight">03/25（三）</div></div>
         </div>
 
-        <div class="dayBody">
-          <div class="content">
-            <div class="timeline">
-
-              <div class="tRow">
-                <div><div class="time">10:00</div><div class="meta"></div></div>
-                <div><div class="place">旅館華柚</div><div class="meta">早餐後退房</div></div>
-              </div>
-
-              <div class="tRow">
-                <div><div class="time">10:25–10:50</div><div class="meta"></div></div>
-                <div><div class="place">夫妻瀑布</div><div class="meta">行車約 20–25 分鐘｜停留 15–25 分鐘</div></div>
-              </div>
-
-              <div class="tRow">
-                <div><div class="time">11:40–13:10</div><div class="meta"></div></div>
-                <div>
-                  <div class="place">黑川溫泉新停車場</div>
-                  <div class="meta">黑川溫泉新停車場雖距離較遠(約950m~1.1Km，步行時間15分鐘)，但位置最順路、車位最充足且不需開進狹窄危險的溫泉街小巷。</div>
-                </div>
-              </div>
-
-              <div class="galleryWrap alignTime" aria-label="黑川溫泉新停車場 照片">
-                <p class="galleryTitle">📷 黑川溫泉新停車場</p>
-                <div class="galleryRow" role="list">
-                  <div class="gItem" role="listitem" data-caption="黑川溫泉地圖（PDF）封面">
-                    <a href="day3/黑川溫泉地圖.pdf" target="_blank" rel="noopener" style="display:block;width:100%;height:100%;text-decoration:none">
-                      <img loading="lazy" src="day3/03.jpg" data-full="day3/03.jpg" alt="黑川溫泉地圖（PDF）封面" data-no-lightbox="1">
-                    </a>
-                  </div>
-                  <div class="gItem" role="listitem" data-caption="黑川溫泉新停車場位置示意地圖"><img loading="lazy" src="day3/01.jpg" data-full="day3/01.jpg" alt="黑川溫泉新停車場地圖"></div>
-                  <div class="gItem" role="listitem" data-caption="黑川溫泉新停車場空拍"><img loading="lazy" src="day3/02.jpg" data-full="day3/02.jpg" alt="黑川溫泉新停車場空拍"></div>
-                </div>
-              </div>
-
-              <div class="alignTime" style="margin-top:12px">
-
-                <p style="margin:0 0 8px;font-weight:700">📍 黑川溫泉周邊散步重點</p>
-                <div class="routeList" style="color:var(--muted);font-size:13px;line-height:1.7">
-                  <div class="routeItem">
-                    <span class="routeArrow">⇢</span>
-                    <div class="routeText"><strong>風之舍(服務中心)</strong> 停車場下來第一站作為起點，可購買入湯手形(用在地小國杉木製成的圓形木牌「溫泉三入通行證」，¥1500可用來泡2間溫泉+可在指定店家兌換伴手禮、飲料或點心*1，購買日起6個月內有效)、紀念品，這裡的地圖很齊全。</div>
-                  </div>
-                  <div class="routeItem">
-                    <span class="routeArrow">⇢</span>
-                    <div class="routeText"><strong>地藏尊</strong> 在風之舍隔壁，這有著名的顏湯(用溫泉蒸汽蒸臉)，路邊有賣溫泉蛋很有氛圍。</div>
-                  </div>
-                  <div class="routeItem">
-                    <span class="routeArrow">⇢</span>
-                    <div class="routeText">
-                      <strong>いご坂(伊後坂)</strong> 這是一段很有風情的下坡階梯，兩旁是木造旅館，有神隱少女的感覺。
-                      <div class="routeSub"><strong>人氣甜點｜Pâtisserie Roku</strong> 可先買泡芙。</div>
-                      <div class="routeSub"><strong>午餐首選｜わろく屋 (Warokuya)</strong>：古民風格餐廳＆咖啡廳，最受歡迎的餐點是熊本縣產豬肉製成的炸豬排黑咖哩（可先去登記用餐）。</div>
-                    </div>
-                  </div>
-                  <div class="routeItem">
-                    <span class="routeArrow">⇢</span>
-                    <div class="routeText"><strong>丸鈴橋(核心地標)</strong> 必拍景點！這裡就是看「湯明」點燈最美的地方，橋上可以俯瞰田之原川，兩岸全是鞠燈籠。</div>
-                  </div>
-                  <div class="routeItem">
-                    <span class="routeArrow">⇢</span>
-                    <div class="routeText"><strong>川端通り(老街核心)</strong> 沿著河邊的小路，街道以傳統木造建築與石板路為主，保留濃厚的日式懷舊氛圍。</div>
-                  </div>
-                </div>
-
-                <div class="links" style="margin:10px 0 10px">
-                  <a class="btn" href="day3/%E5%AE%98%E6%96%B9%E7%B0%A1%E4%BB%8B%E5%9C%B0%E5%9C%96%28%E6%97%A5%E6%96%87%E7%89%88%29.pdf" target="_blank" rel="noopener">📄 官方簡介地圖（日文版）</a>
-                  <a class="btn" href="day3/%E6%95%A3%E6%AD%A5%E5%9C%B0%E5%9C%96.pdf" target="_blank" rel="noopener">📄 散步地圖（PDF）</a>
-                </div>
-
-                <div style="margin-top:4px;font-size:12px;line-height:1.7;color:var(--text)">
-                  📌 黑川溫泉・湯明（湯あかり）我覺得很漂亮，但時間應該無法配合，先看看照片。<br>
-                  點燈時間：每天傍晚 17:00–21:30<br>
-                  活動期間：2025/12/20（六） 至 2026/3/31（二）<br>
-                  溫泉街上會擺放約 300 個由當地旅館與商店人員手工製作的球狀「鞠燈籠」，以及高約 2 公尺的筒狀竹燈籠，是冬季限定的浪漫夜間景色（見下方照片 14、15）。
-                </div>
-
-                <div class="galleryWrap" aria-label="黑川溫泉 景點照片">
-                  <div class="galleryRow" role="list">
-                    <div class="gItem" role="listitem" data-caption="風之舍（服務中心）"><img loading="lazy" src="day3/04.jpg" data-full="day3/04.jpg" alt="風之舍（服務中心）"></div>
-                    <div class="gItem" role="listitem" data-caption="入湯手形紀念"><img loading="lazy" src="day3/05.jpg" data-full="day3/05.jpg" alt="入湯手形紀念"></div>
-                    <div class="gItem" role="listitem" data-caption="黑川地藏尊"><img loading="lazy" src="day3/06.jpg" data-full="day3/06.jpg" alt="黑川地藏尊"></div>
-                    <div class="gItem" role="listitem" data-caption="溫泉蛋"><img loading="lazy" src="day3/07.jpg" data-full="day3/07.jpg" alt="溫泉蛋"></div>
-                    <div class="gItem" role="listitem" data-caption="河邊足湯"><img loading="lazy" src="day3/08.jpg" data-full="day3/08.jpg" alt="河邊足湯"></div>
-                    <div class="gItem" role="listitem" data-caption="いご坂石階"><img loading="lazy" src="day3/09.jpg" data-full="day3/09.jpg" alt="いご坂石階"></div>
-                    <div class="gItem" role="listitem" data-caption="丸鈴橋與旅館景觀"><img loading="lazy" src="day3/10.jpg" data-full="day3/10.jpg" alt="丸鈴橋與旅館景觀"></div>
-                    <div class="gItem" role="listitem" data-caption="川端通り街景"><img loading="lazy" src="day3/11.jpg" data-full="day3/11.jpg" alt="川端通り街景"></div>
-                    <div class="gItem" role="listitem" data-caption="わろく屋 (Warokuya)"><img loading="lazy" src="day3/12.jpg" data-full="day3/12.jpg" alt="わろく屋 (Warokuya)"></div>
-                    <div class="gItem" role="listitem" data-caption="Pâtisserie Roku 泡芙"><img loading="lazy" src="day3/13.jpg" data-full="day3/13.jpg" alt="Pâtisserie Roku 泡芙"></div>
-                    <div class="gItem" role="listitem" data-caption="湯明（湯あかり）夜間河景"><img loading="lazy" src="day3/14.jpg" data-full="day3/14.jpg" alt="湯明（湯あかり）夜間河景"></div>
-                    <div class="gItem" role="listitem" data-caption="湯明竹燈與鞠燈籠"><img loading="lazy" src="day3/15.jpg" data-full="day3/15.jpg" alt="湯明竹燈與鞠燈籠"></div>
-                  </div>
-                </div>
-
-                <details style="margin-top:12px;border:1px dashed var(--line);border-radius:14px;background:#fafafa">
-                  <summary><span class="sumText">🍽 黑川溫泉 午餐・咖啡其他選擇</span><span class="chev">⌄</span></summary>
-                  <div class="content">
-                    <p style="margin:0 0 6px;font-weight:700">⭐ 午餐</p>
-                    <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-                      <li><strong>Tsuji no Chaya</strong>｜傳統日式定食與輕食，節奏慢，適合悠閒用餐。</li>
-                      <li><strong>nez（ネズ）</strong>｜小而美的和食店，料理細緻、評價高，想吃得有質感可選。</li>
-                      <li><strong>うな北 黒川温泉店</strong>｜鰻魚飯／天丼份量扎實，早上走景點較累時補體力。</li>
-                      <li>❌<strong>Yamatake - Natural Root Vegetable Cuisine（Yama no Ibuki）</strong>｜自然薯與在地蔬菜料理，清爽不油。</li>
-                      <li>❌<strong>黑川溫泉 予祝 (よしゅく)</strong>｜以熊本和牛料理聞名，熊本赤牛漢堡排是招牌必點美食，每日限量 15 份。</li>
-                    </ul>
-
-                    <p style="margin:10px 0 6px;font-weight:700">☕ 咖啡・甜點・輕食</p>
-                    <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-                      <li><strong>Au Pan & Coffee</strong>｜麵包＋咖啡為主的輕食型選擇，位在第四停車場附近，離老街中心(丸鈴橋)走路約 10 分鐘以上。</li>
-                      <li>❌<strong>SLOW WALK CAFE</strong>｜咖啡＋輕食，適合拉長休息時間或下雨備用。</li>
-                    </ul>
-                  </div>
-                </details>
-
-                <div class="tRow">
-                  <div><div class="time">13:50–14:30</div><div class="meta"></div></div>
-                  <div><div class="place">池山水源</div><div class="meta">日本環境省選為「日本名水百選」之一，每分鐘湧出量高達 30 噸，水溫常年維持在約 13.5℃。<br>💧 可帶空寶特瓶(或在現場商店購買)裝泉水帶回，惟此地泉水也作為當地居民的飲用水源，嚴禁將手腳伸入主水源池內。<br>每年夏天限定的「點燈活動」將青苔覆蓋的溪畔、清澈見底的湧泉與四周的森林，整個區域都會被水和光的夢幻空間所圍繞。</div></div>
-                </div>
-
-                <div class="galleryWrap" aria-label="池山水源 照片">
-                  <div class="galleryRow" role="list">
-                    <div class="gItem" role="listitem" data-caption="池山水源清澈湧泉"><img loading="lazy" src="day3/16.jpg" data-full="day3/16.jpg" alt="池山水源清澈湧泉"></div>
-                    <div class="gItem" role="listitem" data-caption="池山水源森林倒影"><img loading="lazy" src="day3/17.jpg" data-full="day3/17.jpg" alt="池山水源森林倒影"></div>
-                    <div class="gItem" role="listitem" data-caption="池山水源夜間燈景"><img loading="lazy" src="day3/18.jpg" data-full="day3/18.jpg" alt="池山水源夜間燈景"></div>
-                    <div class="gItem" role="listitem" data-caption="池山水源橋與水景"><img loading="lazy" src="day3/19.jpg" data-full="day3/19.jpg" alt="池山水源橋與水景"></div>
-                  </div>
-                </div>
-
-              </div>
-
-              <div class="tRow">
-                <div><div class="time">15:00–15:20</div><div class="meta"></div></div>
-                <div><div class="place">Kamenoi Hotel Aso</div><div class="meta" style="margin-top:4px"><ul class="metaList" style="gap:4px;font-size:12px;line-height:1.2">
-                  <li><span class="metaIcon">🌄</span><span class="metaText">產山村高原大草原，下坡段可遠眺「阿蘇五岳」震撼全景。</span></li>
-                  <li><span class="metaIcon">⚠</span><span class="metaText">持續長下坡，請換入低速檔 (B/L檔) 利用引擎煞車，避免煞車過熱。</span></li>
-                  <li><span class="metaIcon">⚠</span><span class="metaText">沿國道 212 走大路最順，傍晚山區易起霧且無路燈，建議 17:00 前下山，嚴防野生動物（鹿）出沒。</span></li>
-                  <li><span class="metaIcon">🛒</span><span class="metaText">補給：進飯店前可先去 Lawson 阿蘇一之宮店補給。</span></li>
-                </ul></div></div>
-              </div>
-
-            </div><!-- /.timeline -->
-
-            <details style="margin-top:12px;border:1px dashed var(--line);border-radius:14px;background:#fafafa">
-              <summary><span class="sumText">🌧️ 雨天備案（Day3）</span><span class="chev">⌄</span></summary>
-              <div class="content">
-                <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-                  <li>夫妻瀑布雨勢大：改為黑川溫泉街散步＋用餐拉長</li>
-                  <li>池山水源：視雨勢與路況縮短或略過</li>
-                  <li>提早抵達飯店休息泡湯</li>
-                </ul>
-              </div>
-            </details>
-
-          </div><!-- /.content -->
-        </div><!-- /.dayBody -->
-
-        <div class="links" style="margin-top:12px;padding:0 12px">
-          <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Manganji%2C%20Minamioguni%2C%20Aso%20District%2C%20Kumamoto%20869-2402%2C%20Japan&travelmode=driving">🚗 導航｜夫妻瀑布</a>
-          <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E9%BB%92%E5%B7%9D%E6%BA%AB%E6%B3%89%E6%96%B0%E5%81%9C%E8%BB%8A%E5%A0%B4&travelmode=driving">🚗 導航｜黑川溫泉新停車場</a>
-          <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E6%B1%A0%E5%B1%B1%E6%B0%B4%E6%BA%90&travelmode=driving">🚗 導航｜池山水源</a>
-<a class="btn" target="_blank" rel="noopener"
-   href="https://www.google.com/maps/dir/?api=1&destination=Lawson%20%E9%98%BF%E8%98%87%E4%B8%80%E4%B9%8B%E5%AE%AE%E5%BA%97&travelmode=driving">
-   🚗 導航｜Lawson 阿蘇一之宮店
-</a>        
-        </div>
-      </section>
-
-      <section class="panel" id="day4" role="tabpanel" aria-label="Day 4 行程">
-        <div class="dayHeader">
-          <div class="dayTitle"><div class="num">4</div><div class="tblock"><h2>阿蘇 → 福岡｜A / B 兩套方案</h2></div></div>
-          <div class="dayHeaderRight"><div class="dayDateRight">03/26（四）</div></div>
+        <div class="galleryWrap alignTime" aria-label="黑川溫泉新停車場 照片">
+          <p class="galleryTitle">📷 黑川溫泉新停車場</p>
+          <div class="galleryRow" role="list">
+            <div class="gItem" role="listitem" data-caption="黑川溫泉地圖（PDF）封面">
+              <a href="day3/黑川溫泉地圖.pdf" target="_blank" rel="noopener" style="display:block;width:100%;height:100%;text-decoration:none">
+                <img loading="lazy" src="day3/03.jpg" data-full="day3/03.jpg" alt="黑川溫泉地圖（PDF）封面" data-no-lightbox="1">
+              </a>
+            </div>
+            <div class="gItem" role="listitem" data-caption="黑川溫泉新停車場位置示意地圖"><img loading="lazy" src="day3/01.jpg" data-full="day3/01.jpg" alt="黑川溫泉新停車場地圖"></div>
+            <div class="gItem" role="listitem" data-caption="黑川溫泉新停車場空拍"><img loading="lazy" src="day3/02.jpg" data-full="day3/02.jpg" alt="黑川溫泉新停車場空拍"></div>
+          </div>
         </div>
 
-        <div class="dayBody"><div class="content">
+        <div class="alignTime" style="margin-top:12px">
+          <p style="margin:0 0 8px;font-weight:700">📍 黑川溫泉周邊散步重點</p>
+          <div class="routeList" style="color:var(--muted);font-size:13px;line-height:1.7">
+            <div class="routeItem">
+              <span class="routeArrow">⇢</span>
+              <div class="routeText"><strong>風之舍(服務中心)</strong> 停車場下來第一站作為起點，可購買入湯手形(用在地小國杉木製成的圓形木牌「溫泉三入通行證」，¥1500可用來泡2間溫泉+可在指定店家兌換伴手禮、飲料或點心*1，購買日起6個月內有效)、紀念品，這裡的地圖很齊全。</div>
+            </div>
+            <div class="routeItem">
+              <span class="routeArrow">⇢</span>
+              <div class="routeText"><strong>地藏尊</strong> 在風之舍隔壁，這有著名的顏湯(用溫泉蒸汽蒸臉)，路邊有賣溫泉蛋很有氛圍。</div>
+            </div>
+            <div class="routeItem">
+              <span class="routeArrow">⇢</span>
+              <div class="routeText">
+                <strong>いご坂(伊後坂)</strong> 這是一段很有風情的下坡階梯，兩旁是木造旅館，有神隱少女的感覺。
+                <div class="routeSub"><strong>人氣甜點｜Pâtisserie Roku</strong> 可先買泡芙。</div>
+                <div class="routeSub"><strong>午餐首選｜わろく屋 (Warokuya)</strong>：古民風格餐廳＆咖啡廳，最受歡迎的餐點是熊本縣產豬肉製成的炸豬排黑咖哩（可先去登記用餐）。</div>
+              </div>
+            </div>
+            <div class="routeItem">
+              <span class="routeArrow">⇢</span>
+              <div class="routeText"><strong>丸鈴橋(核心地標)</strong> 必拍景點！這裡就是看「湯明」點燈最美的地方，橋上可以俯瞰田之原川，兩岸全是鞠燈籠。</div>
+            </div>
+            <div class="routeItem">
+              <span class="routeArrow">⇢</span>
+              <div class="routeText"><strong>川端通り(老街核心)</strong> 沿著河邊的小路，街道以傳統木造建築與石板路為主，保留濃厚的日式懷舊氛圍。</div>
+            </div>
+          </div>
 
-          <div class="timeline" style="padding:12px">
+          <div class="links" style="margin:10px 0 10px">
+            <a class="btn" href="day3/%E5%AE%98%E6%96%B9%E7%B0%A1%E4%BB%8B%E5%9C%B0%E5%9C%96%28%E6%97%A5%E6%96%87%E7%89%88%29.pdf" target="_blank" rel="noopener">📄 官方簡介地圖（日文版）</a>
+            <a class="btn" href="day3/%E6%95%A3%E6%AD%A5%E5%9C%B0%E5%9C%96.pdf" target="_blank" rel="noopener">📄 散步地圖（PDF）</a>
+          </div>
 
-          <details>
-            <summary><span class="sumText">🧭 Day4 怎麼選 A / B？</span><span class="chev">⌄</span></summary>
+          <div style="margin-top:4px;font-size:12px;line-height:1.7;color:var(--text)">
+            📌 黑川溫泉・湯明（湯あかり）我覺得很漂亮，但時間應該無法配合，先看看照片。<br>
+            點燈時間：每天傍晚 17:00–21:30<br>
+            活動期間：2025/12/20（六） 至 2026/3/31（二）<br>
+            溫泉街上會擺放約 300 個由當地旅館與商店人員手工製作的球狀「鞠燈籠」，以及高約 2 公尺的筒狀竹燈籠，是冬季限定的浪漫夜間景色（見下方照片 14、15）。
+          </div>
+
+          <div class="galleryWrap" aria-label="黑川溫泉 景點照片">
+            <div class="galleryRow" role="list">
+              <div class="gItem" role="listitem" data-caption="風之舍（服務中心）"><img loading="lazy" src="day3/04.jpg" data-full="day3/04.jpg" alt="風之舍（服務中心）"></div>
+              <div class="gItem" role="listitem" data-caption="入湯手形紀念"><img loading="lazy" src="day3/05.jpg" data-full="day3/05.jpg" alt="入湯手形紀念"></div>
+              <div class="gItem" role="listitem" data-caption="黑川地藏尊"><img loading="lazy" src="day3/06.jpg" data-full="day3/06.jpg" alt="黑川地藏尊"></div>
+              <div class="gItem" role="listitem" data-caption="溫泉蛋"><img loading="lazy" src="day3/07.jpg" data-full="day3/07.jpg" alt="溫泉蛋"></div>
+              <div class="gItem" role="listitem" data-caption="河邊足湯"><img loading="lazy" src="day3/08.jpg" data-full="day3/08.jpg" alt="河邊足湯"></div>
+              <div class="gItem" role="listitem" data-caption="いご坂石階"><img loading="lazy" src="day3/09.jpg" data-full="day3/09.jpg" alt="いご坂石階"></div>
+              <div class="gItem" role="listitem" data-caption="丸鈴橋與旅館景觀"><img loading="lazy" src="day3/10.jpg" data-full="day3/10.jpg" alt="丸鈴橋與旅館景觀"></div>
+              <div class="gItem" role="listitem" data-caption="川端通り街景"><img loading="lazy" src="day3/11.jpg" data-full="day3/11.jpg" alt="川端通り街景"></div>
+              <div class="gItem" role="listitem" data-caption="わろく屋 (Warokuya)"><img loading="lazy" src="day3/12.jpg" data-full="day3/12.jpg" alt="わろく屋 (Warokuya)"></div>
+              <div class="gItem" role="listitem" data-caption="Pâtisserie Roku 泡芙"><img loading="lazy" src="day3/13.jpg" data-full="day3/13.jpg" alt="Pâtisserie Roku 泡芙"></div>
+              <div class="gItem" role="listitem" data-caption="湯明（湯あかり）夜間河景"><img loading="lazy" src="day3/14.jpg" data-full="day3/14.jpg" alt="湯明（湯あかり）夜間河景"></div>
+              <div class="gItem" role="listitem" data-caption="湯明竹燈與鞠燈籠"><img loading="lazy" src="day3/15.jpg" data-full="day3/15.jpg" alt="湯明竹燈與鞠燈籠"></div>
+            </div>
+          </div>
+
+          <details style="margin-top:12px;border:1px dashed var(--line);border-radius:14px;background:#fafafa">
+            <summary><span class="sumText">🍽 黑川溫泉 午餐・咖啡其他選擇</span><span class="chev">⌄</span></summary>
+            <div class="content">
+              <p style="margin:0 0 6px;font-weight:700">⭐ 午餐</p>
+              <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
+                <li><strong>Tsuji no Chaya</strong>｜傳統日式定食與輕食，節奏慢，適合悠閒用餐。</li>
+                <li><strong>nez（ネズ）</strong>｜小而美的和食店，料理細緻、評價高，想吃得有質感可選。</li>
+                <li><strong>うな北 黒川温泉店</strong>｜鰻魚飯／天丼份量扎實，早上走景點較累時補體力。</li>
+                <li>❌<strong>Yamatake - Natural Root Vegetable Cuisine（Yama no Ibuki）</strong>｜自然薯與在地蔬菜料理，清爽不油。</li>
+                <li>❌<strong>黑川溫泉 予祝 (よしゅく)</strong>｜以熊本和牛料理聞名，熊本赤牛漢堡排是招牌必點美食，每日限量 15 份。</li>
+              </ul>
+
+              <p style="margin:10px 0 6px;font-weight:700">☕ 咖啡・甜點・輕食</p>
+              <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
+                <li><strong>Au Pan & Coffee</strong>｜麵包＋咖啡為主的輕食型選擇，位在第四停車場附近，離老街中心(丸鈴橋)走路約 10 分鐘以上。</li>
+                <li>❌<strong>SLOW WALK CAFE</strong>｜咖啡＋輕食，適合拉長休息時間或下雨備用。</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+
+        <div class="tRow">
+          <div><div class="time">13:50–14:30</div><div class="meta"></div></div>
+          <div><div class="place">池山水源</div><div class="meta">日本環境省選為「日本名水百選」之一，每分鐘湧出量高達 30 噸，水溫常年維持在約 13.5℃。<br>💧 可帶空寶特瓶(或在現場商店購買)裝泉水帶回，惟此地泉水也作為當地居民的飲用水源，嚴禁將手腳伸入主水源池內。<br>每年夏天限定的「點燈活動」將青苔覆蓋的溪畔、清澈見底的湧泉與四周的森林，整個區域都會被水和光的夢幻空間所圍繞。</div></div>
+        </div>
+
+        <div class="galleryWrap" aria-label="池山水源 照片">
+          <div class="galleryRow" role="list">
+            <div class="gItem" role="listitem" data-caption="池山水源清澈湧泉"><img loading="lazy" src="day3/16.jpg" data-full="day3/16.jpg" alt="池山水源清澈湧泉"></div>
+            <div class="gItem" role="listitem" data-caption="池山水源森林倒影"><img loading="lazy" src="day3/17.jpg" data-full="day3/17.jpg" alt="池山水源森林倒影"></div>
+            <div class="gItem" role="listitem" data-caption="池山水源夜間燈景"><img loading="lazy" src="day3/18.jpg" data-full="day3/18.jpg" alt="池山水源夜間燈景"></div>
+            <div class="gItem" role="listitem" data-caption="池山水源橋與水景"><img loading="lazy" src="day3/19.jpg" data-full="day3/19.jpg" alt="池山水源橋與水景"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tRow">
+        <div><div class="time">15:00–15:20</div><div class="meta"></div></div>
+        <div><div class="place">Kamenoi Hotel Aso</div><div class="meta" style="margin-top:4px"><ul class="metaList" style="gap:4px;font-size:12px;line-height:1.2">
+          <li><span class="metaIcon">🌄</span><span class="metaText">產山村高原大草原，下坡段可遠眺「阿蘇五岳」震撼全景。</span></li>
+          <li><span class="metaIcon">⚠</span><span class="metaText">持續長下坡，請換入低速檔 (B/L檔) 利用引擎煞車，避免煞車過熱。</span></li>
+          <li><span class="metaIcon">⚠</span><span class="metaText">沿國道 212 走大路最順，傍晚山區易起霧且無路燈，建議 17:00 前下山，嚴防野生動物（鹿）出沒。</span></li>
+          <li><span class="metaIcon">🛒</span><span class="metaText">補給：進飯店前可先去 Lawson 阿蘇一之宮店補給。</span></li>
+        </ul></div></div>
+      </div>
+
+    </div><!-- /.timeline -->
+
+    <details style="margin-top:12px;border:1px dashed var(--line);border-radius:14px;background:#fafafa">
+      <summary><span class="sumText">🌧️ 雨天備案（Day3）</span><span class="chev">⌄</span></summary>
+      <div class="content">
+        <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
+          <li>夫妻瀑布雨勢大：改為黑川溫泉街散步＋用餐拉長</li>
+          <li>池山水源：視雨勢與路況縮短或略過</li>
+          <li>提早抵達飯店休息泡湯</li>
+        </ul>
+      </div>
+    </details>
+
+    <div class="links" style="margin-top:12px;padding:0 12px">
+      <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Manganji%2C%20Minamioguni%2C%20Aso%20District%2C%20Kumamoto%20869-2402%2C%20Japan&travelmode=driving">🚗 導航｜夫妻瀑布</a>
+      <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E9%BB%92%E5%B7%9D%E6%BA%AB%E6%B3%89%E6%96%B0%E5%81%9C%E8%BB%8A%E5%A0%B4&travelmode=driving">🚗 導航｜黑川溫泉新停車場</a>
+      <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E6%B1%A0%E5%B1%B1%E6%B0%B4%E6%BA%90&travelmode=driving">🚗 導航｜池山水源</a>
+      <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Lawson%20%E9%98%BF%E8%98%87%E4%B8%80%E4%B9%8B%E5%AE%AE%E5%BA%97&travelmode=driving">🚗 導航｜Lawson 阿蘇一之宮店</a>
+    </div>
+
+  </div><!-- /.content -->
+</div><!-- /.dayBody -->
+</section>
+
+<section class="panel" id="day4" role="tabpanel" aria-label="Day 4 行程">
+  <div class="dayHeader">
+    <div class="dayTitle"><div class="num">4</div><div class="tblock"><h2>阿蘇 → 福岡｜A / B 兩套方案</h2></div></div>
+    <div class="dayHeaderRight"><div class="dayDateRight">03/26（四）</div></div>
+  </div>
+
+  <div class="dayBody"><div class="content">
+
+    <div class="timeline" style="padding:12px">
+
+      <details>
+        <summary><span class="sumText">🧭 Day4 怎麼選 A / B？</span><span class="chev">⌄</span></summary>
+        <div class="content">
+          <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
+            <li><strong>方案 A（阿蘇自然景點跑好跑滿）</strong>：天氣好、體力 OK，想把阿蘇一次看完整。</li>
+            <li><strong>方案 B（阿蘇火山＋太宰府）</strong>：想保留體力、下午提早進市區。</li>
+          </ul>
+        </div>
+      </details>
+
+      <div class="links" style="margin:10px 0 6px">
+        <a class="btn" href="https://www.jma.go.jp/bosai/volcano/" target="_blank" rel="noopener">🌋 日本氣象廳｜火山資訊</a>
+        <a class="btn" href="https://www.aso-volcano.jp/chinese/index.html" target="_blank" rel="noopener">🏔 阿蘇火山情報</a>
+        <a class="btn" href="https://emergency-weather.yahoo.co.jp/weather/zh-TW/volcano/503/" target="_blank" rel="noopener">🔴 阿蘇火山即時影像</a>
+        <a class="btn" href="day4/%E9%98%BF%E8%98%87%E8%A7%80%E5%85%89%E5%B0%8E%E8%A6%BD%E6%89%8B%E5%86%8A.pdf" target="_blank" rel="noopener">📄 阿蘇觀光導覽手冊</a>
+      </div>
+
+      <details style="margin-top:12px">
+        <summary><span class="sumText">🅰️ 方案 A｜阿蘇自然景點 → 回福岡還車</span><span class="chev">⌄</span></summary>
+        <div class="content">
+
+          <div class="timeline" style="border:none;background:transparent;border-radius:0">
+            <div class="tRow">
+              <div><div class="time">09:00</div><div class="meta">出發</div></div>
+              <div><div class="place">Kamenoi Hotel Aso</div><div class="meta">退房後出發，行李上車</div></div>
+            </div>
+          </div>
+
+          <div class="timeline" style="border:none;background:transparent;border-radius:0">
+            <div class="tRow">
+              <div><div class="time">09:40–10:40</div><div class="meta">行車時間約30分鐘</div></div>
+              <div>
+                <div class="place">上色見熊野座神社</div>
+                <div class="meta">從停車場走至神社入口約 100 多公尺，穿過鳥居後是高達 100 多座石燈籠與 260 多段石階，青苔、藤蔓、石階與高聳杉木交織，形成令人難以言喻的綠色奇景。<br>📸 拍照點在石燈籠階梯中段</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="galleryWrap" aria-label="上色見熊野座神社 照片">
+            <div class="galleryRow" role="list">
+              <div class="gItem" role="listitem" data-caption="石燈籠階梯與杉木林"><img loading="lazy" src="day4/01.jpg" data-full="day4/01.jpg" alt="石燈籠階梯與杉木林"></div>
+              <div class="gItem" role="listitem" data-caption="神社本殿與林間光影"><img loading="lazy" src="day4/02.jpg" data-full="day4/02.jpg" alt="神社本殿與林間光影"></div>
+            </div>
+          </div>
+
+          <div class="timeline" style="border:none;background:transparent;border-radius:0">
+            <div class="tRow">
+              <div><div class="time">11:30–12:10</div><div class="meta">行車時間約15分鐘</div></div>
+              <div>
+                <div class="place">白川水源</div>
+                <div class="meta">由阿蘇破火山口的地下水湧出，也是流經熊本市內的一級河川「白川」的源頭，獲環境廳（現為環境省）選為「日本名水百選」之一的知名水源，可自由從水池直接裝取泉水帶回。</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="galleryWrap" aria-label="白川水源 照片">
+            <div class="galleryRow" role="list">
+              <div class="gItem" role="listitem" data-caption="白川水源｜名水百選石碑"><img loading="lazy" src="day4/03.jpg" data-full="day4/03.jpg" alt="白川水源｜名水百選石碑"></div>
+              <div class="gItem" role="listitem" data-caption="白川水源｜清澈湧泉與水色"><img loading="lazy" src="day4/04.jpg" data-full="day4/04.jpg" alt="白川水源｜清澈湧泉與水色"></div>
+              <div class="gItem" role="listitem" data-caption="白川水源｜現場取水"><img loading="lazy" src="day4/05.jpg" data-full="day4/05.jpg" alt="白川水源｜現場取水"></div>
+            </div>
+          </div>
+
+          <div class="timeline" style="border:none;background:transparent;border-radius:0">
+            <div class="tRow">
+              <div><div class="time">12:30–13:30</div><div class="meta">午餐</div></div>
+              <div><div class="place">阿蘇市區</div><div class="meta">現場決定</div></div>
+            </div>
+          </div>
+
+          <details style="margin-top:10px">
+            <summary><span class="sumText">🍽 午餐選擇</span><span class="chev">⌄</span></summary>
             <div class="content">
               <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-                <li><strong>方案 A（阿蘇自然景點跑好跑滿）</strong>：天氣好、體力 OK，想把阿蘇一次看完整。</li>
-                <li><strong>方案 B（阿蘇火山＋太宰府）</strong>：想保留體力、下午提早進市區。</li>
+                <li><strong>赤牛丼／赤牛定食</strong>：阿蘇最代表性的在地選擇（現場看候位決定）。</li>
+                <li><strong>赤牛丼の店 赤牛屋</strong>｜最人氣赤牛丼名店，肉香濃、份量足；尖峰時段需排隊。</li>
+                <li><strong>あそ路</strong>｜在地食堂風，赤牛定食穩定，節奏快、不易踩雷。</li>
+                <li><strong>レストラン アスペクタ</strong>｜靠近火山動線，可邊看山景邊吃赤牛。</li>
+                <li><strong>赤牛丼屋 たらお</strong>｜小店型，價格親切，適合想快速用餐。</li>
+                <li><strong>定食／蕎麥麵</strong>：想吃清爽、速度快可選。</li>
               </ul>
             </div>
           </details>
 
-          <div class="links" style="margin:10px 0 6px">
-            <a class="btn" href="https://www.jma.go.jp/bosai/volcano/" target="_blank" rel="noopener">🌋 日本氣象廳｜火山資訊</a>
-            <a class="btn" href="https://www.aso-volcano.jp/chinese/index.html" target="_blank" rel="noopener">🏔 阿蘇火山情報</a>
-            <a class="btn" href="https://emergency-weather.yahoo.co.jp/weather/zh-TW/volcano/503/" target="_blank" rel="noopener">🔴 阿蘇火山即時影像</a>
-            <a class="btn" href="day4/%E9%98%BF%E8%98%87%E8%A7%80%E5%85%89%E5%B0%8E%E8%A6%BD%E6%89%8B%E5%86%8A.pdf" target="_blank" rel="noopener">📄 阿蘇觀光導覽手冊</a>
-          </div>
-
-          <details style="margin-top:12px">
-            <summary><span class="sumText">🅰️ 方案 A｜阿蘇自然景點 → 回福岡還車</span><span class="chev">⌄</span></summary>
-            <div class="content">
-
-              <div class="timeline" style="border:none;background:transparent;border-radius:0">
-                <div class="tRow">
-                  <div><div class="time">09:00</div><div class="meta">出發</div></div>
-                  <div><div class="place">Kamenoi Hotel Aso</div><div class="meta">退房後出發，行李上車</div></div>
-                </div>
-              </div>
-
-              <div class="timeline" style="border:none;background:transparent;border-radius:0">
-                <div class="tRow">
-                  <div><div class="time">09:40–10:40</div><div class="meta">行車時間約30分鐘</div></div>
-                  <div>
-                    <div class="place">上色見熊野座神社</div>
-                    <div class="meta">從停車場走至神社入口約 100 多公尺，穿過鳥居後是高達 100 多座石燈籠與 260 多段石階，青苔、藤蔓、石階與高聳杉木交織，形成令人難以言喻的綠色奇景。<br>📸 拍照點在石燈籠階梯中段</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="galleryWrap" aria-label="上色見熊野座神社 照片">
-                <div class="galleryRow" role="list">
-                  <div class="gItem" role="listitem" data-caption="石燈籠階梯與杉木林"><img loading="lazy" src="day4/01.jpg" data-full="day4/01.jpg" alt="石燈籠階梯與杉木林"></div>
-                  <div class="gItem" role="listitem" data-caption="神社本殿與林間光影"><img loading="lazy" src="day4/02.jpg" data-full="day4/02.jpg" alt="神社本殿與林間光影"></div>
-                </div>
-              </div>
-
-              <div class="timeline" style="border:none;background:transparent;border-radius:0">
-                <div class="tRow">
-                  <div><div class="time">11:30–12:10</div><div class="meta">行車時間約15分鐘</div></div>
-                  <div>
-                    <div class="place">白川水源</div>
-                    <div class="meta">由阿蘇破火山口的地下水湧出，也是流經熊本市內的一級河川「白川」的源頭，獲環境廳（現為環境省）選為「日本名水百選」之一的知名水源，可自由從水池直接裝取泉水帶回。</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="galleryWrap" aria-label="白川水源 照片">
-                <div class="galleryRow" role="list">
-                  <div class="gItem" role="listitem" data-caption="白川水源｜名水百選石碑"><img loading="lazy" src="day4/03.jpg" data-full="day4/03.jpg" alt="白川水源｜名水百選石碑"></div>
-                  <div class="gItem" role="listitem" data-caption="白川水源｜清澈湧泉與水色"><img loading="lazy" src="day4/04.jpg" data-full="day4/04.jpg" alt="白川水源｜清澈湧泉與水色"></div>
-                  <div class="gItem" role="listitem" data-caption="白川水源｜現場取水"><img loading="lazy" src="day4/05.jpg" data-full="day4/05.jpg" alt="白川水源｜現場取水"></div>
-                </div>
-              </div>
-
-              <div class="timeline" style="border:none;background:transparent;border-radius:0">
-                <div class="tRow">
-                  <div><div class="time">12:30–13:30</div><div class="meta">午餐</div></div>
-                  <div><div class="place">阿蘇市區</div><div class="meta">現場決定</div></div>
-                </div>
-              </div>
-
-              <details style="margin-top:10px">
-                <summary><span class="sumText">🍽 午餐選擇</span><span class="chev">⌄</span></summary>
-                <div class="content">
-                  <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-                    <li><strong>赤牛丼／赤牛定食</strong>：阿蘇最代表性的在地選擇（現場看候位決定）。</li>
-                    <li><strong>赤牛丼の店 赤牛屋</strong>｜最人氣赤牛丼名店，肉香濃、份量足；尖峰時段需排隊。</li>
-                    <li><strong>あそ路</strong>｜在地食堂風，赤牛定食穩定，節奏快、不易踩雷。</li>
-                    <li><strong>レストラン アスペクタ</strong>｜靠近火山動線，可邊看山景邊吃赤牛。</li>
-                    <li><strong>赤牛丼屋 たらお</strong>｜小店型，價格親切，適合想快速用餐。</li>
-                    <li><strong>定食／蕎麥麵</strong>：想吃清爽、速度快可選。</li>
-                  </ul>
-                </div>
-              </details>
-
-              <div class="timeline" style="border:none;background:transparent;border-radius:0">
-                <div class="tRow">
-                  <div><div class="time">14:20–15:10</div></div>
-                  <div>
-                    <div class="place">阿蘇火山（中岳）</div>
-                    <div class="meta">阿蘇市區行車約 30–40 分鐘（含上山與停車等候）<br>停留約 45–60 分鐘　⚠️ 需視當日開放與火山警戒狀況</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="galleryWrap" aria-label="阿蘇火山（中岳） 照片">
-                <p class="galleryTitle">📷 阿蘇火山（中岳）</p>
-                <div class="galleryRow" role="list">
-                  <div class="gItem" role="listitem" data-caption="中岳火山口"><img loading="lazy" src="day4/10.jpg" data-full="day4/10.jpg" alt="中岳火山口（參考照片）"></div>
-                  <div class="gItem" role="listitem" data-caption="中岳火山口全景"><img loading="lazy" src="day4/11.jpg" data-full="day4/11.jpg" alt="中岳火山口全景（參考照片）"></div>
-                  <div class="gItem" role="listitem" data-caption="火山口噴氣"><img loading="lazy" src="day4/12.jpg" data-full="day4/12.jpg" alt="火山口噴氣（參考照片）"></div>
-                </div>
-              </div>
-
-              <div class="links" style="margin-top:10px">
-                <a class="btn" href="day4/%E9%98%BF%E8%98%87%E4%B8%AD%E5%B2%B3%E7%81%AB%E5%B1%B1%E5%8F%A3%E5%8F%83%E8%A7%80.pdf" target="_blank" rel="noopener">📄 阿蘇中岳火山口參觀（PDF）</a>
-              </div>
-
-              <div class="timeline" style="border:none;background:transparent;border-radius:0">
-                <div class="tRow">
-                  <div><div class="time">15:20–16:20</div><div class="meta">景點</div></div>
-                  <div>
-                    <div class="place">草千里ヶ浜</div>
-                    <div class="meta">海拔約 1100 米，可以欣賞到悠閒漫步的馬匹和氣勢磅礴、冒著煙的阿蘇山中岳火山口的景色。</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="galleryWrap" aria-label="草千里ヶ浜 照片">
-                <div class="galleryRow" role="list">
-                  <div class="gItem" role="listitem" data-caption="草千里ヶ浜｜草原與馬匹"><img loading="lazy" src="day4/06.jpg" data-full="day4/06.jpg" alt="草千里ヶ浜｜草原與馬匹"></div>
-                  <div class="gItem" role="listitem" data-caption="草千里ヶ浜｜水面倒影"><img loading="lazy" src="day4/07.jpg" data-full="day4/07.jpg" alt="草千里ヶ浜｜水面倒影"></div>
-                  <div class="gItem" role="listitem" data-caption="草千里ヶ浜｜夕景與火山煙"><img loading="lazy" src="day4/08.jpg" data-full="day4/08.jpg" alt="草千里ヶ浜｜夕景與火山煙"></div>
-                  <div class="gItem" role="listitem" data-caption="草千里ヶ浜｜星空"><img loading="lazy" src="day4/09.jpg" data-full="day4/09.jpg" alt="草千里ヶ浜｜星空（示意）"></div>
-                </div>
-              </div>
-
-              <div class="timeline" style="border:none;background:transparent;border-radius:0">
-                <div class="tRow">
-                  <div><div class="time">16:30–19:30</div><div class="meta">移動</div></div>
-                  <div><div class="place">阿蘇 → 福岡市區</div><div class="meta">行車約 3 小時（含休息站）｜首選休息站：玖珠 SA（上り）｜備選：山田 SA（上り）</div></div>
-                </div>
-                <div class="tRow">
-                  <div><div class="time">19:30</div></div>
-                  <div>
-                    <div class="place"><span class="act">還車</span>Budget Rent-a-car Tenjin-kita</div>
-                    <div class="meta"><span class="act">入住</span>🏨 Cross Life 博多柳橋</div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </details>
-
-          <details style="margin-top:12px">
-            <summary><span class="sumText">🅱️ 方案 B｜阿蘇火山 → 太宰府 → 福岡</span><span class="chev">⌄</span></summary>
-            <div class="content">
-
-              <div class="timeline" style="border:none;background:transparent;border-radius:0">
-                <div class="tRow">
-                  <div><div class="time">09:00</div><div class="meta">出發</div></div>
-                  <div>
-                    <div class="place">Kamenoi Hotel Aso</div>
-                    <div class="meta">退房後出發，行李上車</div>
-                  </div>
-                </div>
-                <div class="tRow">
-                  <div><div class="time">09:40–10:30</div></div>
-                  <div>
-                    <div class="place">阿蘇火山（中岳）</div>
-                    <div class="meta">Kamenoi Hotel Aso 出發後行車約 25–35 分鐘，含停車緩衝抓 40–50 分鐘<br>停約 45–60 分鐘｜⚠️ 需視當日開放與火山警戒狀況</div>
-                  </div>
-                </div>
-
-                <div class="galleryWrap" aria-label="阿蘇火山（中岳） 照片">
-                  <p class="galleryTitle">📷 阿蘇火山（中岳）</p>
-                  <div class="galleryRow" role="list">
-                    <div class="gItem" role="listitem" data-caption="中岳火山口">
-                      <img loading="lazy" src="day4/10.jpg" data-full="day4/10.jpg" alt="中岳火山口">
-                    </div>
-                    <div class="gItem" role="listitem" data-caption="中岳火山口全景">
-                      <img loading="lazy" src="day4/11.jpg" data-full="day4/11.jpg" alt="中岳火山口全景">
-                    </div>
-                    <div class="gItem" role="listitem" data-caption="火山口噴氣">
-                      <img loading="lazy" src="day4/12.jpg" data-full="day4/12.jpg" alt="火山口噴氣">
-                    </div>
-                  </div>
-                </div>
-
-                <div class="links" style="margin-top:10px">
-                  <a class="btn" href="day4/%E9%98%BF%E8%98%87%E4%B8%AD%E5%B2%B3%E7%81%AB%E5%B1%B1%E5%8F%A3%E5%8F%83%E8%A7%80.pdf" target="_blank" rel="noopener">📄 阿蘇中岳火山口參觀（PDF）</a>
-                </div>
-
-                <details style="margin-top:10px">
-                  <summary><span class="sumText">午餐・咖啡選擇</span><span class="chev">⌄</span></summary>
-                  <div class="content">
-                    <p style="margin:0 0 6px;font-weight:700">🍽 在阿蘇火山周邊</p>
-                    <p style="margin:6px 0 6px;font-weight:700">⭐ 景觀餐廳／正餐</p>
-                    <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-                      <li><strong>草千里レストハウス</strong>｜就在草千里旁，定食、烏龍麵、咖哩為主；景觀最好、動線最順。</li>
-                      <li><strong>火の山かふぇ</strong>｜在地食材定食，位置在高原地帶，用餐時可欣賞開闊山景。</li>
-                    </ul>
-
-                    <p style="margin:10px 0 6px;font-weight:700">☕ 咖啡／輕食休息</p>
-                    <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-                      <li><strong>カフェ・スヴニール（Cafe Souvenir）</strong>｜草千里附近，咖啡、甜點為主，適合火山後短暫放空。</li>
-                      <li><strong>ASO MILK FACTORY（阿部牧場）</strong>｜牛乳、霜淇淋、輕食；不想吃正餐時的保險選項。</li>
-                    </ul>
-
-                    <p style="margin:12px 0 6px;font-weight:700">🍽 阿蘇市區</p>
-                    <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-                      <li><strong>赤牛丼／赤牛定食</strong>：阿蘇最代表性的在地選擇（路邊店很多，現場看候位決定）。</li>
-                      <li><strong>定食／蕎麥麵</strong>：想吃清爽、速度快就選定食或蕎麥。</li>
-                    </ul>
-                  </div>
-                </details>
-
-              <div class="timeline" style="border:none;background:transparent;border-radius:0">
-                <div class="tRow">
-                  <div><div class="time">13:00–15:00</div><div class="meta">移動</div></div>
-                  <div><div class="place">阿蘇 → 太宰府</div><div class="meta">行車約 2–2.5 小時（含休息）｜建議停靠：玖珠 SA（上り）｜備選：山田 SA（上り）</div></div>
-                </div>
-
-                <div class="tRow">
-                  <div><div class="time">15:00–16:30</div><div class="meta">參拜</div></div>
-                  <div>
-                    <div class="place">太宰府天滿宮</div>
-                    <div class="meta">太宰府天滿宮是日本最重要的神社之一，主祭神是菅原道真，又名「天神」，即學問、文化及藝術之神。<br>
-                    建議停車：太宰府市營停車場。</div>
-                  </div>
-                </div>
-
-                <div class="galleryWrap" aria-label="太宰府天滿宮 照片">
-                  <p class="galleryTitle">📷 太宰府天滿宮・表參道散策</p>
-                  <div class="galleryRow" role="list">
-                    <div class="gItem" role="listitem" data-caption="太宰府天滿宮樓門"><img loading="lazy" src="day4/13.jpg" data-full="day4/13.jpg" alt="太宰府天滿宮樓門"></div>
-                    <div class="gItem" role="listitem" data-caption="境內梅花與心字池"><img loading="lazy" src="day4/14.jpg" data-full="day4/14.jpg" alt="境內梅花與心字池"></div>
-                    <div class="gItem" role="listitem" data-caption="御神牛"><img loading="lazy" src="day4/15.jpg" data-full="day4/15.jpg" alt="御神牛"></div>
-                    <div class="gItem" role="listitem" data-caption="隈研吾設計的星巴克"><img loading="lazy" src="day4/16.jpg" data-full="day4/16.jpg" alt="隈研吾設計的星巴克"></div>
-                    <div class="gItem" role="listitem" data-caption="全國唯一的五角合格碗一蘭 "><img loading="lazy" src="day4/17.jpg" data-full="day4/17.jpg" alt="全國唯一的五角合格碗一蘭 "></div>
-                    <div class="gItem" role="listitem" data-caption="太宰府天滿宮境內導覽圖"><img loading="lazy" src="day4/神社境內地圖.jpg" data-full="day4/神社境內地圖.jpg" alt="太宰府天滿宮境內導覽圖"></div>
-                    <div class="gItem" role="listitem" data-caption="太宰府周邊散策"><img loading="lazy" src="day4/散策.jpg" data-full="day4/散策.jpg" alt="太宰府散策動線示意"></div>
-                  </div>
-                </div>
-
-                <div class="tRow">
-                  <div><div class="time">17:30–18:30</div><div class="meta">移動</div></div>
-                  <div><div class="place">太宰府 → 福岡市區</div></div>
-                </div>
-                <div class="tRow">
-                  <div><div class="time">19:30</div></div>
-                  <div>
-                    <div class="place"><span class="act">還車</span>Budget Rent-a-car Tenjin-kita</div>
-                    <div class="meta"><span class="act">入住</span>🏨 Cross Life 博多柳橋</div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </details>
-
-          </div>
-
-          <div class="links" style="margin-top:12px">
-
-            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E4%B8%8A%E8%89%B2%E8%A6%8B%E7%86%8A%E9%87%8E%E5%BA%A7%E7%A5%9E%E7%A4%BE&travelmode=driving">🚗 導航｜上色見熊野座神社</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E7%99%BD%E5%B7%9D%E6%B0%B4%E6%BA%90&travelmode=driving">🚗 導航｜白川水源</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E9%98%BF%E8%98%87%E4%B8%AD%E5%B2%B3%E7%81%AB%E5%B1%B1%E5%8F%A3&travelmode=driving">🌋 導航｜阿蘇火山（中岳）</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E8%8D%89%E5%8D%83%E9%87%8C%E3%83%B6%E6%B5%9C&travelmode=driving">🚗 導航｜草千里ヶ浜</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E5%B1%B1%E7%94%B0%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%A8%E3%83%AA%E3%82%A2%20%28%E4%B8%8B%E3%82%8A%29&travelmode=driving">🚗 休息站｜山田SA（建議）</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E7%8E%96%E7%8F%A0%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%A8%E3%83%AA%E3%82%A2%20%28%E4%B8%8B%E3%82%8A%29&travelmode=driving">🚗 休息站｜玖珠SA（次要）</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E5%A4%AA%E5%AE%B0%E5%BA%9C%E5%A4%A9%E6%BB%BF%E5%AE%AE&travelmode=driving">⛩️ 導航｜太宰府天滿宮</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Cross%20Life%20%E5%8D%9A%E5%A4%9A%E6%9F%B3%E6%A9%8B&travelmode=driving">🏨 導航｜Cross Life 博多柳橋</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Budget Rent-a-car Tenjin-kita&travelmode=driving">🚗 導航｜Budget Rent-a-car Tenjin-kita</a>
-          </div>
-
-        </div></div>
-      </section>
-
-      <!-- =================== Day 5 =================== -->
-      <section class="panel" id="day5" role="tabpanel" aria-label="Day 5 行程">
-        <div class="dayHeader">
-          <div class="dayTitle"><div class="num">5</div><div class="tblock"><h2>福岡市區散步｜天神・博多</h2></div></div>
-          <div class="dayHeaderRight"><div class="dayDateRight">03/27（五）</div></div>
-        </div>
-        <div class="dayBody"><div class="content">
-
-          <div class="timeline">
-
+          <div class="timeline" style="border:none;background:transparent;border-radius:0">
             <div class="tRow">
-              <div><div class="time">10:00</div><div class="meta">早／午餐</div></div>
               <div>
-                <div class="place">柳橋連合市場｜食堂 光
-                  <a href="IG網址" target="_blank" rel="noopener" style="margin-left:10px;color:#2563eb;font-weight:600;font-size:13px;">IG</a>
-                  <a href="訂位網址" target="_blank" rel="noopener" style="margin-left:10px;color:#2563eb;font-weight:600;font-size:13px;">訂位/只能訂PM5:30以後</a>
-                </div>
-                <div class="meta">在地市場食堂，以新鮮海鮮定食、生魚片丼為主；10點開始營業，9點多可以先到店門口的候位表填寫資料。</div>
+                <div class="time">14:20–15:10</div>
+              </div>
+              <div>
+                <div class="place">阿蘇火山（中岳）</div>
+                <div class="meta">阿蘇市區行車約 30–40 分鐘（含上山與停車等候）<br>停留約 45–60 分鐘　⚠️ 需視當日開放與火山警戒狀況</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="galleryWrap" aria-label="阿蘇火山（中岳） 照片">
+            <p class="galleryTitle">📷 阿蘇火山（中岳）</p>
+            <div class="galleryRow" role="list">
+              <div class="gItem" role="listitem" data-caption="中岳火山口"><img loading="lazy" src="day4/10.jpg" data-full="day4/10.jpg" alt="中岳火山口（參考照片）"></div>
+              <div class="gItem" role="listitem" data-caption="中岳火山口全景"><img loading="lazy" src="day4/11.jpg" data-full="day4/11.jpg" alt="中岳火山口全景（參考照片）"></div>
+              <div class="gItem" role="listitem" data-caption="火山口噴氣"><img loading="lazy" src="day4/12.jpg" data-full="day4/12.jpg" alt="火山口噴氣（參考照片）"></div>
+            </div>
+          </div>
+
+          <div class="links" style="margin-top:10px">
+            <a class="btn" href="day4/%E9%98%BF%E8%98%87%E4%B8%AD%E5%B2%B3%E7%81%AB%E5%B1%B1%E5%8F%A3%E5%8F%83%E8%A7%80.pdf" target="_blank" rel="noopener">📄 阿蘇中岳火山口參觀（PDF）</a>
+          </div>
+
+          <div class="timeline" style="border:none;background:transparent;border-radius:0">
+            <div class="tRow">
+              <div><div class="time">15:20–16:20</div><div class="meta">景點</div></div>
+              <div>
+                <div class="place">草千里ヶ浜</div>
+                <div class="meta">海拔約 1100 米，可以欣賞到悠閒漫步的馬匹和氣勢磅礴、冒著煙的阿蘇山中岳火山口的景色。</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="galleryWrap" aria-label="草千里ヶ浜 照片">
+            <div class="galleryRow" role="list">
+              <div class="gItem" role="listitem" data-caption="草千里ヶ浜｜草原與馬匹"><img loading="lazy" src="day4/06.jpg" data-full="day4/06.jpg" alt="草千里ヶ浜｜草原與馬匹"></div>
+              <div class="gItem" role="listitem" data-caption="草千里ヶ浜｜水面倒影"><img loading="lazy" src="day4/07.jpg" data-full="day4/07.jpg" alt="草千里ヶ浜｜水面倒影"></div>
+              <div class="gItem" role="listitem" data-caption="草千里ヶ浜｜夕景與火山煙"><img loading="lazy" src="day4/08.jpg" data-full="day4/08.jpg" alt="草千里ヶ浜｜夕景與火山煙"></div>
+              <div class="gItem" role="listitem" data-caption="草千里ヶ浜｜星空"><img loading="lazy" src="day4/09.jpg" data-full="day4/09.jpg" alt="草千里ヶ浜｜星空（示意）"></div>
+            </div>
+          </div>
+
+          <div class="timeline" style="border:none;background:transparent;border-radius:0">
+            <div class="tRow">
+              <div><div class="time">16:30–19:30</div><div class="meta">移動</div></div>
+              <div><div class="place">阿蘇 → 福岡市區</div><div class="meta">行車約 3 小時（含休息站）｜首選休息站：玖珠 SA（上り）｜備選：山田 SA（上り）</div></div>
+            </div>
+            <div class="tRow">
+              <div><div class="time">19:30</div></div>
+              <div>
+                <div class="place"><span class="act">還車</span>Budget Rent-a-car Tenjin-kita</div>
+                <div class="meta"><span class="act">入住</span>🏨 Cross Life 博多柳橋</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </details>
+
+      <details style="margin-top:12px">
+        <summary><span class="sumText">🅱️ 方案 B｜阿蘇火山 → 太宰府 → 福岡</span><span class="chev">⌄</span></summary>
+        <div class="content">
+
+          <div class="timeline" style="border:none;background:transparent;border-radius:0">
+            <div class="tRow">
+              <div><div class="time">09:00</div><div class="meta">出發</div></div>
+              <div>
+                <div class="place">Kamenoi Hotel Aso</div>
+                <div class="meta">退房後出發，行李上車</div>
+              </div>
+            </div>
+            <div class="tRow">
+              <div><div class="time">09:40–10:30</div></div>
+              <div>
+                <div class="place">阿蘇火山（中岳）</div>
+                <div class="meta">Kamenoi Hotel Aso 出發後行車約 25–35 分鐘，含停車緩衝抓 40–50 分鐘<br>停約 45–60 分鐘｜⚠️ 需視當日開放與火山警戒狀況</div>
               </div>
             </div>
 
-            <div class="tRow tRow--full" style="padding:6px 12px;">
-              <div class="galleryWrap" aria-label="柳橋連合市場｜食堂光 照片" style="margin-top:0">
-                <p class="galleryTitle">📷 柳橋連合市場｜食堂 光</p>
+            <div class="galleryWrap" aria-label="阿蘇火山（中岳） 照片">
+              <p class="galleryTitle">📷 阿蘇火山（中岳）</p>
+              <div class="galleryRow" role="list">
+                <div class="gItem" role="listitem" data-caption="中岳火山口"><img loading="lazy" src="day4/10.jpg" data-full="day4/10.jpg" alt="中岳火山口"></div>
+                <div class="gItem" role="listitem" data-caption="中岳火山口全景"><img loading="lazy" src="day4/11.jpg" data-full="day4/11.jpg" alt="中岳火山口全景"></div>
+                <div class="gItem" role="listitem" data-caption="火山口噴氣"><img loading="lazy" src="day4/12.jpg" data-full="day4/12.jpg" alt="火山口噴氣"></div>
+              </div>
+            </div>
+
+            <div class="links" style="margin-top:10px">
+              <a class="btn" href="day4/%E9%98%BF%E8%98%87%E4%B8%AD%E5%B2%B3%E7%81%AB%E5%B1%B1%E5%8F%A3%E5%8F%83%E8%A7%80.pdf" target="_blank" rel="noopener">📄 阿蘇中岳火山口參觀（PDF）</a>
+            </div>
+
+            <details style="margin-top:10px">
+              <summary><span class="sumText">午餐・咖啡選擇</span><span class="chev">⌄</span></summary>
+              <div class="content">
+                <p style="margin:0 0 6px;font-weight:700">🍽 在阿蘇火山周邊</p>
+                <p style="margin:6px 0 6px;font-weight:700">⭐ 景觀餐廳／正餐</p>
+                <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
+                  <li><strong>草千里レストハウス</strong>｜就在草千里旁，定食、烏龍麵、咖哩為主；景觀最好、動線最順。</li>
+                  <li><strong>火の山かふぇ</strong>｜在地食材定食，位置在高原地帶，用餐時可欣賞開闊山景。</li>
+                </ul>
+
+                <p style="margin:10px 0 6px;font-weight:700">☕ 咖啡／輕食休息</p>
+                <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
+                  <li><strong>カフェ・スヴニール（Cafe Souvenir）</strong>｜草千里附近，咖啡、甜點為主，適合火山後短暫放空。</li>
+                  <li><strong>ASO MILK FACTORY（阿部牧場）</strong>｜牛乳、霜淇淋、輕食；不想吃正餐時的保險選項。</li>
+                </ul>
+
+                <p style="margin:12px 0 6px;font-weight:700">🍽 阿蘇市區</p>
+                <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
+                  <li><strong>赤牛丼／赤牛定食</strong>：阿蘇最代表性的在地選擇（路邊店很多，現場看候位決定）。</li>
+                  <li><strong>定食／蕎麥麵</strong>：想吃清爽、速度快就選定食或蕎麥。</li>
+                </ul>
+              </div>
+            </details>
+
+            <div class="timeline" style="border:none;background:transparent;border-radius:0">
+              <div class="tRow">
+                <div><div class="time">13:00–15:00</div><div class="meta">移動</div></div>
+                <div><div class="place">阿蘇 → 太宰府</div><div class="meta">行車約 2–2.5 小時（含休息）｜建議停靠：玖珠 SA（上り）｜備選：山田 SA（上り）</div></div>
+              </div>
+
+              <div class="tRow">
+                <div><div class="time">15:00–16:30</div><div class="meta">參拜</div></div>
+                <div>
+                  <div class="place">太宰府天滿宮</div>
+                  <div class="meta">太宰府天滿宮是日本最重要的神社之一，主祭神是菅原道真，又名「天神」，即學問、文化及藝術之神。<br>建議停車：太宰府市營停車場。</div>
+                </div>
+              </div>
+
+              <div class="galleryWrap" aria-label="太宰府天滿宮 照片">
+                <p class="galleryTitle">📷 太宰府天滿宮・表參道散策</p>
+                <div class="galleryRow" role="list">
+                  <div class="gItem" role="listitem" data-caption="太宰府天滿宮樓門"><img loading="lazy" src="day4/13.jpg" data-full="day4/13.jpg" alt="太宰府天滿宮樓門"></div>
+                  <div class="gItem" role="listitem" data-caption="境內梅花與心字池"><img loading="lazy" src="day4/14.jpg" data-full="day4/14.jpg" alt="境內梅花與心字池"></div>
+                  <div class="gItem" role="listitem" data-caption="御神牛"><img loading="lazy" src="day4/15.jpg" data-full="day4/15.jpg" alt="御神牛"></div>
+                  <div class="gItem" role="listitem" data-caption="隈研吾設計的星巴克"><img loading="lazy" src="day4/16.jpg" data-full="day4/16.jpg" alt="隈研吾設計的星巴克"></div>
+                  <div class="gItem" role="listitem" data-caption="全國唯一的五角合格碗一蘭"><img loading="lazy" src="day4/17.jpg" data-full="day4/17.jpg" alt="全國唯一的五角合格碗一蘭"></div>
+                  <div class="gItem" role="listitem" data-caption="太宰府天滿宮境內導覽圖"><img loading="lazy" src="day4/神社境內地圖.jpg" data-full="day4/神社境內地圖.jpg" alt="太宰府天滿宮境內導覽圖"></div>
+                  <div class="gItem" role="listitem" data-caption="太宰府周邊散策"><img loading="lazy" src="day4/散策.jpg" data-full="day4/散策.jpg" alt="太宰府散策動線示意"></div>
+                </div>
+              </div>
+
+              <div class="tRow">
+                <div><div class="time">17:30–18:30</div><div class="meta">移動</div></div>
+                <div><div class="place">太宰府 → 福岡市區</div></div>
+              </div>
+              <div class="tRow">
+                <div><div class="time">19:30</div></div>
+                <div>
+                  <div class="place"><span class="act">還車</span>Budget Rent-a-car Tenjin-kita</div>
+                  <div class="meta"><span class="act">入住</span>🏨 Cross Life 博多柳橋</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </details>
+
+      </div>
+
+      <div class="links" style="margin-top:12px">
+        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E4%B8%8A%E8%89%B2%E8%A6%8B%E7%86%8A%E9%87%8E%E5%BA%A7%E7%A5%9E%E7%A4%BE&travelmode=driving">🚗 導航｜上色見熊野座神社</a>
+        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E7%99%BD%E5%B7%9D%E6%B0%B4%E6%BA%90&travelmode=driving">🚗 導航｜白川水源</a>
+        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E9%98%BF%E8%98%87%E4%B8%AD%E5%B2%B3%E7%81%AB%E5%B1%B1%E5%8F%A3&travelmode=driving">🌋 導航｜阿蘇火山（中岳）</a>
+        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E8%8D%89%E5%8D%83%E9%87%8C%E3%83%B6%E6%B5%9C&travelmode=driving">🚗 導航｜草千里ヶ浜</a>
+        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E5%B1%B1%E7%94%B0%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%A8%E3%83%AA%E3%82%A2%20%28%E4%B8%8A%E3%82%8A%29&travelmode=driving">🚗 休息站｜山田SA（建議）</a>
+        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E7%8E%96%E7%8F%A0%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%A8%E3%83%AA%E3%82%A2%20%28%E4%B8%8A%E3%82%8A%29&travelmode=driving">🚗 休息站｜玖珠SA（次要）</a>
+        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E5%A4%AA%E5%AE%B0%E5%BA%9C%E5%A4%A9%E6%BB%BF%E5%AE%AE&travelmode=driving">⛩️ 導航｜太宰府天滿宮</a>
+        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Cross%20Life%20%E5%8D%9A%E5%A4%9A%E6%9F%B3%E6%A9%8B&travelmode=driving">🏨 導航｜Cross Life 博多柳橋</a>
+        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Budget%20Rent-a-car%20Tenjin-kita&travelmode=driving">🚗 導航｜Budget Rent-a-car Tenjin-kita</a>
+      </div>
+
+    </div></div>
+</section>
+
+<section class="panel" id="day5" role="tabpanel" aria-label="Day 5 行程">
+  <div class="dayHeader">
+    <div class="dayTitle"><div class="num">5</div><div class="tblock"><h2>福岡市區散步｜天神・博多</h2></div></div>
+    <div class="dayHeaderRight"><div class="dayDateRight">03/27（五）</div></div>
+  </div>
+  <div class="dayBody"><div class="content">
+
+    <div class="timeline">
+
+      <div class="tRow">
+        <div><div class="time">10:00</div><div class="meta">早／午餐</div></div>
+        <div>
+          <div class="place">柳橋連合市場｜食堂 光
+            <a href="https://www.instagram.com/shokudou_mitsu/" target="_blank" rel="noopener" style="margin-left:10px;color:#2563eb;font-weight:600;font-size:13px;">IG</a>
+            <a href="https://reurl.cc/9WzmyY" target="_blank" rel="noopener" style="margin-left:10px;color:#2563eb;font-weight:600;font-size:13px;">訂位/只能訂PM5:30以後</a>
+          </div>
+          <div class="meta">在地市場食堂，以新鮮海鮮定食、生魚片丼為主；10點開始營業，9點多可以先到店門口的候位表填寫資料。</div>
+        </div>
+      </div>
+
+      <div class="tRow tRow--full" style="padding:6px 12px;">
+        <div class="galleryWrap" aria-label="柳橋連合市場｜食堂光 照片" style="margin-top:0">
+          <p class="galleryTitle">📷 柳橋連合市場｜食堂 光</p>
+          <div class="galleryRow galleryRow--flush" role="list">
+            <div class="gItem" role="listitem" data-caption="柳橋連合市場 外觀"><img loading="lazy" src="day5/01.jpg" data-full="day5/01.jpg" alt="柳橋連合市場 外觀"></div>
+            <div class="gItem" role="listitem" data-caption="市場內部"><img loading="lazy" src="day5/02.jpg" data-full="day5/02.jpg" alt="市場內部"></div>
+            <div class="gItem" role="listitem" data-caption="海鮮攤位"><img loading="lazy" src="day5/03.jpg" data-full="day5/03.jpg" alt="海鮮攤位"></div>
+            <div class="gItem" role="listitem" data-caption="食堂 光 外觀"><img loading="lazy" src="day5/04.jpg" data-full="day5/04.jpg" alt="食堂 光 外觀"></div>
+            <div class="gItem" role="listitem" data-caption="海鮮丼定食"><img loading="lazy" src="day5/05.jpg" data-full="day5/05.jpg" alt="海鮮丼定食"></div>
+            <div class="gItem" role="listitem" data-caption="豪華鮪魚丼"><img loading="lazy" src="day5/06.jpg" data-full="day5/06.jpg" alt="豪華鮪魚丼"></div>
+            <div class="gItem" role="listitem" data-caption="午間菜單"><img loading="lazy" src="day5/07.jpg" data-full="day5/07.jpg" alt="午間菜單"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tRow tRow--full" style="padding:6px 12px;border-bottom:0">
+        <div style="margin:0">
+          <details style="margin-top:0;">
+            <summary style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;">
+              <span style="font-weight:800;font-size:16px;">往櫛田神社、冷泉公園、真言宗 東長寺 →</span>
+              <span class="chev">⌄</span>
+            </summary>
+            <div class="content" style="padding-top:0">
+
+              <div style="margin-top:10px; line-height:1.7; font-size:14px;">
+                🚶‍♂️ 步行　經春吉街區－位於天神與博多之間，在地生活氣息濃厚的巷弄小店與靜謐住宅區。距離約 1.5 公里／步行時間約 20–25 分鐘。<br>
+                🚌 公車　／　🚇 地鐵　／　🚕 計程車
+              </div>
+
+              <div class="tRow" style="padding-left:0;padding-right:0">
+                <div><div class="time">11:20</div></div>
+                <div>
+                  <div class="place">櫛田神社</div>
+                  <div class="meta">擁有古老歷史的櫛田神社為博多總鎮守(守護神)，以櫛田桑的暱稱受當地居民愛戴。櫻花數量不多屬於點綴型，垂櫻與八重櫻在滿開時在傳統建築的襯托下非常精緻。</div>
+                </div>
+              </div>
+
+              <div class="tRow tRow--full" style="padding-left:0;padding-right:0">
+                <div class="galleryWrap" aria-label="櫛田神社 照片" style="margin-top:0">
+                  <p class="galleryTitle">📷 櫛田神社</p>
+                  <div class="galleryRow galleryRow--flush" role="list">
+                    <div class="gItem" role="listitem" data-caption="櫛田神社鳥居與櫻花"><img loading="lazy" src="day5/08.jpg" data-full="day5/08.jpg" alt="櫛田神社鳥居與櫻花"></div>
+                    <div class="gItem" role="listitem" data-caption="如同柳樹枝條般向下垂落的垂櫻"><img loading="lazy" src="day5/09.jpg" data-full="day5/09.jpg" alt="如同柳樹枝條般向下垂落的枝垂櫻"></div>
+                    <div class="gItem" role="listitem" data-caption="五瓣品種，樹齡可達數百年以上"><img loading="lazy" src="day5/10.jpg" data-full="day5/10.jpg" alt="五瓣品種，樹齡可達數百年以上"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tRow" style="padding-left:0;padding-right:0">
+                <div><div class="time">11:50</div></div>
+                <div>
+                  <div class="place">冷泉公園</div>
+                  <div class="meta">神社旁的小型市區公園，櫻花以吉野櫻居多，櫻花盛開的時候，許多人會坐在櫻花樹下野餐。</div>
+                </div>
+              </div>
+
+              <div class="tRow tRow--full" style="padding-left:0;padding-right:0">
+                <div class="galleryWrap" aria-label="冷泉公園 照片" style="margin-top:0">
+                  <p class="galleryTitle">📷 冷泉公園</p>
+                  <div class="galleryRow galleryRow--flush" role="list">
+                    <div class="gItem" role="listitem" data-caption="櫻花步道"><img loading="lazy" src="day5/11.jpg" data-full="day5/11.jpg" alt="冷泉公園櫻花步道"></div>
+                    <div class="gItem" role="listitem" data-caption="鐘塔與櫻花"><img loading="lazy" src="day5/12.jpg" data-full="day5/12.jpg" alt="冷泉公園鐘塔與櫻花"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tRow" style="padding-left:0;padding-right:0">
+                <div><div class="time">12:10</div></div>
+                <div>
+                  <div class="place">真言宗 東長寺</div>
+                  <div class="meta">可參拜日本最大木造坐像的佛像(高10.8ｍ，重30t)及體驗地獄極樂巡禮，費用約為 ¥100-¥300、觀賞櫻花。</div>
+                </div>
+              </div>
+
+              <div class="tRow tRow--full" style="padding-left:0;padding-right:0">
+                <div class="galleryWrap" aria-label="真言宗 東長寺 照片" style="margin-top:0">
+                  <p class="galleryTitle">📷 真言宗 東長寺</p>
+                  <div class="galleryRow galleryRow--flush" role="list">
+                    <div class="gItem" role="listitem" data-caption="福岡大佛"><img loading="lazy" src="day5/13.jpg" data-full="day5/13.jpg" alt="福岡大佛"></div>
+                    <div class="gItem" role="listitem" data-caption="東長寺入口超大櫻花樹"><img loading="lazy" src="day5/14.jpg" data-full="day5/14.jpg" alt="東長寺入口超大櫻花樹"></div>
+                    <div class="gItem" role="listitem" data-caption="五重塔與櫻花"><img loading="lazy" src="day5/15.jpg" data-full="day5/15.jpg" alt="五重塔與櫻花"></div>
+                    <div class="gItem" role="listitem" data-caption="櫻花與五重塔"><img loading="lazy" src="day5/16.jpg" data-full="day5/16.jpg" alt="櫻花與五重塔"></div>
+                    <div class="gItem" role="listitem" data-caption="櫻花特寫"><img loading="lazy" src="day5/17.jpg" data-full="day5/17.jpg" alt="櫻花特寫"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="noteTransit">
+                🚇 <strong>真言宗 東長寺 → 天神地下街：</strong><br>
+                由「祇園站」（空港線）搭乘 1 站至「天神站」，約 5 分鐘（210 円）。
+              </div>
+
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <div class="tRow tRow--full" style="padding:6px 12px;">
+        <div style="margin:0">
+          <details style="margin-top:0;">
+            <summary style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;">
+              <span style="font-weight:800;font-size:16px;">往舞鶴公園／福岡城跡 →</span>
+              <span class="chev">⌄</span>
+            </summary>
+            <div class="content" style="padding-top:0">
+
+              <div class="noteTransit--tight">
+                <div>搭乘公車／地鐵步行時間仍長，進入公園也要走，故直接搭乘計程車 🚕。</div>
+                <div>行車時間：約 12–20 分／費用：約 1500–2000 円（實際依交通、時間略有差）</div>
+              </div>
+
+              <div class="tRow" style="padding-left:0;padding-right:0">
+                <div><div class="time">11:30</div></div>
+                <div>
+                  <div class="place">舞鶴公園
+                    <a href="https://www-midorimachi-jp.translate.goog/maiduru/?_x_tr_sl=ja&_x_tr_tl=zh-TW&_x_tr_hl=ja" target="_blank" rel="noopener" style="margin-left:10px;font-size:13px;font-weight:600;color:#2563eb;">官網</a>
+                  </div>
+                  <div class="meta">以福岡城址為其象徵，自然景色四季分明，1000顆櫻花是福岡市內賞櫻最為知名的公園。園內並設有田徑場等運動設施，鄰接大濠公園和福岡市立美術館。2026預估「 」開花、「 」盛開｜夜間點燈：2026/ / 開始</div>
+                </div>
+              </div>
+
+              <div class="tRow tRow--full" style="padding-left:0;padding-right:0">
+                <div class="galleryWrap" aria-label="舞鶴公園／福岡城跡 照片" style="margin-top:0">
+                  <p class="galleryTitle">📷 舞鶴公園／福岡城跡</p>
+                  <div class="galleryRow galleryRow--flush" role="list">
+                    <div class="gItem" role="listitem" data-caption="舞鶴公園櫻花地圖（PDF）">
+                      <a href="day5/舞鶴公園櫻花地圖.pdf" target="_blank" rel="noopener">
+                        <img loading="lazy" src="day5/18.jpg" alt="舞鶴公園櫻花地圖">
+                      </a>
+                    </div>
+                    <div class="gItem" role="listitem" data-caption="櫻花步道"><img loading="lazy" src="day5/19.jpg" data-full="day5/19.jpg" alt="櫻花步道"></div>
+                    <div class="gItem" role="listitem" data-caption="舞鶴公園草地"><img loading="lazy" src="day5/20.jpg" data-full="day5/20.jpg" alt="舞鶴公園草地"></div>
+                    <div class="gItem" role="listitem" data-caption="福岡城跡"><img loading="lazy" src="day5/21.jpg" data-full="day5/21.jpg" alt="福岡城跡"></div>
+                    <div class="gItem" role="listitem" data-caption="櫻花與城跡"><img loading="lazy" src="day5/22.jpg" data-full="day5/22.jpg" alt="櫻花與城跡"></div>
+                    <div class="gItem" role="listitem" data-caption="公園遠景"><img loading="lazy" src="day5/23.jpg" data-full="day5/23.jpg" alt="公園遠景"></div>
+                    <div class="gItem" role="listitem" data-caption="櫻花開放日期預測"><img loading="lazy" src="day5/24.jpg" data-full="day5/24.jpg" alt="城跡高處視角"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="noteTransit">
+                🚇 <strong>舞鶴公園 → 天神地下街：</strong><br>
+                由「赤坂站」（空港線）搭乘 1 站至「天神站」，約 5 分鐘（210 円）。步行約 15–20 分鐘。
+              </div>
+
+              <div class="desc">
+                🔎 <strong>補充：</strong>
+                可順遊 <strong>大濠公園</strong>（與舞鶴公園相連，步行約 5–10 分鐘）。
+                最美湖景星巴克／草間彌生的南瓜。
+              </div>
+
+              <div class="galleryWrap" aria-label="大濠公園 照片" style="margin-top:12px">
+                <p class="galleryTitle">📷 大濠公園</p>
                 <div class="galleryRow galleryRow--flush" role="list">
-                  <div class="gItem" role="listitem" data-caption="柳橋連合市場 外觀"><img loading="lazy" src="day5/01.jpg" data-full="day5/01.jpg" alt="柳橋連合市場 外觀"></div>
-                  <div class="gItem" role="listitem" data-caption="市場內部"><img loading="lazy" src="day5/02.jpg" data-full="day5/02.jpg" alt="市場內部"></div>
-                  <div class="gItem" role="listitem" data-caption="海鮮攤位"><img loading="lazy" src="day5/03.jpg" data-full="day5/03.jpg" alt="海鮮攤位"></div>
-                  <div class="gItem" role="listitem" data-caption="食堂 光 外觀"><img loading="lazy" src="day5/04.jpg" data-full="day5/04.jpg" alt="食堂 光 外觀"></div>
-                  <div class="gItem" role="listitem" data-caption="海鮮丼定食"><img loading="lazy" src="day5/05.jpg" data-full="day5/05.jpg" alt="海鮮丼定食"></div>
-                  <div class="gItem" role="listitem" data-caption="豪華鮪魚丼"><img loading="lazy" src="day5/06.jpg" data-full="day5/06.jpg" alt="豪華鮪魚丼"></div>
-                  <div class="gItem" role="listitem" data-caption="午間菜單"><img loading="lazy" src="day5/07.jpg" data-full="day5/07.jpg" alt="午間菜單"></div>
+                  <div class="gItem" role="listitem" data-caption="大濠公園地圖"><img loading="lazy" src="day5/25.jpg" data-full="day5/25.jpg" alt="大濠公園地圖"></div>
+                  <div class="gItem" role="listitem" data-caption="湖畔步道"><img loading="lazy" src="day5/26.jpg" data-full="day5/26.jpg" alt="湖畔步道"></div>
+                  <div class="gItem" role="listitem" data-caption="春日湖景"><img loading="lazy" src="day5/27.jpg" data-full="day5/27.jpg" alt="春日湖景"></div>
+                  <div class="gItem" role="listitem" data-caption="舞鶴橋景色"><img loading="lazy" src="day5/28.jpg" data-full="day5/28.jpg" alt="舞鶴橋景色"></div>
+                  <div class="gItem" role="listitem" data-caption="湖景星巴克"><img loading="lazy" src="day5/29.jpg" data-full="day5/29.jpg" alt="湖景星巴克"></div>
+                  <div class="gItem" role="listitem" data-caption="星巴克窗景"><img loading="lazy" src="day5/30.jpg" data-full="day5/30.jpg" alt="星巴克窗景"></div>
+                  <div class="gItem" role="listitem" data-caption="草間彌生南瓜"><img loading="lazy" src="day5/31.jpg" data-full="day5/31.jpg" alt="草間彌生南瓜"></div>
                 </div>
               </div>
-            </div>
 
-            <div class="tRow tRow--full" style="padding:6px 12px;border-bottom:0">
-              <details style="margin-top:0;">
-                <summary style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;">
-                  <span style="font-weight:800;font-size:16px;">往櫛田神社、冷泉公園、真言宗 東長寺 →</span>
-                  <span class="chev">⌄</span>
-                </summary>
-                <div class="content" style="padding-top:0">
-
-                  <div style="margin-top:10px; line-height:1.7; font-size:14px;">
-                    🚶‍♂️ 步行　經春吉街區－位於天神與博多之間，在地生活氣息濃厚的巷弄小店與靜謐住宅區。距離約 1.5 公里／步行時間約 20–25 分鐘。<br>
-                    🚌 公車　／　🚇 地鐵　／　🚕 計程車
-                  </div>
-
-                  <div class="tRow" style="padding-left:0;padding-right:0">
-                    <div><div class="time">11:20</div></div>
-                    <div>
-                      <div class="place">櫛田神社</div>
-                      <div class="meta">擁有古老歷史的櫛田神社為博多總鎮守(守護神)，以櫛田桑的暱稱受當地居民愛戴。櫻花數量不多屬於點綴型，垂櫻與八重櫻在滿開時在傳統建築的襯托下非常精緻。</div>
-                    </div>
-                  </div>
-
-                  <div class="tRow tRow--full" style="padding-left:0;padding-right:0">
-                    <div class="galleryWrap" aria-label="櫛田神社 照片" style="margin-top:0">
-                      <p class="galleryTitle">📷 櫛田神社</p>
-                      <div class="galleryRow galleryRow--flush" role="list">
-                        <div class="gItem" role="listitem" data-caption="櫛田神社鳥居與櫻花"><img loading="lazy" src="day5/08.jpg" data-full="day5/08.jpg" alt="櫛田神社鳥居與櫻花"></div>
-                        <div class="gItem" role="listitem" data-caption="如同柳樹枝條般向下垂落的垂櫻"><img loading="lazy" src="day5/09.jpg" data-full="day5/09.jpg" alt="如同柳樹枝條般向下垂落的枝垂櫻"></div>
-                        <div class="gItem" role="listitem" data-caption="五瓣品種，樹齡可達數百年以上"><img loading="lazy" src="day5/10.jpg" data-full="day5/10.jpg" alt="五瓣品種，樹齡可達數百年以上"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="tRow" style="padding-left:0;padding-right:0">
-                    <div><div class="time">11:50</div></div>
-                    <div>
-                      <div class="place">冷泉公園</div>
-                      <div class="meta">神社旁的小型市區公園，櫻花以吉野櫻居多，櫻花盛開的時候，許多人會坐在櫻花樹下野餐。</div>
-                    </div>
-                  </div>
-
-                  <div class="tRow tRow--full" style="padding-left:0;padding-right:0">
-                    <div class="galleryWrap" aria-label="冷泉公園 照片" style="margin-top:0">
-                      <p class="galleryTitle">📷 冷泉公園</p>
-                      <div class="galleryRow galleryRow--flush" role="list">
-                        <div class="gItem" role="listitem" data-caption="櫻花步道"><img loading="lazy" src="day5/11.jpg" data-full="day5/11.jpg" alt="冷泉公園櫻花步道"></div>
-                        <div class="gItem" role="listitem" data-caption="鐘塔與櫻花"><img loading="lazy" src="day5/12.jpg" data-full="day5/12.jpg" alt="冷泉公園鐘塔與櫻花"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="tRow" style="padding-left:0;padding-right:0">
-                    <div><div class="time">12:10</div></div>
-                    <div>
-                      <div class="place">真言宗 東長寺</div>
-                      <div class="meta">可參拜日本最大木造坐像的佛像(高10.8ｍ，重30t)及體驗地獄極樂巡禮，費用約為 ¥100-¥300、觀賞櫻花。</div>
-                    </div>
-                  </div>
-
-                  <div class="tRow tRow--full" style="padding-left:0;padding-right:0">
-                    <div class="galleryWrap" aria-label="真言宗 東長寺 照片" style="margin-top:0">
-                      <p class="galleryTitle">📷 真言宗 東長寺</p>
-                      <div class="galleryRow galleryRow--flush" role="list">
-                        <div class="gItem" role="listitem" data-caption="福岡大佛"><img loading="lazy" src="day5/13.jpg" data-full="day5/13.jpg" alt="福岡大佛"></div>
-                        <div class="gItem" role="listitem" data-caption="東長寺入口超大櫻花樹"><img loading="lazy" src="day5/14.jpg" data-full="day5/14.jpg" alt="東長寺入口超大櫻花樹"></div>
-                        <div class="gItem" role="listitem" data-caption="五重塔與櫻花"><img loading="lazy" src="day5/15.jpg" data-full="day5/15.jpg" alt="五重塔與櫻花"></div>
-                        <div class="gItem" role="listitem" data-caption="櫻花與五重塔"><img loading="lazy" src="day5/16.jpg" data-full="day5/16.jpg" alt="櫻花與五重塔"></div>
-                        <div class="gItem" role="listitem" data-caption="櫻花特寫"><img loading="lazy" src="day5/17.jpg" data-full="day5/17.jpg" alt="櫻花特寫"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="noteTransit">
-                    🚇 <strong>真言宗 東長寺 → 天神地下街：</strong><br>
-                    由「祇園站」（空港線）搭乘 1 站至「天神站」，約 5 分鐘（210 円）。
-                  </div>
-
-                </div>
-              </details>
-            </div>
-
-            <div class="tRow tRow--full" style="padding:6px 12px;">
-              <details style="margin-top:0;">
-                <summary style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;">
-                  <span style="font-weight:800;font-size:16px;">往舞鶴公園／福岡城跡 →</span>
-                  <span class="chev">⌄</span>
-                </summary>
-                <div class="content" style="padding-top:0">
-
-                  <div class="noteTransit--tight">
-                    <div>搭乘公車／地鐵步行時間仍長，進入公園也要走，故直接搭乘計程車 🚕。</div>
-                    <div>行車時間：約 12–20 分／費用：約 1500–2000 円（實際依交通、時間略有差）</div>
-                  </div>
-
-                  <div class="tRow" style="padding-left:0;padding-right:0">
-                    <div><div class="time">11:30</div></div>
-                    <div>
-                      <div class="place">舞鶴公園
-                        <a href="https://www-midorimachi-jp.translate.goog/maiduru/?_x_tr_sl=ja&_x_tr_tl=zh-TW&_x_tr_hl=ja" target="_blank" rel="noopener" style="margin-left:10px;font-size:13px;font-weight:600;color:#2563eb;">官網</a>
-                      </div>
-                      <div class="meta">以福岡城址為其象徵，自然景色四季分明，1000顆櫻花是福岡市內賞櫻最為知名的公園。園內並設有田徑場等運動設施，鄰接大濠公園和福岡市立美術館。2026預估「 」開花、「 」盛開｜夜間點燈：2026/ / 開始</div>
-                    </div>
-                  </div>
-
-                  <div class="tRow tRow--full" style="padding-left:0;padding-right:0">
-                    <div class="galleryWrap" aria-label="舞鶴公園／福岡城跡 照片" style="margin-top:0">
-                      <p class="galleryTitle">📷 舞鶴公園／福岡城跡</p>
-                      <div class="galleryRow galleryRow--flush" role="list">
-                        <div class="gItem" role="listitem" data-caption="舞鶴公園櫻花地圖（PDF）">
-                          <a href="day5/舞鶴公園櫻花地圖.pdf" target="_blank" rel="noopener" style="display:block;width:100%;height:100%">
-                            <img loading="lazy" src="day5/18.jpg" alt="舞鶴公園櫻花地圖" data-no-lightbox="1">
-                          </a>
-                        </div>
-                        <div class="gItem" role="listitem" data-caption="櫻花步道"><img loading="lazy" src="day5/19.jpg" data-full="day5/19.jpg" alt="櫻花步道"></div>
-                        <div class="gItem" role="listitem" data-caption="舞鶴公園草地"><img loading="lazy" src="day5/20.jpg" data-full="day5/20.jpg" alt="舞鶴公園草地"></div>
-                        <div class="gItem" role="listitem" data-caption="福岡城跡"><img loading="lazy" src="day5/21.jpg" data-full="day5/21.jpg" alt="福岡城跡"></div>
-                        <div class="gItem" role="listitem" data-caption="櫻花與城跡"><img loading="lazy" src="day5/22.jpg" data-full="day5/22.jpg" alt="櫻花與城跡"></div>
-                        <div class="gItem" role="listitem" data-caption="公園遠景"><img loading="lazy" src="day5/23.jpg" data-full="day5/23.jpg" alt="公園遠景"></div>
-                        <div class="gItem" role="listitem" data-caption="櫻花開放日期預測"><img loading="lazy" src="day5/24.jpg" data-full="day5/24.jpg" alt="櫻花開放日期預測"></div>
-                      </div>
-                    </div>
-
-                    <div class="noteTransit">
-                      🚇 <strong>舞鶴公園 → 天神地下街：</strong><br>
-                      由「赤坂站」（空港線）搭乘 1 站至「天神站」，約 5 分鐘（210 円）。步行約 15–20 分鐘。
-                    </div>
-
-                    <div class="desc">
-                      🔎 <strong>補充：</strong>
-                      可順遊 <strong>大濠公園</strong>（與舞鶴公園相連，步行約 5–10 分鐘）。
-                      最美湖景星巴克／草間彌生的南瓜。
-                    </div>
-
-                    <div class="galleryWrap" aria-label="大濠公園 照片" style="margin-top:12px">
-                      <p class="galleryTitle">📷 大濠公園</p>
-                      <div class="galleryRow galleryRow--flush" role="list">
-                        <div class="gItem" role="listitem" data-caption="大濠公園地圖"><img loading="lazy" src="day5/25.jpg" data-full="day5/25.jpg" alt="大濠公園地圖"></div>
-                        <div class="gItem" role="listitem" data-caption="湖畔步道"><img loading="lazy" src="day5/26.jpg" data-full="day5/26.jpg" alt="湖畔步道"></div>
-                        <div class="gItem" role="listitem" data-caption="春日湖景"><img loading="lazy" src="day5/27.jpg" data-full="day5/27.jpg" alt="春日湖景"></div>
-                        <div class="gItem" role="listitem" data-caption="舞鶴橋景色"><img loading="lazy" src="day5/28.jpg" data-full="day5/28.jpg" alt="舞鶴橋景色"></div>
-                        <div class="gItem" role="listitem" data-caption="湖景星巴克"><img loading="lazy" src="day5/29.jpg" data-full="day5/29.jpg" alt="湖景星巴克"></div>
-                        <div class="gItem" role="listitem" data-caption="星巴克窗景"><img loading="lazy" src="day5/30.jpg" data-full="day5/30.jpg" alt="星巴克窗景"></div>
-                        <div class="gItem" role="listitem" data-caption="草間彌生南瓜"><img loading="lazy" src="day5/31.jpg" data-full="day5/31.jpg" alt="草間彌生南瓜"></div>
-                      </div>
-                    </div>
-
-                    <div class="noteTransit">
-                      🚇 <strong>大濠公園 → 天神地下街：</strong><br>
-                      由「大濠公園站」（空港線）搭乘 1 站至「天神站」，約 3 分鐘（210 円）。出站後可直接銜接天神地下街。<br>
-                      🚶‍♂️ 步行：約 1.8–2 公里／約 25–30 分鐘。<br>
-                      🚕 計程車：約 10–15 分鐘／約 1200–1800 円（依交通狀況略有差異）。
-                    </div>
-
-                  </div>
-                </details>
+              <div class="noteTransit">
+                🚇 <strong>大濠公園 → 天神地下街：</strong><br>
+                由「大濠公園站」（空港線）搭乘 1 站至「天神站」，約 3 分鐘（210 円）。出站後可直接銜接天神地下街。<br>
+                🚶‍♂️ 步行：約 1.8–2 公里／約 25–30 分鐘。<br>
+                🚕 計程車：約 10–15 分鐘／約 1200–1800 円（依交通狀況略有差異）。
               </div>
+
             </div>
-
-            <!-- 🛍 天神站附近逛街地圖（取消時間軸左欄，改單欄同層） -->
-            <div class="tRow tRow--full">
-              <div>
-                <div class="place">🛍 天神站附近｜逛街地圖</div>
-                <div class="meta">以天神地下街為起點：天神地下街 → PARCO → Solaria Plaza → 三越 → 大丸。</div>
-
-                📍 <strong>天神地下街</strong>：地下商店街，雨天好走，藥妝／雜貨／伴手禮齊全，連接各大百貨。<br>
-                🛍 <strong>PARCO（天神）</strong>：年輕潮流感強，動漫聯名、Loft、無印良品，流行品牌多。<br>
-                🛍 <strong>Solaria Plaza</strong>：設計感與質感路線，女裝品牌多，咖啡廳好坐。<br>
-                🛍 <strong>福岡三越</strong>：傳統高級百貨，精品與地下美食街、禮盒伴手禮選擇多。<br>
-                🛍 <strong>大丸天神</strong>：穩重型百貨，地下食品區很強，甜點熟食好買。
-
-                <div class="links" style="margin-top:10px; display:flex; flex-wrap:wrap; gap:8px;">
-                  <a class="btn" target="_blank" rel="noopener" href="day5/天神地下街.pdf">📄 天神地下街（PDF）</a>
-                  <a class="btn" target="_blank" rel="noopener" href="day5/百貨公司位置圖.pdf">📄 百貨公司位置圖（PDF）</a>
-
-                  <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E5%A4%A9%E7%A5%9E%E5%9C%B0%E4%B8%8B%E8%A1%97&travelmode=walking">📍 地下街</a>
-                  <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=PARCO%20Fukuoka%20Tenjin&travelmode=walking">🛍 PARCO（天神）</a>
-                  <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Solaria%20Plaza%20Fukuoka&travelmode=walking">🛍 Solaria Plaza</a>
-                  <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Fukuoka%20Mitsukoshi&travelmode=walking">🛍 三越（福岡天神）</a>
-                  <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Daimaru%20Fukuoka%20Tenjin&travelmode=walking">🛍 大丸（福岡天神）</a>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-        </div></div>
-      </section>
-
-      <!-- =================== Day 6 =================== -->
-      <section class="panel" id="day6" role="tabpanel" aria-label="Day 6 行程">
-        <div class="dayHeader">
-          <div class="dayTitle">
-            <div class="num">6</div>
-            <div class="tblock"><h2>回程｜福岡機場 → 桃園</h2></div>
-          </div>
-          <div class="dayHeaderRight"><div class="dayDateRight">03/28（六）</div></div>
+          </details>
         </div>
+      </div>
 
-        <div class="dayBody">
+      <div class="tRow tRow--full">
+        <div>
+          <div class="place">🛍 天神站附近｜逛街地圖</div>
+          <div class="meta">以天神地下街為起點：天神地下街 → PARCO → Solaria Plaza → 三越 → 大丸。</div>
+
+          <div style="margin-top:10px;line-height:1.8;font-size:14px;color:var(--text)">
+            📍 <strong>天神地下街</strong>：地下商店街，雨天好走，藥妝／雜貨／伴手禮齊全，連接各大百貨。<br>
+            🛍 <strong>PARCO（天神）</strong>：年輕潮流感強，動漫聯名、Loft、無印良品，流行品牌多。<br>
+            🛍 <strong>Solaria Plaza</strong>：設計感與質感路線，女裝品牌多，咖啡廳好坐。<br>
+            🛍 <strong>福岡三越</strong>：傳統高級百貨，精品與地下美食街、禮盒伴手禮選擇多。<br>
+            🛍 <strong>大丸天神</strong>：穩重型百貨，地下食品區很強，甜點熟食好買。
+          </div>
+
+          <div class="links" style="margin-top:10px; display:flex; flex-wrap:wrap; gap:8px;">
+            <a class="btn" target="_blank" rel="noopener" href="day5/天神地下街.pdf">📄 天神地下街（PDF）</a>
+            <a class="btn" target="_blank" rel="noopener" href="day5/百貨公司位置圖.pdf">📄 百貨公司位置圖（PDF）</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E5%A4%A9%E7%A5%9E%E5%9C%B0%E4%B8%8B%E8%A1%97&travelmode=walking">📍 地下街</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=PARCO%20Fukuoka%20Tenjin&travelmode=walking">🛍 PARCO（天神）</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Solaria%20Plaza%20Fukuoka&travelmode=walking">🛍 Solaria Plaza</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Fukuoka%20Mitsukoshi&travelmode=walking">🛍 三越（福岡天神）</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Daimaru%20Fukuoka%20Tenjin&travelmode=walking">🛍 大丸（福岡天神）</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div></div>
+</section>
+
+<section class="panel" id="day6" role="tabpanel" aria-label="Day 6 行程">
+  <div class="dayHeader">
+    <div class="dayTitle"><div class="num">6</div><div class="tblock"><h2>回程｜福岡機場 → 桃園</h2></div></div>
+    <div class="dayHeaderRight"><div class="dayDateRight">03/28（六）</div></div>
+  </div>
+  <div class="dayBody"><div class="content">
+    <div class="frame framePad">
+      <div class="timeline" style="border:none;background:transparent;border-radius:0">
+        <div class="tRow"><div><div class="time">06:00</div><div class="meta">起床</div></div><div><div class="place">飯店</div><div class="meta">退房準備／確認護照、機票、行李</div></div></div>
+        <div class="tRow"><div><div class="time">07:00</div><div class="meta">出發</div></div><div><div class="place">前往福岡機場（FUK）</div><div class="meta">預計 07:30 抵達機場</div></div></div>
+        <div class="tRow"><div><div class="time">07:30</div><div class="meta">抵達</div></div><div><div class="place">福岡機場</div><div class="meta">報到／托運／安檢</div></div></div>
+        <div class="tRow"><div><div class="time">10:55</div><div class="meta">起飛</div></div><div><div class="place">虎航 IT241</div><div class="meta">FUK → TPE</div></div></div>
+        <div class="tRow"><div><div class="time">12:40</div></div><div><div class="place">桃園國際機場（TPE）</div><div class="meta">第一航廈</div></div></div>
+      </div>
+    </div>
+    <div class="links" style="margin-top:12px">
+      <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Fukuoka%20Airport&travelmode=driving">🚗 導航｜福岡機場</a>
+    </div>
+  </div></div>
+</section>
+
+<section class="panel" id="mapcodes" role="tabpanel" aria-label="Mapcode 集中頁">
+  <div class="dayHeader">
+    <div class="dayTitle">
+      <div class="num">★</div>
+      <div class="tblock"><h2>Mapcode（車上導航用）</h2></div>
+    </div>
+    <div class="dayHeaderRight"><div class="dayDateRight"></div></div>
+  </div>
+
+  <div class="dayBody">
+    <div class="content mapPage">
+      <div class="frame framePad">
+
+        <details class="mapSection">
+          <summary><span class="sumText sumText--nowrap">Day 2｜由布院・九重</span><span class="chev">⌄</span></summary>
           <div class="content">
-
-            <div class="timeline">
-              <div class="tRow">
-                <div><div class="time">06:00</div><div class="meta">起床</div></div>
-                <div><div class="place">飯店</div><div class="meta">退房準備／確認護照、機票、行李</div></div>
-              </div>
-              <div class="tRow">
-                <div><div class="time">07:00</div><div class="meta">出發</div></div>
-                <div><div class="place">前往福岡機場（FUK）</div><div class="meta">預計 07:30 抵達機場</div></div>
-              </div>
-              <div class="tRow">
-                <div><div class="time">07:30</div><div class="meta">抵達</div></div>
-                <div><div class="place">福岡機場</div><div class="meta">報到／托運／安檢</div></div>
-              </div>
-              <div class="tRow">
-                <div><div class="time">10:55</div><div class="meta">起飛</div></div>
-                <div><div class="place">虎航 IT241</div><div class="meta">FUK → TPE</div></div>
-              </div>
-              <div class="tRow">
-                <div><div class="time">12:40</div><div class="meta">抵達</div></div>
-                <div><div class="place">桃園國際機場（TPE）</div><div class="meta">第一航廈</div></div>
-              </div>
+            <div class="mapList">
+              <div class="mapItem"><div class="mapName">山田服務區 (Yamada SA)下行 (下り)；往大分/別府方向</div><div class="mapMeta">Mapcode：<code style="font-weight:800">166 626 503*52</code><br>電話：0946-52-3103</div></div>
+              <div class="mapItem"><div class="mapName">玖珠服務區 (Kusu SA下行 (下り)；往大分/別府方向</div><div class="mapMeta">Mapcode：<code style="font-weight:800">269 095 861*85</code><br>電話：0973-72-6177</div></div>
+              <div class="mapItem"><div class="mapName">湯布院中央兒童公園</div><div class="mapMeta">Mapcode：<code style="font-weight:800">269 358 469*18</code><br>電話：0977-84-3111</div></div>
+              <div class="mapItem"><div class="mapName">湯布院停車場 (Yufuin Parking Lot / 由布院駅前)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">269 358 409*00</code><br>電話：0977-84-5559</div></div>
+              <div class="mapItem"><div class="mapName">NPC24H 湯布院湯之坪街道停車場</div><div class="mapMeta">Mapcode：<code style="font-weight:800">269 358 376*36</code><br>電話：0120-48-0015（NPC 管理中心）</div></div>
+              <div class="mapItem"><div class="mapName">金鱗湖</div><div class="mapMeta">Mapcode：<code style="font-weight:800">377 319 293*55</code><br>電話：0977-84-3111（由布市觀光案內所）</div></div>
+              <div class="mapItem"><div class="mapName">金鱗湖入口前駐車場 (Kinrinkoiriguchizen Parking Lot)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">269 359 553*20</code><br>電話：無（直接用 Mapcode 導航）</div></div>
+              <div class="mapItem"><div class="mapName">Times 湯布院金鱗湖 (Times Yufuin Lake Kinrin)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">269 359 584*77</code><br>電話：0120-72-8924（Times 管理中心）</div></div>
+              <div class="mapItem"><div class="mapName">狭霧台（展望台）</div><div class="mapMeta">Mapcode：<code style="font-weight:800">302 798 233*66</code><br>電話：0977-84-3111（由布市役所代管）</div></div>
+              <div class="mapItem"><div class="mapName">九重「夢」大吊橋</div><div class="mapMeta">Mapcode：<code style="font-weight:800">377 023 247*63</code><br>電話：0973-73-3800</div></div>
+              <div class="mapItem"><div class="mapName">瀨之本休息站 (Senomoto Rest House)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">256 599 157*11</code><br>電話：0967-44-0011</div></div>
+              <div class="mapItem"><div class="mapName">旅館華柚 (Hanayuu / Hanayoshi)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">202 209 840*77</code><br>電話：0967-46-6688</div></div>
             </div>
-
-            <div class="links" style="margin-top:12px">
-              <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Fukuoka%20Airport&travelmode=driving">✈️ 導航｜福岡機場</a>
-            </div>
-
           </div>
-        </div>
-      </section>
+        </details>
 
-      <!-- =================== Mapcodes =================== -->
-      <section class="panel" id="mapcodes" role="tabpanel" aria-label="Mapcode 集中頁">
-        <div class="dayHeader">
-          <div class="dayTitle">
-            <div class="num">★</div>
-            <div class="tblock"><h2>Mapcode（車上導航用）</h2></div>
-          </div>
-          <div class="dayHeaderRight"><div class="dayDateRight"></div></div>
-        </div>
-
-        <div class="dayBody">
+        <details class="mapSection">
+          <summary><span class="sumText sumText--nowrap">Day 3｜黑川溫泉・阿蘇</span><span class="chev">⌄</span></summary>
           <div class="content">
-          <div class="frame framePad mapPage">
+            <div class="mapList">
+              <div class="mapItem"><div class="mapName">夫妻瀑布（夫婦滝）</div><div class="mapMeta">Mapcode：<code style="font-weight:800">256 456 771*20</code><br>電話：070-2402-0012（瀑布商店）<br>電話：0967-44-0076（南小國町觀光協會）</div></div>
+              <div class="mapItem"><div class="mapName">黑川溫泉 第三停車場 (Kurokawa Onsen Parking 3)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">440 542 811*17</code><br>電話：0967-44-0076（黑川溫泉觀光旅館協同組合）</div></div>
+              <div class="mapItem"><div class="mapName">清流之森停車場 (Seiryunomori Parking Lot)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">440 542 411*62</code><br>導航電話：0967-44-0076（黑川溫泉觀光旅館協同組合）</div></div>
+              <div class="mapItem"><div class="mapName">池山水源</div><div class="mapMeta">Mapcode：<code style="font-weight:800">256 801 799*55</code><br>電話：0967-25-2211（產山村役場）</div></div>
+              <div class="mapItem"><div class="mapName">亀の井ホテル 阿蘇 (Kamenoi Hotel Aso)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">256 551 569*74</code><br>電話：0967-22-1122</div></div>
+            </div>
+          </div>
+        </details>
 
-            <details class="mapSection">
-              <summary><span class="sumText sumText--nowrap">Day 2｜由布院・九重</span><span class="chev">⌄</span></summary>
-              <div class="content">
-                <div class="mapList">
-                  <div class="mapItem">
-                    <div class="mapName">山田服務區 (Yamada SA)下行 (下り)；往大分/別府方向</div>
-                    <div class="mapMeta">Mapcode：<code style="font-weight:800">166 626 503*52</code><br>電話：0946-52-3103</div>
-                  </div>
-                  <div class="mapItem">
-                    <div class="mapName">玖珠服務區 (Kusu SA) 下行 (下り)；往大分/別府方向</div>
-                    <div class="mapMeta">Mapcode：<code style="font-weight:800">269 095 861*85</code><br>電話：0973-72-6177</div>
-                  </div>
+        <details class="mapSection">
+          <summary><span class="sumText sumText--nowrap">Day 4｜阿蘇・太宰府・博多</span><span class="chev">⌄</span></summary>
+          <div class="content">
+            <div class="mapList">
+              <div class="mapItem"><div class="mapName">上色見熊野座神社 (高森町)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">256 547 232*77</code><br>電話：0967-62-1111（高森町觀光推進機構）</div></div>
+              <div class="mapItem"><div class="mapName">白川水源 (南阿蘇村)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">256 460 589*26</code><br>電話：0967-67-1112（南阿蘇村役場）</div></div>
+              <div class="mapItem"><div class="mapName">阿蘇火山（中岳火口）</div><div class="mapMeta">Mapcode：<code style="font-weight:800">449 576 626*12</code><br>電話：0967-34-1600（阿蘇市觀光協會）</div></div>
+              <div class="mapItem"><div class="mapName">草千里ヶ濱</div><div class="mapMeta">Mapcode：<code style="font-weight:800">449 575 012*63</code><br>電話：0967-34-1600（與中岳同為阿蘇山綜合諮詢）</div></div>
+              <div class="mapItem"><div class="mapName">玖珠服務區 (Kusu SA) 上行 (上り)；往 福岡/鳥栖 方向。</div><div class="mapMeta">Mapcode：<code style="font-weight:800">269 095 561*85</code><br>電話：0973-72-6177（玖珠收費站管理處）</div></div>
+              <div class="mapItem"><div class="mapName">山田服務區 (Yamada SA) 上行 (上り)；往 福岡/鳥栖 方向。</div><div class="mapMeta">Mapcode：<code style="font-weight:800">166 626 772*85</code><br>電話：0946-52-3103（美食商場專線）</div></div>
+              <div class="mapItem"><div class="mapName">太宰府天滿宮</div><div class="mapMeta">Mapcode：<code style="font-weight:800">55 452 706*41</code><br>電話：092-922-8225（社務所代表）</div></div>
+              <div class="mapItem"><div class="mapName">Cross Life 博多柳橋 (Cross Life Hakata Yanagibashi)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">13 290 880*21</code><br>電話：092-733-3939</div></div>
+              <div class="mapItem"><div class="mapName">Budget Rent-a-car 天神北店 (天神北店)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">13 318 669*04</code><br>電話：092-752-0543</div></div>
+            </div>
+          </div>
+        </details>
 
-                  <div class="mapItem">
-                    <div class="mapName">湯布院中央兒童公園</div>
-                    <div class="mapMeta">Mapcode：<code style="font-weight:800">269 358 469*18</code><br>電話：0977-84-3111</div>
-                  </div>
-                  <div class="mapItem">
-                    <div class="mapName">湯布院停車場 (Yufuin Parking Lot / 由布院駅前)</div>
-                    <div class="mapMeta">Mapcode：<code style="font-weight:800">269 358 409*00</code><br>電話：0977-84-5559</div>
-                  </div>
-                  <div class="mapItem">
-                    <div class="mapName">NPC24H 湯布院湯之坪街道停車場</div>
-                    <div class="mapMeta">Mapcode：<code style="font-weight:800">269 358 376*36</code><br>電話：0120-48-0015（NPC 管理中心）</div>
-                  </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-                  <div class="mapItem">
-                    <div class="mapName">金鱗湖</div>
-                    <div class="mapMeta">Mapcode：<code style="font-weight:800">377 319 293*55</code><br>電話：0977-84-3111（由布市觀光案內所）</div>
-                  </div>
-                  <div class="mapItem">
-                    <div class="mapName">金鱗湖入口前駐車場 (Kinrinkoiriguchizen Parking Lot)</div>
-                    <div class="mapMeta">Mapcode：<code style="font-weight:800">269 359 553*20</code><br>電話：無（直接用 Mapcode 導航）</div>
-                  </div>
-                  <div class="mapItem">
-                    <div class="mapName">Times 湯布院金鱗湖 (Times Yufuin Lake Kinrin)</div>
-                    <div class="mapMeta">Mapcode：<code style="font-weight:800">269 359 584*77</code><br>電話：0120-72-8924（Times 管理中心）</div>
-                  </div>
-
-                  <div class="mapItem">
-                    <div class="mapName">狭霧台（展望台）</div>
-                    <div class="mapMeta">Mapcode：<code style="font-weight:800">302 798 233*66</code><br>電話：0977-84-3111（由布市役所代管）</div>
-                  </div>
-
-                  <div class="mapItem">
-                    <div class="mapName">九重「夢」大吊橋</div>
-                    <div class="mapMeta">Mapcode：<code style="font-weight:800">377 023 247*63</code><br>電話：0973-73-3800</div>
-                  </div>
-
-                  <div class="mapItem">
-                    <div class="mapName">瀨之本休息站 (Senomoto Rest House)</div>
-                    <div class="mapMeta">Mapcode：<code style="font-weight:800">256 599 157*11</code><br>電話：0967-44-0011</div>
-                  </div>
-
-                  <div class="mapItem">
-                    <div class="mapName">旅館華柚 (Hanayuu / Hanayoshi)</div>
-                    <div class="mapMeta">Mapcode：<code style="font-weight:800">202 209 840*77</code><br>電話：0967-46-6688</div>
-                  </div>
-                </div>
-              </div>
-            </details>
-
-            <details class="mapSection">
-              <summary><span class="sumText sumText--nowrap">Day 3｜黑川溫泉・阿蘇</span><span class="chev">⌄</span></summary>
-              <div class="content">
-                <div class="mapList">
-                  <div class="mapItem">
-                    <div class="mapName">夫妻瀑布（夫婦滝）</div>
-                    <div class="mapMeta">Mapcode：<code style="font-weight:800">256 456 771*20</code><br>電話：070-2402-0012（瀑布商店）<br>電話：0967-44-0076（南小國町觀光協會）</div>
-                  </div>
-
-                  <div class="mapItem">
-                    <div class="mapName">黑川溫泉 第三停車場 (Kurokawa Onsen Parking 3)</div>
-                    <div class="mapMeta">Mapcode：<code style="font-weight:800">440 542 811*17</code><br>電話：0967-44-0076（黑川溫泉觀光旅館協同組合）</div>
-                  </div>
-
-                  <div class="mapItem">
-                    <div class="mapName">清流之森停車場 (Seiryunomori Parking Lot)</div>
-                    <div class="mapMeta">Mapcode：<code style="font-weight:800">440 542 411*62</code><br>導航電話：0967-44-0076（黑川溫泉觀光旅館協同組合）</div>
-                  </div>
-
-                  <div class="mapItem">
-                    <div class="mapName">池山水源</div>
-                    <div class="mapMeta">Mapcode：<code style="font-weight:800">256 801 799*55</code><br>電話：0967-25-2211（產山村役場）</div>
-                  </div>
-
-                  <div class="mapItem">
-                    <div class="mapName">亀の井ホテル 阿蘇 (Kamenoi Hotel Aso)</div>
-                    <div class="mapMeta">Mapcode：<code style="font-weight:800">256 551 569*74</code><br>電話：0967-22-1122</div>
-                  </div>
-                </div>
-              </div>
-            </details>
-
-            <details class="mapSection">
-              <summary><span class="sumText sumText--nowrap">Day 4｜阿蘇・太宰府・博多</span><span class="chev">⌄</span></summary>
-              <div class="content">
-                <div class="mapList">
-
-                  <div class="mapItem">
-                    <div class="mapName">上色見熊野座神社 (高森町)</div>
-                    <div class="mapMeta">Mapcode：<code style="font-weight:800">256 547 232*77</code><br>電話：0967-62-1111（高森町觀光推進機構）</div>
-                  </div>
-
-                  <div class="mapItem">
-                    <div class="mapName">白川水源 (南阿蘇村)</div>
-                    <div class="mapMeta">Mapcode：<code style="font-weight:800">256 460 589*26</code><br>電話：0967-67-1112（南阿蘇村役場）</div>
-                  </div>
-
-                  <div class="mapItem">
-                    <div class="mapName">阿蘇火山（中岳火口）</div>
-                    <div class="mapMeta">Mapcode：<code style="font-weight:800">449 576 626*12</code><br>電話：0967-34-1600（阿蘇市觀光協會）</div>
-                  </div>
-
-                  <div class="mapItem">
-                    <div class="mapName">草千里ヶ濱</div>
-                    <div class="mapMeta">Mapcode：<code style="font-weight:800">449 575 012*63</code><br>電話：0967-34-1600（與中岳同為阿蘇山綜合諮詢）</div>
-                  </div>
-
-                  <div class="mapItem">
-                    <div class="mapName">玖珠服務區 (Kusu SA) 上行 (上り)；往 福岡/鳥栖 方向。</div>
-                    <div class="mapMeta">Mapcode：<code style="font-weight:800">269 095 561*85</code><br>電話：0973-72-6177（玖珠收費站管理處）</div>
-                  </div>
-
-                  <div class="mapItem">
-                    <div class="mapName">山田服務區 (Yamada SA) 上行 (上り)；往 福岡/鳥栖 方向。</div>
-                    <div class="mapMeta">Mapcode：<code style="font-weight:800">166 626 772*85</code><br>電話：0946-52-3103（美食商場專線）</div>
-                  </div>
-
-                  <div class="mapItem">
-                    <div class="mapName">太宰府天滿宮</div>
-                    <div class="mapMeta">Mapcode：<code style="font-weight:800">55 452 706*41</code><br>電話：092-922-8225（社務所代表）</div>
-                  </div>
-
-                  <div class="mapItem">
-                    <div class="mapName">Cross Life 博多柳橋 (Cross Life Hakata Yanagibashi)</div>
-                    <div class="mapMeta">Mapcode：<code style="font-weight:800">13 290 880*21</code><br>電話：092-733-3939</div>
-                  </div>
-
-                  <div class="mapItem">
-                    <div class="mapName">Budget Rent-a-car 天神北店 (天神北店)</div>
-                    <div class="mapMeta">Mapcode：<code style="font-weight:800">13 318 669*04</code><br>電話：092-752-0543</div>
-                  </div>
-
-                </div>
-              </div>
-            </details>
-
-          </div><!-- /.frame -->
-        </div><!-- /.content -->
-      </div><!-- /.dayBody -->
-      </section>
-      </div><!-- /.panelsWrap -->
-
-    </div><!-- /.board -->
-  </div><!-- /.wrap -->
+      </div>
+    </div>
+  </div>
 
   <script>
-  (function(){
-    'use strict';
+    (function(){
+      function qs(sel, root){ return (root || document).querySelector(sel); }
+      function qsa(sel, root){ return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
 
-    function qs(sel, root){ return (root||document).querySelector(sel); }
-    function qsa(sel, root){ return Array.prototype.slice.call((root||document).querySelectorAll(sel)); }
+      function initLightbox(){
+        if(!qs('.lbModal')){
+          var lb = document.createElement('div');
+          lb.className = 'lbModal';
+          lb.innerHTML = ''
+            + '<div class="lbBackdrop" data-lb-close></div>'
+            + '<div class="lbStage"><img class="lbImg" alt="" /></div>'
+            + '<div class="lbNav">'
+            + '  <button class="lbBtn" type="button" data-lb-prev aria-label="上一張">‹</button>'
+            + '  <button class="lbBtn" type="button" data-lb-next aria-label="下一張">›</button>'
+            + '  <span class="lbCount" data-lb-count>0/0</span>'
+            + '</div>'
+            + '<button class="lbClose" type="button" data-lb-close aria-label="關閉">✕</button>';
+          document.body.appendChild(lb);
+        }
 
-    function restoreLockedPages(){
-      qsa('[data-lock-template]').forEach(function(panel){
-        var tplId = panel.getAttribute('data-lock-template');
-        var tpl = tplId ? document.getElementById(tplId) : null;
-        if(!tpl || !tpl.content) return;
-        panel.innerHTML = '';
-        panel.appendChild(tpl.content.cloneNode(true));
-      });
-    }
+        var modal = qs('.lbModal');
+        var stage = qs('.lbStage', modal);
+        var imgEl = qs('.lbImg', modal);
+        var countEl = qs('[data-lb-count]', modal);
 
-    function removeBackLinks(){
-      qsa('a[href^="javascript:history.back"], a.btn[href^="javascript:history.back"]').forEach(function(a){
-        a.remove();
-      });
-    }
+        var list = [];
+        var idx = 0;
 
-    function syncGalleryCaptions(){
-      qsa('.galleryRow .gItem').forEach(function(item){
-        var img = item.querySelector('img');
-        if(!img) return;
-        var cap = (item.getAttribute('data-caption') || '').trim();
-        if(cap) return;
-        var alt = (img.getAttribute('alt') || '').trim();
-        if(!alt) return;
-        item.setAttribute('data-caption', alt);
-      });
-    }
+        function openAt(i){
+          if(!list.length) return;
+          idx = (i + list.length) % list.length;
+          imgEl.src = list[idx];
+          countEl.textContent = String(idx + 1) + '/' + String(list.length);
+          modal.classList.add('open');
+          document.body.style.overflow = 'hidden';
+        }
+        function close(){
+          modal.classList.remove('open');
+          document.body.style.overflow = '';
+        }
+        function next(){ openAt(idx + 1); }
+        function prev(){ openAt(idx - 1); }
 
-    function initImageFallbacks(){
-      qsa('img[data-fallback]').forEach(function(img){
-        var tried = false;
-        img.addEventListener('error', function(){
-          if(tried) return;
-          tried = true;
-          var fb = (img.getAttribute('data-fallback') || '').trim();
-          if(!fb) return;
-          img.src = fb;
-          if(img.hasAttribute('data-full')) img.setAttribute('data-full', fb);
+        modal.addEventListener('click', function(e){
+          if(e.target && e.target.closest && e.target.closest('[data-lb-close]')) close();
         });
-      });
-    }
 
-    function forceLoadImages(root){
-      qsa('img[loading="lazy"]', root).forEach(function(img){
-        try{ img.loading = 'eager'; }catch(e){}
-        var src = img.getAttribute('src');
-        if(src && !img.complete){ img.setAttribute('src', src); }
-      });
-    }
+        qs('[data-lb-next]', modal).addEventListener('click', function(e){ e.stopPropagation(); next(); });
+        qs('[data-lb-prev]', modal).addEventListener('click', function(e){ e.stopPropagation(); prev(); });
 
-    function initDetailsLazyFix(){
-      qsa('details').forEach(function(d){
-        d.addEventListener('toggle', function(){ if(d.open) forceLoadImages(d); });
-      });
-      qsa('details[open]').forEach(function(d){ forceLoadImages(d); });
-    }
+        window.addEventListener('keydown', function(e){
+          if(!modal.classList.contains('open')) return;
+          if(e.key === 'Escape') close();
+          if(e.key === 'ArrowRight') next();
+          if(e.key === 'ArrowLeft') prev();
+        });
 
-    function initTabs(){
-      var tabs = qsa('.tab');
-      var panels = qsa('.panel');
-      var dayIds = panels.map(function(p){ return p.id; });
+        document.addEventListener('click', function(e){
+          var thumb = e.target && e.target.closest && e.target.closest('.galleryRow .gItem img');
+          if(!thumb) return;
+          if(thumb.getAttribute('data-no-lightbox') === '1') return;
 
-      function setActive(dayId){
-        tabs.forEach(function(t){ t.setAttribute('aria-selected', String(t.dataset.day === dayId)); });
-        panels.forEach(function(p){ p.classList.toggle('active', p.id === dayId); });
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        var activeTab = tabs.find(function(t){ return t.dataset.day === dayId; });
-        if(activeTab) activeTab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-      }
-
-      tabs.forEach(function(btn){ btn.addEventListener('click', function(){ setActive(btn.dataset.day); }); });
-
-      (function enableSwipeToSwitchDays(){
-        var swipeArea = qs('.board') || document.body;
-        var startX=0, startY=0, lastX=0, lastY=0;
-        var tracking=false;
-        var lockedHorizontal=false;
-
-        var THRESHOLD = 60;
-        var SLOPE = 1.5;
-
-        function getActiveIndex(){
-          var i = panels.findIndex(function(p){ return p.classList.contains('active'); });
-          return i >= 0 ? i : 0;
-        }
-        function setActiveByIndex(idx){
-          var clamped = Math.max(0, Math.min(dayIds.length - 1, idx));
-          setActive(dayIds[clamped]);
-        }
-        function isInTabs(target){ return !!(target && target.closest && target.closest('.tabs')); }
-        function isInLightbox(target){ return !!(target && target.closest && target.closest('.lbModal.open')); }
-        function isInGallery(target){ return !!(target && target.closest && target.closest('.galleryRow')); }
-
-        swipeArea.addEventListener('touchstart', function(e){
-          if(!e.touches || e.touches.length !== 1) return;
-          if(isInTabs(e.target)) return;
-          if(isInLightbox(e.target)) return;
-          if(isInGallery(e.target)) return;
-
-          var t = e.touches[0];
-          startX = lastX = t.clientX;
-          startY = lastY = t.clientY;
-          tracking = true;
-          lockedHorizontal = false;
+          var row = thumb.closest('.galleryRow');
+          var imgs = qsa('.gItem img', row).filter(function(x){ return x.getAttribute('data-no-lightbox') !== '1'; });
+          list = imgs.map(function(x){ return x.getAttribute('data-full') || x.currentSrc || x.src; });
+          openAt(imgs.indexOf(thumb));
         }, { passive: true });
 
-        swipeArea.addEventListener('touchmove', function(e){
+        var tsx=0, tsy=0, tlx=0, tly=0, tracking=false;
+        var LB_TH = 50;
+
+        stage.addEventListener('touchstart', function(e){
+          if(!modal.classList.contains('open')) return;
+          if(!e.touches || e.touches.length !== 1) return;
+          var t = e.touches[0];
+          tsx = tlx = t.clientX;
+          tsy = tly = t.clientY;
+          tracking = true;
+        }, { passive: true });
+
+        stage.addEventListener('touchmove', function(e){
           if(!tracking || !e.touches || e.touches.length !== 1) return;
           var t = e.touches[0];
-          lastX = t.clientX;
-          lastY = t.clientY;
-
-          var dx = lastX - startX;
-          var dy = lastY - startY;
-
-          if(!lockedHorizontal && Math.abs(dx) > 10){
-            if(Math.abs(dx) > Math.abs(dy) * SLOPE){
-              lockedHorizontal = true;
-            } else {
-              tracking = false;
-              return;
-            }
-          }
-
-          if(lockedHorizontal){ e.preventDefault(); }
-        }, { passive: false });
-
-        swipeArea.addEventListener('touchend', function(){
-          if(!tracking) return;
-
-          var dx = lastX - startX;
-          var dy = lastY - startY;
-
-          if(Math.abs(dx) > THRESHOLD && Math.abs(dx) > Math.abs(dy) * SLOPE){
-            var idx = getActiveIndex();
-            if(dx < 0) setActiveByIndex(idx + 1);
-            else setActiveByIndex(idx - 1);
-          }
-
-          tracking = false;
-          lockedHorizontal = false;
+          tlx = t.clientX;
+          tly = t.clientY;
         }, { passive: true });
-      })();
-    }
 
-    function initLightbox(){
-      if(!qs('.lbModal')){
-        var lb = document.createElement('div');
-        lb.className = 'lbModal';
-        lb.innerHTML = ''
-          + '<div class="lbBackdrop" data-lb-close></div>'
-          + '<div class="lbStage"><img class="lbImg" alt="" /></div>'
-          + '<div class="lbNav">'
-          + '  <button class="lbBtn" type="button" data-lb-prev aria-label="上一張">‹</button>'
-          + '  <button class="lbBtn" type="button" data-lb-next aria-label="下一張">›</button>'
-          + '  <span class="lbCount" data-lb-count>0/0</span>'
-          + '</div>'
-          + '<button class="lbClose" type="button" data-lb-close aria-label="關閉">✕</button>';
-        document.body.appendChild(lb);
+        stage.addEventListener('touchend', function(){
+          if(!tracking) return;
+          var dx = tlx - tsx;
+          var dy = tly - tsy;
+          if(Math.abs(dx) > LB_TH && Math.abs(dx) > Math.abs(dy) * 1.2){
+            if(dx < 0) next();
+            else prev();
+          }
+          tracking = false;
+        }, { passive: true });
       }
 
-      var modal = qs('.lbModal');
-      var stage = qs('.lbStage', modal);
-      var imgEl = qs('.lbImg', modal);
-      var countEl = qs('[data-lb-count]', modal);
-
-      var list = [];
-      var idx = 0;
-
-      function openAt(i){
-        if(!list.length) return;
-        idx = (i + list.length) % list.length;
-        imgEl.src = list[idx];
-        countEl.textContent = String(idx + 1) + '/' + String(list.length);
-        modal.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      }
-      function close(){
-        modal.classList.remove('open');
-        document.body.style.overflow = '';
-      }
-      function next(){ openAt(idx + 1); }
-      function prev(){ openAt(idx - 1); }
-
-      modal.addEventListener('click', function(e){
-        if(e.target && e.target.closest && e.target.closest('[data-lb-close]')) close();
+      document.addEventListener('DOMContentLoaded', function(){
+        initLightbox();
       });
-
-      qs('[data-lb-next]', modal).addEventListener('click', function(e){ e.stopPropagation(); next(); });
-      qs('[data-lb-prev]', modal).addEventListener('click', function(e){ e.stopPropagation(); prev(); });
-
-      window.addEventListener('keydown', function(e){
-        if(!modal.classList.contains('open')) return;
-        if(e.key === 'Escape') close();
-        if(e.key === 'ArrowRight') next();
-        if(e.key === 'ArrowLeft') prev();
-      });
-
-      document.addEventListener('click', function(e){
-        var thumb = e.target && e.target.closest && e.target.closest('.galleryRow .gItem img');
-        if(!thumb) return;
-        if(thumb.getAttribute('data-no-lightbox') === '1') return;
-
-        var row = thumb.closest('.galleryRow');
-        var imgs = qsa('.gItem img', row);
-        list = imgs.map(function(x){ return x.getAttribute('data-full') || x.currentSrc || x.src; });
-        openAt(imgs.indexOf(thumb));
-      }, { passive: true });
-
-      var tsx=0, tsy=0, tlx=0, tly=0, tracking=false;
-      var LB_TH = 50;
-
-      stage.addEventListener('touchstart', function(e){
-        if(!modal.classList.contains('open')) return;
-        if(!e.touches || e.touches.length !== 1) return;
-        var t = e.touches[0];
-        tsx = tlx = t.clientX;
-        tsy = tly = t.clientY;
-        tracking = true;
-      }, { passive: true });
-
-      stage.addEventListener('touchmove', function(e){
-        if(!tracking || !e.touches || e.touches.length !== 1) return;
-        var t = e.touches[0];
-        tlx = t.clientX;
-        tly = t.clientY;
-      }, { passive: true });
-
-      stage.addEventListener('touchend', function(){
-        if(!tracking) return;
-        var dx = tlx - tsx;
-        var dy = tly - tsy;
-        if(Math.abs(dx) > LB_TH && Math.abs(dx) > Math.abs(dy) * 1.2){
-          if(dx < 0) next();
-          else prev();
-        }
-        tracking = false;
-      }, { passive: true });
-    }
-
-    window.addEventListener('DOMContentLoaded', function(){
-      restoreLockedPages();
-      syncGalleryCaptions();
-      initImageFallbacks();
-      initDetailsLazyFix();
-      removeBackLinks();
-
-      try{ initTabs(); }catch(e){ console.warn('[Itinerary] initTabs error', e); }
-      try{ initLightbox(); }catch(e){ console.warn('[Itinerary] initLightbox error', e); }
-    });
-  })();
+    })();
   </script>
 </body>
 </html>
