@@ -1,152 +1,3 @@
-<!doctype html> 
-<html lang="zh-Hant">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>福岡・由布院・阿蘇｜6日行程</title>
-  <style>
-    :root{
-      --bg:#f6f7fb;
-      --surface:#ffffff;
-      --card:#ffffff;
-      --text:#111827;
-      --muted:#6b7280;
-      --line:#e5e7eb;
-      --chip:#f3f4f6;
-      --accent:#2563eb;
-      --shadow:0 8px 24px rgba(0,0,0,.08);
-      --radius:18px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      background:var(--bg);
-      color:var(--text);
-      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans TC", "PingFang TC", "Hiragino Sans", "Helvetica Neue", Arial;
-      line-height:1.6;
-    }
-    a{color:inherit}
-
-    .wrap{
-  max-width:1100px;
-  margin:0 auto;
-  padding:22px 8px 26px;
-}
-
-    header{
-      display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;
-      margin-bottom:14px;
-    }
-    h1{margin:0;font-size:20px;letter-spacing:.2px}
-    .sub{color:var(--muted);font-size:12px}
-
-    .board{
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      background:var(--surface);
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      /* iOS Safari: allow vertical scroll, let JS handle horizontal swipe */
-      touch-action: pan-y;
-    }
-
-    /* Tabs */
-    .tabs{
-      display:flex;
-      gap:10px;
-      padding:14px 14px 12px;
-      border-bottom:1px solid var(--line);
-      background:#ffffff;
-      overflow-x:auto;
-    }
-    .tabs::-webkit-scrollbar{height:8px}
-    .tabs::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14);border-radius:999px}
-    .tabs::-webkit-scrollbar-track{background:rgba(255,255,255,.05)}
-
-    .tab{
-      appearance:none;
-      border:1px solid var(--line);
-      background:#ffffff;
-      color:var(--text);
-      padding:10px 14px;
-      border-radius:999px;
-      font-size:13px;
-      cursor:pointer;
-      white-space:nowrap;
-      transition:background .15s ease, border-color .15s ease;
-    }
-    .tab:hover{transform:translateY(-1px)}
-    .tab[aria-selected="true"]{
-      border-color:var(--accent);
-      background:#eef2ff;
-      box-shadow:none;
-    }
-
-    /* Panels */
-    .panel{
-  display:none;
-  padding:16px 8px 18px;
-}
-    .panel.active{display:block}
-
-    .dayHeader{
-      display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
-      padding:6px 6px 12px;
-    }
-    .dayHeaderRight{margin-left:auto;padding-top:10px}
-    .dayDateRight{color:var(--text);font-size:18px;font-weight:800;line-height:1.2}
-    .dayTitle{display:flex;gap:12px;align-items:center;}
-    .num{
-      width:40px;height:40px;border-radius:14px;
-      display:grid;place-items:center;
-      border:1px solid rgba(96,165,250,.45);
-      background:rgba(96,165,250,.10);
-      font-weight:800;
-    }
-    .tblock{min-width:0;padding-top:2px}
-    .tblock h2{margin:0;font-size:18px;line-height:1.2}
-
-    /* Accordion sections */
-    details{
-      border:1px solid var(--line);
-      border-radius:16px;
-      background:#ffffff;
-      overflow:hidden;
-      margin-top:10px;
-    }
-    summary{
-      list-style:none;
-      cursor:pointer;
-      padding:12px 12px;
-      display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
-      font-weight:700;
-    }
-    /* 修正手機版 summary 文字被擠成直排 */
-    summary span.sumText{
-      flex:1;
-      min-width:0;
-      white-space:normal;
-      word-break:break-word;
-      line-height:1.5;
-    }
-    /* ✅ 需要固定成單行的收合標題（避免兩個收合層高度不一） */
-    summary span.sumText--nowrap{
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-    summary::-webkit-details-marker{display:none}
-summary::marker{content:""}
-    .chev{color:var(--muted);transition:transform .15s ease}
-    details[open] .chev{transform:rotate(180deg)}
-
-    .content{padding:0 12px 12px}
-
-    /* ✅ Day2「取車前注意事項／行車重點提醒」使用 dContent：增加左側內距但不影響其他區塊 */
-    .dContent{padding:0 14px 12px}
-
-    /* ✅ Day2：三個 gallery 與外框保持安全距離（避免縮圖圓角被裁切；不影響其他天） */
-/* Day2 指定 gallery 改為 alignPad 對齊，這段保留空白避免舊規則干擾 */
 
     /* Timeline */
     .timeline{
@@ -189,7 +40,6 @@ summary::marker{content:""}
       line-height:1.4;
       color:var(--muted);
     }
-
     /* ✅ 移動段（想要像圖二：標題獨立一行、替代交通同列） */
     .moveTitle{
       font-weight:800;
@@ -228,14 +78,12 @@ summary::marker{content:""}
 
     .links{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 
-    .btn{
-      text-decoration:none;
-      font-size:12px;
-      padding:8px 10px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background:rgba(96,165,250,.10);
-    }
+    $1
+
+    /* Reusable helpers */
+    .timelinePlain{border:none !important;background:transparent !important;border-radius:0 !important}
+    .linksSection{margin-top:12px}
+    .linksSection--tight{margin:10px 0 6px}
 
     /* Gallery */
     .galleryWrap{margin-top:10px}
@@ -347,6 +195,7 @@ summary::marker{content:""}
       .tblock h2{font-size:17px}
     }
 
+
 /* ====== Day2 紅框區塊額外內距強化 ====== */
 #day2 .card,
 #day2 details,
@@ -381,6 +230,25 @@ summary::marker{content:""}
   padding-right: 0 !important;
   scroll-padding-left: 0;
   scroll-padding-right: 0;
+}
+
+/* ✅ Day2：停車建議 gallery 貼齊外框但不超出 */
+#day2 .timeline .galleryWrap[aria-label="停車照片"]{
+  box-sizing:border-box;
+  width:calc(100% + 28px);
+  margin-left:-14px !important;
+  margin-right:-14px !important;
+  padding-left:0 !important;
+  padding-right:0 !important;
+}
+#day2 .timeline .galleryWrap[aria-label="停車照片"] .galleryTitle,
+#day2 .timeline .galleryWrap[aria-label="停車照片"] .galleryRow{
+  padding-left:0 !important;
+  padding-right:0 !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+  scroll-padding-left:0;
+  scroll-padding-right:0;
 }
 
 /* ✅ Day2：三個 alignWithMain gallery（由布院散策／由布院小食／Day2 照片）
@@ -518,7 +386,7 @@ details.detailsTight .content{
       <div class="sub">03/23（一）→ 03/28（六）</div>
     </header>
 
-    <section style="margin-bottom:14px">
+  <section style="margin-bottom:14px">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
         <div style="border:1px solid var(--line);border-radius:16px;padding:12px;background:rgba(255,255,255,.03)">
           <strong>✈️ 去程（03/23 一）虎航IT720</strong>
@@ -644,7 +512,7 @@ details.detailsTight .content{
                 飯店至取車點約 <strong>550 公尺</strong>／步行時間約 <strong>8 分鐘</strong>
               </div>
 
-              <div class="links" style="margin-top:12px">
+              <div class="links linksSection">
                 <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/d/edit?mid=14d0NUVU1_hLuYWMW2iugAFUnhmY5kg8&usp=sharing">🗺️ 飯店周邊</a>
               </div>
             </div>
@@ -674,8 +542,7 @@ details.detailsTight .content{
             <div class="meta">上博多東或半道橋交流道 → 接大分自動車道</div>
           </div>
         </div>
-
-        <div class="tRow">
+ <div class="tRow">
           <div><div class="time"></div></div>
           <div class="subline">
             <details class="alignPad" style="margin-top:0">
@@ -838,8 +705,7 @@ details.detailsTight .content{
           </div>
         </div>
 
-
-        <div class="tRow">
+<div class="tRow">
           <div><div class="time"></div></div>
           <div class="subline">
             <div class="galleryWrap alignPad" aria-label="旅館華柚照片">
@@ -867,7 +733,7 @@ details.detailsTight .content{
         </div>
       </details>
 
-      <div class="links" style="margin-top:12px">
+      <div class="links linksSection">
         <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E5%B1%B1%E7%94%B0%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%A8%E3%83%AA%E3%82%A2%20%28%E4%B8%8B%E3%82%82%E3%82%8A%29&travelmode=driving">🚗 休息站｜山田SA（建議）</a>
         <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E7%8E%96%E7%8F%A0%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%A8%E3%83%AA%E3%82%A2%20%28%E4%B8%8B%E3%82%82%E3%82%8A%29&travelmode=driving">🚗 休息站｜玖珠SA（次要）</a>
         <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E6%B9%AF%E5%B8%83%E9%99%A2%E4%B8%AD%E5%A4%AE%E5%85%90%E7%AB%A5%E5%85%AC%E5%9C%92&travelmode=driving">🚗 導航｜中央児童公園</a>
@@ -965,7 +831,7 @@ details.detailsTight .content{
               </div>
           </div>
 
-          <div class="links edgeBleed" style="margin:10px 0 8px">
+<div class="links edgeBleed" style="margin:10px 0 8px">
               <a class="btn" href="day3/%E5%AE%98%E6%96%B9%E7%B0%A1%E4%BB%8B%E5%9C%B0%E5%9C%96%28%E6%97%A5%E6%96%87%E7%89%88%29.pdf" target="_blank" rel="noopener">📄 官方簡介（日文版）</a>
               <a class="btn" href="day3/%E6%95%A3%E6%AD%A5%E5%9C%B0%E5%9C%96.pdf" target="_blank" rel="noopener">📄 散步地圖（PDF）</a>
           </div>
@@ -1087,7 +953,7 @@ details.detailsTight .content{
         </div>
       </details>
 
-      <div class="links" style="margin:10px 0 6px">
+      <div class="links linksSection--tight">
         <a class="btn" href="https://www.jma.go.jp/bosai/volcano/" target="_blank" rel="noopener">🌋 日本氣象廳｜火山資訊</a>
         <a class="btn" href="https://www.aso-volcano.jp/chinese/index.html" target="_blank" rel="noopener">🏔 阿蘇火山情報</a>
         <a class="btn" href="https://emergency-weather.yahoo.co.jp/weather/zh-TW/volcano/503/" target="_blank" rel="noopener">🔴 阿蘇火山即時影像</a>
@@ -1098,14 +964,14 @@ details.detailsTight .content{
         <summary><span class="sumText">🅰️ 方案 A｜阿蘇自然景點 → 回福岡還車</span><span class="chev">⌄</span></summary>
         <div class="content">
 
-          <div class="timeline" style="border:none;background:transparent;border-radius:0">
+          <div class="timeline timelinePlain">
             <div class="tRow">
               <div><div class="time">09:00</div><div class="meta">出發</div></div>
               <div><div class="place">Kamenoi Hotel Aso</div><div class="meta">退房後出發，行李上車</div></div>
             </div>
           </div>
 
-          <div class="timeline" style="border:none;background:transparent;border-radius:0">
+          <div class="timeline timelinePlain">
             <div class="tRow">
               <div><div class="time">09:40–10:40</div><div class="meta">行車時間約30分鐘</div></div>
               <div>
@@ -1122,7 +988,7 @@ details.detailsTight .content{
             </div>
           </div>
 
-          <div class="timeline" style="border:none;background:transparent;border-radius:0">
+          <div class="timeline timelinePlain">
             <div class="tRow">
               <div><div class="time">11:30–12:10</div><div class="meta">行車時間約15分鐘</div></div>
               <div>
@@ -1140,7 +1006,7 @@ details.detailsTight .content{
             </div>
           </div>
 
-          <div class="timeline" style="border:none;background:transparent;border-radius:0">
+          <div class="timeline timelinePlain">
             <div class="tRow">
               <div><div class="time">12:30–13:30</div><div class="meta">午餐</div></div>
               <div><div class="place">阿蘇市區</div><div class="meta">現場決定</div></div>
@@ -1161,7 +1027,7 @@ details.detailsTight .content{
             </div>
           </details>
 
-          <div class="timeline" style="border:none;background:transparent;border-radius:0">
+          <div class="timeline timelinePlain">
             <div class="tRow">
               <div>
                 <div class="time">14:20–15:10</div>
@@ -1186,7 +1052,7 @@ details.detailsTight .content{
             <a class="btn" href="day4/%E9%98%BF%E8%98%87%E4%B8%AD%E5%B2%B3%E7%81%AB%E5%B1%B1%E5%8F%A3%E5%8F%83%E8%A7%80.pdf" target="_blank" rel="noopener">📄 阿蘇中岳火山口參觀（PDF）</a>
           </div>
 
-          <div class="timeline" style="border:none;background:transparent;border-radius:0">
+          <div class="timeline timelinePlain">
             <div class="tRow">
               <div><div class="time">15:20–16:20</div><div class="meta">景點</div></div>
               <div>
@@ -1195,8 +1061,7 @@ details.detailsTight .content{
               </div>
             </div>
           </div>
-
-          <div class="galleryWrap" aria-label="草千里ヶ浜 照片">
+<div class="galleryWrap" aria-label="草千里ヶ浜 照片">
             <div class="galleryRow" role="list">
               <div class="gItem" role="listitem" data-caption="草千里ヶ浜｜草原與馬匹"><img loading="lazy" src="day4/06.jpg" data-full="day4/06.jpg" alt="草千里ヶ浜｜草原與馬匹"></div>
               <div class="gItem" role="listitem" data-caption="草千里ヶ浜｜水面倒影"><img loading="lazy" src="day4/07.jpg" data-full="day4/07.jpg" alt="草千里ヶ浜｜水面倒影"></div>
@@ -1205,7 +1070,7 @@ details.detailsTight .content{
             </div>
           </div>
 
-          <div class="timeline" style="border:none;background:transparent;border-radius:0">
+          <div class="timeline timelinePlain">
             <div class="tRow">
               <div><div class="time">16:30–19:30</div><div class="meta">移動</div></div>
               <div><div class="place">阿蘇 → 福岡市區</div><div class="meta">行車約 3 小時（含休息站）｜首選休息站：玖珠 SA（上り）｜備選：山田 SA（上り）</div></div>
@@ -1226,7 +1091,7 @@ details.detailsTight .content{
         <summary><span class="sumText">🅱️ 方案 B｜阿蘇火山 → 太宰府 → 福岡</span><span class="chev">⌄</span></summary>
         <div class="content">
 
-          <div class="timeline" style="border:none;background:transparent;border-radius:0">
+          <div class="timeline timelinePlain">
             <div class="tRow">
               <div><div class="time">09:00</div><div class="meta">出發</div></div>
               <div>
@@ -1279,7 +1144,7 @@ details.detailsTight .content{
               </div>
             </details>
 
-            <div class="timeline" style="border:none;background:transparent;border-radius:0">
+            <div class="timeline timelinePlain">
               <div class="tRow">
                 <div><div class="time">13:00–15:00</div><div class="meta">移動</div></div>
                 <div><div class="place">阿蘇 → 太宰府</div><div class="meta">行車約 2–2.5 小時（含休息）｜建議停靠：玖珠 SA（上り）｜備選：山田 SA（上り）</div></div>
@@ -1319,12 +1184,12 @@ details.detailsTight .content{
               </div>
             </div>
 
-          </div>
+</div>
         </details>
 
       </div>
 
-      <div class="links" style="margin-top:12px">
+      <div class="links linksSection">
         <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E4%B8%8A%E8%89%B2%E8%A6%8B%E7%86%8A%E9%87%8E%E5%BA%A7%E7%A5%9E%E7%A4%BE&travelmode=driving">🚗 導航｜上色見熊野座神社</a>
         <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E7%99%BD%E5%B7%9D%E6%B0%B4%E6%BA%90&travelmode=driving">🚗 導航｜白川水源</a>
         <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E9%98%BF%E8%98%87%E4%B8%AD%E5%B2%B3%E7%81%AB%E5%B1%B1%E5%8F%A3&travelmode=driving">🌋 導航｜阿蘇火山（中岳）</a>
@@ -1425,7 +1290,7 @@ details.detailsTight .content{
                 </div>
               </div>
 
-              <div class="tRow" style="padding-left:0;padding-right:0">
+<div class="tRow" style="padding-left:0;padding-right:0">
                 <div><div class="time">12:10</div></div>
                 <div>
                   <div class="place">真言宗 東長寺</div>
@@ -1530,7 +1395,7 @@ details.detailsTight .content{
                 🚕 計程車：約 10–15 分鐘／約 1200–1800 円（依交通狀況略有差異）。
               </div>
 
-            </div>
+</div>
           </details>
         </div>
       </div>
@@ -1572,7 +1437,7 @@ details.detailsTight .content{
   </div>
   <div class="dayBody"><div class="content">
     <div class="frame framePad">
-      <div class="timeline" style="border:none;background:transparent;border-radius:0">
+      <div class="timeline timelinePlain">
         <div class="tRow"><div><div class="time">06:00</div><div class="meta">起床</div></div><div><div class="place">飯店</div><div class="meta">退房準備／確認護照、機票、行李</div></div></div>
         <div class="tRow"><div><div class="time">07:00</div><div class="meta">出發</div></div><div><div class="place">前往福岡機場（FUK）</div><div class="meta">預計 07:30 抵達機場</div></div></div>
         <div class="tRow"><div><div class="time">07:30</div><div class="meta">抵達</div></div><div><div class="place">福岡機場</div><div class="meta">報到／托運／安檢</div></div></div>
@@ -1580,7 +1445,7 @@ details.detailsTight .content{
         <div class="tRow"><div><div class="time">12:40</div></div><div><div class="place">桃園國際機場（TPE）</div><div class="meta">第一航廈</div></div></div>
       </div>
     </div>
-    <div class="links" style="margin-top:12px">
+    <div class="links linksSection">
       <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Fukuoka%20Airport&travelmode=driving">🚗 導航｜福岡機場</a>
     </div>
   </div></div>
@@ -1604,7 +1469,7 @@ details.detailsTight .content{
           <div class="content">
             <div class="mapList">
               <div class="mapItem"><div class="mapName">山田服務區 (Yamada SA)下行 (下り)；往大分/別府方向</div><div class="mapMeta">Mapcode：<code style="font-weight:800">166 626 503*52</code><br>電話：0946-52-3103</div></div>
-              <div class="mapItem"><div class="mapName">玖珠服務區 (Kusu SA下行 (下り)；往大分/別府方向</div><div class="mapMeta">Mapcode：<code style="font-weight:800">269 095 861*85</code><br>電話：0973-72-6177</div></div>
+              <div class="mapItem"><div class="mapName">玖珠服務區 (Kusu SA 下行（下り）；往大分/別府方向</div><div class="mapMeta">Mapcode：<code style="font-weight:800">269 095 861*85</code><br>電話：0973-72-6177</div></div>
               <div class="mapItem"><div class="mapName">湯布院中央兒童公園</div><div class="mapMeta">Mapcode：<code style="font-weight:800">269 358 469*18</code><br>電話：0977-84-3111</div></div>
               <div class="mapItem"><div class="mapName">湯布院停車場 (Yufuin Parking Lot / 由布院駅前)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">269 358 409*00</code><br>電話：0977-84-5559</div></div>
               <div class="mapItem"><div class="mapName">NPC24H 湯布院湯之坪街道停車場</div><div class="mapMeta">Mapcode：<code style="font-weight:800">269 358 376*36</code><br>電話：0120-48-0015（NPC 管理中心）</div></div>
@@ -1631,8 +1496,7 @@ details.detailsTight .content{
             </div>
           </div>
         </details>
-
-        <details class="mapSection">
+ <details class="mapSection">
           <summary><span class="sumText sumText--nowrap">Day 4｜阿蘇・太宰府・博多</span><span class="chev">⌄</span></summary>
           <div class="content">
             <div class="mapList">
@@ -1678,8 +1542,7 @@ details.detailsTight .content{
             + '<button class="lbClose" type="button" data-lb-close aria-label="關閉">✕</button>';
           document.body.appendChild(lb);
         }
-
-        var modal = qs('.lbModal');
+var modal = qs('.lbModal');
         var stage = qs('.lbStage', modal);
         var imgEl = qs('.lbImg', modal);
         var countEl = qs('[data-lb-count]', modal);
@@ -1763,5 +1626,7 @@ details.detailsTight .content{
       });
     })();
   </script>
+
 </body>
 </html>
+
