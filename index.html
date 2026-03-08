@@ -427,7 +427,30 @@
 /* ✅ 通用外框：避免某些瀏覽器/預覽模式下外框消失 */
 .frame{border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden}
 .framePad{padding:12px}
-
+.edgeBleed{
+  margin-left:-12px !important;
+  margin-right:-12px !important;
+  width:calc(100% + 24px);
+}
+.edgeBleed.galleryWrap .galleryTitle,
+.edgeBleed.galleryWrap .galleryRow,
+.edgeBleed.links{
+  padding-left:0;
+  padding-right:0;
+}
+.edgeBleed.detailsTight,
+details.edgeBleed{
+  border-radius:12px;
+}
+details.detailsTight{
+  margin-top:6px;
+}
+details.detailsTight summary{
+  padding:10px 12px;
+}
+details.detailsTight .content{
+  padding:0 12px 10px;
+}
 </style>
 </head>
 <body>
@@ -861,7 +884,7 @@
             </div>
           </div>
 
-          <div class="galleryWrap" aria-label="黑川溫泉新停車場 照片">
+          <div class="galleryWrap edgeBleed" aria-label="黑川溫泉新停車場 照片">
             <p class="galleryTitle">📷 黑川溫泉新停車場</p>
             <div class="galleryRow" role="list">
               <div class="gItem" role="listitem" data-pdf-href="day3/黑川溫泉地圖.pdf" data-caption="📄 Map（PDF）｜點擊開啟">
