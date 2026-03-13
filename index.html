@@ -140,7 +140,7 @@ summary::marker{content:""}
     .chev{color:var(--muted);transition:transform .15s ease}
     details[open] .chev{transform:rotate(180deg)}
 
-    .content{padding:0 12px 12px}
+ .content{padding:0 12px 12px}
 
     /* ✅ Day2「取車前注意事項／行車重點提醒」使用 dContent：增加左側內距但不影響其他區塊 */
     .dContent{padding:0 14px 12px}
@@ -303,7 +303,7 @@ summary::marker{content:""}
     }
     .gItem img{width:100%;height:100%;object-fit:cover;display:block}
 
-    /* ✅ 縮圖文字說明（不依賴 JS；iOS 檔案預覽不跑 JS 也能顯示） */
+ /* ✅ 縮圖文字說明（不依賴 JS；iOS 檔案預覽不跑 JS 也能顯示） */
     .gItem[data-caption]::after{
       content: attr(data-caption);
       position:absolute;
@@ -455,9 +455,6 @@ summary::marker{content:""}
 @supports not selector(.tRow:has(.galleryWrap)){
   #day2 .timeline .galleryWrap[aria-label="由布院照片"]{ margin-top: -10px; }
 }
-
-
-
 /* ✅ Day2：四組相簿真正貼齊左邊框（含 subline 結構） */
 #day2 .timeline .tRow .subline > .galleryWrap[aria-label="由布院照片"],
 #day2 .timeline .tRow .subline > .galleryWrap[aria-label="九重夢大吊橋照片"],
@@ -601,7 +598,7 @@ details.detailsTight .content{
         <button class="tab" role="tab" aria-selected="false" data-day="mapcodes">Mapcode</button>
       </nav>
 
-      <script>
+<script>
   document.addEventListener('DOMContentLoaded', function(){
     var tabs = document.querySelectorAll('.tab');
     var panels = document.querySelectorAll('.panel');
@@ -742,8 +739,7 @@ details.detailsTight .content{
                   </ul>
 
                   <div class="dDivider" role="separator" aria-hidden="true"></div>
-
-                  <div class="dLabel">行車重點提醒</div>
+<div class="dLabel">行車重點提醒</div>
                   <ul class="dList">
                     <li>日本為右駕。請隨時默念口訣：<strong style="color:#2563eb">「左小轉、右大轉」</strong>。</li>
                     <li>高速路段為主：注意速限與測速照相，保持車距。</li>
@@ -933,11 +929,10 @@ details.detailsTight .content{
                 <div class="gItem" role="listitem" data-caption="旅館華柚｜日式庭園與建築"><img loading="lazy" src="day2/25.jpg" data-full="day2/25.jpg" alt="旅館華柚 建築"></div>
                 <div class="gItem" role="listitem" data-caption="旅館華柚｜露天溫泉"><img loading="lazy" src="day2/26.jpg" data-full="day2/26.jpg" alt="旅館華柚 溫泉"></div>
                 <div class="gItem" role="listitem" data-caption="九重高原櫻花景色"><img loading="lazy" src="day2/27.jpg" data-full="day2/27.jpg" alt="九重高原櫻花"></div>
-              </div>
+             </div>
             </div>
           </div>
         </div>
-      </div>
 
       <details class="alignWithMain" style="margin-top:10px">
         <summary><span class="sumText">☔ 雨天備案</span><span class="chev">⌄</span></summary>
@@ -1049,7 +1044,7 @@ details.detailsTight .content{
           </div>
 
 <div class="links edgeBleed" style="margin:10px 0 8px">
-              <a class="btn" target="_blank" rel="noopener" href="day3/官方簡介.pdf">📄 官方簡介（日文版）</a>
+              <a class="btn" target="_blank" rel="noopener" href="day3/官方簡介（日文版） .pdf">📄 官方簡介（日文版）</a>
               <a class="btn" target="_blank" rel="noopener" href="day3/散步地圖.pdf">📄 散步地圖（PDF）</a>
               <a class="btn" target="_blank" rel="noopener" href="day3/Warokuya菜單.pdf">📄 Warokuya菜單</a>
           </div>
@@ -1089,8 +1084,7 @@ details.detailsTight .content{
             <div class="gItem" role="listitem" data-caption="湯明竹燈與鞠燈籠"><img loading="lazy" src="day3/15.jpg" data-full="day3/15.jpg" alt="湯明竹燈與鞠燈籠"></div>
           </div>
         </div>
-
-        <div style="margin-top:8px;padding:0 12px;font-size:12px;line-height:1.7;color:var(--text)">
+<div style="margin-top:8px;padding:0 12px;font-size:12px;line-height:1.7;color:var(--text)">
           📌 黑川溫泉・湯明（湯あかり）我覺得很漂亮，但時間應該無法配合，先看看照片。<br>
           點燈時間：每天傍晚 17:00–21:30<br>
           活動期間：2025/12/20（六） 至 2026/3/31（二）<br>
@@ -1156,279 +1150,8 @@ details.detailsTight .content{
   </div>
 
   <div class="dayBody"><div class="content">
-
-    <div class="timeline" style="padding:12px">
-
-      <details>
-        <summary><span class="sumText">🧭 Day4 怎麼選 A / B？</span><span class="chev">⌄</span></summary>
-        <div class="content">
-          <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-            <li><strong>方案 A（阿蘇自然景點跑好跑滿）</strong>：天氣好、體力 OK，想把阿蘇一次看完整。</li>
-            <li><strong>方案 B（阿蘇火山＋太宰府）</strong>：想保留體力、下午提早進市區。</li>
-          </ul>
-        </div>
-      </details>
-
-      <div class="links linksSection--tight">
-        <a class="btn" href="https://www.jma.go.jp/bosai/volcano/" target="_blank" rel="noopener">🌋 日本氣象廳｜火山資訊</a>
-        <a class="btn" href="https://www.aso-volcano.jp/chinese/index.html" target="_blank" rel="noopener">🏔 阿蘇火山情報</a>
-        <a class="btn" href="https://emergency-weather.yahoo.co.jp/weather/zh-TW/volcano/503/" target="_blank" rel="noopener">🔴 阿蘇火山即時影像</a>
-        <a class="btn" href="day4/%E9%98%BF%E8%98%87%E8%A7%80%E5%85%89%E5%B0%8E%E8%A6%BD%E6%89%8B%E5%86%8A.pdf" target="_blank" rel="noopener">📄 阿蘇觀光導覽手冊</a>
-      </div>
-
-      <details style="margin-top:12px">
-        <summary><span class="sumText">🅰️ 方案 A｜阿蘇自然景點 → 回福岡還車</span><span class="chev">⌄</span></summary>
-        <div class="content">
-
-          <div class="timeline timelinePlain">
-            <div class="tRow">
-              <div><div class="time">09:00</div><div class="meta">出發</div></div>
-              <div><div class="place">Kamenoi Hotel Aso</div><div class="meta">退房後出發，行李上車</div></div>
-            </div>
-          </div>
-
-          <div class="timeline timelinePlain">
-            <div class="tRow">
-              <div><div class="time">09:40–10:40</div><div class="meta">行車時間約30分鐘</div></div>
-              <div>
-                <div class="place">上色見熊野座神社</div>
-                <div class="meta">從停車場走至神社入口約 100 多公尺，穿過鳥居後是高達 100 多座石燈籠與 260 多段石階，青苔、藤蔓、石階與高聳杉木交織，形成令人難以言喻的綠色奇景。<br>📸 拍照點在石燈籠階梯中段</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="galleryWrap" aria-label="上色見熊野座神社 照片">
-            <div class="galleryRow" role="list">
-              <div class="gItem" role="listitem" data-caption="石燈籠階梯與杉木林"><img loading="lazy" src="day4/01.jpg" data-full="day4/01.jpg" alt="石燈籠階梯與杉木林"></div>
-              <div class="gItem" role="listitem" data-caption="神社本殿與林間光影"><img loading="lazy" src="day4/02.jpg" data-full="day4/02.jpg" alt="神社本殿與林間光影"></div>
-            </div>
-          </div>
-
-          <div class="timeline timelinePlain">
-            <div class="tRow">
-              <div><div class="time">11:30–12:10</div><div class="meta">行車時間約15分鐘</div></div>
-              <div>
-                <div class="place">白川水源</div>
-                <div class="meta">由阿蘇破火山口的地下水湧出，也是流經熊本市內的一級河川「白川」的源頭，獲環境廳（現為環境省）選為「日本名水百選」之一的知名水源，可自由從水池直接裝取泉水帶回。</div>
-              </div>
-            </div>
-          </div>
-<div class="galleryWrap" aria-label="白川水源 照片">
-            <div class="galleryRow" role="list">
-              <div class="gItem" role="listitem" data-caption="白川水源｜名水百選石碑"><img loading="lazy" src="day4/03.jpg" data-full="day4/03.jpg" alt="白川水源｜名水百選石碑"></div>
-              <div class="gItem" role="listitem" data-caption="白川水源｜清澈湧泉與水色"><img loading="lazy" src="day4/04.jpg" data-full="day4/04.jpg" alt="白川水源｜清澈湧泉與水色"></div>
-              <div class="gItem" role="listitem" data-caption="白川水源｜現場取水"><img loading="lazy" src="day4/05.jpg" data-full="day4/05.jpg" alt="白川水源｜現場取水"></div>
-            </div>
-          </div>
-
-          <div class="timeline timelinePlain">
-            <div class="tRow">
-              <div><div class="time">12:30–13:30</div><div class="meta">午餐</div></div>
-              <div><div class="place">阿蘇市區</div><div class="meta">現場決定</div></div>
-            </div>
-          </div>
-
-          <details style="margin-top:10px">
-            <summary><span class="sumText">🍽 午餐選擇</span><span class="chev">⌄</span></summary>
-            <div class="content">
-              
-              <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-                <li>
-                  <strong>🐂 <strong>赤牛丼（阿蘇代表料理）</strong><br>
-赤牛丼／赤牛定食：阿蘇最代表性的在地選擇（現場看候位決定）。<br>
-赤牛丼の店 赤牛屋（Akaushi‑ya）｜最人氣赤牛丼名店，肉香濃、份量足；尖峰時段需排隊。<br>
-あそ路（Asoji）｜在地食堂風，赤牛定食穩定，節奏快、不易踩雷。<br>
-レストラン アスペクタ（Restaurant Aspekta）｜靠近火山動線，可邊看山景邊吃赤牛。<br>
-赤牛丼屋 たらお（Tarao Akaushi Don）｜小店型，價格親切，適合想快速用餐。<br><br>
-🥢 <strong>定食／蕎麥麵（備案）</strong><br>
-若不想排赤牛丼或想吃清爽一點，阿蘇市區也有許多定食或蕎麥麵餐廳可快速用餐。</strong>：阿蘇市區餐廳很多，若不想排赤牛丼或想吃清爽一點，也有很多其他選擇。</li>
-              </ul>
-            </div>
-          </details>
-
-          <div class="timeline timelinePlain">
-            <div class="tRow">
-              <div>
-                <div class="time">14:20–15:10</div>
-              </div>
-              <div>
-                <div class="place">阿蘇火山（中岳）</div>
-                <div class="meta">阿蘇市區行車約 30–40 分鐘（含上山與停車等候）<br>停留約 45–60 分鐘　⚠️ 需視當日開放與火山警戒狀況</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="galleryWrap" aria-label="阿蘇火山（中岳） 照片">
-            <p class="galleryTitle">📷 阿蘇火山（中岳）</p>
-            <div class="galleryRow" role="list">
-              <div class="gItem" role="listitem" data-caption="中岳火山口"><img loading="lazy" src="day4/10.jpg" data-full="day4/10.jpg" alt="中岳火山口（參考照片）"></div>
-              <div class="gItem" role="listitem" data-caption="中岳火山口全景"><img loading="lazy" src="day4/11.jpg" data-full="day4/11.jpg" alt="中岳火山口全景（參考照片）"></div>
-              <div class="gItem" role="listitem" data-caption="火山口噴氣"><img loading="lazy" src="day4/12.jpg" data-full="day4/12.jpg" alt="火山口噴氣（參考照片）"></div>
-            </div>
-          </div>
-
-          <div class="links" style="margin-top:10px">
-            <a class="btn" href="day4/%E9%98%BF%E8%98%87%E4%B8%AD%E5%B2%B3%E7%81%AB%E5%B1%B1%E5%8F%A3%E5%8F%83%E8%A7%80.pdf" target="_blank" rel="noopener">📄 阿蘇中岳火山口參觀（PDF）</a>
-          </div>
-
-          <div class="timeline timelinePlain">
-            <div class="tRow">
-              <div><div class="time">15:20–16:20</div><div class="meta">景點</div></div>
-              <div>
-                <div class="place">草千里ヶ浜</div>
-                <div class="meta">海拔約 1100 米，可以欣賞到悠閒漫步的馬匹和氣勢磅礴、冒著煙的阿蘇山中岳火山口的景色。</div>
-              </div>
-            </div>
-          </div>
-<div class="galleryWrap" aria-label="草千里ヶ浜 照片">
-            <div class="galleryRow" role="list">
-              <div class="gItem" role="listitem" data-caption="草千里ヶ浜｜草原與馬匹"><img loading="lazy" src="day4/06.jpg" data-full="day4/06.jpg" alt="草千里ヶ浜｜草原與馬匹"></div>
-              <div class="gItem" role="listitem" data-caption="草千里ヶ浜｜水面倒影"><img loading="lazy" src="day4/07.jpg" data-full="day4/07.jpg" alt="草千里ヶ浜｜水面倒影"></div>
-              <div class="gItem" role="listitem" data-caption="草千里ヶ浜｜夕景與火山煙"><img loading="lazy" src="day4/08.jpg" data-full="day4/08.jpg" alt="草千里ヶ浜｜夕景與火山煙"></div>
-              <div class="gItem" role="listitem" data-caption="草千里ヶ浜｜星空"><img loading="lazy" src="day4/09.jpg" data-full="day4/09.jpg" alt="草千里ヶ浜｜星空（示意）"></div>
-            </div>
-          </div>
-
-          <div class="timeline timelinePlain">
-            <div class="tRow">
-              <div><div class="time">16:30–19:30</div><div class="meta">移動</div></div>
-              <div><div class="place">阿蘇 → 福岡市區</div><div class="meta">行車約 3 小時（含休息站）｜首選休息站：玖珠 SA（上り）｜備選：山田 SA（上り）</div></div>
-            </div>
-            <div class="tRow">
-              <div><div class="time">19:30</div></div>
-              <div>
-                <div class="place"><span class="act">還車</span>Budget Rent-a-car Tenjin-kita</div>
-                <div class="meta"><span class="act">入住</span>🏨 Cross Life 博多柳橋</div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </details>
-
-      <details style="margin-top:12px">
-        <summary><span class="sumText">🅱️ 方案 B｜阿蘇火山 → 太宰府 → 福岡</span><span class="chev">⌄</span></summary>
-        <div class="content">
-
-          <div class="timeline timelinePlain">
-            <div class="tRow">
-              <div><div class="time">09:00</div><div class="meta">出發</div></div>
-              <div>
-                <div class="place">Kamenoi Hotel Aso</div>
-                <div class="meta">退房後出發，行李上車</div>
-              </div>
-            </div>
-            <div class="tRow">
-              <div><div class="time">09:40–10:30</div></div>
-              <div>
-                <div class="place">阿蘇火山（中岳）</div>
-                <div class="meta">Kamenoi Hotel Aso 出發後行車約 25–35 分鐘，含停車緩衝抓 40–50 分鐘<br>停約 45–60 分鐘｜⚠️ 需視當日開放與火山警戒狀況</div>
-              </div>
-            </div>
-
-            <div class="galleryWrap" aria-label="阿蘇火山（中岳） 照片">
-              <p class="galleryTitle">📷 阿蘇火山（中岳）</p>
-              <div class="galleryRow" role="list">
-                <div class="gItem" role="listitem" data-caption="中岳火山口"><img loading="lazy" src="day4/10.jpg" data-full="day4/10.jpg" alt="中岳火山口"></div>
-                <div class="gItem" role="listitem" data-caption="中岳火山口全景"><img loading="lazy" src="day4/11.jpg" data-full="day4/11.jpg" alt="中岳火山口全景"></div>
-                <div class="gItem" role="listitem" data-caption="火山口噴氣"><img loading="lazy" src="day4/12.jpg" data-full="day4/12.jpg" alt="火山口噴氣"></div>
-              </div>
-            </div>
-
-<div class="links" style="margin-top:10px">
-              <a class="btn" href="day4/%E9%98%BF%E8%98%87%E4%B8%AD%E5%B2%B3%E7%81%AB%E5%B1%B1%E5%8F%A3%E5%8F%83%E8%A7%80.pdf" target="_blank" rel="noopener">📄 阿蘇中岳火山口參觀（PDF）</a>
-            </div>
-
-            <details style="margin-top:10px">
-              <summary><span class="sumText">🍽 午餐選擇 / 阿蘇市區</span><span class="chev">⌄</span></summary>
-              <div class="content">
-                <p style="margin:0 0 6px;font-weight:700">🍽 在阿蘇火山周邊</p>
-                <p style="margin:6px 0 6px;font-weight:700">⭐ 景觀餐廳／正餐</p>
-                <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-                  <li><strong>草千里レストハウス (Kusasenri Rest House)</strong>｜就在草千里旁，定食、烏龍麵、咖哩為主；景觀最好、動線最順。</li>
-                  <li><strong>火の山かふぇ (Hinoyama Café)</strong>｜高原景觀餐廳，在地食材定食；用餐時可欣賞阿蘇山景。</li>
-                </ul>
-
-                <p style="margin:10px 0 6px;font-weight:700">☕ 咖啡／輕食休息</p>
-                <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-                  <li><strong>カフェ・スヴニール (Cafe Souvenir)</strong>｜草千里附近，咖啡與甜點為主，適合火山行程後短暫休息。</li>
-                  <li><strong>ASO MILK FACTORY（阿部牧場）</strong>｜牛乳、霜淇淋、輕食；若不想吃正餐，是很好的備案。</li>
-                </ul>
-
-                <p style="margin:12px 0 6px;font-weight:700">🍽 阿蘇市區</p>
-                <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
-                  <li>
-                    <strong>赤牛丼／赤牛定食</strong>：阿蘇最代表性的在地料理（現場看候位決定）。
-                    <ul style="margin-top:6px;padding-left:16px">
-                      <li><strong>赤牛丼の店 赤牛屋 (Akaushi-ya)</strong>｜最人氣赤牛丼名店，肉香濃、份量足；尖峰時段需排隊。</li>
-                      <li><strong>あそ路 (Asoji)</strong>｜在地食堂風格，赤牛定食穩定，節奏快、不易踩雷。</li>
-                      <li><strong>レストラン アスペクタ (Restaurant Aspecta)</strong>｜靠近火山動線，可邊看山景邊吃赤牛。</li>
-                      <li><strong>赤牛丼屋 たらお (Tarao Akaushi-don)</strong>｜小店型，價格親切，適合想快速用餐。</li>
-                    </ul>
-                  </li>
-                  <li style="margin-top:6px"><strong>定食／蕎麥麵</strong>：阿蘇市區餐廳很多，若不想排赤牛丼或想吃清爽一點，可隨機選一家定食或蕎麥麵店。</li>
-                </ul>
-              </div>
-            </details>
-
-            <div class="timeline timelinePlain">
-              <div class="tRow">
-                <div><div class="time">13:00–15:00</div><div class="meta">移動</div></div>
-                <div><div class="place">阿蘇 → 太宰府</div><div class="meta">行車約 2–2.5 小時（含休息）｜建議停靠：玖珠 SA（上り）｜備選：山田 SA（上り）</div></div>
-              </div>
-
-              <div class="tRow">
-                <div><div class="time">15:00–16:30</div><div class="meta">參拜</div></div>
-                <div>
-                  <div class="place">太宰府天滿宮</div>
-                  <div class="meta">太宰府天滿宮是日本最重要的神社之一，主祭神是菅原道真，又名「天神」，即學問、文化及藝術之神。<br>建議停車：太宰府市營停車場。</div>
-                </div>
-              </div>
-
-              <div class="galleryWrap" aria-label="太宰府天滿宮 照片">
-                <p class="galleryTitle">📷 太宰府天滿宮・表參道散策</p>
-                <div class="galleryRow" role="list">
-                  <div class="gItem" role="listitem" data-caption="太宰府天滿宮樓門"><img loading="lazy" src="day4/13.jpg" data-full="day4/13.jpg" alt="太宰府天滿宮樓門"></div>
-                  <div class="gItem" role="listitem" data-caption="境內梅花與心字池"><img loading="lazy" src="day4/14.jpg" data-full="day4/14.jpg" alt="境內梅花與心字池"></div>
-                  <div class="gItem" role="listitem" data-caption="御神牛"><img loading="lazy" src="day4/15.jpg" data-full="day4/15.jpg" alt="御神牛"></div>
-                  <div class="gItem" role="listitem" data-caption="隈研吾設計的星巴克"><img loading="lazy" src="day4/16.jpg" data-full="day4/16.jpg" alt="隈研吾設計的星巴克"></div>
-                  <div class="gItem" role="listitem" data-caption="全國唯一的五角合格碗一蘭"><img loading="lazy" src="day4/17.jpg" data-full="day4/17.jpg" alt="全國唯一的五角合格碗一蘭"></div>
-                  <div class="gItem" role="listitem" data-caption="太宰府天滿宮境內導覽圖"><img loading="lazy" src="day4/神社境內地圖.jpg" data-full="day4/神社境內地圖.jpg" alt="太宰府天滿宮境內導覽圖"></div>
-                  <div class="gItem" role="listitem" data-caption="太宰府周邊散策"><img loading="lazy" src="day4/散策.jpg" data-full="day4/散策.jpg" alt="太宰府散策動線示意"></div>
-                </div>
-              </div>
-
-              <div class="tRow">
-                <div><div class="time">17:30–18:30</div><div class="meta">移動</div></div>
-                <div><div class="place">太宰府 → 福岡市區</div></div>
-              </div>
-              <div class="tRow">
-                <div><div class="time">19:30</div></div>
-                <div>
-                  <div class="place"><span class="act">還車</span>Budget Rent-a-car Tenjin-kita</div>
-                  <div class="meta"><span class="act">入住</span>🏨 Cross Life 博多柳橋</div>
-                </div>
-              </div>
-            </div>
-
-</div>
-        </details>
-
-      </div>
-
-      <div class="links linksSection">
-        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E4%B8%8A%E8%89%B2%E8%A6%8B%E7%86%8A%E9%87%8E%E5%BA%A7%E7%A5%9E%E7%A4%BE&travelmode=driving">🚗 導航｜上色見熊野座神社</a>
-        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E7%99%BD%E5%B7%9D%E6%B0%B4%E6%BA%90&travelmode=driving">🚗 白川水源</a>
-        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E9%98%BF%E8%98%87%E4%B8%AD%E5%B2%B3%E7%81%AB%E5%B1%B1%E5%8F%A3&travelmode=driving">🌋 導航｜阿蘇火山（中岳）</a>
-        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E8%8D%89%E5%8D%83%E9%87%8C%E3%83%B6%E6%B5%9C&travelmode=driving">🚗 草千里ヶ浜</a>
-        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E5%B1%B1%E7%94%B0%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%A8%E3%83%AA%E3%82%A2%20%28%E4%B8%8A%E3%82%8A%29&travelmode=driving">🚗 休息站｜山田SA（建議）</a>
-        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E7%8E%96%E7%8F%A0%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%A8%E3%83%AA%E3%82%A2%20%28%E4%B8%8A%E3%82%8A%29&travelmode=driving">🚗 休息站｜玖珠SA（次要）</a>
-        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E5%A4%AA%E5%AE%B0%E5%BA%9C%E5%A4%A9%E6%BB%BF%E5%AE%AE&travelmode=driving">🚗 太宰府天滿宮</a>
-        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Cross%20Life%20%E5%8D%9A%E5%A4%9A%E6%9F%B3%E6%A9%8B&travelmode=driving">🚗Cross Life 博多柳橋</a>
-        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Budget%20Rent-a-car%20Tenjin-kita&travelmode=driving">🚗 導航｜Budget Rent-a-car Tenjin-kita</a>
-      </div>
-
-    </div></div>
+    <!-- Day4 內容已清空，等待新行程表貼回 -->
+  </div></div>
 </section>
 
 <section class="panel" id="day5" role="tabpanel" aria-label="Day 5 行程">
@@ -1474,8 +1197,7 @@ details.detailsTight .content{
               <span class="chev">⌄</span>
             </summary>
             <div class="content" style="padding-top:0">
-
-              <div style="margin-top:10px; line-height:1.7; font-size:14px;">
+<div style="margin-top:10px; line-height:1.7; font-size:14px;">
                 🚶‍♂️ 步行　經春吉街區－位於天神與博多之間，在地生活氣息濃厚的巷弄小店與靜謐住宅區。距離約 1.5 公里／步行時間約 20–25 分鐘。<br>
                 🚌 公車　／　🚇 地鐵　／　🚕 計程車
               </div>
@@ -1556,8 +1278,7 @@ details.detailsTight .content{
               <span class="chev">⌄</span>
             </summary>
             <div class="content" style="padding-top:0">
-
-              <div class="noteTransit--tight">
+<div class="noteTransit--tight">
                 <div>搭乘公車／地鐵步行時間仍長，進入公園也要走，故直接搭乘計程車 🚕。</div>
                 <div>行車時間：約 12–20 分／費用：約 1500–2000 円（實際依交通、時間略有差）</div>
               </div>
@@ -1652,7 +1373,7 @@ details.detailsTight .content{
         </div>
       </div>
 
-    </div>
+</div>
 
   </div></div>
 </section>
@@ -1805,8 +1526,7 @@ var modal = qs('.lbModal');
           if(e.key === 'ArrowRight') next();
           if(e.key === 'ArrowLeft') prev();
         });
-
-        document.addEventListener('click', function(e){
+ document.addEventListener('click', function(e){
           var thumb = e.target && e.target.closest && e.target.closest('.galleryRow .gItem img');
           if(!thumb) return;
           if(thumb.getAttribute('data-no-lightbox') === '1') return;
@@ -1856,4 +1576,3 @@ var modal = qs('.lbModal');
 
 </body>
 </html>
-
