@@ -197,7 +197,8 @@ summary::marker{content:""}
       margin:0 0 4px;
       line-height:1.35;
     }
-    .moveAlt{
+
+ .moveAlt{
       margin-top:6px;
       color:var(--muted);
       font-size:12px;
@@ -306,7 +307,8 @@ summary::marker{content:""}
     }
     .gItem img{width:100%;height:100%;object-fit:cover;display:block}
 
- /* ✅ 縮圖文字說明（不依賴 JS；iOS 檔案預覽不跑 JS 也能顯示） */
+
+/* ✅ 縮圖文字說明（不依賴 JS；iOS 檔案預覽不跑 JS 也能顯示） */
     .gItem[data-caption]::after{
       content: attr(data-caption);
       position:absolute;
@@ -391,6 +393,8 @@ summary::marker{content:""}
   padding-left:0 !important;
   padding-right:0 !important;
 }
+
+
 #day2 .timeline .galleryWrap[aria-label="停車照片"] .galleryTitle,
 #day2 .timeline .galleryWrap[aria-label="停車照片"] .galleryRow{
   padding-left:0 !important;
@@ -505,6 +509,89 @@ summary::marker{content:""}
   transition:background .15s ease, transform .15s ease;
 }
 
+
+btn:hover{
+  background:#e5e7eb;
+  transform:translateY(-1px);
+}
+
+.btn:active{
+  transform:translateY(0);
+}
+
+/* 按鈕容器 */
+.links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:10px;
+}
+
+
+/* ✅ Mapcode 集中頁：極簡清單（不走時間軸，避免跑版） */
+.mapPage .mapSection{margin-top:12px}
+.mapPage .mapSection > summary{padding:12px 12px; font-size:15px}
+.mapList{display:flex;flex-direction:column;gap:10px}
+.mapItem{border:1px solid var(--line);border-radius:14px;background:#fff;padding:10px 12px}
+.mapName{font-weight:800;line-height:1.35}
+.mapMeta{margin-top:6px;color:var(--muted);font-size:14px;line-height:1.6}
+
+/* ✅ 通用外框：避免某些瀏覽器/預覽模式下外框消失 */
+.frame{border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden}
+.framePad{padding:12px}
+.edgeBleed{
+  margin-left:-12px !important;
+  margin-right:-12px !important;
+  width:calc(100% + 24px);
+}
+.edgeBleed.galleryWrap .galleryTitle,
+.edgeBleed.galleryWrap .galleryRow,
+.edgeBleed.links{
+  padding-left:0;
+  padding-right:0;
+}
+.edgeBleed.detailsTight,
+details.edgeBleed{
+  border-radius:12px;
+}
+details.detailsTight{
+  margin-top:6px;
+}
+details.detailsTight summary{
+  padding:10px 12px;
+}
+details.detailsTight .content{
+  padding:0 12px 10px;
+}
+
+/* ===== Day4 專用樣式（獨立編輯頁回填主行程） ===== */
+#day4 .timeline{padding:12px}
+#day4 .tRow{grid-template-columns:74px 1fr;gap:2px;padding:9px 4px;border-bottom:none;align-items:start}
+#day4 .tRow > div:last-child{padding-top:0}
+#day4 .time{line-height:1.05;display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;text-align:left;margin-top:0}
+#day4 .place{line-height:1.18}
+#day4 .meta{font-size:11.5px;line-height:1.6;margin:2px 0 0 0;padding-left:16px;text-indent:-16px;display:block}
+#day4 .metaList{color:var(--muted);font-size:11.5px;line-height:1.6;margin:2px 0 0 0;padding-left:0;list-style:none;display:block;gap:0}
+#day4 .metaList li{position:relative;margin:2px 0;padding-left:16px;display:block}
+#day4 .metaList li::before{content:"•";position:absolute;left:0;top:0.1em;width:16px;text-align:center;color:var(--muted)}
+#day4 .navGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin-top:10px}
+#day4 .navGrid .btn{width:100%;justify-content:center}
+#day4 .linksSection--tight{margin:10px 0 6px}
+#day4 .warningCard{margin:6px 0 14px;border:1px solid #dbe3f0;border-radius:18px;background:linear-gradient(180deg,#f8fbff 0%, #f3f7fd 100%);padding:14px 16px;box-shadow:0 4px 14px rgba(37,99,235,.06)}
+#day4 .warningHead{display:flex;align-items:center;gap:8px;font-weight:900;font-size:16px;margin-bottom:6px;letter-spacing:.2px}
+#day4 .warningIcon{width:28px;height:28px;border-radius:999px;display:grid;place-items:center;background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.24);flex:0 0 28px}
+#day4 .warningText{color:var(--muted);font-size:13px;margin:0 0 10px}
+#day4 .galleryRow{gap:8px;padding:0;margin:8px -12px 14px -12px;scroll-padding:12px}
+#day4 .gItem{width:240px !important;border-radius:16px}
+#day4 .gCaption{position:absolute;left:8px;right:8px;bottom:8px;background:rgba(17,24,39,.55);color:#fff;font-size:12px;padding:6px 10px;border-radius:999px;backdrop-filter:blur(2px)}
+#day4 details{margin-top:10px}
+#day4 .timeline details{margin-left:-12px;margin-right:-12px}
+#day4 .timeline details .galleryRow{margin-top:0}
+@media (max-width: 640px){
+  #day4 .tRow{grid-template-columns:72px 1fr;gap:8px;padding:12px}
+}
+
+
 .btn:hover{
   background:#e5e7eb;
   transform:translateY(-1px);
@@ -585,16 +672,21 @@ details.detailsTight .content{
 @media (max-width: 640px){
   #day4 .tRow{grid-template-columns:72px 1fr;gap:8px;padding:12px}
 }
+
+
+
+
 </style>
 </head>
 <body>
   <div class="wrap">
     <header>
       <div>
-        <h1>福岡・由布院・阿蘇 <a href="https://www.google.com/maps/d/viewer?mid=14d0NUVU1_hLuYWMW2iugAFUnhmY5kg8" target="_blank" rel="noopener" style="text-decoration:none;margin-left:6px">🗺️</a></h1>
+        <h1>福岡・由布院・阿蘇 <a href="https://www.google.com/maps/d/viewer?mid=14d0NUVU1_hLuYWMW2iugAFUnhmY5kg8" target="_blank" rel="noopener" style="text-decoration:none;margin-left:6px">🗺️ <a href="https://tenki.jp/week/9/" target="_blank" rel="noopener" style="margin-left:6px;color:#2563eb;font-weight:600;font-size:13px;">🌞九州一週天氣</a>
       </div>
       <div class="sub">03/23（一）→ 03/28（六）</div>
     </header>
+
 
 <section style="margin-bottom:14px">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
@@ -703,7 +795,8 @@ details.detailsTight .content{
                   <div class="place">🥩燒肉 Hayato 博多站東店</div>
                   <div class="meta">提供中文介面以平板進行點餐｜💰套餐 ¥5,280 日圓（含稅）<br>
                   特等牛舌、特選牛排拼盤、內臟拼盤、豬里脊＆赤雞拼盤、特選五花肉、特選牛里脊、泡菜拼盤、醋醬拌高麗菜、烤蔬菜（3 種每天變換）、韓式泡飯／湯品／韓式拌飯／白飯（4 選 1）</div>
-                </div>
+
+</div>
               </div>
             </div>
 
@@ -817,6 +910,7 @@ details.detailsTight .content{
             </details>
           </div>
         </div>
+
 
         <div class="tRow">
           <div class="alignPad" style="grid-column:1 / -1; padding:6px 12px 2px 12px; font-size:16px; font-weight:600; color:var(--text); opacity:.85; line-height:1.6;">
@@ -995,7 +1089,7 @@ details.detailsTight .content{
         <a class="btn" target="_blank" rel="noopener" href="https://maps.google.com/?daddr=%E6%97%85%E9%A4%A8%E8%8F%AF%E6%9F%9A%20%E7%94%B1%E5%B8%83%E9%99%A2&directionsmode=driving">🚗 旅館華柚</a>
       </div>
 
-    </div>
+</div>
   </div>
 </section>
 
@@ -1098,8 +1192,7 @@ details.detailsTight .content{
               <li>❌<strong>Yamatake - Natural Root Vegetable Cuisine（Yama no Ibuki）</strong>｜自然薯與在地蔬菜料理，清爽不油。</li>
               <li>❌<strong>黑川溫泉 予祝 (よしゅく)</strong>｜以熊本和牛料理聞名，熊本赤牛漢堡排是招牌必點美食，每日限量 15 份。</li>
             </ul>
-
-            <p style="margin:10px 0 6px;font-weight:700">☕ 咖啡・甜點・輕食</p>
+<p style="margin:10px 0 6px;font-weight:700">☕ 咖啡・甜點・輕食</p>
             <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
               <li><strong>Au Pan & Coffee</strong>｜麵包＋咖啡為主的輕食型選擇，位在第四停車場附近，離老街中心(丸鈴橋)走路約 10 分鐘以上。</li>
               <li>❌<strong>SLOW WALK CAFE</strong>｜咖啡＋輕食，適合拉長休息時間或下雨備用。</li>
@@ -1182,7 +1275,6 @@ details.detailsTight .content{
 
   </section>
 </section>
-
 <section class="panel" id="day4" role="tabpanel" aria-label="Day 4 行程">
   <div class="dayHeader">
     <div class="dayTitle"><div class="num">4</div><div class="tblock"><h2><h2>阿蘇・太宰府天滿宮</h2></h2></div></div>
@@ -1303,8 +1395,9 @@ details.detailsTight .content{
             <div class="meta">🚗 建議停靠：廣川服務區（SA，上行／福岡方向）。</div>
           </div>
         </div>
+      </details>
 
-        <div class="tRow">
+<div class="tRow">
           <div class="time">16:30–<br>18:00</div>
           <div>
             <div class="place">太宰府天滿宮<a href="https://www.dazaifutenmangu.or.jp/tw/discover-dazaifu-tenmangu/" target="_blank" rel="noopener">🌎</a></div>
@@ -1400,7 +1493,7 @@ details.detailsTight .content{
           <div class="gItem" role="listitem" data-full="day4/10.jpg" data-caption="中岳火山口空拍"><img src="day4/10.jpg" loading="lazy" alt="中岳火山口空拍"><div class="gCaption">中岳火山口空拍</div></div>
         </div>
 
-        <div class="tRow">
+<div class="tRow">
           <div class="time">10:45–<br>11:45</div>
           <div>
             <div class="place">草千里ヶ浜</div>
@@ -1599,7 +1692,8 @@ details.detailsTight .content{
                   <div class="galleryRow galleryRow--flush" role="list">
                     <div class="gItem" role="listitem" data-caption="福岡大佛"><img loading="lazy" src="day5/13.jpg" data-full="day5/13.jpg" alt="福岡大佛"></div>
                     <div class="gItem" role="listitem" data-caption="東長寺入口超大櫻花樹"><img loading="lazy" src="day5/14.jpg" data-full="day5/14.jpg" alt="東長寺入口超大櫻花樹"></div>
-                    <div class="gItem" role="listitem" data-caption="五重塔與櫻花"><img loading="lazy" src="day5/15.jpg" data-full="day5/15.jpg" alt="五重塔與櫻花"></div>
+
+<div class="gItem" role="listitem" data-caption="五重塔與櫻花"><img loading="lazy" src="day5/15.jpg" data-full="day5/15.jpg" alt="五重塔與櫻花"></div>
                     <div class="gItem" role="listitem" data-caption="櫻花與五重塔"><img loading="lazy" src="day5/16.jpg" data-full="day5/16.jpg" alt="櫻花與五重塔"></div>
                     <div class="gItem" role="listitem" data-caption="櫻花特寫"><img loading="lazy" src="day5/17.jpg" data-full="day5/17.jpg" alt="櫻花特寫"></div>
                   </div>
@@ -1699,7 +1793,7 @@ details.detailsTight .content{
           <div class="place">🛍 天神站附近｜逛街地圖</div>
           <div class="meta">以天神地下街為起點：天神地下街 → PARCO → Solaria Plaza → 三越 → 大丸。</div>
 
-          <div style="margin-top:10px;line-height:1.8;font-size:14px;color:var(--text)">
+<div style="margin-top:10px;line-height:1.8;font-size:14px;color:var(--text)">
             📍 <strong>天神地下街</strong>：地下商店街，雨天好走，藥妝／雜貨／伴手禮齊全，連接各大百貨。<br>
             🛍 <strong>PARCO（天神）</strong>：年輕潮流感強，動漫聯名、Loft、無印良品，流行品牌多。<br>
             🛍 <strong>Solaria Plaza</strong>：設計感與質感路線，女裝品牌多，咖啡廳好坐。<br>
@@ -1789,7 +1883,8 @@ details.detailsTight .content{
             </div>
           </div>
         </details>
- <details class="mapSection">
+
+<details class="mapSection">
           <summary><span class="sumText sumText--nowrap">Day 4｜阿蘇・太宰府・博多</span><span class="chev">⌄</span></summary>
           <div class="content">
             <div class="mapList">
@@ -1921,3 +2016,4 @@ var modal = qs('.lbModal');
 
 </body>
 </html>
+
