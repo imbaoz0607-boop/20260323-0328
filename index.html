@@ -3,8 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>福岡・由布院・阿蘇｜6日行程</title>
+  <title><h1><h1>福岡・由布院・阿蘇 <a href="https://www.google.com/maps/d/viewer?mid=14d0NUVU1_hLuYWMW2iugAFUnhmY5kg8" target="_blank" rel="noopener" style="text-decoration:none;margin-left:6px">🗺️</a></h1></h1></title>
   <style>
+
     :root{
       --bg:#f6f7fb;
       --surface:#ffffff;
@@ -555,13 +556,40 @@ details.detailsTight summary{
 details.detailsTight .content{
   padding:0 12px 10px;
 }
+
+/* ===== Day4 專用樣式（獨立編輯頁回填主行程） ===== */
+#day4 .timeline{padding:12px}
+#day4 .tRow{grid-template-columns:74px 1fr;gap:2px;padding:9px 4px;border-bottom:none;align-items:start}
+#day4 .tRow > div:last-child{padding-top:0}
+#day4 .time{line-height:1.05;display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;text-align:left;margin-top:0}
+#day4 .place{line-height:1.18}
+#day4 .meta{font-size:11.5px;line-height:1.6;margin:2px 0 0 0;padding-left:16px;text-indent:-16px;display:block}
+#day4 .metaList{color:var(--muted);font-size:11.5px;line-height:1.6;margin:2px 0 0 0;padding-left:0;list-style:none;display:block;gap:0}
+#day4 .metaList li{position:relative;margin:2px 0;padding-left:16px;display:block}
+#day4 .metaList li::before{content:"•";position:absolute;left:0;top:0.1em;width:16px;text-align:center;color:var(--muted)}
+#day4 .navGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin-top:10px}
+#day4 .navGrid .btn{width:100%;justify-content:center}
+#day4 .linksSection--tight{margin:10px 0 6px}
+#day4 .warningCard{margin:6px 0 14px;border:1px solid #dbe3f0;border-radius:18px;background:linear-gradient(180deg,#f8fbff 0%, #f3f7fd 100%);padding:14px 16px;box-shadow:0 4px 14px rgba(37,99,235,.06)}
+#day4 .warningHead{display:flex;align-items:center;gap:8px;font-weight:900;font-size:16px;margin-bottom:6px;letter-spacing:.2px}
+#day4 .warningIcon{width:28px;height:28px;border-radius:999px;display:grid;place-items:center;background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.24);flex:0 0 28px}
+#day4 .warningText{color:var(--muted);font-size:13px;margin:0 0 10px}
+#day4 .galleryRow{gap:8px;padding:0;margin:8px -12px 14px -12px;scroll-padding:12px}
+#day4 .gItem{width:240px !important;border-radius:16px}
+#day4 .gCaption{position:absolute;left:8px;right:8px;bottom:8px;background:rgba(17,24,39,.55);color:#fff;font-size:12px;padding:6px 10px;border-radius:999px;backdrop-filter:blur(2px)}
+#day4 details{margin-top:10px}
+#day4 .timeline details{margin-left:-12px;margin-right:-12px}
+#day4 .timeline details .galleryRow{margin-top:0}
+@media (max-width: 640px){
+  #day4 .tRow{grid-template-columns:72px 1fr;gap:8px;padding:12px}
+}
 </style>
 </head>
 <body>
   <div class="wrap">
     <header>
       <div>
-        <h1>福岡・由布院・阿蘇｜6日行程</h1>
+        <h1>福岡・由布院・阿蘇 🗺️</h1>
       </div>
       <div class="sub">03/23（一）→ 03/28（六）</div>
     </header>
@@ -724,7 +752,7 @@ details.detailsTight .content{
  <div class="tRow">
           <div><div class="time"></div></div>
           <div class="subline">
-            <details class="alignPad" style="margin-top:0">
+           <details class="alignPad" style="margin-top:-12px">
               <summary><span class="sumText">🚗 取車前注意事項 / 行車重點提醒</span><span class="chev">⌄</span></summary>
               <div class="dContent">
                 <div class="dSplit">
@@ -791,8 +819,19 @@ details.detailsTight .content{
 
         <div class="tRow">
           <div class="alignPad" style="grid-column:1 / -1; padding:6px 12px 2px 12px; font-size:16px; font-weight:600; color:var(--text); opacity:.85; line-height:1.6;">
-            📍由布院（又稱湯布院），以夢幻的金鱗湖、時尚的湯之坪街道和精緻的溫泉旅館聞名，是日本湧泉量第二大的著名溫泉勝地。
-          </div>
+            <div style="font-size:14px; line-height:1.8; color:var(--text);">
+📍由布院（又稱湯布院），是日本湧泉量第二大的著名溫泉勝地。<br>
+<div style="font-size:13px; line-height:1.8; color:var(--text);">
+
+．金鱗湖 (Kinrin Lake)：由布院最著名的地標，因湖底湧出溫泉與清水，在冬日的清晨容易形成夢幻的晨霧。湖畔還有特別的水上鳥居（天祖神社）。<br>
+
+．湯之坪街道 (Yunotsubo Kaido)：連接車站與金鱗湖的主要商店街，沿途充滿各式在地小吃、甜點與特色工藝品店。<br>
+
+．由布院童話村 (Yufuin Floral Village)：以英國科茨沃爾德為藍本打造的童話小鎮，風格唯美，適合拍照打卡。<br>
+
+．由布岳 (Mount Yufu)：由布院的象徵，外形優美有「豐後富士」之稱，是登山客與風景攝影的焦點。
+
+</div>
         </div>
 
         <div class="tRow">
@@ -868,9 +907,8 @@ details.detailsTight .content{
         <div class="tRow">
           <div><div class="time"></div></div>
           <div class="subline">
-            <div class="galleryWrap alignWithMain" aria-label="九重夢大吊橋照片">
-              <p class="galleryTitle">📷 九重「夢」大吊橋</p>
-              <div class="galleryRow galleryRow--flush" role="list">
+           <div class="galleryWrap alignWithMain" aria-label="九重夢大吊橋照片" style="margin-top:4px">
+                    <div class="galleryRow" role="list">
                 <div class="gItem" role="listitem" data-caption="長者原｜阿蘇九重國立公園入口"><img loading="lazy" src="day2/16.jpg" data-full="day2/16.jpg" alt="長者原入口"></div>
                 <div class="gItem" role="listitem" data-caption="長者原地標｜CHOJABARU"><img loading="lazy" src="day2/17.jpg" data-full="day2/17.jpg" alt="長者原地標"></div>
                 <div class="gItem" role="listitem" data-caption="山並快速道路草原高原景觀"><img loading="lazy" src="day2/18.jpg" data-full="day2/18.jpg" alt="山並快速道路"></div>
@@ -896,7 +934,7 @@ details.detailsTight .content{
         <li>
           <span class="metaIcon">⚠</span>
           <span class="metaText">
-          狹窄路段：從國道 442 號轉進旅館華柚最後 1–2 公里，路寬會明顯變窄（僅能容納 1.5 台車寬），且兩側多為樹林。若對向有來車，請找稍寬處減速會車。
+          狹窄路段：從國道 442 號轉進旅館華柚最後1–2公里，路寬會明顯變窄(僅能容納 1.5 台車寬），且兩側多為樹林。若對向有來車，請找稍寬處減速會車。
           </span>
         </li>
 
@@ -934,17 +972,16 @@ details.detailsTight .content{
           </div>
         </div>
 
-      <details class="alignWithMain" style="margin-top:10px">
-        <summary><span class="sumText">☔ 雨天備案</span><span class="chev">⌄</span></summary>
-        <div class="dContent">
-          <ul class="dList">
-            <li><strong>由布院：</strong>改走室內，如 COMICO美術館、彩色玻璃美術館；或是享用甜點：專賣抹茶與地酒義式冰淇淋的 由布院之森（Telato）、室內空間舒適適合躲雨享用銅鑼燒的 鞠智 cucuchi。</li>
-            <li><strong>九重：</strong>若霧大看不見瀑布，直接放棄吊橋，直奔 <strong>瀨之本休息站</strong> 採買。</li>
-            <li><strong>終點：</strong>提早 Check-in 旅館華柚，享受雨中露天溫泉。</li>
-          </ul>
-        </div>
-      </details>
-
+     <details class="edgeBleed" style="margin-top:10px">
+  <summary><span class="sumText">☔ 雨天備案</span><span class="chev">⌄</span></summary>
+  <div class="dContent">
+    <ul class="dList">
+      <li><strong>由布院：</strong>改走室內，如 COMICO美術館、彩色玻璃美術館；或是享用甜點：專賣抹茶與地酒義式冰淇淋的由布院之森（Telato）、室內空間舒適適合躲雨享用銅鑼燒的 鞠智 cucuchi。</li>
+      <li><strong>九重：</strong>若霧大看不見瀑布，直接放棄吊橋，直奔 <strong>瀨之本休息站</strong> 採買。</li>
+      <li><strong>終點：</strong>提早 Check-in 旅館華柚，享受雨中露天溫泉。</li>
+    </ul>
+  </div>
+</details>
       <div class="links linksSection">
         <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E5%B1%B1%E7%94%B0%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%A8%E3%83%AA%E3%82%A2%20%28%E4%B8%8B%E3%82%82%E3%82%8A%29&travelmode=driving">🚗 休息站｜山田SA（建議）</a>
         <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E7%8E%96%E7%8F%A0%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%A8%E3%83%AA%E3%82%A2%20%28%E4%B8%8B%E3%82%82%E3%82%8A%29&travelmode=driving">🚗 休息站｜玖珠SA（次要）</a>
@@ -1145,12 +1182,318 @@ details.detailsTight .content{
 
 <section class="panel" id="day4" role="tabpanel" aria-label="Day 4 行程">
   <div class="dayHeader">
-    <div class="dayTitle"><div class="num">4</div><div class="tblock"><h2>阿蘇 → 福岡｜A / B 兩套方案</h2></div></div>
+    <div class="dayTitle"><div class="num">4</div><div class="tblock"><h2>阿蘇 → 福岡</h2></div></div>
     <div class="dayHeaderRight"><div class="dayDateRight">03/26（四）</div></div>
   </div>
 
   <div class="dayBody"><div class="content">
-    <!-- Day4 內容已清空，等待新行程表貼回 -->
+    <div class="timeline">
+      <div class="tRow">
+        <div class="time">09:00~</div>
+        <div>
+          <div class="place">Kamenoi Hotel Aso</div>
+          <div class="meta">退房前往上色見熊野座神社。會翻越阿蘇的外輪山，先走一段上坡進入山區，S型彎道較多，再下坡進入南阿(高森町)。</div>
+        </div>
+      </div>
+
+      <div class="tRow">
+        <div class="time">09:40–<br>10:40</div>
+        <div>
+          <div class="place">上色見熊野座神社</div>
+          <ul class="metaList">
+            <li>停車場走至神社（入口處有登山杖可自行使用），從停車場開始走到神社來回約30–40分鐘，到穿戶岩則來回約抓1小時。</li>
+            <li>共400多公尺，280個石階梯，97個石燈籠。</li>
+            <li>人氣動漫《螢火蟲之森》原型，青苔、藤蔓、石階與高聳杉木交織，形成令人難以言喻的綠色奇景。</li>
+          </ul>
+          <div class="meta">📸 拍照點：通往異世界階梯的石階與杉木林景色；進入參道後的第二個鳥居（二之鳥居）與長長石階同時入鏡。</div>
+          <div class="meta">⚠️ 石階多部分坡度陡且濕滑，務必小心行走。</div>
+          <div class="meta">⚠️ 停車場自助蔬果販賣處可購買御朱印。</div>
+          <div class="meta">⚠️ 洗手間在停車場附近，鳥居入口旁邊。</div>
+        </div>
+      </div>
+
+      <div class="galleryRow" aria-label="上色見熊野座神社照片" role="list">
+        <div class="gItem" role="listitem" data-full="day4/1111.jpg"><img src="day4/1111.jpg" loading="lazy" alt="上色見熊野座神社入口"><div class="gCaption">上色見熊野座神社入口</div></div>
+        <div class="gItem" role="listitem" data-full="day4/2222.jpg"><img src="day4/2222.jpg" loading="lazy" alt="洗手間位置"><div class="gCaption">洗手間位置</div></div>
+        <div class="gItem" role="listitem" data-full="day4/3333.jpg"><img src="day4/3333.jpg" loading="lazy" alt="螢火蟲之森海報"><div class="gCaption">《螢火蟲之森》海報</div></div>
+        <div class="gItem" role="listitem" data-full="day4/4444.jpg"><img src="day4/4444.jpg" loading="lazy" alt="動畫場景階梯"><div class="gCaption">動畫場景階梯</div></div>
+        <div class="gItem" role="listitem" data-full="day4/20.jpg"><img src="day4/20.jpg" loading="lazy" alt="石燈籠參道"><div class="gCaption">石燈籠參道</div></div>
+        <div class="gItem" role="listitem" data-full="day4/21.jpg"><img src="day4/21.jpg" loading="lazy" alt="杉木林階梯"><div class="gCaption">杉木林階梯</div></div>
+        <div class="gItem" role="listitem" data-full="day4/22.jpg"><img src="day4/22.jpg" loading="lazy" alt="上色見熊野座神社本殿"><div class="gCaption">上色見熊野座神社本殿</div></div>
+        <div class="gItem" role="listitem" data-full="day4/23.jpg"><img src="day4/23.jpg" loading="lazy" alt="穿戶岩"><div class="gCaption">穿戶岩</div></div>
+        <div class="gItem" role="listitem" data-full="day4/25.jpg"><img src="day4/25.jpg" loading="lazy" alt="御朱印公告"><div class="gCaption">御朱印公告</div></div>
+      </div>
+
+      <details style="border:1px dashed #cbd5e1;border-radius:14px;background:#fafafa;padding:10px 14px">
+        <summary style="font-weight:800;cursor:pointer">💧 白川水源(視情況前往)</summary>
+        <div class="tRow">
+          <div class="time">10:40–<br>11:30</div>
+          <div>
+            <div class="place">白川水源</div>
+            <ul class="metaList">
+              <li>車程約20分鐘，從高森町往南阿蘇方向行駛即可抵達。</li>
+              <li>南阿蘇最知名的湧水地，每分鐘湧出約60噸清澈地下水，水質非常清澈。</li>
+              <li>與池山水源同為日本名水百選之一，可直接飲用或自備水瓶裝水回去。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="galleryRow" aria-label="白川水源照片" role="list" style="margin-top:0">
+          <div class="gItem" role="listitem" data-full="day4/1212.jpg"><img src="day4/1212.jpg" loading="lazy" alt="白川水源入口"><div class="gCaption">白川水源入口</div></div>
+          <div class="gItem" role="listitem" data-full="day4/1213.jpg"><img src="day4/1213.jpg" loading="lazy" alt="白川水源湧泉"><div class="gCaption">白川水源湧泉</div></div>
+          <div class="gItem" role="listitem" data-full="day4/1214.jpg"><img src="day4/1214.jpg" loading="lazy" alt="裝水取泉"><div class="gCaption">裝水取泉</div></div>
+        </div>
+      </details>
+
+      <div class="tRow">
+        <div class="time">12:10–<br>12:50</div>
+        <div>
+          <div class="place">草千里之濱</div>
+          <ul class="metaList">
+            <li>進入山區的銜接處有幾個比較大的180度彎道，轉彎時請減速並靠右側行駛。</li>
+            <li>阿蘇山上收訊較差，Google導航先下載離線地圖。</li>
+            <li>導航至草千里之濱停車場，單次收費¥500。</li>
+            <li>建議停在離 New 草千里建築物（咖啡廳所在地）近一點的地方。</li>
+            <li>為了維持草原生態，通常在3月初至3月中旬進行「燒山(野焼き)」儀式，新的綠草要到4月中下旬後才會逐漸長出。燒山後的地面會呈現焦黑色，景觀像沙漠或特攝片戰鬥場地。</li>
+            <li>公共廁所旁的小徑，可空往草千里展望所，登高望遠草千里的風景。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tRow">
+        <div class="time">12:50–<br>14:30</div>
+        <div>
+          <div class="place">阿蘇火山博物館　<a href="https://asomuse.jp/" target="_blank" rel="noopener">🌎</a></div>
+          <ul class="metaList">
+            <li>成人門票¥1300，3F可透過大型螢幕自由操控鏡頭，即時觀察火山口內部的噴煙與地熱狀況。</li>
+            <li>五面環繞全景劇場(有中文字幕)、地質與岩石展示，一樓區域免費參觀，有觀光諮詢櫃台、餐廳及販售熊本與阿蘇土產的商店。</li>
+          </ul>
+          <div class="place" style="margin-top:6px">千里咖啡焙煎所</div>
+          <div class="meta">☕ 草千里咖啡焙煎所 (Kusasenri Coffee Roastery)，大片落地窗可以直接對望火山煙與草原。</div>
+        </div>
+      </div>
+
+      <div class="galleryRow" aria-label="草千里之濱照片" role="list">
+        <div class="gItem" role="listitem" data-full="day4/11.jpg"><img src="day4/11.jpg" loading="lazy" alt="草千里野燒景觀"><div class="gCaption">草千里野燒景觀</div></div>
+        <div class="gItem" role="listitem" data-full="day4/12.jpg"><img src="day4/12.jpg" loading="lazy" alt="草千里三月草原"><div class="gCaption">草千里三月草原</div></div>
+        <div class="gItem" role="listitem" data-full="day4/13.jpg"><img src="day4/13.jpg" loading="lazy" alt="草千里放牧馬匹"><div class="gCaption">草千里放牧馬匹</div></div>
+        <div class="gItem" role="listitem" data-full="day4/14.jpg"><img src="day4/14.jpg" loading="lazy" alt="草千里湖畔景觀"><div class="gCaption">草千里湖畔景觀</div></div>
+        <div class="gItem" role="listitem" data-full="day4/15.jpg"><img src="day4/15.jpg" loading="lazy" alt="草千里綠草季"><div class="gCaption">草千里綠草季</div></div>
+        <div class="gItem" role="listitem" data-full="day4/666.jpg"><img src="day4/666.jpg" loading="lazy" alt="草千里展望台"><div class="gCaption">草千里展望台</div></div>
+        <div class="gItem" role="listitem" data-full="day4/5555.jpg"><img src="day4/5555.jpg" loading="lazy" alt="阿蘇火山博物館外觀"><div class="gCaption">阿蘇火山博物館外觀</div></div>
+        <div class="gItem" role="listitem" data-full="day4/6666.jpg"><img src="day4/6666.jpg" loading="lazy" alt="阿蘇火山博物館劇場"><div class="gCaption">阿蘇火山博物館劇場</div></div>
+        <div class="gItem" role="listitem" data-full="day4/7777.jpg"><img src="day4/7777.jpg" loading="lazy" alt="阿蘇火山博物館入口"><div class="gCaption">阿蘇火山博物館入口</div></div>
+        <div class="gItem" role="listitem" data-full="day4/16.jpg"><img src="day4/16.jpg" loading="lazy" alt="草千里咖啡焙煎所外觀"><div class="gCaption">草千里咖啡焙煎所外觀</div></div>
+        <div class="gItem" role="listitem" data-full="day4/18.jpg"><img src="day4/18.jpg" loading="lazy" alt="草千里特色飲品"><div class="gCaption">草千里特色飲品</div></div>
+        <div class="gItem" role="listitem" data-full="day4/19.jpg"><img src="day4/19.jpg" loading="lazy" alt="草千里甜點"><div class="gCaption">草千里甜點</div></div>
+      </div>
+
+      <details style="border:1px dashed #cbd5e1;border-radius:14px;background:#fafafa;padding:10px 14px">
+        <summary style="font-weight:800;cursor:pointer">⛩️前往太宰府天滿宮</summary>
+        <div class="tRow">
+          <div class="time">14:30–<br>16:30</div>
+          <div>
+            <div class="place">前往太宰府</div>
+            <ul class="metaList">
+              <li>推薦路線：縣道111號(阿蘇Panorama Line)下山 → 往熊本 / 大津方向 → 熊本IC或益城熊本空港IC進入九州自動車道（福岡方向） → 太宰府 IC下交流道。車程約1小時50分。</li>
+            </ul>
+            <div class="meta">🚗 建議停靠：廣川服務區（SA，上行／福岡方向）。</div>
+          </div>
+        </div>
+
+        <div class="tRow">
+          <div class="time">16:30–<br>18:00</div>
+          <div>
+            <div class="place">太宰府天滿宮<a href="https://www.dazaifutenmangu.or.jp/tw/discover-dazaifu-tenmangu/" target="_blank" rel="noopener">🌎</a></div>
+            <ul class="metaList">
+              <li>建議停車：太宰府駐車中心 (Dazaifu Parking Center)，位於太宰府站南側，停車後步行即可看到天滿宮參道入口。</li>
+              <li>天滿宮主祭神為菅原道真，又稱「天神」，是日本最重要的學問之神。</li>
+              <li>周邊商店約 17:00–17:30 陸續關門：梅枝餅、明太子烤飯糰、天山草莓大福夾心餅、Starbucks (20:00)。</li>
+              <li>本殿參拜入口關閉時間：19:00。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="galleryRow" aria-label="太宰府照片" role="list" style="margin-top:0">
+          <div class="gItem" role="listitem" data-full="day4/27.jpg"><img loading="lazy" src="day4/27.jpg" alt="太宰府天滿宮"></div>
+          <div class="gItem" role="listitem" data-full="day4/28.jpg"><img loading="lazy" src="day4/28.jpg" alt="太宰府參道"></div>
+          <div class="gItem" role="listitem" data-full="day4/29.jpg"><img loading="lazy" src="day4/29.jpg" alt="太宰府梅花"></div>
+          <div class="gItem" role="listitem" data-full="day4/30.jpg"><img loading="lazy" src="day4/30.jpg" alt="御神牛"></div>
+          <div class="gItem" role="listitem" data-full="day4/31.jpg"><img loading="lazy" src="day4/31.jpg" alt="梅枝餅"></div>
+          <div class="gItem" role="listitem" data-full="day4/3301.jpg"><img loading="lazy" src="day4/3301.jpg" alt="明太子飯糰"></div>
+          <div class="gItem" role="listitem" data-full="day4/3302.jpg"><img loading="lazy" src="day4/3302.jpg" alt="草莓大福"></div>
+          <div class="gItem" role="listitem" data-full="day4/3303.jpg"><img loading="lazy" src="day4/3303.jpg" alt="太宰府 Starbucks"></div>
+          <div class="gItem" role="listitem" data-full="day4/32.jpg"><img loading="lazy" src="day4/32.jpg" alt="一蘭拉麵"></div>
+          <div class="gItem" role="listitem" data-full="day4/33.jpg"><img loading="lazy" src="day4/33.jpg" alt="太宰府街景"></div>
+        </div>
+      </details>
+
+      <details style="border:1px dashed #cbd5e1;border-radius:14px;background:#fafafa;padding:10px 14px">
+        <summary style="font-weight:800;cursor:pointer">🛍️ 前往鳥栖 Premium Outlets</summary>
+        <div class="tRow">
+          <div class="time">14:30-<br>18:20</div>
+          <div>
+            <div class="place">前往鳥栖 Premium Outlets <a href="https://www.premiumoutlets.co.jp/cht/tosu/" target="_blank" rel="noopener">🌎</a></div>
+            <div class="meta">．推薦路線：縣道111號(阿蘇Panorama Line)下山，往熊本/大津方向行駛，從熊本IC或益城熊本空港IC進入九州自動車道 (往福岡方向)，鳥栖 IC 下交流道。</div>
+            <div class="meta">．最晚18:20離開返回天神北加油還車。</div>
+          </div>
+        </div>
+      </details>
+
+      <div class="tRow">
+        <div class="time">18:00–<br>20:00</div>
+        <div>
+          <div class="place">Budget Rent-a-car Tenjin-kit 還車</div>
+          <div class="meta">• 預留塞車及加油時間，最晚18:00離開。</div>
+          <div class="meta">• 建議路線：建議走福岡都市高速(Urban Expressway)，從太宰府 IC上去，從天神北出口下來。</div>
+          <div class="meta">⛽首選：ENEOS須崎SS(Dr.Drive)，福岡市中央区須崎町13-1，距離還車地點最近約300公尺。</div>
+          <div class="meta">⛽備選：ENEOS渡邊通SS(福岡中央石油)，福岡市中央区渡辺通5丁目22-1。</div>
+          <div class="meta">🏨 <strong>入住 Cross Life 博多柳橋</strong></div>
+        </div>
+      </div>
+
+      <div class="navGrid" style="margin:10px 0 14px">
+        <div style="grid-column:1 / -1;font-weight:700;font-size:12px;margin:2px 0 6px;color:var(--muted)">🚗 Google 行程導航</div>
+        <a class="btn" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=%E4%B8%8A%E8%89%B2%E8%A6%8B%E7%86%8A%E9%87%8E%E5%BA%A7%E7%A5%9E%E7%A4%BE" target="_blank" rel="noopener">🚗 上色見熊野座神社</a>
+        <a class="btn" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=%E7%99%BD%E5%B7%9D%E6%B0%B4%E6%BA%90" target="_blank" rel="noopener">🚗 白川水源</a>
+        <a class="btn" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=%E8%8D%89%E5%8D%83%E9%87%8C%E4%B9%8B%E6%BF%B1%E5%81%9C%E8%BB%8A%E5%A0%B4" target="_blank" rel="noopener">🚗 草千里之濱停車場</a>
+        <a class="btn" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=%E5%BB%A3%E5%B7%9D%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%A8%E3%83%AA%E3%82%A2%20%E4%B8%8A%E3%82%8A" target="_blank" rel="noopener">🚗 廣川SA(上行)</a>
+        <a class="btn" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Dazaifu%20Parking%20Center" target="_blank" rel="noopener">🚗 太宰府駐車中心</a>
+        <a class="btn" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Tosu%20Premium%20Outlets" target="_blank" rel="noopener">🚗 鳥栖 Premium Outlets</a>
+        <a class="btn" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Cross%20Life%20Hakata%20Yanagibashi" target="_blank" rel="noopener">🚗 Cross Life 博多柳橋</a>
+        <a class="btn" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Budget%20Rent-a-car%20Tenjin-kita" target="_blank" rel="noopener">🚗 Budget Rent-a-car Tenjin-kita</a>
+      </div>
+    </div>
+
+    <details style="margin:16px 0 6px;border:1px dashed #cbd5e1;border-radius:14px;background:#fafafa;padding:12px 14px">
+      <summary style="font-weight:800;cursor:pointer">🌋阿蘇火山口如遇正常開放</summary>
+      <div class="timeline" style="padding:12px">
+        <div class="warningCard">
+          <div class="warningHead"><span class="warningIcon">⚠️</span><span>火山警戒與天氣</span></div>
+          <p class="warningText">阿蘇中岳火山口常因噴氣過量關閉，出發前一小時／抵達收費前皆務必查看 <strong>阿蘇火山火口規制情報</strong>。</p>
+          <div class="links linksSection--tight" style="margin-top:4px">
+            <a class="btn" href="https://www.jma.go.jp/bosai/volcano/" target="_blank" rel="noopener">🌋 日本氣象廳｜火山資訊</a>
+            <a class="btn" href="https://www.aso-volcano.jp/chinese/index.html" target="_blank" rel="noopener">🏔 阿蘇火山情報</a>
+            <a class="btn" href="https://emergency-weather.yahoo.co.jp/weather/zh-TW/volcano/503/" target="_blank" rel="noopener">🔴 阿蘇火山即時影像</a>
+            <a class="btn" href="day4/阿蘇觀光導覽手冊.pdf" target="_blank" rel="noopener">📄 阿蘇觀光導覽手冊</a>
+          </div>
+        </div>
+
+        <div class="tRow">
+          <div class="time">09:40–<br>10:40</div>
+          <div>
+            <div class="place">阿蘇中岳火山口</div>
+            <div class="meta">火山口海拔高約 1,200m，氣溫會比平地低約5~8 ℃且風力強勁，下車前記得加外套。</div>
+            <div class="meta">🌋 參觀亮點與地圖指引<br><strong>第一火山口 (Nakadake No.1 Crater)</strong>：天氣晴朗且氣體濃度低時可清晰看見碧綠色火口湖。<br><strong>B區 (一般參觀區 B1、B2)</strong>：停車場出來即可抵達的近距離觀景台。<br><strong>E區 (管制備案區)</strong>：當 B 區因氣體濃度過高關閉時，可搭乘專用巴士前往此區參觀，距離火山口更近。<br><strong>砂千里ヶ浜</strong>：位於火山口旁的黑色火山灰平原，景觀宛如外星地表。</div>
+          </div>
+        </div>
+
+        <div class="galleryRow" aria-label="阿蘇火山口照片" role="list">
+          <div class="gItem" role="listitem" onclick="event.stopPropagation();window.open('day4/阿蘇中岳火山口參觀.pdf','_blank')"><img src="day4/111.jpg" alt="阿蘇中岳火山口參觀 PDF 封面" loading="lazy" data-no-lightbox="1"><div class="gCaption">📄 阿蘇中岳火山口參觀（PDF）</div></div>
+          <div class="gItem" role="listitem" data-full="day4/06.jpg" data-caption="阿蘇火山口步道"><img src="day4/06.jpg" loading="lazy" alt="阿蘇火山口步道"><div class="gCaption">火山口步道</div></div>
+          <div class="gItem" role="listitem" data-full="day4/07.jpg" data-caption="火山口步道遠景"><img src="day4/07.jpg" loading="lazy" alt="火山口步道遠景"><div class="gCaption">火山口步道遠景</div></div>
+          <div class="gItem" role="listitem" data-full="day4/08.jpg" data-caption="阿蘇火山口標誌"><img src="day4/08.jpg" loading="lazy" alt="阿蘇火山口標誌"><div class="gCaption">阿蘇火山口標誌</div></div>
+          <div class="gItem" role="listitem" data-full="day4/09.jpg" data-caption="中岳火山口"><img src="day4/09.jpg" loading="lazy" alt="中岳火山口"><div class="gCaption">中岳火山口</div></div>
+          <div class="gItem" role="listitem" data-full="day4/10.jpg" data-caption="中岳火山口空拍"><img src="day4/10.jpg" loading="lazy" alt="中岳火山口空拍"><div class="gCaption">中岳火山口空拍</div></div>
+        </div>
+
+        <div class="tRow">
+          <div class="time">10:45–<br>11:45</div>
+          <div>
+            <div class="place">草千里ヶ浜</div>
+            <div class="meta">為了維持草原生態，通常在 3 月初至 3 月中旬 進行「燒山(野焼き)」儀式，新的綠草要到 4 月中下旬後才會逐漸長出。燒山後的地面會呈現焦黑色，景觀像沙漠或特攝片戰鬥場地。</div>
+            <div class="meta">☕ 草千里咖啡焙煎所 (Kusasenri Coffee Roastery)，大片落地窗可以直接對望火山煙與草原。</div>
+          </div>
+        </div>
+
+        <div class="galleryRow" aria-label="草千里照片" role="list">
+          <div class="gItem" role="listitem" data-full="day4/11.jpg" data-caption="草千里野燒景觀"><img src="day4/11.jpg" loading="lazy" alt="草千里野燒景觀"><div class="gCaption">草千里野燒景觀</div></div>
+          <div class="gItem" role="listitem" data-full="day4/12.jpg" data-caption="草千里三月草原"><img src="day4/12.jpg" loading="lazy" alt="草千里三月草原"><div class="gCaption">草千里三月草原</div></div>
+          <div class="gItem" role="listitem" data-full="day4/13.jpg" data-caption="草千里放牧馬匹"><img src="day4/13.jpg" loading="lazy" alt="草千里放牧馬匹"><div class="gCaption">草千里放牧馬匹</div></div>
+          <div class="gItem" role="listitem" data-full="day4/14.jpg" data-caption="草千里湖畔景觀"><img src="day4/14.jpg" loading="lazy" alt="草千里湖畔景觀"><div class="gCaption">草千里湖畔景觀</div></div>
+          <div class="gItem" role="listitem" data-full="day4/15.jpg" data-caption="草千里綠草季"><img src="day4/15.jpg" loading="lazy" alt="草千里綠草季"><div class="gCaption">草千里綠草季</div></div>
+          <div class="gItem" role="listitem" data-full="day4/16.jpg" data-caption="草千里咖啡焙煎所"><img src="day4/16.jpg" loading="lazy" alt="草千里咖啡焙煎所"><div class="gCaption">草千里咖啡焙煎所</div></div>
+          <div class="gItem" role="listitem" data-full="day4/17.jpg" data-caption="咖啡店內景觀窗"><img src="day4/17.jpg" loading="lazy" alt="咖啡店內景觀窗"><div class="gCaption">咖啡店內景觀窗</div></div>
+          <div class="gItem" role="listitem" data-full="day4/18.jpg" data-caption="草千里特色飲品"><img src="day4/18.jpg" loading="lazy" alt="草千里特色飲品"><div class="gCaption">草千里特色飲品</div></div>
+          <div class="gItem" role="listitem" data-full="day4/19.jpg" data-caption="草千里甜點"><img src="day4/19.jpg" loading="lazy" alt="草千里甜點"><div class="gCaption">草千里甜點</div></div>
+        </div>
+
+        <div class="tRow">
+          <div class="time">12:15–<br>12:45</div>
+          <div>
+            <div class="place">高森町觀光交流中心</div>
+            <div class="meta">草千里下山(經由111號縣道，即阿蘇吉田線)，下坡時可俯瞰南阿蘇盆地的景色，唯前半段路多彎道需多留意對向重機。</div>
+            <div class="meta">🧧御朱印　🛍在地伴手禮　🚻洗手間</div>
+          </div>
+        </div>
+
+        <div class="galleryRow" aria-label="高森町觀光交流中心照片" role="list">
+          <div class="gItem" role="listitem" data-full="day4/24.jpg" data-caption="高森町觀光交流中心外觀"><img src="day4/24.jpg" loading="lazy" alt="高森町觀光交流中心外觀"><div class="gCaption">高森町觀光交流中心</div></div>
+          <div class="gItem" role="listitem" data-full="day4/25.jpg" data-caption="御朱印"><img src="day4/25.jpg" loading="lazy" alt="御朱印"><div class="gCaption">御朱印</div></div>
+          <div class="gItem" role="listitem" data-full="day4/26.jpg" data-caption="在地伴手禮"><img src="day4/26.jpg" loading="lazy" alt="在地伴手禮"><div class="gCaption">在地伴手禮</div></div>
+        </div>
+
+        <div class="tRow">
+          <div class="time">13:15–<br>14:00</div>
+          <div>
+            <div class="place">上色見熊野座神社</div>
+            <div class="meta">停車場走至神社（入口處有登山杖可自行使用），從停車場開始走到神社來回約30–40分鐘，會遇到陡坡及260多段石階，到穿戶岩則來回約抓1小時。</div>
+            <div class="meta">⚠️體力提醒：石階多且部分坡度較陡且濕滑，務必小心行走。</div>
+          </div>
+        </div>
+
+        <div class="galleryRow" aria-label="上色見熊野座神社照片" role="list">
+          <div class="gItem" role="listitem" data-full="day4/20.jpg" data-caption="石燈籠參道"><img src="day4/20.jpg" loading="lazy" alt="石燈籠參道"><div class="gCaption">石燈籠參道</div></div>
+          <div class="gItem" role="listitem" data-full="day4/21.jpg" data-caption="杉木林階梯"><img src="day4/21.jpg" loading="lazy" alt="杉木林階梯"><div class="gCaption">杉木林階梯</div></div>
+          <div class="gItem" role="listitem" data-full="day4/22.jpg" data-caption="上色見熊野座神社本殿"><img src="day4/22.jpg" loading="lazy" alt="上色見熊野座神社本殿"><div class="gCaption">上色見熊野座神社本殿</div></div>
+          <div class="gItem" role="listitem" data-full="day4/23.jpg" data-caption="穿戶岩"><img src="day4/23.jpg" loading="lazy" alt="穿戶岩"><div class="gCaption">穿戶岩</div></div>
+        </div>
+
+        <div class="tRow">
+          <div class="time">14:00–<br>16:15</div>
+          <div>
+            <div class="place">前往太宰府</div>
+            <div class="meta">最推薦路線：經由縣道28號(阿蘇俵山線)穿過俵山隧道，接往城熊本空港 IC上高速公路。到高速公路入口約45–50分鐘，上國道後到太宰府約90分鐘，車程總計約2小時15分。</div>
+            <div class="meta">🚗 建議停靠：進入高速公路前➝阿蘇望之鄉Kugino / 行駛高速公路上➝廣川 SA 上行／福岡方向</div>
+          </div>
+        </div>
+
+        <div class="tRow">
+          <div class="time">16:15–<br>17:45</div>
+          <div>
+            <div class="place">太宰府天滿宮</div>
+            <ul class="metaList">
+              <li>最重要的神社之一，主祭神是菅原道真，又名天神，即學問、文化及藝術之神。</li>
+              <li>建議停車：太宰府市營停車場 (Dazaifu Parking Center)，位於太宰府站的南側，停車後走一小段就會看到天滿宮參道入口（與石鳥居、Starbucks 同一邊）。</li>
+              <li>周邊商店約在 17:00–17:30 陸續關門：梅枝餅、明太子烤飯糰、天山草莓大福夾心餅、Starbucks。</li>
+              <li>天滿宮關門時間：19:00（進入本殿參拜的大門關閉時間）。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="galleryRow" aria-label="太宰府天滿宮照片" role="list">
+          <div class="gItem" role="listitem" data-full="day4/27.jpg" data-caption="太宰府天滿宮地圖"><img src="day4/27.jpg" loading="lazy" alt="太宰府天滿宮地圖"><div class="gCaption">太宰府天滿宮地圖</div></div>
+          <div class="gItem" role="listitem" data-full="day4/28.jpg" data-caption="太宰府表參道散策"><img src="day4/28.jpg" loading="lazy" alt="太宰府表參道散策"><div class="gCaption">太宰府表參道</div></div>
+          <div class="gItem" role="listitem" data-full="day4/29.jpg" data-caption="太宰府天滿宮樓門"><img src="day4/29.jpg" loading="lazy" alt="太宰府天滿宮樓門"><div class="gCaption">太宰府天滿宮樓門</div></div>
+          <div class="gItem" role="listitem" data-full="day4/30.jpg" data-caption="太宰府天滿宮垂枝梅"><img src="day4/30.jpg" loading="lazy" alt="太宰府天滿宮垂枝梅"><div class="gCaption">太宰府垂枝梅</div></div>
+          <div class="gItem" role="listitem" data-full="day4/31.jpg" data-caption="御神牛"><img src="day4/31.jpg" loading="lazy" alt="御神牛"><div class="gCaption">御神牛</div></div>
+          <div class="gItem" role="listitem" data-full="day4/32.jpg" data-caption="太宰府星巴克"><img src="day4/32.jpg" loading="lazy" alt="太宰府星巴克"><div class="gCaption">太宰府星巴克</div></div>
+          <div class="gItem" role="listitem" data-full="day4/33.jpg" data-caption="一蘭合格拉麵"><img src="day4/33.jpg" loading="lazy" alt="一蘭合格拉麵"><div class="gCaption">一蘭合格拉麵</div></div>
+        </div>
+
+        <div class="tRow">
+          <div class="time">18:00–<br>20:00</div>
+          <div>
+            <div class="place">Budget Rent-a-car Tenjin-kit 還車</div>
+            <div class="meta">．預留塞車及加油時間，最晚18:00離開。</div>
+            <div class="meta">．建議路線：建議走福岡都市高速(Urban Expressway)，從太宰府 IC上去，從天神北出口下來。</div>
+            <div class="meta">⛽首選：ENEOS須崎SS(Dr.Drive)，福岡市中央区須崎町13-1，距離還車地點最近約300公尺。</div>
+            <div class="meta">備選：ENEOS渡邊通SS(福岡中央石油)，福岡市中央区渡辺通5丁目22-1。</div>
+            <div class="meta">🏨 <strong>入住 Cross Life 博多柳橋</strong></div>
+          </div>
+        </div>
+      </div>
+    </details>
   </div></div>
 </section>
 
@@ -1403,7 +1746,7 @@ details.detailsTight .content{
   <div class="dayHeader">
     <div class="dayTitle">
       <div class="num">★</div>
-      <div class="tblock"><h2>Mapcode（車上導航用）</h2></div>
+      <div class="tblock"><h2>Mapcode｜<a href="https://www.mapion.co.jp/" target="_blank" rel="noopener">查詢按這裡</a></h2></div>
     </div>
     <div class="dayHeaderRight"><div class="dayDateRight"></div></div>
   </div>
