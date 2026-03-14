@@ -232,6 +232,8 @@ summary::marker{content:""}
     .timelinePlain{border:none !important;background:transparent !important;border-radius:0 !important}
     .linksSection{margin-top:12px}
     .linksSection--tight{margin:10px 0 6px}
+.navGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin-top:10px}
+.navGrid .btn{width:100%;justify-content:center}
 
     /* Gallery */
     .galleryWrap{margin-top:10px}
@@ -981,7 +983,8 @@ details.detailsTight .content{
     </ul>
   </div>
 </details>
-      <div class="links linksSection">
+      <div class="navGrid linksSection">
+        <div style="grid-column:1 / -1;font-weight:700;font-size:12px;margin:2px 0 6px;color:var(--muted)">🚗 Google 行程導航</div>
         <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E5%B1%B1%E7%94%B0%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%A8%E3%83%AA%E3%82%A2%20%28%E4%B8%8B%E3%82%82%E3%82%8A%29&travelmode=driving">🚗 休息站｜山田SA（建議）</a>
         <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E7%8E%96%E7%8F%A0%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%A8%E3%83%AA%E3%82%A2%20%28%E4%B8%8B%E3%82%82%E3%82%8A%29&travelmode=driving">🚗 休息站｜玖珠SA（次要）</a>
         <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E6%B9%AF%E5%B8%83%E9%99%A2%E4%B8%AD%E5%A4%AE%E5%85%90%E7%AB%A5%E5%85%AC%E5%9C%92&travelmode=driving">🚗 中央児童公園</a>
@@ -1168,7 +1171,8 @@ details.detailsTight .content{
       </div><!-- /.content -->
     </div><!-- /.dayBody -->
 
-    <div class="links" style="margin-top:12px;padding:0 12px">
+    <div class="navGrid" style="margin-top:12px;padding:0 12px">
+      <div style="grid-column:1 / -1;font-weight:700;font-size:12px;margin:2px 0 6px;color:var(--muted)">🚗 Google 行程導航</div>
       <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Manganji%2C%20Minamioguni%2C%20Aso%20District%2C%20Kumamoto%20869-2402%2C%20Japan&travelmode=driving">🚗 夫妻瀑布</a>
       <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E9%BB%92%E5%B7%9D%E6%B8%A9%E6%B3%89%20%E7%AC%AC%E4%B8%89%E9%A7%90%E8%BB%8A%E5%A0%B4&travelmode=driving">🚗 黑川溫泉新停車場</a>
       <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E6%B1%A0%E5%B1%B1%E6%B0%B4%E6%BA%90&travelmode=driving">🚗 池山水源</a>
@@ -1703,14 +1707,15 @@ details.detailsTight .content{
             🛍 <strong>大丸天神</strong>：穩重型百貨，地下食品區很強，甜點熟食好買。
           </div>
 
-          <div class="links" style="margin-top:10px; display:flex; flex-wrap:wrap; gap:8px;">
+          <div class="navGrid" style="margin-top:10px;">
+            <div style="grid-column:1 / -1;font-weight:700;font-size:12px;margin:2px 0 6px;color:var(--muted)">🚶 購物地圖 / 步行導航</div>
             <a class="btn" target="_blank" rel="noopener" href="day5/天神地下街.pdf">📄 天神地下街（PDF）</a>
             <a class="btn" target="_blank" rel="noopener" href="day5/百貨公司位置圖.pdf">📄 百貨公司位置圖（PDF）</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E5%A4%A9%E7%A5%9E%E5%9C%B0%E4%B8%8B%E8%A1%97&travelmode=walking">📍 地下街</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=PARCO%20Fukuoka%20Tenjin&travelmode=walking">🛍 PARCO（天神）</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Solaria%20Plaza%20Fukuoka&travelmode=walking">🛍 Solaria Plaza</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Fukuoka%20Mitsukoshi&travelmode=walking">🛍 三越（福岡天神）</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Daimaru%20Fukuoka%20Tenjin&travelmode=walking">🛍 大丸（福岡天神）</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E5%A4%A9%E7%A5%9E%E5%9C%B0%E4%B8%8B%E8%A1%97&travelmode=walking">🚶 天神地下街</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=PARCO%20Fukuoka%20Tenjin&travelmode=walking">🚶 PARCO（天神）</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Solaria%20Plaza%20Fukuoka&travelmode=walking">🚶 Solaria Plaza</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Fukuoka%20Mitsukoshi&travelmode=walking">🚶 三越（福岡天神）</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Daimaru%20Fukuoka%20Tenjin&travelmode=walking">🚶 大丸（福岡天神）</a>
           </div>
         </div>
       </div>
@@ -1735,7 +1740,12 @@ details.detailsTight .content{
         <div class="tRow"><div><div class="time">12:40</div></div><div><div class="place">桃園國際機場（TPE）</div><div class="meta">第一航廈</div></div></div>
       </div>
     </div>
-    
+    <div class="navGrid linksSection">
+      <div style="grid-column:1 / -1;font-weight:700;font-size:12px;margin:2px 0 6px;color:var(--muted)">🚗 Google 行程導航</div>
+      <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Fukuoka%20Airport&travelmode=driving">🚗 導航｜福岡機場</a>
+    </div>
+  </div></div>
+</section>
 
 <section class="panel" id="mapcodes" role="tabpanel" aria-label="Mapcode 集中頁">
   <div class="dayHeader">
