@@ -682,92 +682,135 @@ details.detailsTight .content{
 
       <div class="panelsWrap">
 
-<section class="panel" id="overview" role="tabpanel" aria-label="旅行總覽">
-  <div class="dayHeader">
-    <div class="dayTitle">
-      <div class="num">★</div>
-      <div class="tblock"><h2>旅行總覽</h2></div>
-    </div>
-  </div>
-
-  <div class="dayBody">
-    <div class="content">
-      <details class="edgeBleed" style="margin-top:0">
-        <summary><span class="sumText">🚗 Budget租車</span><span class="chev">⌄</span></summary>
-        <div class="content">
-          <div class="timeline">
-
-            <div class="tRow">
-              <div><div class="time">預約</div></div>
-              <div>
-                <div class="place">Budget 租車預約資訊</div>
-                <div class="meta"><strong style="color:#2563eb !important;">預約號碼：140758336</strong></div>
-                <div class="meta">密碼：e363db9d</div>
-              </div>
+<template id="tpl-overview">
+          <div class="dayHeader">
+            <div class="dayTitle">
+              <div class="num">★</div>
+              <div class="tblock"><h2>旅行總覽</h2></div>
             </div>
-
-            <div class="tRow">
-              <div><div class="time">顧客</div></div>
-              <div>
-                <div class="meta">姓名：呂弘鈞</div>
-                <div class="meta"><strong style="color:#2563eb !important;">姓名（英文）：LU HUNG CHUN</strong></div>
-                <div class="meta">Email：kidrock0228@gmail.com</div>
-                <div class="meta">電話：0975729889</div>
-                <div class="meta">搭乘人數：4</div>
-              </div>
-            </div>
-
-            <div class="tRow">
-              <div><div class="time">租車</div></div>
-              <div>
-                <div class="meta">取車時間：2026/03/24 (二) 08:00</div>
-                <div class="meta">還車時間：2026/03/26 (四) 20:00</div>
-                <div class="meta">租車公司：Budget Rent-a-Car</div>
-                <div class="meta">車型：<strong style="color:#2563eb !important;">Serena 同級 (WA)</strong></div>
-                <div class="meta">車輛：<strong style="color:#2563eb !important;">禁煙車</strong></div>
-              </div>
-            </div>
-<div class="tRow">
-              <div><div class="time">取車</div></div>
-              <div>
-                <div class="place">博多祇園店</div>
-                <div class="meta">地址：福岡県福岡市博多区博多駅前2-11-19</div>
-                <div class="meta">電話：092-473-0543</div>
-                <div class="meta"><a href="https://tc.tabirai.net/car/fukuoka/company/budget/branch/?PID=2537" target="_blank" rel="noopener">店鋪資訊</a></div>
-              </div>
-            </div>
-
-            <div class="tRow">
-              <div><div class="time">還車</div></div>
-              <div>
-                <div class="place"><s>天神渡辺通</s> → 天神北店</div>
-                <div class="meta">地址：<s>福岡県福岡市中央区渡辺通5-22-3</s> 福岡縣福岡市中央區舞鶴1丁目2番3號</div>
-                <div class="meta">電話：<s>092-722-0543</s> / 0570-054-317</div>
-                <div class="meta"><s><a href="https://tc.tabirai.net/car/fukuoka/company/budget/branch/?PID=2539" target="_blank" rel="noopener">https://tc.tabirai.net/car/fukuoka/company/budget/branch/?PID=2539</a></s> ｜ <a href="https://tc.tabirai.net/car/fukuoka/company/budget/branch/?PID=2534" target="_blank" rel="noopener">店鋪資訊</a></div>
-              </div>
-            </div>
-
-            <div class="tRow">
-              <div><div class="time">費用</div></div>
-              <div>
-                <div class="meta">基本費用：47,000 日圓</div>
-                <div class="meta">早鳥優惠：-9,000 日圓</div>
-                <div class="meta">ETC卡租用：330 日圓</div>
-                <div class="meta"><strong>總費用：38,330 日圓</strong></div>
-
-                <div class="navGrid" style="margin-top:10px;">
-                  <a class="btn" href="Budget租車預約資料.pdf" target="_blank" rel="noopener">📄 Budget租車預約資料</a>
-                  <a class="btn" href="還車地點變更.jpg" target="_blank" rel="noopener">🚗 還車地點變更</a>
-                </div>
-              </div>
-            </div>
-
           </div>
-        </div>
-      </details>
-    </div>
-  </div>
-</section>
+
+          <div class="dayBody">
+            <div class="content">
+              <details open>
+                <summary><span>🚗 Budget租車</span><span>⌄</span></summary>
+                <div style="padding:0 12px 12px">
+                  <div class="timeline">
+                    <div class="tRow">
+                      <div><div class="time">預約</div></div>
+                      <div>
+                        <div class="place">Budget 租車預約資訊</div>
+                        <div class="meta">預約號碼：140758336</div>
+                        <div class="meta">密碼：e363db9d</div>
+                      </div>
+                    </div>
+                    <div class="tRow">
+                      <div><div class="time">顧客</div></div>
+                      <div>
+                        <div class="meta">姓名：呂弘鈞</div>
+                        <div class="meta">姓名（英文）：LU HUNG CHUN</div>
+                        <div class="meta">Email：kidrock0228@gmail.com</div>
+                        <div class="meta">電話：0975729889</div>
+                        <div class="meta">搭乘人數：4</div>
+                      </div>
+                    </div>
+                    <div class="tRow">
+                      <div><div class="time">租車</div></div>
+                      <div>
+                        <div class="meta">取車時間：2026/03/24 (二) 08:00</div>
+                        <div class="meta">還車時間：2026/03/26 (四) 20:00</div>
+                        <div class="meta">租車公司：Budget Rent-a-Car</div>
+                        <div class="meta">車型：Serena 同級 (WA)</div>
+                        <div class="meta">車輛：禁煙車</div>
+                      </div>
+                    </div>
+                    <div class="tRow">
+                      <div><div class="time">取車</div></div>
+                      <div>
+                        <div class="place">博多祇園店</div>
+                        <div class="meta">地址：福岡県福岡市博多区博多駅前2-11-19</div>
+                        <div class="meta">電話：092-473-0543</div>
+                      </div>
+                    </div>
+                    <div class="tRow">
+                      <div><div class="time">還車</div></div>
+                      <div>
+                        <div class="place"><s>天神渡辺通</s> → 天神北店</div>
+                        <div class="meta">地址：<s>福岡県福岡市中央区渡辺通5-22-3</s> 福岡縣福岡市中央區舞鶴1丁目2番3號</div>
+                        <div class="meta">電話：<s>092-722-0543</s> / 0570-054-317</div>
+                      </div>
+                    </div>
+                    <div class="tRow">
+                      <div><div class="time">費用</div></div>
+                      <div>
+                        <div class="meta">基本費用：47,000 日圓</div>
+                        <div class="meta">早鳥優惠：-9,000 日圓</div>
+                        <div class="meta">ETC卡租用：330 日圓</div>
+                        <div class="meta"><strong>總費用：38,330 日圓</strong></div>
+                        <div class="navGrid">
+                          <a class="btn" href="Budget租車預約資料.pdf" target="_blank" rel="noopener">📄 Budget租車預約資料</a>
+                          <a class="btn" href="還車地點變更.jpg" target="_blank" rel="noopener">🚗 還車地點變更</a>
+                        </div>
+                </div>
+                </div>
+              </details>
+
+              <details>
+                <summary><span>🗣️ 自駕日文會話（含發音）</span><span>⌄</span></summary>
+                <div style="padding:0 12px 12px">
+                  <div class="timeline">
+
+                    <div class="tRow">
+                      <div><div class="time">租車</div></div>
+                      <div>
+                        <div class="meta">予約しています（よやく しています） 👉 我有預約 <button class="speak" data-text="予約しています">🔊</button></div>
+                        <div class="meta">名前は LU HUNG CHUN です（なまえ は ルー ホン チュン です） 👉 我的名字是 LU HUNG CHUN <button class="speak" data-text="名前は LU HUNG CHUN です">🔊</button></div>
+                      </div>
+                    </div>
+
+                    <div class="tRow">
+                      <div><div class="time">加油</div></div>
+                      <div>
+                        <div class="meta">レギュラー満タン（れぎゅらー まんたん） 👉 加滿92 <button class="speak" data-text="レギュラー満タン">🔊</button></div>
+                        <div class="meta">満タンでお願いします（まんたん で おねがいします） 👉 請加滿 <button class="speak" data-text="満タンでお願いします">🔊</button></div>
+                      </div>
+                    </div>
+
+                    <div class="tRow">
+                      <div><div class="time">停車</div></div>
+                      <div>
+                        <div class="meta">ここは駐車できますか（ここ は ちゅうしゃ できますか） 👉 可以停車嗎？ <button class="speak" data-text="ここは駐車できますか">🔊</button></div>
+                        <div class="meta">駐車場はありますか（ちゅうしゃじょう は ありますか） 👉 有停車場嗎？ <button class="speak" data-text="駐車場はありますか">🔊</button></div>
+                      </div>
+                    </div>
+
+                    <div class="tRow">
+                      <div><div class="time">迷路</div></div>
+                      <div>
+                        <div class="meta">道に迷いました（みち に まよいました） 👉 我迷路了 <button class="speak" data-text="道に迷いました">🔊</button></div>
+                      </div>
+                    </div>
+
+                    <div class="tRow">
+                      <div><div class="time">轉彎</div></div>
+                      <div>
+                        <div class="meta" style="font-weight:700">🚗 導航用</div>
+                        <div class="meta">左です（ひだり です） 👉 左轉 <button class="speak" data-text="左です">🔊</button></div>
+                        <div class="meta">右です（みぎ です） 👉 右轉 <button class="speak" data-text="右です">🔊</button></div>
+
+                        <div class="meta" style="margin-top:8px;font-weight:700">🗣️ 講給人聽</div>
+                        <div class="meta">左に曲がって 👉 左轉 <button class="speak" data-text="左に曲がって">🔊</button></div>
+                        <div class="meta">右に曲がって 👉 右轉 <button class="speak" data-text="右に曲がって">🔊</button></div>
+                </div>
+                </div>
+              </details>
+            </div>
+          </div>
+        </template>
+
+<section class="panel" id="overview" role="tabpanel" aria-label="旅行總覽" data-lock-template="tpl-overview"></section>
+
+
 
 <template id="tpl-day1">
         <div class="dayHeader">
