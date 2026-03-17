@@ -305,7 +305,7 @@ summary::marker{content:""}
       cursor:pointer;
       position:relative
     }
-    .gItem img{width:100%;height:100%;object-fit:cover;display:block}
+.gItem img{width:100%;height:100%;object-fit:cover;display:block}
 
 
 /* ✅ 縮圖文字說明（不依賴 JS；iOS 檔案預覽不跑 JS 也能顯示） */
@@ -510,88 +510,6 @@ summary::marker{content:""}
 }
 
 
-btn:hover{
-  background:#e5e7eb;
-  transform:translateY(-1px);
-}
-
-.btn:active{
-  transform:translateY(0);
-}
-
-/* 按鈕容器 */
-.links{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-top:10px;
-}
-
-
-/* ✅ Mapcode 集中頁：極簡清單（不走時間軸，避免跑版） */
-.mapPage .mapSection{margin-top:12px}
-.mapPage .mapSection > summary{padding:12px 12px; font-size:15px}
-.mapList{display:flex;flex-direction:column;gap:10px}
-.mapItem{border:1px solid var(--line);border-radius:14px;background:#fff;padding:10px 12px}
-.mapName{font-weight:800;line-height:1.35}
-.mapMeta{margin-top:6px;color:var(--muted);font-size:14px;line-height:1.6}
-
-/* ✅ 通用外框：避免某些瀏覽器/預覽模式下外框消失 */
-.frame{border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden}
-.framePad{padding:12px}
-.edgeBleed{
-  margin-left:-12px !important;
-  margin-right:-12px !important;
-  width:calc(100% + 24px);
-}
-.edgeBleed.galleryWrap .galleryTitle,
-.edgeBleed.galleryWrap .galleryRow,
-.edgeBleed.links{
-  padding-left:0;
-  padding-right:0;
-}
-.edgeBleed.detailsTight,
-details.edgeBleed{
-  border-radius:12px;
-}
-details.detailsTight{
-  margin-top:6px;
-}
-details.detailsTight summary{
-  padding:10px 12px;
-}
-details.detailsTight .content{
-  padding:0 12px 10px;
-}
-
-/* ===== Day4 專用樣式（獨立編輯頁回填主行程） ===== */
-#day4 .timeline{padding:12px}
-#day4 .tRow{grid-template-columns:74px 1fr;gap:2px;padding:9px 4px;border-bottom:none;align-items:start}
-#day4 .tRow > div:last-child{padding-top:0}
-#day4 .time{line-height:1.05;display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;text-align:left;margin-top:0}
-#day4 .place{line-height:1.18}
-#day4 .meta{font-size:11.5px;line-height:1.6;margin:2px 0 0 0;padding-left:16px;text-indent:-16px;display:block}
-#day4 .metaList{color:var(--muted);font-size:11.5px;line-height:1.6;margin:2px 0 0 0;padding-left:0;list-style:none;display:block;gap:0}
-#day4 .metaList li{position:relative;margin:2px 0;padding-left:16px;display:block}
-#day4 .metaList li::before{content:"•";position:absolute;left:0;top:0.1em;width:16px;text-align:center;color:var(--muted)}
-#day4 .navGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin-top:10px}
-#day4 .navGrid .btn{width:100%;justify-content:center}
-#day4 .linksSection--tight{margin:10px 0 6px}
-#day4 .warningCard{margin:6px 0 14px;border:1px solid #dbe3f0;border-radius:18px;background:linear-gradient(180deg,#f8fbff 0%, #f3f7fd 100%);padding:14px 16px;box-shadow:0 4px 14px rgba(37,99,235,.06)}
-#day4 .warningHead{display:flex;align-items:center;gap:8px;font-weight:900;font-size:16px;margin-bottom:6px;letter-spacing:.2px}
-#day4 .warningIcon{width:28px;height:28px;border-radius:999px;display:grid;place-items:center;background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.24);flex:0 0 28px}
-#day4 .warningText{color:var(--muted);font-size:13px;margin:0 0 10px}
-#day4 .galleryRow{gap:8px;padding:0;margin:8px -12px 14px -12px;scroll-padding:12px}
-#day4 .gItem{width:240px !important;border-radius:16px}
-#day4 .gCaption{position:absolute;left:8px;right:8px;bottom:8px;background:rgba(17,24,39,.55);color:#fff;font-size:12px;padding:6px 10px;border-radius:999px;backdrop-filter:blur(2px)}
-#day4 details{margin-top:10px}
-#day4 .timeline details{margin-left:-12px;margin-right:-12px}
-#day4 .timeline details .galleryRow{margin-top:0}
-@media (max-width: 640px){
-  #day4 .tRow{grid-template-columns:72px 1fr;gap:8px;padding:12px}
-}
-
-
 .btn:hover{
   background:#e5e7eb;
   transform:translateY(-1px);
@@ -682,12 +600,10 @@ details.detailsTight .content{
   <div class="wrap">
     <header>
       <div>
-        <h1>福岡・由布院・阿蘇 <a href="https://www.google.com/maps/d/viewer?mid=14d0NUVU1_hLuYWMW2iugAFUnhmY5kg8" target="_blank" rel="noopener" style="text-decoration:none;margin-left:6px">🗺️</a><a href="https://tenki.jp/week/9/" target="_blank" rel="noopener" style="margin-left:6px;color:#2563eb;font-weight:600;font-size:13px;text-decoration:none;">🌞九州一週天氣</a>
+        <h1>福岡・由布院・阿蘇 <a href="https://www.google.com/maps/d/viewer?mid=14d0NUVU1_hLuYWMW2iugAFUnhmY5kg8" target="_blank" rel="noopener" style="text-decoration:none;margin-left:6px">🗺️</a><a href="https://tenki.jp/week/9/" target="_blank" rel="noopener" style="margin-left:6px;color:#2563eb;font-weight:600;font-size:13px;text-decoration:none;">🌞九州一週天氣</a></h1>
       </div>
       <div class="sub">03/23（一）→ 03/28（六）</div>
     </header>
-
-
 <section style="margin-bottom:14px">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
         <div style="border:1px solid var(--line);border-radius:16px;padding:12px;background:rgba(255,255,255,.03)">
@@ -811,8 +727,7 @@ details.detailsTight .content{
                 <div class="meta">車輛：<strong style="color:#2563eb !important;">禁煙車</strong></div>
               </div>
             </div>
-
-            <div class="tRow">
+<div class="tRow">
               <div><div class="time">取車</div></div>
               <div>
                 <div class="place">博多祇園店</div>
@@ -858,7 +773,7 @@ details.detailsTight .content{
         <div class="dayHeader">
           <div class="dayTitle">
             <div class="num">1</div>
-            <div class="tblock"><h2><h2>抵達福岡｜博多市區散步</h2></h2></div>
+            <div class="tblock"><h2>抵達福岡｜博多市區散步</h2></div>
           </div>
           <div class="dayHeaderRight"><div class="dayDateRight">03/23（一）</div></div>
         </div>
@@ -917,7 +832,7 @@ details.detailsTight .content{
          <div class="dayHeader">
     <div class="dayTitle">
       <div class="num">2</div>
-      <div class="tblock"><h2><h2>由布院溫泉鄉・九重高原</h2></h2></div>
+      <div class="tblock"><h2>由布院溫泉鄉・九重高原</h2></div>
     </div>
     <div class="dayHeaderRight"><div class="dayDateRight">03/24（二）</div></div>
   </div>
@@ -932,7 +847,7 @@ details.detailsTight .content{
             <div class="meta">上博多東或半道橋交流道 → 接大分自動車道</div>
           </div>
         </div>
- <div class="tRow">
+<div class="tRow">
           <div><div class="time"></div></div>
           <div class="subline">
            <details class="alignPad" style="margin-top:-12px">
@@ -1037,9 +952,8 @@ details.detailsTight .content{
               </div>
             </div>
           </div>
-        </div>
-
-        <div class="tRow">
+       </div>
+<div class="tRow">
   <div class="alignPad" style="grid-column:1 / -1; padding:6px 12px 2px 12px;">
     <details class="alignPad" style="margin-top:0">
       <summary>
@@ -1188,7 +1102,7 @@ details.detailsTight .content{
     <div class="dayHeader">
     <div class="dayTitle">
       <div class="num">3</div>
-      <div class="tblock"><h2><h2>黑川溫泉散策・阿蘇高原</h2></h2></div>
+      <div class="tblock"><h2>黑川溫泉散策・阿蘇高原</h2></div>
     </div>
     <div class="dayHeaderRight"><div class="dayDateRight">03/25（三）</div></div>
   </div>
@@ -1223,8 +1137,7 @@ details.detailsTight .content{
             <div class="meta">黑川溫泉新停車場雖距離較遠(約950m~1.1Km，步行時間15分鐘)，但位置最順路、車位最充足且不需開進狹窄危險的溫泉街小巷。</div>
           </div>
         </div>
-
-        <div class="galleryWrap" aria-label="黑川溫泉新停車場 照片">
+<div class="galleryWrap" aria-label="黑川溫泉新停車場 照片">
           <p class="galleryTitle">📷 黑川溫泉新停車場</p>
           <div class="galleryRow" role="list">
             <div class="gItem" role="listitem" data-pdf-href="day3/黑川溫泉地圖.pdf" data-caption="📄 Map（PDF）｜點擊開啟">
@@ -1328,7 +1241,6 @@ details.detailsTight .content{
           </div>
         </div>
         </div>
-
 <div class="tRow">
           <div><div class="time">15:00–15:20</div><div class="meta"></div></div>
           <div><div class="place">Kamenoi Hotel Aso</div><div class="meta" style="margin-top:4px"><ul class="metaList" style="gap:4px;font-size:12px;line-height:1.2">
@@ -1368,7 +1280,7 @@ details.detailsTight .content{
 
 <section class="panel" id="day4" role="tabpanel" aria-label="Day 4 行程">
   <div class="dayHeader">
-    <div class="dayTitle"><div class="num">4</div><div class="tblock"><h2><h2>阿蘇・太宰府天滿宮</h2></h2></div></div>
+    <div class="dayTitle"><div class="num">4</div><div class="tblock"><h2>阿蘇・太宰府天滿宮</h2></div></div>
     <div class="dayHeaderRight"><div class="dayDateRight">03/26（四）</div></div>
   </div>
 
@@ -1431,7 +1343,7 @@ details.detailsTight .content{
         </div>
       </details>
 
-      <div class="tRow">
+<div class="tRow">
         <div class="time">12:10–<br>12:50</div>
         <div>
           <div class="place">草千里之濱</div>
@@ -1526,7 +1438,7 @@ details.detailsTight .content{
         </div>
       </details>
 
-      <div class="tRow">
+<div class="tRow">
         <div class="time">18:00–<br>20:00</div>
         <div>
           <div class="place">Budget Rent-a-car Tenjin-kit 還車</div>
@@ -1628,7 +1540,7 @@ details.detailsTight .content{
           </div>
         </div>
 
-        <div class="galleryRow" aria-label="上色見熊野座神社照片" role="list">
+ <div class="galleryRow" aria-label="上色見熊野座神社照片" role="list">
           <div class="gItem" role="listitem" data-full="day4/20.jpg" data-caption="石燈籠參道"><img src="day4/20.jpg" loading="lazy" alt="石燈籠參道"><div class="gCaption">石燈籠參道</div></div>
           <div class="gItem" role="listitem" data-full="day4/21.jpg" data-caption="杉木林階梯"><img src="day4/21.jpg" loading="lazy" alt="杉木林階梯"><div class="gCaption">杉木林階梯</div></div>
           <div class="gItem" role="listitem" data-full="day4/22.jpg" data-caption="上色見熊野座神社本殿"><img src="day4/22.jpg" loading="lazy" alt="上色見熊野座神社本殿"><div class="gCaption">上色見熊野座神社本殿</div></div>
@@ -1718,7 +1630,7 @@ details.detailsTight .content{
         </div>
       </div>
 
-      <div class="tRow tRow--full" style="padding:6px 12px;border-bottom:0">
+<div class="tRow tRow--full" style="padding:6px 12px;border-bottom:0">
         <div style="margin:0">
           <details style="margin-top:0;">
             <summary style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;">
@@ -1822,7 +1734,7 @@ details.detailsTight .content{
                 </div>
               </div>
 
-              <div class="tRow tRow--full" style="padding-left:0;padding-right:0">
+<div class="tRow tRow--full" style="padding-left:0;padding-right:0">
                 <div class="galleryWrap" aria-label="舞鶴公園／福岡城跡 照片" style="margin-top:0">
                   <p class="galleryTitle">📷 舞鶴公園／福岡城跡</p>
                   <div class="galleryRow galleryRow--flush" role="list">
@@ -1907,7 +1819,6 @@ details.detailsTight .content{
 
   </div></div>
 </section>
-
 <section class="panel" id="day6" role="tabpanel" aria-label="Day 6 行程">
   <div class="dayHeader">
     <div class="dayTitle"><div class="num">6</div><div class="tblock"><h2>回程｜福岡機場 → 桃園</h2></div></div>
@@ -1923,10 +1834,7 @@ details.detailsTight .content{
         <div class="tRow"><div><div class="time">12:40</div></div><div><div class="place">桃園國際機場（TPE）</div><div class="meta">第一航廈</div></div></div>
       </div>
     </div>
-    <div class="navGrid linksSection">
-      <div style="grid-column:1 / -1;font-weight:700;font-size:12px;margin:2px 0 6px;color:var(--muted)">🚗 Google 行程導航</div>
-      <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Fukuoka%20Airport&travelmode=driving">🚗 導航｜福岡機場</a>
-    </div>
+    
   </div></div>
 </section>
 
@@ -1947,47 +1855,38 @@ details.detailsTight .content{
           <summary><span class="sumText sumText--nowrap">Day 2｜由布院・九重</span><span class="chev">⌄</span></summary>
           <div class="content">
             <div class="mapList">
-              <div class="mapItem"><div class="mapName">山田服務區 (Yamada SA)下行 (下り)；往大分/別府方向</div><div class="mapMeta">Mapcode：<code style="font-weight:800">166 626 503*52</code><br>電話：0946-52-3103</div></div>
-              <div class="mapItem"><div class="mapName">玖珠服務區 (Kusu SA 下行（下り）；往大分/別府方向</div><div class="mapMeta">Mapcode：<code style="font-weight:800">269 095 861*85</code><br>電話：0973-72-6177</div></div>
-              <div class="mapItem"><div class="mapName">湯布院中央兒童公園</div><div class="mapMeta">Mapcode：<code style="font-weight:800">269 358 469*18</code><br>電話：0977-84-3111</div></div>
-              <div class="mapItem"><div class="mapName">湯布院停車場 (Yufuin Parking Lot / 由布院駅前)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">269 358 409*00</code><br>電話：0977-84-5559</div></div>
-              <div class="mapItem"><div class="mapName">NPC24H 湯布院湯之坪街道停車場</div><div class="mapMeta">Mapcode：<code style="font-weight:800">269 358 376*36</code><br>電話：0120-48-0015（NPC 管理中心）</div></div>
-              <div class="mapItem"><div class="mapName">金鱗湖</div><div class="mapMeta">Mapcode：<code style="font-weight:800">377 319 293*55</code><br>電話：0977-84-3111（由布市觀光案內所）</div></div>
-              <div class="mapItem"><div class="mapName">金鱗湖入口前駐車場 (Kinrinkoiriguchizen Parking Lot)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">269 359 553*20</code><br>電話：無（直接用 Mapcode 導航）</div></div>
-              <div class="mapItem"><div class="mapName">Times 湯布院金鱗湖 (Times Yufuin Lake Kinrin)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">269 359 584*77</code><br>電話：0120-72-8924（Times 管理中心）</div></div>
-              <div class="mapItem"><div class="mapName">狭霧台（展望台）</div><div class="mapMeta">Mapcode：<code style="font-weight:800">302 798 233*66</code><br>電話：0977-84-3111（由布市役所代管）</div></div>
-              <div class="mapItem"><div class="mapName">九重「夢」大吊橋</div><div class="mapMeta">Mapcode：<code style="font-weight:800">377 023 247*63</code><br>電話：0973-73-3800</div></div>
-              <div class="mapItem"><div class="mapName">瀨之本休息站 (Senomoto Rest House)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">256 599 157*11</code><br>電話：0967-44-0011</div></div>
-              <div class="mapItem"><div class="mapName">旅館華柚 (Hanayuu / Hanayoshi)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">202 209 840*77</code><br>電話：0967-46-6688</div></div>
+              <div class="mapItem"><div class="mapName">山田服務區 (Yamada SA)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">166 626 503*52</code></div></div>
+              <div class="mapItem"><div class="mapName">玖珠服務區 (Kusu SA)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">269 095 861*85</code></div></div>
+              <div class="mapItem"><div class="mapName">湯布院中央兒童公園</div><div class="mapMeta">Mapcode：<code style="font-weight:800">269 358 469*18</code></div></div>
+              <div class="mapItem"><div class="mapName">金鱗湖</div><div class="mapMeta">Mapcode：<code style="font-weight:800">377 319 293*55</code></div></div>
+              <div class="mapItem"><div class="mapName">狭霧台</div><div class="mapMeta">Mapcode：<code style="font-weight:800">302 798 233*66</code></div></div>
+              <div class="mapItem"><div class="mapName">九重夢大吊橋</div><div class="mapMeta">Mapcode：<code style="font-weight:800">377 023 247*63</code></div></div>
             </div>
           </div>
         </details>
 
-<details class="mapSection">
+        <details class="mapSection">
           <summary><span class="sumText sumText--nowrap">Day 3｜黑川溫泉・阿蘇</span><span class="chev">⌄</span></summary>
           <div class="content">
             <div class="mapList">
-              <div class="mapItem"><div class="mapName">夫妻瀑布（夫婦滝）</div><div class="mapMeta">Mapcode：<code style="font-weight:800">256 456 771*20</code><br>電話：070-2402-0012（瀑布商店）<br>電話：0967-44-0076（南小國町觀光協會）</div></div>
-              <div class="mapItem"><div class="mapName">黑川溫泉 第三停車場 (Kurokawa Onsen Parking 3)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">440 542 811*17</code><br>電話：0967-44-0076（黑川溫泉觀光旅館協同組合）</div></div>
-              <div class="mapItem"><div class="mapName">清流之森停車場 (Seiryunomori Parking Lot)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">440 542 411*62</code><br>導航電話：0967-44-0076（黑川溫泉觀光旅館協同組合）</div></div>
-              <div class="mapItem"><div class="mapName">池山水源</div><div class="mapMeta">Mapcode：<code style="font-weight:800">256 801 799*55</code><br>電話：0967-25-2211（產山村役場）</div></div>
-              <div class="mapItem"><div class="mapName">亀の井ホテル 阿蘇 (Kamenoi Hotel Aso)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">256 551 569*74</code><br>電話：0967-22-1122</div></div>
+              <div class="mapItem"><div class="mapName">夫妻瀑布</div><div class="mapMeta">Mapcode：<code style="font-weight:800">256 456 771*20</code></div></div>
+              <div class="mapItem"><div class="mapName">黑川溫泉停車場</div><div class="mapMeta">Mapcode：<code style="font-weight:800">440 542 811*17</code></div></div>
+              <div class="mapItem"><div class="mapName">池山水源</div><div class="mapMeta">Mapcode：<code style="font-weight:800">256 801 799*55</code></div></div>
+              <div class="mapItem"><div class="mapName">Kamenoi Hotel Aso</div><div class="mapMeta">Mapcode：<code style="font-weight:800">256 551 569*74</code></div></div>
             </div>
           </div>
         </details>
- <details class="mapSection">
+
+        <details class="mapSection">
           <summary><span class="sumText sumText--nowrap">Day 4｜阿蘇・太宰府・博多</span><span class="chev">⌄</span></summary>
           <div class="content">
             <div class="mapList">
-              <div class="mapItem"><div class="mapName">上色見熊野座神社 (高森町)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">256 547 232*77</code><br>電話：0967-62-1111（高森町觀光推進機構）</div></div>
-              <div class="mapItem"><div class="mapName">白川水源 (南阿蘇村)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">256 460 589*26</code><br>電話：0967-67-1112（南阿蘇村役場）</div></div>
-              <div class="mapItem"><div class="mapName">阿蘇火山（中岳火口）</div><div class="mapMeta">Mapcode：<code style="font-weight:800">449 576 626*12</code><br>電話：0967-34-1600（阿蘇市觀光協會）</div></div>
-              <div class="mapItem"><div class="mapName">草千里ヶ濱</div><div class="mapMeta">Mapcode：<code style="font-weight:800">449 575 012*63</code><br>電話：0967-34-1600（與中岳同為阿蘇山綜合諮詢）</div></div>
-              <div class="mapItem"><div class="mapName">玖珠服務區 (Kusu SA) 上行 (上り)；往 福岡/鳥栖 方向。</div><div class="mapMeta">Mapcode：<code style="font-weight:800">269 095 561*85</code><br>電話：0973-72-6177（玖珠收費站管理處）</div></div>
-              <div class="mapItem"><div class="mapName">山田服務區 (Yamada SA) 上行 (上り)；往 福岡/鳥栖 方向。</div><div class="mapMeta">Mapcode：<code style="font-weight:800">166 626 772*85</code><br>電話：0946-52-3103（美食商場專線）</div></div>
-              <div class="mapItem"><div class="mapName">太宰府天滿宮</div><div class="mapMeta">Mapcode：<code style="font-weight:800">55 452 706*41</code><br>電話：092-922-8225（社務所代表）</div></div>
-              <div class="mapItem"><div class="mapName">Cross Life 博多柳橋 (Cross Life Hakata Yanagibashi)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">13 290 880*21</code><br>電話：092-733-3939</div></div>
-              <div class="mapItem"><div class="mapName">Budget Rent-a-car 天神北店 (天神北店)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">13 318 669*04</code><br>電話：092-752-0543</div></div>
+              <div class="mapItem"><div class="mapName">上色見熊野座神社</div><div class="mapMeta">Mapcode：<code style="font-weight:800">256 547 232*77</code></div></div>
+              <div class="mapItem"><div class="mapName">白川水源</div><div class="mapMeta">Mapcode：<code style="font-weight:800">256 460 589*26</code></div></div>
+              <div class="mapItem"><div class="mapName">阿蘇火山</div><div class="mapMeta">Mapcode：<code style="font-weight:800">449 576 626*12</code></div></div>
+              <div class="mapItem"><div class="mapName">草千里</div><div class="mapMeta">Mapcode：<code style="font-weight:800">449 575 012*63</code></div></div>
+              <div class="mapItem"><div class="mapName">太宰府天滿宮</div><div class="mapMeta">Mapcode：<code style="font-weight:800">55 452 706*41</code></div></div>
+              <div class="mapItem"><div class="mapName">Cross Life 博多柳橋</div><div class="mapMeta">Mapcode：<code style="font-weight:800">13 290 880*21</code></div></div>
             </div>
           </div>
         </details>
@@ -1997,7 +1896,7 @@ details.detailsTight .content{
   </div>
 </section>
 
-      </div>
+</div>
     </div>
   </div>
 
