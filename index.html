@@ -627,7 +627,7 @@ details.detailsTight .content{
 
     <div class="board">
       <nav class="tabs" role="tablist" aria-label="行程日切換">
-  <button class="tab" role="tab" aria-selected="false" data-day="overview">總覽</button>
+  <button class="tab" role="tab" aria-selected="false" data-day="overview">Memo</button>
   <button class="tab" role="tab" aria-selected="true" data-day="day1">Day 1</button>
   <button class="tab" role="tab" aria-selected="false" data-day="day2">Day 2</button>
   <button class="tab" role="tab" aria-selected="false" data-day="day3">Day 3</button>
@@ -1945,109 +1945,151 @@ details.detailsTight .content{
     </div>
   </div>
 
-  <script>
-    (function(){
-      function qs(sel, root){ return (root || document).querySelector(sel); }
-      function qsa(sel, root){ return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
+ <script>
+(function(){
 
-      function initLightbox(){
-        if(!qs('.lbModal')){
-          var lb = document.createElement('div');
-          lb.className = 'lbModal';
-          lb.innerHTML = ''
-            + '<div class="lbBackdrop" data-lb-close></div>'
-            + '<div class="lbStage"><img class="lbImg" alt="" /></div>'
-            + '<div class="lbNav">'
-            + '  <button class="lbBtn" type="button" data-lb-prev aria-label="上一張">‹</button>'
-            + '  <button class="lbBtn" type="button" data-lb-next aria-label="下一張">›</button>'
-            + '  <span class="lbCount" data-lb-count>0/0</span>'
-            + '</div>'
-            + '<button class="lbClose" type="button" data-lb-close aria-label="關閉">✕</button>';
-          document.body.appendChild(lb);
-        }
-var modal = qs('.lbModal');
-        var stage = qs('.lbStage', modal);
-        var imgEl = qs('.lbImg', modal);
-        var countEl = qs('[data-lb-count]', modal);
+  function qs(sel, root){ return (root || document).querySelector(sel); }
+  function qsa(sel, root){ return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
 
-        var list = [];
-        var idx = 0;
+  function initLightbox(){
+    if(!qs('.lbModal')){
+      var lb = document.createElement('div');
+      lb.className = 'lbModal';
+      lb.innerHTML = ''
+        + '<div class="lbBackdrop" data-lb-close></div>'
+        + '<div class="lbStage"><img class="lbImg" alt="" /></div>'
+        + '<div class="lbNav">'
+        + '  <button class="lbBtn" type="button" data-lb-prev>‹</button>'
+        + '  <button class="lbBtn" type="button" data-lb-next>›</button>'
+        + '  <span class="lbCount" data-lb-count>0/0</span>'
+        + '</div>'
+        + '<button class="lbClose" type="button" data-lb-close>✕</button>';
+      document.body.appendChild(lb);
+    }
 
-        function openAt(i){
-          if(!list.length) return;
-          idx = (i + list.length) % list.length;
-          imgEl.src = list[idx];
-          countEl.textContent = String(idx + 1) + '/' + String(list.length);
-          modal.classList.add('open');
-          document.body.style.overflow = 'hidden';
-        }
-        function close(){
-          modal.classList.remove('open');
-          document.body.style.overflow = '';
-        }
-        function next(){ openAt(idx + 1); }
-        function prev(){ openAt(idx - 1); }
+    var modal = qs('.lbModal');
+    var stage = qs('.lbStage', modal);
+    var imgEl = qs('.lbImg', modal);
+    var countEl = qs('[data-lb-count]', modal);
 
-        modal.addEventListener('click', function(e){
-          if(e.target && e.target.closest && e.target.closest('[data-lb-close]')) close();
-        });
+    var list = [];
+    var idx = 0;
 
-        qs('[data-lb-next]', modal).addEventListener('click', function(e){ e.stopPropagation(); next(); });
-        qs('[data-lb-prev]', modal).addEventListener('click', function(e){ e.stopPropagation(); prev(); });
+    function openAt(i){
+      if(!list.length) return;
+      idx = (i + list.length) % list.length;
+      imgEl.src = list[idx];
+      countEl.textContent = (idx+1) + '/' + list.length;
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
 
-        window.addEventListener('keydown', function(e){
-          if(!modal.classList.contains('open')) return;
-          if(e.key === 'Escape') close();
-          if(e.key === 'ArrowRight') next();
-          if(e.key === 'ArrowLeft') prev();
-        });
- document.addEventListener('click', function(e){
-          var thumb = e.target && e.target.closest && e.target.closest('.galleryRow .gItem img');
-          if(!thumb) return;
-          if(thumb.getAttribute('data-no-lightbox') === '1') return;
+    function close(){
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
 
-          var row = thumb.closest('.galleryRow');
-          var imgs = qsa('.gItem img', row).filter(function(x){ return x.getAttribute('data-no-lightbox') !== '1'; });
-          list = imgs.map(function(x){ return x.getAttribute('data-full') || x.currentSrc || x.src; });
-          openAt(imgs.indexOf(thumb));
-        }, { passive: true });
+    function next(){ openAt(idx + 1); }
+    function prev(){ openAt(idx - 1); }
 
-        var tsx=0, tsy=0, tlx=0, tly=0, tracking=false;
-        var LB_TH = 50;
+    modal.addEventListener('click', function(e){
+      if(e.target.closest('[data-lb-close]')) close();
+    });
 
-        stage.addEventListener('touchstart', function(e){
-          if(!modal.classList.contains('open')) return;
-          if(!e.touches || e.touches.length !== 1) return;
-          var t = e.touches[0];
-          tsx = tlx = t.clientX;
-          tsy = tly = t.clientY;
-          tracking = true;
-        }, { passive: true });
+    qs('[data-lb-next]', modal).onclick = function(e){ e.stopPropagation(); next(); };
+    qs('[data-lb-prev]', modal).onclick = function(e){ e.stopPropagation(); prev(); };
 
-        stage.addEventListener('touchmove', function(e){
-          if(!tracking || !e.touches || e.touches.length !== 1) return;
-          var t = e.touches[0];
-          tlx = t.clientX;
-          tly = t.clientY;
-        }, { passive: true });
+    document.addEventListener('click', function(e){
+      var thumb = e.target.closest('.galleryRow .gItem img');
+      if(!thumb) return;
+      if(thumb.dataset.noLightbox === '1') return;
 
-        stage.addEventListener('touchend', function(){
-          if(!tracking) return;
-          var dx = tlx - tsx;
-          var dy = tly - tsy;
-          if(Math.abs(dx) > LB_TH && Math.abs(dx) > Math.abs(dy) * 1.2){
-            if(dx < 0) next();
-            else prev();
-          }
-          tracking = false;
-        }, { passive: true });
+      var row = thumb.closest('.galleryRow');
+      var imgs = qsa('.gItem img', row).filter(x => x.dataset.noLightbox !== '1');
+
+      list = imgs.map(x => x.dataset.full || x.src);
+      openAt(imgs.indexOf(thumb));
+    });
+
+    // swipe
+    var sx=0, lx=0, tracking=false;
+
+    stage.addEventListener('touchstart', e=>{
+      if(!modal.classList.contains('open')) return;
+      sx = lx = e.touches[0].clientX;
+      tracking = true;
+    }, {passive:true});
+
+    stage.addEventListener('touchmove', e=>{
+      if(!tracking) return;
+      lx = e.touches[0].clientX;
+    }, {passive:true});
+
+    stage.addEventListener('touchend', ()=>{
+      if(!tracking) return;
+      if(Math.abs(lx-sx) > 50){
+        lx < sx ? next() : prev();
       }
+      tracking = false;
+    }, {passive:true});
+  }
 
-      document.addEventListener('DOMContentLoaded', function(){
-        initLightbox();
-      });
-    })();
-  </script>
+  document.addEventListener('DOMContentLoaded', initLightbox);
+
+})();
+
+
+// =======================
+// 🔊 語音系統（完整版）
+// =======================
+
+// iOS 初始化
+let voicesReady = false;
+
+function initVoices(){
+  return new Promise(resolve=>{
+    let voices = speechSynthesis.getVoices();
+    if(voices.length){
+      voicesReady = true;
+      resolve(voices);
+    }else{
+      speechSynthesis.onvoiceschanged = ()=>{
+        voicesReady = true;
+        resolve(speechSynthesis.getVoices());
+      };
+    }
+  });
+}
+
+// 必須由「使用者互動」觸發
+document.addEventListener('click', function unlock(){
+  initVoices();
+  document.removeEventListener('click', unlock);
+});
+
+// 播放
+document.addEventListener('click', function(e){
+  const btn = e.target.closest('.speak');
+  if(!btn) return;
+
+  const text = btn.dataset.text;
+  if(!text) return;
+
+  speechSynthesis.cancel();
+
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'ja-JP';
+  utter.rate = 0.75;   // 慢一點（你之前要求）
+  utter.pitch = 1;
+
+  const voices = speechSynthesis.getVoices();
+  const ja = voices.find(v => v.lang === 'ja-JP');
+
+  if(ja) utter.voice = ja;
+
+  speechSynthesis.speak(utter);
+});
+</script>
 
 </body>
 </html>
