@@ -19,6 +19,16 @@
       --radius:18px;
     }
     *{box-sizing:border-box}
+
+    /* Memo 提示區塊（左側線設計） */
+    .note{
+      margin:0 0 12px;
+      padding:12px 14px;
+      border:none;
+      border-left:4px solid var(--accent);
+      background:#f8fafc;
+      font-size:13px;
+    }
     body{
       margin:0;
       background:var(--bg);
@@ -590,7 +600,11 @@ details.detailsTight .content{
 @media (max-width: 640px){
   #day4 .tRow{grid-template-columns:72px 1fr;gap:8px;padding:12px}
 }
-
+/* 🔊 語音高亮效果 */
+.speaking span{
+  color: var(--accent);
+  font-weight: 700;
+}
 
 
 
@@ -682,20 +696,25 @@ details.detailsTight .content{
 
       <div class="panelsWrap">
 
- <template id="tpl-overview">
+<template id="tpl-overview">
           <div class="dayHeader">
             <div class="dayTitle">
               <div class="num">★</div>
-              <div class="tblock"><h2>旅行總覽</h2></div>
+              <div class="tblock"><h2>Memo</h2></div>
             </div>
           </div>
 
           <div class="dayBody">
             <div class="content">
-              <details>
-                <summary><span>🚗 租車資訊</span><span>⌄</span></summary>
+              
+<details>
+  <summary>
+    <span>🚗 租車資訊</span>
+    <span>⌄</span>
+  </summary>
+
                 <div style="padding:0 12px 12px">
-            
+                  <div class="timeline">
                     <div class="tRow">
                       <div><div class="time">預約</div></div>
                       <div>
@@ -749,10 +768,11 @@ details.detailsTight .content{
                         <div class="meta"><strong>總費用：38,330 日圓</strong></div>
                         <div class="navGrid">
                           <a class="btn" href="Budget租車預約資料.pdf" target="_blank" rel="noopener">📄 Budget租車預約資料</a>
-                          <a class="btn" href="還車地點變更.jpg" target="_blank" rel="noopener">🚗 還車地點變更訊息</a>
+                          <a class="btn" href="還車地點變更.jpg" target="_blank" rel="noopener">🚗 還車地點變更</a>
                         </div>
                       </div>
                     </div>
+                  </div>
                 </div>
               </details>
 
@@ -828,22 +848,11 @@ details.detailsTight .content{
                     <span>間もなく、目的地です 👉 即將到達目的地</span>
                     <button class="speak" data-text="間もなく、目的地です">🔊</button>
                   </div>
-
-                  <div class="meta" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-                    <span>ガソリンを満タンにしてください 👉 請加滿汽油</span>
-                    <button class="speak" data-text="ガソリンを満タンにしてください">🔊</button>
-                  </div>
-
-                  <div class="meta" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-                    <span>領収書をください 👉 請給我一張收據</span>
-                    <button class="speak" data-text="領収書をください">🔊</button>
-                  </div>
                 </div>
               </details>
             </div>
           </div>
         </template>
-
 
 
 
@@ -1997,11 +2006,11 @@ details.detailsTight .content{
         + '<div class="lbBackdrop" data-lb-close></div>'
         + '<div class="lbStage"><img class="lbImg" alt="" /></div>'
         + '<div class="lbNav">'
-        + '  <button class="lbBtn" type="button" data-lb-prev>‹</button>'
-        + '  <button class="lbBtn" type="button" data-lb-next>›</button>'
+        + '  <button class="lbBtn" type="button" data-lb-prev aria-label="上一張">‹</button>'
+        + '  <button class="lbBtn" type="button" data-lb-next aria-label="下一張">›</button>'
         + '  <span class="lbCount" data-lb-count>0/0</span>'
         + '</div>'
-        + '<button class="lbClose" type="button" data-lb-close>✕</button>';
+        + '<button class="lbClose" type="button" data-lb-close aria-label="關閉">✕</button>';
       document.body.appendChild(lb);
     }
 
@@ -2017,7 +2026,7 @@ details.detailsTight .content{
       if(!list.length) return;
       idx = (i + list.length) % list.length;
       imgEl.src = list[idx];
-      countEl.textContent = (idx+1) + '/' + list.length;
+      countEl.textContent = String(idx + 1) + '/' + String(list.length);
       modal.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
@@ -2031,103 +2040,133 @@ details.detailsTight .content{
     function prev(){ openAt(idx - 1); }
 
     modal.addEventListener('click', function(e){
-      if(e.target.closest('[data-lb-close]')) close();
+      if(e.target && e.target.closest && e.target.closest('[data-lb-close]')) close();
     });
 
-    qs('[data-lb-next]', modal).onclick = function(e){ e.stopPropagation(); next(); };
-    qs('[data-lb-prev]', modal).onclick = function(e){ e.stopPropagation(); prev(); };
+    qs('[data-lb-next]', modal).addEventListener('click', function(e){
+      e.stopPropagation();
+      next();
+    });
+
+    qs('[data-lb-prev]', modal).addEventListener('click', function(e){
+      e.stopPropagation();
+      prev();
+    });
+
+    window.addEventListener('keydown', function(e){
+      if(!modal.classList.contains('open')) return;
+      if(e.key === 'Escape') close();
+      if(e.key === 'ArrowRight') next();
+      if(e.key === 'ArrowLeft') prev();
+    });
 
     document.addEventListener('click', function(e){
-      var thumb = e.target.closest('.galleryRow .gItem img');
+      var thumb = e.target && e.target.closest && e.target.closest('.galleryRow .gItem img');
       if(!thumb) return;
-      if(thumb.dataset.noLightbox === '1') return;
+      if(thumb.getAttribute('data-no-lightbox') === '1') return;
 
       var row = thumb.closest('.galleryRow');
-      var imgs = qsa('.gItem img', row).filter(x => x.dataset.noLightbox !== '1');
+      var imgs = qsa('.gItem img', row).filter(function(x){
+        return x.getAttribute('data-no-lightbox') !== '1';
+      });
 
-      list = imgs.map(x => x.dataset.full || x.src);
+      list = imgs.map(function(x){
+        return x.getAttribute('data-full') || x.currentSrc || x.src;
+      });
+
       openAt(imgs.indexOf(thumb));
-    });
+    }, { passive: true });
 
-    // swipe
-    var sx=0, lx=0, tracking=false;
+    var tsx = 0, tsy = 0, tlx = 0, tly = 0, tracking = false;
+    var LB_TH = 50;
 
-    stage.addEventListener('touchstart', e=>{
+    stage.addEventListener('touchstart', function(e){
       if(!modal.classList.contains('open')) return;
-      sx = lx = e.touches[0].clientX;
+      if(!e.touches || e.touches.length !== 1) return;
+      var t = e.touches[0];
+      tsx = tlx = t.clientX;
+      tsy = tly = t.clientY;
       tracking = true;
-    }, {passive:true});
+    }, { passive: true });
 
-    stage.addEventListener('touchmove', e=>{
-      if(!tracking) return;
-      lx = e.touches[0].clientX;
-    }, {passive:true});
+    stage.addEventListener('touchmove', function(e){
+      if(!tracking || !e.touches || e.touches.length !== 1) return;
+      var t = e.touches[0];
+      tlx = t.clientX;
+      tly = t.clientY;
+    }, { passive: true });
 
-    stage.addEventListener('touchend', ()=>{
+    stage.addEventListener('touchend', function(){
       if(!tracking) return;
-      if(Math.abs(lx-sx) > 50){
-        lx < sx ? next() : prev();
+      var dx = tlx - tsx;
+      var dy = tly - tsy;
+      if(Math.abs(dx) > LB_TH && Math.abs(dx) > Math.abs(dy) * 1.2){
+        if(dx < 0) next();
+        else prev();
       }
       tracking = false;
-    }, {passive:true});
+    }, { passive: true });
   }
 
-  document.addEventListener('DOMContentLoaded', initLightbox);
+  document.addEventListener('DOMContentLoaded', function(){
+    initLightbox();
+  });
 
 })();
 
-
-// =======================
-// 🔊 語音系統（完整版）
-// =======================
-
-// iOS 初始化
-let voicesReady = false;
-
-function initVoices(){
-  return new Promise(resolve=>{
-    let voices = speechSynthesis.getVoices();
+// iOS / 手機語音初始化
+let voicesLoaded = false;
+function loadVoices(){
+  return new Promise(resolve => {
+    const voices = speechSynthesis.getVoices();
     if(voices.length){
-      voicesReady = true;
+      voicesLoaded = true;
       resolve(voices);
     }else{
-      speechSynthesis.onvoiceschanged = ()=>{
-        voicesReady = true;
+      speechSynthesis.onvoiceschanged = () => {
+        voicesLoaded = true;
         resolve(speechSynthesis.getVoices());
       };
     }
   });
 }
 
-// 必須由「使用者互動」觸發
-document.addEventListener('click', function unlock(){
-  initVoices();
-  document.removeEventListener('click', unlock);
+// 使用者第一次互動時喚醒語音（iOS 必要）
+document.addEventListener('click', function initOnce(){
+  loadVoices();
+  document.removeEventListener('click', initOnce);
 });
 
-// 播放
+// 播放語音 + 高亮
 document.addEventListener('click', function(e){
   const btn = e.target.closest('.speak');
   if(!btn) return;
 
-  const text = btn.dataset.text;
+  const text = btn.getAttribute('data-text');
   if(!text) return;
+
+  const row = btn.closest('.meta');
+
+  document.querySelectorAll('.meta').forEach(el => el.classList.remove('speaking'));
+  if(row) row.classList.add('speaking');
 
   speechSynthesis.cancel();
 
   const utter = new SpeechSynthesisUtterance(text);
   utter.lang = 'ja-JP';
-  utter.rate = 0.75;   // 慢一點（你之前要求）
+  utter.rate = 0.75;
   utter.pitch = 1;
 
   const voices = speechSynthesis.getVoices();
-  const ja = voices.find(v => v.lang === 'ja-JP');
+  const jaVoice = voices.find(v => v.lang === 'ja-JP');
+  if(jaVoice) utter.voice = jaVoice;
 
-  if(ja) utter.voice = ja;
+  utter.onend = () => {
+    if(row) row.classList.remove('speaking');
+  };
 
   speechSynthesis.speak(utter);
 });
 </script>
-
 </body>
 </html>
