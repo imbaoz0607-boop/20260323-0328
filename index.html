@@ -682,25 +682,20 @@ details.detailsTight .content{
 
       <div class="panelsWrap">
 
-<template id="tpl-overview">
+ <template id="tpl-overview">
           <div class="dayHeader">
             <div class="dayTitle">
               <div class="num">★</div>
-              <div class="tblock"><h2>Memo</h2></div>
+              <div class="tblock"><h2>旅行總覽</h2></div>
             </div>
           </div>
 
           <div class="dayBody">
             <div class="content">
-              
-<details>
-  <summary>
-    <span>🚗 租車資訊</span>
-    <span>⌄</span>
-  </summary>
-
+              <details>
+                <summary><span>🚗 租車資訊</span><span>⌄</span></summary>
                 <div style="padding:0 12px 12px">
-                  <div class="timeline">
+            
                     <div class="tRow">
                       <div><div class="time">預約</div></div>
                       <div>
@@ -754,9 +749,10 @@ details.detailsTight .content{
                         <div class="meta"><strong>總費用：38,330 日圓</strong></div>
                         <div class="navGrid">
                           <a class="btn" href="Budget租車預約資料.pdf" target="_blank" rel="noopener">📄 Budget租車預約資料</a>
-                          <a class="btn" href="還車地點變更.jpg" target="_blank" rel="noopener">🚗 還車地點變更</a>
+                          <a class="btn" href="還車地點變更.jpg" target="_blank" rel="noopener">🚗 還車地點變更訊息</a>
                         </div>
-                </div>
+                      </div>
+                    </div>
                 </div>
               </details>
 
@@ -832,12 +828,22 @@ details.detailsTight .content{
                     <span>間もなく、目的地です 👉 即將到達目的地</span>
                     <button class="speak" data-text="間もなく、目的地です">🔊</button>
                   </div>
+
+                  <div class="meta" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+                    <span>ガソリンを満タンにしてください 👉 請加滿汽油</span>
+                    <button class="speak" data-text="ガソリンを満タンにしてください">🔊</button>
+                  </div>
+
+                  <div class="meta" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+                    <span>領収書をください 👉 請給我一張收據</span>
+                    <button class="speak" data-text="領収書をください">🔊</button>
+                  </div>
                 </div>
-              </details>
               </details>
             </div>
           </div>
         </template>
+
 
 
 
