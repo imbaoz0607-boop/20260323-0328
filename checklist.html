@@ -1,273 +1,204 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>旅行打包清單</title>
-  <meta name="theme-color" content="#2563eb" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="旅行清單" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <style>
-    :root{
-      --bg:#f4f7fb;
-      --card:#ffffff;
-      --text:#1f2937;
-      --muted:#6b7280;
-      --line:#e5e7eb;
-      --accent:#2563eb;
-      --accent-soft:#dbeafe;
-      --done:#16a34a;
-      --done-soft:#dcfce7;
-      --shadow:0 12px 30px rgba(15,23,42,.08);
-      --radius:20px;
-    }
-    *{ box-sizing:border-box; }
-    html,body{ margin:0; padding:0; }
-    body{
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
-      background:linear-gradient(180deg,#f8fbff 0%, var(--bg) 100%);
-      color:var(--text);
-    }
-    .wrap{
-      width:min(920px, 100%);
-      margin:0 auto;
-      padding:18px 14px 40px;
-    }
-    .hero{
-      background:var(--card);
-      border:1px solid rgba(37,99,235,.10);
-      border-radius:26px;
-      box-shadow:var(--shadow);
-      padding:20px 16px;
-      margin-bottom:16px;
-    }
-    h1{ margin:0; font-size:28px; line-height:1.2; letter-spacing:.2px; }
-    .sub{ margin-top:8px; color:var(--muted); font-size:14px; line-height:1.7; }
-    .stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:16px; }
-    .stat{ background:#fff; border:1px solid var(--line); border-radius:18px; padding:14px 10px; text-align:center; }
-    .stat .num{ font-weight:800; font-size:24px; line-height:1.1; margin-bottom:4px; }
-    .stat .label{ color:var(--muted); font-size:12px; }
-    .toolbar{ display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
-    button{ appearance:none; border:none; border-radius:999px; padding:11px 14px; font-size:14px; cursor:pointer; background:#fff; color:var(--text); border:1px solid var(--line); box-shadow:0 3px 10px rgba(15,23,42,.04); }
-    button.primary{ background:var(--accent); color:#fff; border-color:var(--accent); }
-    button:active{ transform:translateY(1px); }
-    .group{ background:var(--card); border:1px solid var(--line); border-radius:24px; box-shadow:var(--shadow); overflow:hidden; margin-bottom:14px; }
-    .group summary{ list-style:none; display:flex; align-items:center; gap:12px; cursor:pointer; padding:16px; user-select:none; }
-    .group summary::-webkit-details-marker{ display:none; }
-    .summary-main{ display:flex; align-items:center; gap:12px; flex:1; min-width:0; }
-    .title-area{ min-width:0; flex:1; }
-    .title-row{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
-    .group-title{ font-size:17px; font-weight:800; }
-    .group-meta{ margin-top:4px; color:var(--muted); font-size:12px; }
-    .badge{ display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; font-size:12px; font-weight:700; background:var(--accent-soft); color:var(--accent); border:1px solid rgba(37,99,235,.12); }
-    .badge.done{ background:var(--done-soft); color:var(--done); border-color:#bbf7d0; }
-    .caret{ width:12px; height:12px; border-right:2px solid #94a3b8; border-bottom:2px solid #94a3b8; transform:rotate(45deg); transition:.18s ease; margin-right:4px; flex:0 0 auto; }
-    details[open] .caret{ transform:rotate(225deg); margin-top:6px; }
-    .items{ border-top:1px solid #f1f5f9; padding:4px 16px 16px 52px; display:grid; gap:6px; }
-    .item{ display:flex; align-items:flex-start; gap:10px; min-height:40px; padding:7px 0; }
-    .item .text{ flex:1; line-height:1.55; padding-top:1px; }
-    .item.checked .text{ color:#9ca3af; text-decoration:line-through; }
-    input[type="checkbox"]{ width:22px; height:22px; accent-color:var(--accent); cursor:pointer; flex:0 0 auto; margin:0; }
-    .footer{ text-align:center; color:var(--muted); font-size:12px; line-height:1.7; margin-top:18px; }
-    .toast{ position:fixed; left:50%; bottom:22px; transform:translateX(-50%) translateY(12px); background:rgba(17,24,39,.92); color:#fff; padding:10px 14px; border-radius:999px; font-size:13px; opacity:0; pointer-events:none; transition:.2s ease; z-index:50; white-space:nowrap; }
-    .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
-    @media (max-width:640px){ .wrap{ padding:14px 12px 34px; } h1{ font-size:24px; } .group summary{ padding:14px; } .items{ padding:4px 14px 14px 46px; } .group-title{ font-size:16px; } .stats .stat .num{ font-size:22px; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>小尾巴</title>
+
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="小尾巴">
+<meta name="mobile-web-app-capable" content="yes">
+
+<!-- ⭐ 這就是你的 icon -->
+<link rel="apple-touch-icon" href="icon.png">
+
+<style>
+body{
+  font-family:-apple-system,sans-serif;
+  background:#f4f7fb;
+  padding:20px;
+}
+
+h1{text-align:center;}
+
+details{
+  background:#fff;
+  border-radius:16px;
+  padding:10px 15px;
+  margin-bottom:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+
+summary{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.items{margin-top:10px;}
+.items label{
+  display:flex;
+  gap:10px;
+  padding:6px 0;
+}
+
+.checked span{
+  text-decoration:line-through;
+  color:#999;
+}
+</style>
 </head>
+
 <body>
-  <div class="wrap">
-    <section class="hero">
-      <h1>🧳 旅行打包清單</h1>
-      <div class="sub">
-        可長期保存使用。分類可收合，子項目可直接勾選；當某分類全部完成時，會自動勾選分類並自動收起。勾選狀態與收合狀態都會自動記住。<br>
-        這份也可加到手機桌面，從桌面點開時會更像 App。
-      </div>
 
-      <div class="stats">
-        <div class="stat">
-          <div class="num" id="doneCount">0</div>
-          <div class="label">已完成</div>
-        </div>
-        <div class="stat">
-          <div class="num" id="totalCount">0</div>
-          <div class="label">總項目</div>
-        </div>
-        <div class="stat">
-          <div class="num" id="percentCount">0%</div>
-          <div class="label">完成度</div>
-        </div>
-      </div>
+<h1>🐯 小尾巴</h1>
 
-      <div class="toolbar">
-        <button class="primary" id="expandBtn">全部展開</button>
-        <button id="collapseBtn">全部收合</button>
-        <button id="resetBtn">全部重設</button>
-      </div>
-    </section>
+<!-- 重要物品 -->
+<details open>
+<summary><input type="checkbox" class="group"> 重要物品</summary>
+<div class="items">
+<label><input type="checkbox"> <span>護照</span></label>
+<label><input type="checkbox"> <span>日文駕照翻譯本、台灣駕照</span></label>
+<label><input type="checkbox"> <span>現金</span></label>
+</div>
+</details>
 
-    <div id="groupContainer"></div>
+<!-- 清潔 -->
+<details>
+<summary><input type="checkbox" class="group"> 清潔</summary>
+<div class="items">
+<label><input type="checkbox"> <span>卸妝油</span></label>
+<label><input type="checkbox"> <span>洗面乳</span></label>
+<label><input type="checkbox"> <span>洗髮精</span></label>
+<label><input type="checkbox"> <span>護髮膜</span></label>
+<label><input type="checkbox"> <span>快乾擦髮巾</span></label>
+</div>
+</details>
 
-    
+<!-- 保養 -->
+<details>
+<summary><input type="checkbox" class="group"> 保養品、底妝</summary>
+<div class="items">
+<label><input type="checkbox"> <span>前導精華</span></label>
+<label><input type="checkbox"> <span>痘膚潤</span></label>
+<label><input type="checkbox"> <span>痘痘藥</span></label>
+<label><input type="checkbox"> <span>化妝水</span></label>
+<label><input type="checkbox"> <span>眼霜</span></label>
+<label><input type="checkbox"> <span>保濕精華液</span></label>
+<label><input type="checkbox"> <span>面霜</span></label>
+<label><input type="checkbox"> <span>擦拭行化妝水</span></label>
+<label><input type="checkbox"> <span>化妝棉</span></label>
+<label><input type="checkbox"> <span>防曬</span></label>
+<label><input type="checkbox"> <span>CC霜</span></label>
+<label><input type="checkbox"> <span>妝前霜</span></label>
+<label><input type="checkbox"> <span>蜜粉</span></label>
+<label><input type="checkbox"> <span>多效精華液</span></label>
+<label><input type="checkbox"> <span>身體乳液</span></label>
+</div>
+</details>
 
-    <div class="footer">
-      勾選紀錄保存在目前這個瀏覽器。<br>
-      若更換裝置或清除瀏覽器資料，紀錄會重新開始。
-    </div>
-  </div>
+<!-- 生活 -->
+<details>
+<summary><input type="checkbox" class="group"> 生活物品</summary>
+<div class="items">
+<label><input type="checkbox"> <span>牙刷、牙膏</span></label>
+<label><input type="checkbox"> <span>牙線棒</span></label>
+<label><input type="checkbox"> <span>棉花棒</span></label>
+<label><input type="checkbox"> <span>濕紙巾</span></label>
+<label><input type="checkbox"> <span>暈車藥</span></label>
+<label><input type="checkbox"> <span>暖暖包</span></label>
+<label><input type="checkbox"> <span>鯊魚夾</span></label>
+<label><input type="checkbox"> <span>瀏海貼</span></label>
+<label><input type="checkbox"> <span>口罩</span></label>
+<label><input type="checkbox"> <span>袖珍面紙</span></label>
+<label><input type="checkbox"> <span>購物袋</span></label>
+<label><input type="checkbox"> <span>垃圾袋</span></label>
+<label><input type="checkbox"> <span>凡士林</span></label>
+<label><input type="checkbox"> <span>眼藥水</span></label>
+<label><input type="checkbox"> <span>眼鏡</span></label>
+</div>
+</details>
 
-  <div class="toast" id="toast">已儲存</div>
+<!-- 其他 -->
+<details>
+<summary><input type="checkbox" class="group"> 其他</summary>
+<div class="items">
+<label><input type="checkbox"> <span>行動電源</span></label>
+<label><input type="checkbox"> <span>酒精</span></label>
+<label><input type="checkbox"> <span>耳機</span></label>
+<label><input type="checkbox"> <span>充電頭、充電線</span></label>
+<label><input type="checkbox"> <span>藥品</span></label>
+</div>
+</details>
 
-  <script>
-    const STORAGE_KEY = "travel-checklist-final-v1";
+<script>
+const STORAGE_KEY="tail-checklist";
 
-    const data = [
-      { title: "重要物品", icon: "📘", items: ["護照","日文駕照翻譯本、台灣駕照","現金"] },
-      { title: "清潔", icon: "🧼", items: ["卸妝油","洗面乳","洗髮精","護髮膜","快乾擦髮巾"] },
-      { title: "保養品、底妝", icon: "💄", items: ["前導精華","痘膚潤","痘痘藥","化妝水","眼霜","保濕精華液","面霜","擦拭行化妝水","化妝棉","防曬","CC霜","妝前霜","蜜粉","多效精華液","身體乳液"] },
-      { title: "生活物品", icon: "🏠", items: ["牙刷、牙膏","牙線棒","棉花棒","濕紙巾","暈車藥","暖暖包","鯊魚夾","瀏海貼","口罩","袖珍面紙","購物袋","垃圾袋","凡士林","眼藥水","眼鏡"] },
-      { title: "其他", icon: "🔌", items: ["行動電源","酒精","耳機","充電頭、充電線","藥品"] }
-    ];
+const items=document.querySelectorAll(".items input");
+const groups=document.querySelectorAll(".group");
+const state=JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}");
 
-    function loadState(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }catch(e){ return {}; } }
-    function saveState(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); showToast("已自動儲存"); }
-    function keyForItem(groupTitle, item){ return groupTitle + "||" + item; }
-    function keyForOpen(groupTitle){ return "__open__" + groupTitle; }
-    function escapeHtml(str){ return String(str).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;"); }
-    function safeId(str){ return str.replace(/[^\\w\\u4e00-\\u9fff]+/g, "-"); }
+// 初始化
+items.forEach(cb=>{
+  const key=cb.nextElementSibling.innerText;
+  if(state[key]){
+    cb.checked=true;
+    cb.closest("label").classList.add("checked");
+  }
+});
 
-    const state = loadState();
-    const container = document.getElementById("groupContainer");
-    const toast = document.getElementById("toast");
-    let toastTimer = null;
+// 子項目
+items.forEach(cb=>{
+  cb.addEventListener("change",()=>{
+    const label=cb.closest("label");
+    label.classList.toggle("checked",cb.checked);
 
-    function showToast(msg){ toast.textContent = msg; toast.classList.add("show"); clearTimeout(toastTimer); toastTimer = setTimeout(() => { toast.classList.remove("show"); }, 1100); }
-    function getCounts(group){ const total = group.items.length; const done = group.items.filter(item => !!state[keyForItem(group.title, item)]).length; return { total, done, allDone: total > 0 && done === total }; }
+    const key=cb.nextElementSibling.innerText;
+    state[key]=cb.checked;
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
 
-    function render(){
-      container.innerHTML = data.map((group, idx) => {
-        const { total, done, allDone } = getCounts(group);
-        const open = state[keyForOpen(group.title)];
-        const shouldOpen = open === undefined ? !allDone : !!open;
-        return `
-          <details class="group" id="group-${safeId(group.title)}-${idx}" ${shouldOpen ? "open" : ""}>
-            <summary>
-              <div class="summary-main">
-                <input type="checkbox" class="group-checkbox" data-group="${escapeHtml(group.title)}" ${allDone ? "checked" : ""}>
-                <div class="title-area">
-                  <div class="title-row">
-                    <div class="group-title">${group.icon} ${escapeHtml(group.title)}</div>
-                    <div class="badge ${allDone ? "done" : ""}">
-                      ${allDone ? "已完成" : `剩 ${total - done} 項`}
-                    </div>
-                  </div>
-                  <div class="group-meta">${done} / ${total} 已完成</div>
-                </div>
-              </div>
-              <div class="caret"></div>
-            </summary>
+    const box=cb.closest("details");
+    const all=box.querySelectorAll(".items input");
+    const done=box.querySelectorAll(".items input:checked");
 
-            <div class="items">
-              ${group.items.map(item => {
-                const checked = !!state[keyForItem(group.title, item)];
-                return `
-                  <label class="item ${checked ? "checked" : ""}">
-                    <input type="checkbox" class="item-checkbox" data-group="${escapeHtml(group.title)}" data-item="${escapeHtml(item)}" ${checked ? "checked" : ""}>
-                    <span class="text">${escapeHtml(item)}</span>
-                  </label>
-                `;
-              }).join("")}
-            </div>
-          </details>
-        `;
-      }).join("");
+    const group=box.querySelector(".group");
+    group.checked=all.length===done.length;
 
-      bindEvents();
-      refreshStats();
+    if(group.checked){
+      box.removeAttribute("open");
     }
+  });
+});
 
-    function bindEvents(){
-      document.querySelectorAll(".item-checkbox").forEach(cb => {
-        cb.addEventListener("change", function(){
-          const groupTitle = this.dataset.group;
-          const item = this.dataset.item;
-          state[keyForItem(groupTitle, item)] = this.checked;
+// 上層
+groups.forEach(g=>{
+  g.addEventListener("change",()=>{
+    const box=g.closest("details");
+    const all=box.querySelectorAll(".items input");
 
-          const label = this.closest(".item");
-          if(label) label.classList.toggle("checked", this.checked);
+    all.forEach(i=>{
+      i.checked=g.checked;
+      i.closest("label").classList.toggle("checked",g.checked);
 
-          syncGroup(groupTitle, true);
-          saveState();
-          refreshStats();
-        });
-      });
+      const key=i.nextElementSibling.innerText;
+      state[key]=g.checked;
+    });
 
-      document.querySelectorAll(".group-checkbox").forEach(cb => {
-        cb.addEventListener("click", function(e){ e.stopPropagation(); });
-        cb.addEventListener("change", function(){
-          const groupTitle = this.dataset.group;
-          const group = data.find(g => g.title === groupTitle);
-          if(!group) return;
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
 
-          group.items.forEach(item => { state[keyForItem(groupTitle, item)] = this.checked; });
-          state[keyForOpen(groupTitle)] = this.checked ? false : true;
-          render();
-          saveState();
-        });
-      });
-
-      document.querySelectorAll(".group").forEach(detail => {
-        detail.addEventListener("toggle", function(){
-          const groupCheckbox = this.querySelector(".group-checkbox");
-          if(!groupCheckbox) return;
-          const groupTitle = groupCheckbox.dataset.group;
-          state[keyForOpen(groupTitle)] = this.open;
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-        });
-      });
-
-      document.getElementById("expandBtn").onclick = function(){ data.forEach(group => state[keyForOpen(group.title)] = true); render(); saveState(); };
-      document.getElementById("collapseBtn").onclick = function(){ data.forEach(group => state[keyForOpen(group.title)] = false); render(); saveState(); };
-      document.getElementById("resetBtn").onclick = function(){ if(!confirm("要清空全部勾選與收合紀錄嗎？")) return; Object.keys(state).forEach(k => delete state[k]); render(); saveState(); showToast("已重設"); };
+    if(g.checked){
+      box.removeAttribute("open");
+    }else{
+      box.setAttribute("open","");
     }
+  });
+});
+</script>
 
-    function syncGroup(groupTitle, autoCollapse){
-      const detail = [...document.querySelectorAll(".group")].find(el => el.querySelector(".group-checkbox")?.dataset.group === groupTitle);
-      if(!detail) return;
-
-      const itemBoxes = detail.querySelectorAll(".item-checkbox");
-      const doneBoxes = detail.querySelectorAll(".item-checkbox:checked");
-      const groupBox = detail.querySelector(".group-checkbox");
-      const badge = detail.querySelector(".badge");
-      const meta = detail.querySelector(".group-meta");
-
-      const total = itemBoxes.length;
-      const done = doneBoxes.length;
-      const allDone = total > 0 && total === done;
-
-      groupBox.checked = allDone;
-      badge.textContent = allDone ? "已完成" : `剩 ${total - done} 項`;
-      badge.classList.toggle("done", allDone);
-      meta.textContent = `${done} / ${total} 已完成`;
-
-      if(autoCollapse){
-        if(allDone){ detail.open = false; state[keyForOpen(groupTitle)] = false; }
-        else{ detail.open = true; state[keyForOpen(groupTitle)] = true; }
-      }
-    }
-
-    function refreshStats(){
-      const total = data.reduce((sum, group) => sum + group.items.length, 0);
-      const done = data.reduce((sum, group) => sum + group.items.filter(item => !!state[keyForItem(group.title, item)]).length, 0);
-      const percent = total ? Math.round((done / total) * 100) : 0;
-
-      document.getElementById("doneCount").textContent = done;
-      document.getElementById("totalCount").textContent = total;
-      document.getElementById("percentCount").textContent = percent + "%";
-    }
-
-    render();
-  </script>
 </body>
 </html>
