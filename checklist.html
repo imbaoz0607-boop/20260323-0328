@@ -89,6 +89,13 @@
 .card-item.checked{background:var(--done-soft);border-color:#bbf7d0}
 .card-item input{position:absolute;top:8px;right:8px}
 .card-item .text{display:block;font-size:14px;margin-top:6px;line-height:1.3}
+.card-item img{width:70px;height:70px;object-fit:contain;display:block;margin:8px auto 4px;cursor:zoom-in}
+.image-modal{position:fixed;inset:0;background:rgba(15,23,42,.72);display:flex;align-items:center;justify-content:center;padding:20px;z-index:100;opacity:0;pointer-events:none;transition:.2s ease}
+.image-modal.show{opacity:1;pointer-events:auto}
+.modal-card{position:relative;max-width:min(92vw,720px);max-height:88vh;background:#fff;border-radius:24px;padding:16px;box-shadow:0 20px 60px rgba(0,0,0,.28)}
+.modal-card img{display:block;max-width:100%;max-height:72vh;object-fit:contain;border-radius:16px}
+.modal-close{position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:22px;line-height:1;cursor:pointer;box-shadow:none}
+.modal-title{margin-top:10px;text-align:center;font-size:14px;color:var(--muted)}
     .item{ display:flex; align-items:flex-start; gap:10px; min-height:40px; padding:7px 0; }
     .item .text{ flex:1; line-height:1.55; padding-top:1px; }
     .item.checked .text{ color:#9ca3af; text-decoration:line-through; }
@@ -140,6 +147,14 @@
 
   <div class="toast" id="toast">已儲存</div>
 
+  <div class="image-modal" id="imageModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose" type="button" aria-label="關閉">×</button>
+      <img id="modalImage" src="" alt="商品圖片放大預覽">
+      <div class="modal-title" id="modalTitle"></div>
+    </div>
+  </div>
+
   <script>
     const STORAGE_KEY = "travel-checklist-pro-v2";
 
@@ -187,6 +202,10 @@
 
     const container = document.getElementById("groupContainer");
     const toast = document.getElementById("toast");
+    const imageModal = document.getElementById("imageModal");
+    const modalImage = document.getElementById("modalImage");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalClose = document.getElementById("modalClose");
 
     function keyForItem(listKey, groupTitle, item){ return `${listKey}||${groupTitle}||${item}`; }
     function keyForOpen(listKey, groupTitle){ return `${listKey}||${groupTitle}`; }
@@ -223,7 +242,7 @@
                 return `
                   <label class="card-item ${checked ? "checked" : ""}" data-item="${itemName}">
                     <input type="checkbox" class="item-checkbox" data-group="${group.title}" data-item="${itemName}" ${checked ? "checked" : ""}>
-                    ${itemImg ? `<img src="${itemImg}" style="width:70px;margin-top:6px">` : ""}
+                    ${itemImg ? `<img src="${itemImg}" alt="${itemName}" class="zoomable-image" data-full="${itemImg}" data-title="${itemName}">` : ""}
 <span class="text">${itemName}</span>
                     <button class="delete-btn" type="button" data-group="${group.title}" data-item="${itemName}" style="position:absolute;bottom:6px;right:6px">×</button>
                   </label>
@@ -282,6 +301,13 @@
     }
 
     function bindEvents(){
+      document.querySelectorAll(".zoomable-image").forEach(img => {
+        img.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          openImageModal(this.dataset.full || this.src, this.dataset.title || this.alt || "");
+        });
+      });
       document.querySelectorAll(".item-checkbox").forEach(cb => {
         cb.addEventListener("change", function(){
           const groupTitle = this.dataset.group;
@@ -360,6 +386,29 @@
       document.getElementById("travelBtn").onclick = function(){ state.activeList = "travel"; localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); render(); };
       document.getElementById("drugstoreBtn").onclick = function(){ state.activeList = "drugstore"; localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); render(); };
     }
+
+    function openImageModal(src, title){
+      modalImage.src = src;
+      modalTitle.textContent = title;
+      imageModal.classList.add("show");
+      imageModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeImageModal(){
+      imageModal.classList.remove("show");
+      imageModal.setAttribute("aria-hidden", "true");
+      modalImage.src = "";
+      document.body.style.overflow = "";
+    }
+
+    modalClose.addEventListener("click", closeImageModal);
+    imageModal.addEventListener("click", function(e){
+      if(e.target === imageModal) closeImageModal();
+    });
+    document.addEventListener("keydown", function(e){
+      if(e.key === "Escape" && imageModal.classList.contains("show")) closeImageModal();
+    });
 
     function addItem(groupTitle){
       const input = document.querySelector(`[data-add-input="${groupTitle}"]`);
