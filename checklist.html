@@ -180,7 +180,14 @@
             { name:"SVELTY黑薑", img:"images/3.jpg" },
             { name:"SVELTY3倍酵母", img:"images/4.jpg" }
           ] },
-          { title: "保養", icon: "🧴", items: ["化妝水", "防曬", "面霜"] },
+          { title: "保養", icon: "🧴", items: [
+            { name:"COVERMARK", covermark:true, items:[
+              { name:"200ml+30ml クレンジング オイル3,300円(税込)", img:"images/8.jpg" },
+              { name:"モイスチュア チャージ セラム9,900円(税込)", img:"images/9.jpg" },
+              { name:"モイスチュア チャージ セラム(リフィル)9,350円(税込)", img:"images/10.jpg" },
+              { name:"モイスチュア リッチ リンクル クリーム6,380円(税込)", img:"images/11.jpg" }
+            ] }
+          ] },
           { title: "其他", icon: "🛍️", items: [
             { name:"TADAS 比菲禦力菌 2,916円(税込)", img:"images/5.jpg" },
             { name:"vitoas多效美白菁華9,350円(税込)", img:"images/6.jpg" },
@@ -244,7 +251,25 @@
               ${group.items.map(item => {
                 const itemName = item.name ?? item;
                 const itemImg = item.img ?? null;
+                const isCovermark = item.covermark === true;
                 const checked = !!state.checked[keyForItem(state.activeList, group.title, itemName)];
+                if(isCovermark){
+                  return `
+                  <div class="card-item" style="border-radius:20px;background:#f8fafc;cursor:default">
+                    <details>
+                      <summary style="font-weight:700;list-style:none;cursor:pointer">COVERMARK</summary>
+                      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;margin-top:10px">
+                        ${(item.items||[]).map(sub=>`
+                          <div class="card-item" style="padding:10px">
+                            ${sub.img?`<img src="${sub.img}" style="width:60px;height:60px;object-fit:contain;margin:auto">`:""}
+                            <div class="text" style="font-size:12px">${sub.name}</div>
+                          </div>
+                        `).join("")}
+                      </div>
+                    </details>
+                  </div>
+                  `;
+                }
                 return `
                   <label class="card-item ${checked ? "checked" : ""}" data-item="${itemName}">
                     <input type="checkbox" class="item-checkbox" data-group="${group.title}" data-item="${itemName}" ${checked ? "checked" : ""}>
