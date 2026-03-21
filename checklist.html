@@ -112,7 +112,6 @@
           <div class="label">完成度</div>
         </div>
       </div>
-
       <div class="toolbar">
         <div class="switcher">
           <button class="switch-btn" id="travelBtn">🧳 旅行清單</button>
@@ -125,8 +124,6 @@
     </section>
 
     <div id="groupContainer"></div>
-
-    
 
     <div class="footer">
       勾選紀錄保存在目前這個瀏覽器。<br>
@@ -168,25 +165,15 @@
       }catch(e){}
       return { activeList: "travel", lists: clone(DEFAULT_LISTS), checked: {}, open: {} };
     }
+
     const state = loadState();
-    if(!state.activeList) state.activeList = "travel";
-    if(!state.lists) state.lists = clone(DEFAULT_LISTS);
-    if(!state.checked) state.checked = {};
-    if(!state.open) state.open = {};
 
     const container = document.getElementById("groupContainer");
     const toast = document.getElementById("toast");
-    let toastTimer = null;
 
-    function saveState(msg = "已自動儲存"){
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      showToast(msg);
-    }
-    function showToast(msg){ toast.textContent = msg; toast.classList.add("show"); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove("show"), 1100); }
     function keyForItem(listKey, groupTitle, item){ return `${listKey}||${groupTitle}||${item}`; }
     function keyForOpen(listKey, groupTitle){ return `${listKey}||${groupTitle}`; }
-    function escapeHtml(str){ return String(str).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;"); }
-    function safeId(str){ return str.replace(/[^\w\u4e00-\u9fff]+/g, "-"); }
+
     function currentList(){ return state.lists[state.activeList]; }
 
     function getCounts(group){
@@ -198,21 +185,19 @@
     function render(){
       const list = currentList();
       document.querySelector("h1").textContent = list.title;
-      document.getElementById("travelBtn").classList.toggle("active", state.activeList === "travel");
-      document.getElementById("drugstoreBtn").classList.toggle("active", state.activeList === "drugstore");
 
       container.innerHTML = list.groups.map((group, idx) => {
         const { total, done, allDone } = getCounts(group);
         const open = state.open[keyForOpen(state.activeList, group.title)];
         const shouldOpen = open === undefined ? !allDone : !!open;
         return `
-          <details class="group" id="group-${safeId(group.title)}-${idx}" ${shouldOpen ? "open" : ""}>
+          <details class="group" id="group-${group.title}-${idx}" ${shouldOpen ? "open" : ""}>
             <summary>
               <div class="summary-main">
-                <input type="checkbox" class="group-checkbox" data-group="${escapeHtml(group.title)}" ${allDone ? "checked" : ""}>
+                <input type="checkbox" class="group-checkbox" data-group="${group.title}" ${allDone ? "checked" : ""}>
                 <div class="title-area">
                   <div class="title-row">
-                    <div class="group-title">${group.icon} ${escapeHtml(group.title)}</div>
+                    <div class="group-title">${group.icon} ${group.title}</div>
                     <div class="badge ${allDone ? "done" : ""}">${allDone ? "已完成" : `剩 ${total - done} 項`}</div>
                   </div>
                   <div class="group-meta">${done} / ${total} 已完成</div>
@@ -221,25 +206,26 @@
               <div class="caret"></div>
             </summary>
 
-            <div class="items" data-group="${escapeHtml(group.title)}">
+            <div class="items" data-group="${group.title}">
               ${group.items.map(item => {
                 const checked = !!state.checked[keyForItem(state.activeList, group.title, item)];
                 return `
-                  <label class="item ${checked ? "checked" : ""}" draggable="true" data-item="${escapeHtml(item)}">
+                  <label class="item ${checked ? "checked" : ""}" draggable="true" data-item="${item}">
                     <div class="item-main">
-                      <input type="checkbox" class="item-checkbox" data-group="${escapeHtml(group.title)}" data-item="${escapeHtml(item)}" ${checked ? "checked" : ""}>
-                      <span class="text">${escapeHtml(item)}</span>
+                      <input type="checkbox" class="item-checkbox" data-group="${group.title}" data-item="${item}" ${checked ? "checked" : ""}>
+                      <span class="text">${item}</span>
                     </div>
                     <div class="item-actions">
-                      <button class="delete-btn" type="button" title="刪除" data-group="${escapeHtml(group.title)}" data-item="${escapeHtml(item)}">×</button>
+                      <button class="delete-btn" type="button" title="刪除" data-group="${group.title}" data-item="${item}">×</button>
                     </div>
                   </label>
                 `;
               }).join("")}
             </div>
+
             <div class="editor-row">
-              <input class="editor-input" type="text" placeholder="新增 ${escapeHtml(group.title)} 物品" data-add-input="${escapeHtml(group.title)}">
-              <button class="tiny-btn" type="button" data-add-btn="${escapeHtml(group.title)}">新增</button>
+              <input class="editor-input" type="text" placeholder="新增 ${group.title} 物品" data-add-input="${group.title}">
+              <button class="tiny-btn" type="button" data-add-btn="${group.title}">新增</button>
             </div>
           </details>
         `;
@@ -259,7 +245,7 @@
           const label = this.closest(".item");
           if(label) label.classList.toggle("checked", this.checked);
           syncGroup(groupTitle, true);
-          saveState();
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
           refreshStats();
         });
       });
@@ -274,7 +260,7 @@
           if(!group) return;
           group.items = group.items.filter(i => i !== item);
           delete state.checked[keyForItem(state.activeList, groupTitle, item)];
-          saveState("已刪除物品");
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
           render();
         });
       });
@@ -294,7 +280,7 @@
           if(!group) return;
           group.items.forEach(item => { state.checked[keyForItem(state.activeList, groupTitle, item)] = this.checked; });
           state.open[keyForOpen(state.activeList, groupTitle)] = this.checked ? false : true;
-          saveState();
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
           render();
         });
       });
@@ -308,8 +294,8 @@
         });
       });
 
-      document.getElementById("expandBtn").onclick = function(){ currentList().groups.forEach(group => state.open[keyForOpen(state.activeList, group.title)] = true); saveState(); render(); };
-      document.getElementById("collapseBtn").onclick = function(){ currentList().groups.forEach(group => state.open[keyForOpen(state.activeList, group.title)] = false); saveState(); render(); };
+      document.getElementById("expandBtn").onclick = function(){ currentList().groups.forEach(group => state.open[keyForOpen(state.activeList, group.title)] = true); localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); render(); };
+      document.getElementById("collapseBtn").onclick = function(){ currentList().groups.forEach(group => state.open[keyForOpen(state.activeList, group.title)] = false); localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); render(); };
       document.getElementById("resetBtn").onclick = function(){
         if(!confirm("要清空目前這份清單的勾選與收合紀錄嗎？")) return;
         const list = currentList();
@@ -317,26 +303,23 @@
           group.items.forEach(item => delete state.checked[keyForItem(state.activeList, group.title, item)]);
           delete state.open[keyForOpen(state.activeList, group.title)];
         });
-        saveState("已重設目前清單");
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
         render();
       };
-      document.getElementById("travelBtn").onclick = function(){ state.activeList = "travel"; saveState("已切換旅行清單"); render(); };
-      document.getElementById("drugstoreBtn").onclick = function(){ state.activeList = "drugstore"; saveState("已切換藥妝清單"); render(); };
+      document.getElementById("travelBtn").onclick = function(){ state.activeList = "travel"; localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); render(); };
+      document.getElementById("drugstoreBtn").onclick = function(){ state.activeList = "drugstore"; localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); render(); };
     }
 
     function addItem(groupTitle){
-      const input = document.querySelector(`[data-add-input="${CSS.escape(groupTitle)}"]`);
+      const input = document.querySelector(`[data-add-input="${groupTitle}"]`);
       const value = input?.value.trim();
       if(!value) return;
       const group = currentList().groups.find(g => g.title === groupTitle);
       if(!group) return;
-      if(group.items.includes(value)){
-        showToast("這個物品已經存在");
-        return;
-      }
+      if(group.items.includes(value)) return;
       group.items.push(value);
       if(input) input.value = "";
-      saveState("已新增物品");
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
       render();
     }
 
@@ -364,22 +347,72 @@
     function enableDragSort(){
       document.querySelectorAll('.items').forEach(listEl => {
         let draggingEl = null;
+        let holdTimer = null;
         const groupTitle = listEl.dataset.group;
+
         listEl.querySelectorAll('.item').forEach(item => {
-          item.addEventListener('dragstart', () => { draggingEl = item; item.classList.add('dragging'); });
+
+          /* Desktop drag */
+          item.addEventListener('dragstart', () => {
+            draggingEl = item;
+            item.classList.add('dragging');
+          });
+
           item.addEventListener('dragend', () => {
             item.classList.remove('dragging');
             draggingEl = null;
             persistOrder(groupTitle, listEl);
           });
+
+          /* Mobile long‑press drag */
+          item.addEventListener('touchstart', e => {
+            holdTimer = setTimeout(()=>{
+              draggingEl = item;
+              item.classList.add('dragging');
+
+              /* vibration feedback if supported */
+              if(navigator.vibrate) navigator.vibrate(10);
+
+            }, 220); // long press delay
+          },{passive:true});
+
+          item.addEventListener('touchend', ()=>{
+            clearTimeout(holdTimer);
+            if(draggingEl){
+              draggingEl.classList.remove('dragging');
+              draggingEl = null;
+              persistOrder(groupTitle, listEl);
+            }
+          });
+
+          item.addEventListener('touchcancel', ()=>{
+            clearTimeout(holdTimer);
+            draggingEl = null;
+          });
         });
+
         listEl.addEventListener('dragover', e => {
           e.preventDefault();
-          const after = [...listEl.querySelectorAll('.item:not(.dragging)')].find(el => e.clientY <= el.getBoundingClientRect().top + el.offsetHeight / 2);
+          const after = [...listEl.querySelectorAll('.item:not(.dragging)')]
+            .find(el => e.clientY <= el.getBoundingClientRect().top + el.offsetHeight / 2);
+
           if(!draggingEl) return;
           if(!after) listEl.appendChild(draggingEl);
           else listEl.insertBefore(draggingEl, after);
         });
+
+        listEl.addEventListener('touchmove', e => {
+          if(!draggingEl) return;
+          const touch = e.touches[0];
+
+          const after = [...listEl.querySelectorAll('.item:not(.dragging)')]
+            .find(el => touch.clientY <= el.getBoundingClientRect().top + el.offsetHeight / 2);
+
+          if(!after) listEl.appendChild(draggingEl);
+          else listEl.insertBefore(draggingEl, after);
+
+          e.preventDefault();
+        },{passive:false});
       });
     }
 
@@ -387,7 +420,7 @@
       const group = currentList().groups.find(g => g.title === groupTitle);
       if(!group) return;
       group.items = [...listEl.querySelectorAll('.item')].map(el => el.dataset.item);
-      saveState("已記住排序");
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
       render();
     }
 
