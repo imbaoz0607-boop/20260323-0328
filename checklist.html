@@ -65,6 +65,8 @@
     .delete-btn:hover{ background:#f8fafc; color:#b91c1c; }
     .item .text{ flex:1; line-height:1.55; padding-top:1px; }
     .editor-row{ display:flex; gap:8px; padding:0 16px 16px 52px; }
+    .editor-row.drugstore-editor{flex-wrap:wrap;align-items:center;padding:0 16px 16px 16px}
+    .file-btn{display:inline-flex;align-items:center;justify-content:center;min-width:110px}
     .editor-input{ flex:1; border:1px solid var(--line); border-radius:12px; padding:10px 12px; font-size:14px; }
     button{ appearance:none; border:none; border-radius:999px; padding:11px 14px; font-size:14px; cursor:pointer; background:#fff; color:var(--text); border:1px solid var(--line); box-shadow:0 3px 10px rgba(15,23,42,.04); }
     button.primary{ background:var(--accent); color:#fff; border-color:var(--accent); }
@@ -287,10 +289,19 @@
 
             ${itemsHtml}
 
+            ${state.activeList === "drugstore" ? `
+            <div class="editor-row drugstore-editor">
+              <input class="editor-input" type="text" placeholder="新增 ${group.title} 物品" data-add-input="${group.title}">
+              <label class="tiny-btn file-btn" for="file-${idx}">選擇圖片</label>
+              <input type="file" id="file-${idx}" accept="image/*" data-add-file="${group.title}" style="display:none">
+              <button class="tiny-btn" type="button" data-add-btn="${group.title}">新增</button>
+            </div>
+            ` : `
             <div class="editor-row">
               <input class="editor-input" type="text" placeholder="新增 ${group.title} 物品" data-add-input="${group.title}">
               <button class="tiny-btn" type="button" data-add-btn="${group.title}">新增</button>
             </div>
+            `}
           </details>
         `;
       }).join("");
@@ -322,18 +333,36 @@
       });
 
       document.querySelectorAll(".delete-btn").forEach(btn => {
-        btn.addEventListener("click", function(e){
+        let holdTimer = null;
+
+        const startHold = (e)=>{
           e.preventDefault();
           e.stopPropagation();
-          const groupTitle = this.dataset.group;
-          const item = this.dataset.item;
-          const group = currentList().groups.find(g => g.title === groupTitle);
-          if(!group) return;
-          group.items = group.items.filter(i => (i?.name ?? i) !== item);
-          delete state.checked[keyForItem(state.activeList, groupTitle, item)];
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-          render();
-        });
+          const groupTitle = btn.dataset.group;
+          const item = btn.dataset.item;
+
+          holdTimer = setTimeout(()=>{
+            const group = currentList().groups.find(g => g.title === groupTitle);
+            if(!group) return;
+            group.items = group.items.filter(i => (i?.name ?? i) !== item);
+            delete state.checked[keyForItem(state.activeList, groupTitle, item)];
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+            showToast("已刪除物品");
+            render();
+          },700); // 長按 0.7 秒才刪除
+        };
+
+        const cancelHold = ()=>{
+          clearTimeout(holdTimer);
+        };
+
+        btn.addEventListener("mousedown", startHold);
+        btn.addEventListener("touchstart", startHold,{passive:false});
+
+        btn.addEventListener("mouseup", cancelHold);
+        btn.addEventListener("mouseleave", cancelHold);
+        btn.addEventListener("touchend", cancelHold);
+        btn.addEventListener("touchcancel", cancelHold);
       });
 
       document.querySelectorAll("[data-add-btn]").forEach(btn => {
@@ -341,6 +370,13 @@
       });
       document.querySelectorAll("[data-add-input]").forEach(input => {
         input.addEventListener("keydown", function(e){ if(e.key === "Enter") addItem(this.dataset.addInput); });
+      });
+      document.querySelectorAll("[data-add-file]").forEach(fileInput => {
+        fileInput.addEventListener("change", function(){
+          const file = this.files && this.files[0];
+          if(!file) return;
+          showToast(`已選擇圖片：${file.name}`);
+        });
       });
 
       document.querySelectorAll(".group-checkbox").forEach(cb => {
@@ -387,6 +423,13 @@
       document.getElementById("drugstoreBtn").onclick = function(){ state.activeList = "drugstore"; localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); render(); };
     }
 
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.classList.add("show");
+      clearTimeout(showToast._timer);
+      showToast._timer = setTimeout(() => toast.classList.remove("show"), 1200);
+    }
+
     function openImageModal(src, title){
       modalImage.src = src;
       modalTitle.textContent = title;
@@ -412,14 +455,38 @@
 
     function addItem(groupTitle){
       const input = document.querySelector(`[data-add-input="${groupTitle}"]`);
+      const fileInput = document.querySelector(`[data-add-file="${groupTitle}"]`);
       const value = input?.value.trim();
       if(!value) return;
       const group = currentList().groups.find(g => g.title === groupTitle);
       if(!group) return;
-      if(group.items.some(item => (item?.name ?? item) === value)) return;
+      if(group.items.some(item => (item?.name ?? item) === value)){
+        showToast("這個品項已存在");
+        return;
+      }
+
+      const isDrugstore = state.activeList === "drugstore";
+      const file = fileInput?.files?.[0];
+
+      if(isDrugstore && file){
+        const reader = new FileReader();
+        reader.onload = function(){
+          group.items.push({ name:value, img:reader.result });
+          if(input) input.value = "";
+          if(fileInput) fileInput.value = "";
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+          showToast("已新增品項與圖片");
+          render();
+        };
+        reader.readAsDataURL(file);
+        return;
+      }
+
       group.items.push(value);
       if(input) input.value = "";
+      if(fileInput) fileInput.value = "";
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      showToast(isDrugstore ? "已新增品項" : "已新增物品");
       render();
     }
 
