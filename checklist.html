@@ -82,6 +82,13 @@
     .caret{ width:12px; height:12px; border-right:2px solid #94a3b8; border-bottom:2px solid #94a3b8; transform:rotate(45deg); transition:.18s ease; margin-right:4px; flex:0 0 auto; }
     details[open] .caret{ transform:rotate(225deg); margin-top:6px; }
     .items{ border-top:1px solid #f1f5f9; padding:4px 16px 16px 52px; display:grid; gap:6px; }
+
+/* Card style (for drugstore) */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;padding:14px 16px 18px 16px;border-top:1px solid #f1f5f9}
+.card-item{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 10px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.04);position:relative;cursor:pointer}
+.card-item.checked{background:var(--done-soft);border-color:#bbf7d0}
+.card-item input{position:absolute;top:8px;right:8px}
+.card-item .text{display:block;font-size:14px;margin-top:6px;line-height:1.3}
     .item{ display:flex; align-items:flex-start; gap:10px; min-height:40px; padding:7px 0; }
     .item .text{ flex:1; line-height:1.55; padding-top:1px; }
     .item.checked .text{ color:#9ca3af; text-decoration:line-through; }
@@ -134,7 +141,7 @@
   <div class="toast" id="toast">已儲存</div>
 
   <script>
-    const STORAGE_KEY = "travel-checklist-pro-v1";
+    const STORAGE_KEY = "travel-checklist-pro-v2";
 
     const DEFAULT_LISTS = {
       travel: {
@@ -150,9 +157,14 @@
       drugstore: {
         title: "💊 藥妝清單",
         groups: [
-          { title: "藥品", icon: "💊", items: ["EVE止痛藥","曼秀雷敦眼藥水","龍角散"] },
-          { title: "保養", icon: "🧴", items: ["化妝水","防曬","面霜"] },
-          { title: "其他", icon: "🛍️", items: ["面膜","休足時間"] }
+          { title: "藥品", icon: "💊", items: [
+            { name:"EVE止痛藥", img:"images/1.jpg" },
+            { name:"大正漢方便秘藥", img:"images/2.jpg" },
+            { name:"SVELTY黑薑", img:"images/3.jpg" },
+            { name:"SVELTY3倍酵母", img:"images/4.jpg" }
+          ] },
+          { title: "保養", icon: "🧴", items: ["化妝水", "防曬", "面霜"] },
+          { title: "其他", icon: "🛍️", items: ["面膜", "休足時間"] }
         ]
       }
     };
@@ -161,7 +173,12 @@
     function loadState(){
       try{
         const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-        if(saved && saved.lists) return saved;
+        return {
+          activeList: saved?.activeList || "travel",
+          lists: clone(DEFAULT_LISTS),
+          checked: saved?.checked || {},
+          open: saved?.open || {}
+        };
       }catch(e){}
       return { activeList: "travel", lists: clone(DEFAULT_LISTS), checked: {}, open: {} };
     }
@@ -178,34 +195,43 @@
 
     function getCounts(group){
       const total = group.items.length;
-      const done = group.items.filter(item => !!state.checked[keyForItem(state.activeList, group.title, item)]).length;
+      const done = group.items.filter(item => {
+        const itemName = item?.name ?? item;
+        return !!state.checked[keyForItem(state.activeList, group.title, itemName)];
+      }).length;
       return { total, done, allDone: total > 0 && done === total };
     }
 
     function render(){
       const list = currentList();
       document.querySelector("h1").textContent = list.title;
+      document.getElementById("travelBtn").classList.toggle("active", state.activeList === "travel");
+      document.getElementById("drugstoreBtn").classList.toggle("active", state.activeList === "drugstore");
 
       container.innerHTML = list.groups.map((group, idx) => {
         const { total, done, allDone } = getCounts(group);
         const open = state.open[keyForOpen(state.activeList, group.title)];
         const shouldOpen = open === undefined ? !allDone : !!open;
-        return `
-          <details class="group" id="group-${group.title}-${idx}" ${shouldOpen ? "open" : ""}>
-            <summary>
-              <div class="summary-main">
-                <input type="checkbox" class="group-checkbox" data-group="${group.title}" ${allDone ? "checked" : ""}>
-                <div class="title-area">
-                  <div class="title-row">
-                    <div class="group-title">${group.icon} ${group.title}</div>
-                    <div class="badge ${allDone ? "done" : ""}">${allDone ? "已完成" : `剩 ${total - done} 項`}</div>
-                  </div>
-                  <div class="group-meta">${done} / ${total} 已完成</div>
-                </div>
-              </div>
-              <div class="caret"></div>
-            </summary>
 
+        const itemsHtml = state.activeList === "drugstore"
+          ? `
+            <div class="card-grid" data-group="${group.title}">
+              ${group.items.map(item => {
+                const itemName = item.name ?? item;
+                const itemImg = item.img ?? null;
+                const checked = !!state.checked[keyForItem(state.activeList, group.title, itemName)];
+                return `
+                  <label class="card-item ${checked ? "checked" : ""}" data-item="${itemName}">
+                    <input type="checkbox" class="item-checkbox" data-group="${group.title}" data-item="${itemName}" ${checked ? "checked" : ""}>
+                    ${itemImg ? `<img src="${itemImg}" style="width:70px;margin-top:6px">` : ""}
+<span class="text">${itemName}</span>
+                    <button class="delete-btn" type="button" data-group="${group.title}" data-item="${itemName}" style="position:absolute;bottom:6px;right:6px">×</button>
+                  </label>
+                `;
+              }).join("")}
+            </div>
+          `
+          : `
             <div class="items" data-group="${group.title}">
               ${group.items.map(item => {
                 const checked = !!state.checked[keyForItem(state.activeList, group.title, item)];
@@ -222,6 +248,25 @@
                 `;
               }).join("")}
             </div>
+          `;
+
+        return `
+          <details class="group" id="group-${idx}" ${shouldOpen ? "open" : ""}>
+            <summary>
+              <div class="summary-main">
+                <input type="checkbox" class="group-checkbox" data-group="${group.title}" ${allDone ? "checked" : ""}>
+                <div class="title-area">
+                  <div class="title-row">
+                    <div class="group-title">${group.icon} ${group.title}</div>
+                    <div class="badge ${allDone ? "done" : ""}">${allDone ? "已完成" : `剩 ${total - done} 項`}</div>
+                  </div>
+                  <div class="group-meta">${done} / ${total} 已完成</div>
+                </div>
+              </div>
+              <div class="caret"></div>
+            </summary>
+
+            ${itemsHtml}
 
             <div class="editor-row">
               <input class="editor-input" type="text" placeholder="新增 ${group.title} 物品" data-add-input="${group.title}">
@@ -242,7 +287,7 @@
           const groupTitle = this.dataset.group;
           const item = this.dataset.item;
           state.checked[keyForItem(state.activeList, groupTitle, item)] = this.checked;
-          const label = this.closest(".item");
+          const label = this.closest(".item, .card-item");
           if(label) label.classList.toggle("checked", this.checked);
           syncGroup(groupTitle, true);
           localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -258,7 +303,7 @@
           const item = this.dataset.item;
           const group = currentList().groups.find(g => g.title === groupTitle);
           if(!group) return;
-          group.items = group.items.filter(i => i !== item);
+          group.items = group.items.filter(i => (i?.name ?? i) !== item);
           delete state.checked[keyForItem(state.activeList, groupTitle, item)];
           localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
           render();
@@ -278,7 +323,10 @@
           const groupTitle = this.dataset.group;
           const group = currentList().groups.find(g => g.title === groupTitle);
           if(!group) return;
-          group.items.forEach(item => { state.checked[keyForItem(state.activeList, groupTitle, item)] = this.checked; });
+          group.items.forEach(item => {
+            const itemName = item?.name ?? item;
+            state.checked[keyForItem(state.activeList, groupTitle, itemName)] = this.checked;
+          });
           state.open[keyForOpen(state.activeList, groupTitle)] = this.checked ? false : true;
           localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
           render();
@@ -300,7 +348,10 @@
         if(!confirm("要清空目前這份清單的勾選與收合紀錄嗎？")) return;
         const list = currentList();
         list.groups.forEach(group => {
-          group.items.forEach(item => delete state.checked[keyForItem(state.activeList, group.title, item)]);
+          group.items.forEach(item => {
+          const itemName = item?.name ?? item;
+          delete state.checked[keyForItem(state.activeList, group.title, itemName)];
+        });
           delete state.open[keyForOpen(state.activeList, group.title)];
         });
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -316,7 +367,7 @@
       if(!value) return;
       const group = currentList().groups.find(g => g.title === groupTitle);
       if(!group) return;
-      if(group.items.includes(value)) return;
+      if(group.items.some(item => (item?.name ?? item) === value)) return;
       group.items.push(value);
       if(input) input.value = "";
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -427,7 +478,10 @@
     function refreshStats(){
       const list = currentList();
       const total = list.groups.reduce((sum, group) => sum + group.items.length, 0);
-      const done = list.groups.reduce((sum, group) => sum + group.items.filter(item => !!state.checked[keyForItem(state.activeList, group.title, item)]).length, 0);
+      const done = list.groups.reduce((sum, group) => sum + group.items.filter(item => {
+        const itemName = item?.name ?? item;
+        return !!state.checked[keyForItem(state.activeList, group.title, itemName)];
+      }).length, 0);
       const percent = total ? Math.round((done / total) * 100) : 0;
       document.getElementById("doneCount").textContent = done;
       document.getElementById("totalCount").textContent = total;
