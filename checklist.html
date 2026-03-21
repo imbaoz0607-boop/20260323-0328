@@ -90,7 +90,8 @@
 .card-item{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 10px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.04);position:relative;cursor:pointer}
 .card-item.checked{background:var(--done-soft);border-color:#bbf7d0}
 .card-item input{position:absolute;top:8px;right:8px}
-.card-item .text{display:block;font-size:14px;margin-top:6px;line-height:1.3}
+.card-item .text{display:block;font-size:13px;margin-top:6px;line-height:1.3}
+.card-item .price{display:block;font-size:12px;color:var(--muted);margin-top:2px}
 .card-item img{width:70px;height:70px;object-fit:contain;display:block;margin:8px auto 4px;cursor:zoom-in}
 .cover-brand{grid-column:1 / -1;background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,.04)}
 .cover-brand summary{list-style:none;display:flex;align-items:center;justify-content:space-between;padding:16px 18px;cursor:pointer;font-weight:800;color:var(--text)}
@@ -232,8 +233,9 @@
     function currentList(){ return state.lists[state.activeList]; }
 
     function getCounts(group){
-      const total = group.items.length;
-      const done = group.items.filter(item => {
+      const flattenedItems = group.items.flatMap(item => item?.covermark ? (item.items || []) : [item]);
+      const total = flattenedItems.length;
+      const done = flattenedItems.filter(item => {
         const itemName = item?.name ?? item;
         return !!state.checked[keyForItem(state.activeList, group.title, itemName)];
       }).length;
@@ -270,12 +272,16 @@
                       <span class="cover-brand-caret"></span>
                     </summary>
                     <div class="cover-brand-grid">
-                      ${(item.items||[]).map(sub => `
-                        <label class="card-item" data-item="${sub.name}">
+                      ${(item.items||[]).map(sub => {
+                        const subChecked = !!state.checked[keyForItem(state.activeList, group.title, sub.name)];
+                        return `
+                        <label class="card-item ${subChecked ? "checked" : ""}" data-item="${sub.name}">
+                          <input type="checkbox" class="item-checkbox" data-group="${group.title}" data-item="${sub.name}" ${subChecked ? "checked" : ""}>
                           ${sub.img ? `<img src="${sub.img}" alt="${sub.name}" class="zoomable-image" data-full="${sub.img}" data-title="${sub.name}">` : ""}
-                          <span class="text">${sub.name}</span>
+                          ${(()=>{const m=sub.name.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<span class="text">${m[1].trim()}</span><span class="price">${m[2]}</span>`;}return `<span class="text">${sub.name}</span>`;})()}
                         </label>
-                      `).join("")}
+                      `;
+                      }).join("")}
                     </div>
                   </details>
                   `;
@@ -284,7 +290,7 @@
                   <label class="card-item ${checked ? "checked" : ""}" data-item="${itemName}">
                     <input type="checkbox" class="item-checkbox" data-group="${group.title}" data-item="${itemName}" ${checked ? "checked" : ""}>
                     ${itemImg ? `<img src="${itemImg}" alt="${itemName}" class="zoomable-image" data-full="${itemImg}" data-title="${itemName}">` : ""}
-<span class="text">${itemName}</span>
+${(()=>{const m=itemName.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<span class="text">${m[1].trim()}</span><span class="price">${m[2]}</span>`;}return `<span class="text">${itemName}</span>`;})()}
                     <button class="delete-btn" type="button" data-group="${group.title}" data-item="${itemName}" style="position:absolute;bottom:6px;right:6px">×</button>
                   </label>
                 `;
@@ -351,20 +357,28 @@
     }
 
     function bindEvents(){
-      document.querySelectorAll(".brand-checkbox").forEach(cb=>{
-        cb.addEventListener("click",e=>e.stopPropagation());
-        cb.addEventListener("change",function(){
-          const grid=this.closest("details").querySelectorAll(".card-item");
-          grid.forEach(card=>{
-            const name=card.dataset.item;
-            if(!name) return;
-            state.checked[keyForItem(state.activeList,"保養",name)]=this.checked;
-            card.classList.toggle("checked",this.checked);
+      document.querySelectorAll(".brand-checkbox").forEach(cb => {
+        const detail = cb.closest("details");
+        const itemBoxes = detail?.querySelectorAll(".cover-brand-grid .item-checkbox") || [];
+        if(itemBoxes.length){
+          cb.checked = [...itemBoxes].every(box => box.checked);
+        }
+        cb.addEventListener("click", e => e.stopPropagation());
+        cb.addEventListener("change", function(){
+          const boxes = this.closest("details").querySelectorAll(".cover-brand-grid .item-checkbox");
+          boxes.forEach(box => {
+            box.checked = this.checked;
+            const name = box.dataset.item;
+            state.checked[keyForItem(state.activeList, "保養", name)] = this.checked;
+            const card = box.closest(".card-item");
+            if(card) card.classList.toggle("checked", this.checked);
           });
           localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+          syncGroup("保養", false);
           refreshStats();
         });
       });
+
       document.querySelectorAll(".zoomable-image").forEach(img => {
         img.addEventListener("click", function(e){
           e.preventDefault();
@@ -372,13 +386,25 @@
           openImageModal(this.dataset.full || this.src, this.dataset.title || this.alt || "");
         });
       });
+
       document.querySelectorAll(".item-checkbox").forEach(cb => {
+        cb.addEventListener("click", function(e){ e.stopPropagation(); });
         cb.addEventListener("change", function(){
           const groupTitle = this.dataset.group;
           const item = this.dataset.item;
           state.checked[keyForItem(state.activeList, groupTitle, item)] = this.checked;
           const label = this.closest(".item, .card-item");
           if(label) label.classList.toggle("checked", this.checked);
+
+          const brandDetail = this.closest(".cover-brand");
+          if(brandDetail){
+            const brandBox = brandDetail.querySelector(".brand-checkbox");
+            const boxes = brandDetail.querySelectorAll(".cover-brand-grid .item-checkbox");
+            if(brandBox && boxes.length){
+              brandBox.checked = [...boxes].every(box => box.checked);
+            }
+          }
+
           syncGroup(groupTitle, true);
           localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
           refreshStats();
@@ -388,13 +414,13 @@
       document.querySelectorAll(".delete-btn").forEach(btn => {
         let holdTimer = null;
 
-        const startHold = (e)=>{
+        const startHold = (e) => {
           e.preventDefault();
           e.stopPropagation();
           const groupTitle = btn.dataset.group;
           const item = btn.dataset.item;
 
-          holdTimer = setTimeout(()=>{
+          holdTimer = setTimeout(() => {
             const group = currentList().groups.find(g => g.title === groupTitle);
             if(!group) return;
             group.items = group.items.filter(i => (i?.name ?? i) !== item);
@@ -402,16 +428,13 @@
             localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
             showToast("已刪除物品");
             render();
-          },700); // 長按 0.7 秒才刪除
+          }, 700);
         };
 
-        const cancelHold = ()=>{
-          clearTimeout(holdTimer);
-        };
+        const cancelHold = () => clearTimeout(holdTimer);
 
         btn.addEventListener("mousedown", startHold);
-        btn.addEventListener("touchstart", startHold,{passive:false});
-
+        btn.addEventListener("touchstart", startHold, { passive:false });
         btn.addEventListener("mouseup", cancelHold);
         btn.addEventListener("mouseleave", cancelHold);
         btn.addEventListener("touchend", cancelHold);
@@ -421,9 +444,13 @@
       document.querySelectorAll("[data-add-btn]").forEach(btn => {
         btn.addEventListener("click", function(){ addItem(this.dataset.addBtn); });
       });
+
       document.querySelectorAll("[data-add-input]").forEach(input => {
-        input.addEventListener("keydown", function(e){ if(e.key === "Enter") addItem(this.dataset.addInput); });
+        input.addEventListener("keydown", function(e){
+          if(e.key === "Enter") addItem(this.dataset.addInput);
+        });
       });
+
       document.querySelectorAll("[data-add-file]").forEach(fileInput => {
         fileInput.addEventListener("change", function(){
           const file = this.files && this.files[0];
@@ -438,10 +465,13 @@
           const groupTitle = this.dataset.group;
           const group = currentList().groups.find(g => g.title === groupTitle);
           if(!group) return;
-          group.items.forEach(item => {
+
+          const flattenedItems = group.items.flatMap(item => item?.covermark ? (item.items || []) : [item]);
+          flattenedItems.forEach(item => {
             const itemName = item?.name ?? item;
             state.checked[keyForItem(state.activeList, groupTitle, itemName)] = this.checked;
           });
+
           state.open[keyForOpen(state.activeList, groupTitle)] = this.checked ? false : true;
           localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
           render();
@@ -457,23 +487,44 @@
         });
       });
 
-      document.getElementById("expandBtn").onclick = function(){ currentList().groups.forEach(group => state.open[keyForOpen(state.activeList, group.title)] = true); localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); render(); };
-      document.getElementById("collapseBtn").onclick = function(){ currentList().groups.forEach(group => state.open[keyForOpen(state.activeList, group.title)] = false); localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); render(); };
+      document.getElementById("expandBtn").onclick = function(){
+        currentList().groups.forEach(group => state.open[keyForOpen(state.activeList, group.title)] = true);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        render();
+      };
+
+      document.getElementById("collapseBtn").onclick = function(){
+        currentList().groups.forEach(group => state.open[keyForOpen(state.activeList, group.title)] = false);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        render();
+      };
+
       document.getElementById("resetBtn").onclick = function(){
         if(!confirm("要清空目前這份清單的勾選與收合紀錄嗎？")) return;
         const list = currentList();
         list.groups.forEach(group => {
-          group.items.forEach(item => {
-          const itemName = item?.name ?? item;
-          delete state.checked[keyForItem(state.activeList, group.title, itemName)];
-        });
+          const flattenedItems = group.items.flatMap(item => item?.covermark ? (item.items || []) : [item]);
+          flattenedItems.forEach(item => {
+            const itemName = item?.name ?? item;
+            delete state.checked[keyForItem(state.activeList, group.title, itemName)];
+          });
           delete state.open[keyForOpen(state.activeList, group.title)];
         });
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
         render();
       };
-      document.getElementById("travelBtn").onclick = function(){ state.activeList = "travel"; localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); render(); };
-      document.getElementById("drugstoreBtn").onclick = function(){ state.activeList = "drugstore"; localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); render(); };
+
+      document.getElementById("travelBtn").onclick = function(){
+        state.activeList = "travel";
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        render();
+      };
+
+      document.getElementById("drugstoreBtn").onclick = function(){
+        state.activeList = "drugstore";
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        render();
+      };
     }
 
     function showToast(msg){
@@ -646,8 +697,8 @@
 
     function refreshStats(){
       const list = currentList();
-      const total = list.groups.reduce((sum, group) => sum + group.items.length, 0);
-      const done = list.groups.reduce((sum, group) => sum + group.items.filter(item => {
+      const total = list.groups.reduce((sum, group) => sum + group.items.flatMap(item => item?.covermark ? (item.items || []) : [item]).length, 0);
+      const done = list.groups.reduce((sum, group) => sum + group.items.flatMap(item => item?.covermark ? (item.items || []) : [item]).filter(item => {
         const itemName = item?.name ?? item;
         return !!state.checked[keyForItem(state.activeList, group.title, itemName)];
       }).length, 0);
