@@ -131,7 +131,7 @@
       <div class="toolbar">
         <div class="switcher">
           <button class="switch-btn" id="travelBtn">🧳 旅行清單</button>
-          <button class="switch-btn" id="drugstoreBtn">💊 藥妝清單</button>
+          <button class="switch-btn" id="drugstoreBtn">🛒 藥妝清單</button>
         </div>
         <button class="primary" id="expandBtn">全部展開</button>
         <button id="collapseBtn">全部收合</button>
@@ -172,16 +172,20 @@
         ]
       },
       drugstore: {
-        title: "💊 藥妝清單",
+        title: "🛒 購物清單",
         groups: [
-          { title: "藥品", icon: "💊", items: [
+          { title: "藥品", icon: "🛒", items: [
             { name:"EVE止痛藥", img:"images/1.jpg" },
             { name:"大正漢方便秘藥", img:"images/2.jpg" },
             { name:"SVELTY黑薑", img:"images/3.jpg" },
             { name:"SVELTY3倍酵母", img:"images/4.jpg" }
           ] },
           { title: "保養", icon: "🧴", items: ["化妝水", "防曬", "面霜"] },
-          { title: "其他", icon: "🛍️", items: ["面膜", "休足時間"] }
+          { title: "其他", icon: "🛍️", items: [
+            { name:"TADAS 比菲禦力菌 2,916円(税込)", img:"images/5.jpg" },
+            { name:"vitoas多效美白菁華9,350円(税込)", img:"images/6.jpg" },
+            { name:"vitoas多效菁華9,900円(税込)", img:"images/7.jpg" }
+          ] }
         ]
       }
     };
