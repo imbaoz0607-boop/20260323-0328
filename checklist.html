@@ -50,7 +50,22 @@
     .stat{ background:#fff; border:1px solid var(--line); border-radius:18px; padding:14px 10px; text-align:center; }
     .stat .num{ font-weight:800; font-size:24px; line-height:1.1; margin-bottom:4px; }
     .stat .label{ color:var(--muted); font-size:12px; }
-    .toolbar{ display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
+    .toolbar{ display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; align-items:center; }
+    .switcher{ display:flex; gap:8px; flex-wrap:wrap; }
+    .switch-btn{ background:#fff; }
+    .switch-btn.active{ background:var(--accent); color:#fff; border-color:var(--accent); }
+    .group-actions{ display:flex; gap:8px; flex-wrap:wrap; padding:0 16px 14px 52px; }
+    .tiny-btn{ appearance:none; border:none; border-radius:999px; padding:8px 10px; font-size:12px; cursor:pointer; background:#fff; color:var(--text); border:1px solid var(--line); }
+    .tiny-btn.danger{ color:#b91c1c; border-color:#fecaca; background:#fff5f5; }
+    .item{ display:flex; align-items:flex-start; gap:10px; min-height:40px; padding:7px 0; }
+    .item.dragging{ opacity:.45; }
+    .item-main{ display:flex; align-items:flex-start; gap:10px; flex:1; min-width:0; }
+    .item-actions{ display:flex; align-items:center; gap:8px; margin-left:8px; }
+    .delete-btn{ appearance:none; border:none; background:transparent; color:#94a3b8; font-size:18px; line-height:1; cursor:pointer; padding:2px 6px; border-radius:8px; }
+    .delete-btn:hover{ background:#f8fafc; color:#b91c1c; }
+    .item .text{ flex:1; line-height:1.55; padding-top:1px; }
+    .editor-row{ display:flex; gap:8px; padding:0 16px 16px 52px; }
+    .editor-input{ flex:1; border:1px solid var(--line); border-radius:12px; padding:10px 12px; font-size:14px; }
     button{ appearance:none; border:none; border-radius:999px; padding:11px 14px; font-size:14px; cursor:pointer; background:#fff; color:var(--text); border:1px solid var(--line); box-shadow:0 3px 10px rgba(15,23,42,.04); }
     button.primary{ background:var(--accent); color:#fff; border-color:var(--accent); }
     button:active{ transform:translateY(1px); }
@@ -99,6 +114,10 @@
       </div>
 
       <div class="toolbar">
+        <div class="switcher">
+          <button class="switch-btn" id="travelBtn">🧳 旅行清單</button>
+          <button class="switch-btn" id="drugstoreBtn">💊 藥妝清單</button>
+        </div>
         <button class="primary" id="expandBtn">全部展開</button>
         <button id="collapseBtn">全部收合</button>
         <button id="resetBtn">全部重設</button>
@@ -118,35 +137,73 @@
   <div class="toast" id="toast">已儲存</div>
 
   <script>
-    const STORAGE_KEY = "travel-checklist-final-v1";
+    const STORAGE_KEY = "travel-checklist-pro-v1";
 
-    const data = [
-      { title: "重要物品", icon: "📘", items: ["護照","日文駕照翻譯本、台灣駕照","現金"] },
-      { title: "清潔", icon: "🧼", items: ["卸妝油","洗面乳","洗髮精","護髮膜","快乾擦髮巾"] },
-      { title: "保養品、底妝", icon: "💄", items: ["前導精華","痘膚潤","痘痘藥","化妝水","眼霜","保濕精華液","面霜","擦拭行化妝水","化妝棉","防曬","CC霜","妝前霜","蜜粉","多效精華液","身體乳液"] },
-      { title: "生活物品", icon: "🏠", items: ["牙刷、牙膏","牙線棒","棉花棒","濕紙巾","暈車藥","暖暖包","鯊魚夾","瀏海貼","口罩","袖珍面紙","購物袋","垃圾袋","凡士林","眼藥水","眼鏡","睡覺穿厚襪"] },
-      { title: "其他", icon: "🔌", items: ["行動電源","酒精","耳機","充電頭、充電線","藥品"] }
-    ];
+    const DEFAULT_LISTS = {
+      travel: {
+        title: "📜 Packing List",
+        groups: [
+          { title: "重要物品", icon: "📘", items: ["護照","日文駕照翻譯本、台灣駕照","現金"] },
+          { title: "清潔", icon: "🧼", items: ["卸妝油","洗面乳","洗髮精","護髮膜","快乾擦髮巾"] },
+          { title: "保養品、底妝", icon: "💄", items: ["前導精華","痘膚潤","痘痘藥","化妝水","眼霜","保濕精華液","面霜","擦拭行化妝水","化妝棉","防曬","CC霜","妝前霜","蜜粉","多效精華液","身體乳液"] },
+          { title: "生活物品", icon: "🏠", items: ["牙刷、牙膏","牙線棒","棉花棒","濕紙巾","暈車藥","暖暖包","鯊魚夾","瀏海貼","口罩","袖珍面紙","購物袋","垃圾袋","凡士林","眼藥水","眼鏡","睡覺穿厚襪","藥品","雨傘"] },
+          { title: "其他", icon: "🔌", items: ["充電頭、充電線","行動電源","耳機","酒精"] }
+        ]
+      },
+      drugstore: {
+        title: "💊 藥妝清單",
+        groups: [
+          { title: "藥品", icon: "💊", items: ["EVE止痛藥","曼秀雷敦眼藥水","龍角散"] },
+          { title: "保養", icon: "🧴", items: ["化妝水","防曬","面霜"] },
+          { title: "其他", icon: "🛍️", items: ["面膜","休足時間"] }
+        ]
+      }
+    };
 
-    function loadState(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }catch(e){ return {}; } }
-    function saveState(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); showToast("已自動儲存"); }
-    function keyForItem(groupTitle, item){ return groupTitle + "||" + item; }
-    function keyForOpen(groupTitle){ return "__open__" + groupTitle; }
-    function escapeHtml(str){ return String(str).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;"); }
-    function safeId(str){ return str.replace(/[^\\w\\u4e00-\\u9fff]+/g, "-"); }
-
+    function clone(obj){ return JSON.parse(JSON.stringify(obj)); }
+    function loadState(){
+      try{
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        if(saved && saved.lists) return saved;
+      }catch(e){}
+      return { activeList: "travel", lists: clone(DEFAULT_LISTS), checked: {}, open: {} };
+    }
     const state = loadState();
+    if(!state.activeList) state.activeList = "travel";
+    if(!state.lists) state.lists = clone(DEFAULT_LISTS);
+    if(!state.checked) state.checked = {};
+    if(!state.open) state.open = {};
+
     const container = document.getElementById("groupContainer");
     const toast = document.getElementById("toast");
     let toastTimer = null;
 
-    function showToast(msg){ toast.textContent = msg; toast.classList.add("show"); clearTimeout(toastTimer); toastTimer = setTimeout(() => { toast.classList.remove("show"); }, 1100); }
-    function getCounts(group){ const total = group.items.length; const done = group.items.filter(item => !!state[keyForItem(group.title, item)]).length; return { total, done, allDone: total > 0 && done === total }; }
+    function saveState(msg = "已自動儲存"){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      showToast(msg);
+    }
+    function showToast(msg){ toast.textContent = msg; toast.classList.add("show"); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove("show"), 1100); }
+    function keyForItem(listKey, groupTitle, item){ return `${listKey}||${groupTitle}||${item}`; }
+    function keyForOpen(listKey, groupTitle){ return `${listKey}||${groupTitle}`; }
+    function escapeHtml(str){ return String(str).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;"); }
+    function safeId(str){ return str.replace(/[^\w\u4e00-\u9fff]+/g, "-"); }
+    function currentList(){ return state.lists[state.activeList]; }
+
+    function getCounts(group){
+      const total = group.items.length;
+      const done = group.items.filter(item => !!state.checked[keyForItem(state.activeList, group.title, item)]).length;
+      return { total, done, allDone: total > 0 && done === total };
+    }
 
     function render(){
-      container.innerHTML = data.map((group, idx) => {
+      const list = currentList();
+      document.querySelector("h1").textContent = list.title;
+      document.getElementById("travelBtn").classList.toggle("active", state.activeList === "travel");
+      document.getElementById("drugstoreBtn").classList.toggle("active", state.activeList === "drugstore");
+
+      container.innerHTML = list.groups.map((group, idx) => {
         const { total, done, allDone } = getCounts(group);
-        const open = state[keyForOpen(group.title)];
+        const open = state.open[keyForOpen(state.activeList, group.title)];
         const shouldOpen = open === undefined ? !allDone : !!open;
         return `
           <details class="group" id="group-${safeId(group.title)}-${idx}" ${shouldOpen ? "open" : ""}>
@@ -156,9 +213,7 @@
                 <div class="title-area">
                   <div class="title-row">
                     <div class="group-title">${group.icon} ${escapeHtml(group.title)}</div>
-                    <div class="badge ${allDone ? "done" : ""}">
-                      ${allDone ? "已完成" : `剩 ${total - done} 項`}
-                    </div>
+                    <div class="badge ${allDone ? "done" : ""}">${allDone ? "已完成" : `剩 ${total - done} 項`}</div>
                   </div>
                   <div class="group-meta">${done} / ${total} 已完成</div>
                 </div>
@@ -166,22 +221,32 @@
               <div class="caret"></div>
             </summary>
 
-            <div class="items">
+            <div class="items" data-group="${escapeHtml(group.title)}">
               ${group.items.map(item => {
-                const checked = !!state[keyForItem(group.title, item)];
+                const checked = !!state.checked[keyForItem(state.activeList, group.title, item)];
                 return `
-                  <label class="item ${checked ? "checked" : ""}">
-                    <input type="checkbox" class="item-checkbox" data-group="${escapeHtml(group.title)}" data-item="${escapeHtml(item)}" ${checked ? "checked" : ""}>
-                    <span class="text">${escapeHtml(item)}</span>
+                  <label class="item ${checked ? "checked" : ""}" draggable="true" data-item="${escapeHtml(item)}">
+                    <div class="item-main">
+                      <input type="checkbox" class="item-checkbox" data-group="${escapeHtml(group.title)}" data-item="${escapeHtml(item)}" ${checked ? "checked" : ""}>
+                      <span class="text">${escapeHtml(item)}</span>
+                    </div>
+                    <div class="item-actions">
+                      <button class="delete-btn" type="button" title="刪除" data-group="${escapeHtml(group.title)}" data-item="${escapeHtml(item)}">×</button>
+                    </div>
                   </label>
                 `;
               }).join("")}
+            </div>
+            <div class="editor-row">
+              <input class="editor-input" type="text" placeholder="新增 ${escapeHtml(group.title)} 物品" data-add-input="${escapeHtml(group.title)}">
+              <button class="tiny-btn" type="button" data-add-btn="${escapeHtml(group.title)}">新增</button>
             </div>
           </details>
         `;
       }).join("");
 
       bindEvents();
+      enableDragSort();
       refreshStats();
     }
 
@@ -190,28 +255,47 @@
         cb.addEventListener("change", function(){
           const groupTitle = this.dataset.group;
           const item = this.dataset.item;
-          state[keyForItem(groupTitle, item)] = this.checked;
-
+          state.checked[keyForItem(state.activeList, groupTitle, item)] = this.checked;
           const label = this.closest(".item");
           if(label) label.classList.toggle("checked", this.checked);
-
           syncGroup(groupTitle, true);
           saveState();
           refreshStats();
         });
       });
 
+      document.querySelectorAll(".delete-btn").forEach(btn => {
+        btn.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          const groupTitle = this.dataset.group;
+          const item = this.dataset.item;
+          const group = currentList().groups.find(g => g.title === groupTitle);
+          if(!group) return;
+          group.items = group.items.filter(i => i !== item);
+          delete state.checked[keyForItem(state.activeList, groupTitle, item)];
+          saveState("已刪除物品");
+          render();
+        });
+      });
+
+      document.querySelectorAll("[data-add-btn]").forEach(btn => {
+        btn.addEventListener("click", function(){ addItem(this.dataset.addBtn); });
+      });
+      document.querySelectorAll("[data-add-input]").forEach(input => {
+        input.addEventListener("keydown", function(e){ if(e.key === "Enter") addItem(this.dataset.addInput); });
+      });
+
       document.querySelectorAll(".group-checkbox").forEach(cb => {
-        cb.addEventListener("click", function(e){ e.stopPropagation(); });
+        cb.addEventListener("click", e => e.stopPropagation());
         cb.addEventListener("change", function(){
           const groupTitle = this.dataset.group;
-          const group = data.find(g => g.title === groupTitle);
+          const group = currentList().groups.find(g => g.title === groupTitle);
           if(!group) return;
-
-          group.items.forEach(item => { state[keyForItem(groupTitle, item)] = this.checked; });
-          state[keyForOpen(groupTitle)] = this.checked ? false : true;
-          render();
+          group.items.forEach(item => { state.checked[keyForItem(state.activeList, groupTitle, item)] = this.checked; });
+          state.open[keyForOpen(state.activeList, groupTitle)] = this.checked ? false : true;
           saveState();
+          render();
         });
       });
 
@@ -219,47 +303,99 @@
         detail.addEventListener("toggle", function(){
           const groupCheckbox = this.querySelector(".group-checkbox");
           if(!groupCheckbox) return;
-          const groupTitle = groupCheckbox.dataset.group;
-          state[keyForOpen(groupTitle)] = this.open;
+          state.open[keyForOpen(state.activeList, groupCheckbox.dataset.group)] = this.open;
           localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
         });
       });
 
-      document.getElementById("expandBtn").onclick = function(){ data.forEach(group => state[keyForOpen(group.title)] = true); render(); saveState(); };
-      document.getElementById("collapseBtn").onclick = function(){ data.forEach(group => state[keyForOpen(group.title)] = false); render(); saveState(); };
-      document.getElementById("resetBtn").onclick = function(){ if(!confirm("要清空全部勾選與收合紀錄嗎？")) return; Object.keys(state).forEach(k => delete state[k]); render(); saveState(); showToast("已重設"); };
+      document.getElementById("expandBtn").onclick = function(){ currentList().groups.forEach(group => state.open[keyForOpen(state.activeList, group.title)] = true); saveState(); render(); };
+      document.getElementById("collapseBtn").onclick = function(){ currentList().groups.forEach(group => state.open[keyForOpen(state.activeList, group.title)] = false); saveState(); render(); };
+      document.getElementById("resetBtn").onclick = function(){
+        if(!confirm("要清空目前這份清單的勾選與收合紀錄嗎？")) return;
+        const list = currentList();
+        list.groups.forEach(group => {
+          group.items.forEach(item => delete state.checked[keyForItem(state.activeList, group.title, item)]);
+          delete state.open[keyForOpen(state.activeList, group.title)];
+        });
+        saveState("已重設目前清單");
+        render();
+      };
+      document.getElementById("travelBtn").onclick = function(){ state.activeList = "travel"; saveState("已切換旅行清單"); render(); };
+      document.getElementById("drugstoreBtn").onclick = function(){ state.activeList = "drugstore"; saveState("已切換藥妝清單"); render(); };
+    }
+
+    function addItem(groupTitle){
+      const input = document.querySelector(`[data-add-input="${CSS.escape(groupTitle)}"]`);
+      const value = input?.value.trim();
+      if(!value) return;
+      const group = currentList().groups.find(g => g.title === groupTitle);
+      if(!group) return;
+      if(group.items.includes(value)){
+        showToast("這個物品已經存在");
+        return;
+      }
+      group.items.push(value);
+      if(input) input.value = "";
+      saveState("已新增物品");
+      render();
     }
 
     function syncGroup(groupTitle, autoCollapse){
       const detail = [...document.querySelectorAll(".group")].find(el => el.querySelector(".group-checkbox")?.dataset.group === groupTitle);
       if(!detail) return;
-
       const itemBoxes = detail.querySelectorAll(".item-checkbox");
       const doneBoxes = detail.querySelectorAll(".item-checkbox:checked");
       const groupBox = detail.querySelector(".group-checkbox");
       const badge = detail.querySelector(".badge");
       const meta = detail.querySelector(".group-meta");
-
       const total = itemBoxes.length;
       const done = doneBoxes.length;
       const allDone = total > 0 && total === done;
-
       groupBox.checked = allDone;
       badge.textContent = allDone ? "已完成" : `剩 ${total - done} 項`;
       badge.classList.toggle("done", allDone);
       meta.textContent = `${done} / ${total} 已完成`;
-
       if(autoCollapse){
-        if(allDone){ detail.open = false; state[keyForOpen(groupTitle)] = false; }
-        else{ detail.open = true; state[keyForOpen(groupTitle)] = true; }
+        if(allDone){ detail.open = false; state.open[keyForOpen(state.activeList, groupTitle)] = false; }
+        else{ detail.open = true; state.open[keyForOpen(state.activeList, groupTitle)] = true; }
       }
     }
 
-    function refreshStats(){
-      const total = data.reduce((sum, group) => sum + group.items.length, 0);
-      const done = data.reduce((sum, group) => sum + group.items.filter(item => !!state[keyForItem(group.title, item)]).length, 0);
-      const percent = total ? Math.round((done / total) * 100) : 0;
+    function enableDragSort(){
+      document.querySelectorAll('.items').forEach(listEl => {
+        let draggingEl = null;
+        const groupTitle = listEl.dataset.group;
+        listEl.querySelectorAll('.item').forEach(item => {
+          item.addEventListener('dragstart', () => { draggingEl = item; item.classList.add('dragging'); });
+          item.addEventListener('dragend', () => {
+            item.classList.remove('dragging');
+            draggingEl = null;
+            persistOrder(groupTitle, listEl);
+          });
+        });
+        listEl.addEventListener('dragover', e => {
+          e.preventDefault();
+          const after = [...listEl.querySelectorAll('.item:not(.dragging)')].find(el => e.clientY <= el.getBoundingClientRect().top + el.offsetHeight / 2);
+          if(!draggingEl) return;
+          if(!after) listEl.appendChild(draggingEl);
+          else listEl.insertBefore(draggingEl, after);
+        });
+      });
+    }
 
+    function persistOrder(groupTitle, listEl){
+      const group = currentList().groups.find(g => g.title === groupTitle);
+      if(!group) return;
+      group.items = [...listEl.querySelectorAll('.item')].map(el => el.dataset.item);
+      saveState("已記住排序");
+      render();
+    }
+
+    function refreshStats(){
+      const list = currentList();
+      const total = list.groups.reduce((sum, group) => sum + group.items.length, 0);
+      const done = list.groups.reduce((sum, group) => sum + group.items.filter(item => !!state.checked[keyForItem(state.activeList, group.title, item)]).length, 0);
+      const percent = total ? Math.round((done / total) * 100) : 0;
       document.getElementById("doneCount").textContent = done;
       document.getElementById("totalCount").textContent = total;
       document.getElementById("percentCount").textContent = percent + "%";
