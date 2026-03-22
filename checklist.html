@@ -118,7 +118,7 @@
 <body>
   <div class="wrap">
     <section class="hero">
-      <h1>📜 Packing List</h1>
+      <h1>📜 List</h1>
       
 
       <div class="stats">
@@ -137,8 +137,8 @@
       </div>
       <div class="toolbar">
         <div class="switcher">
-          <button class="switch-btn" id="travelBtn">🧳 旅行清單</button>
-          <button class="switch-btn" id="drugstoreBtn">🛒 藥妝清單</button>
+          <button class="switch-btn" id="travelBtn">打包清單</button>
+          <button class="switch-btn" id="drugstoreBtn">購物清單</button>
         </div>
         <button class="primary" id="expandBtn">全部展開</button>
         <button id="collapseBtn">全部收合</button>
@@ -169,17 +169,17 @@
 
     const DEFAULT_LISTS = {
       travel: {
-        title: "📜 Packing List",
+        title: "📜 List",
         groups: [
           { title: "重要物品", icon: "📘", items: ["護照","日文駕照翻譯本、台灣駕照","現金"] },
           { title: "清潔", icon: "🧼", items: ["卸妝油","洗面乳","洗髮精","護髮膜","快乾擦髮巾"] },
-          { title: "保養品、底妝", icon: "💄", items: ["前導精華","痘膚潤","痘痘藥","化妝水","眼霜","保濕精華液","面霜","擦拭行化妝水","化妝棉","防曬","CC霜","妝前霜","蜜粉","多效精華液","身體乳液"] },
+          { title: "保養品、底妝", icon: "💄", items: ["前導精華","痘膚潤","痘痘藥","化妝水","眼霜","保濕精華液","面霜","擦拭型化妝水","化妝棉","防曬","CC霜","妝前霜","蜜粉","多效精華液","身體乳液","熱活精華","護髮油"] },
           { title: "生活物品", icon: "🏠", items: ["牙刷、牙膏","牙線棒","棉花棒","濕紙巾","暈車藥","暖暖包","鯊魚夾","瀏海貼","口罩","袖珍面紙","購物袋","垃圾袋","凡士林","眼藥水","眼鏡","睡覺穿厚襪","藥品","雨傘"] },
           { title: "其他", icon: "🔌", items: ["充電頭、充電線","行動電源","耳機","酒精"] }
         ]
       },
       drugstore: {
-        title: "🛒 購物清單",
+        title: "📜 List",
         groups: [
           { title: "藥品", icon: "🛒", items: [
             { name:"EVE止痛藥", img:"images/1.jpg" },
