@@ -602,6 +602,48 @@ details.detailsTight .content{
 #day4 details{margin-top:10px}
 #day4 .timeline details{margin-left:-12px;margin-right:-12px}
 #day4 .timeline details .galleryRow{margin-top:0}
+
+/* ✅ Day4：只修主行程白川水源與火山口開放收合層外框 */
+#day4 > .dayBody > .content > .timeline > details{
+  box-sizing:border-box;
+  margin-left:-12px !important;
+  margin-right:-12px !important;
+  overflow:hidden;
+}
+#day4 > .dayBody > .content > .timeline > details > .galleryRow,
+#day4 > .dayBody > .content > .timeline > details[style*="白川水源"] > .galleryRow{
+  margin-left:-14px !important;
+  margin-right:-14px !important;
+  padding-left:14px !important;
+  padding-right:14px !important;
+  box-sizing:border-box;
+  scroll-padding-left:14px;
+  scroll-padding-right:14px;
+}
+
+/* ✅ Day4：火山口開放版內，兩組相簿真正貼齊左右且不吃邊框 */
+#day4 .galleryWrap[aria-label="上色見熊野座神社照片（火山口開放版）"],
+#day4 .galleryWrap[aria-label="太宰府天滿宮照片（火山口開放版）"]{
+  margin-left:-12px !important;
+  margin-right:-12px !important;
+  width:calc(100% + 24px);
+}
+#day4 .galleryWrap[aria-label="上色見熊野座神社照片（火山口開放版）"] .galleryTitle,
+#day4 .galleryWrap[aria-label="太宰府天滿宮照片（火山口開放版）"] .galleryTitle{
+  padding-left:12px !important;
+  padding-right:12px !important;
+}
+#day4 .galleryWrap[aria-label="上色見熊野座神社照片（火山口開放版）"] .galleryRow,
+#day4 .galleryWrap[aria-label="太宰府天滿宮照片（火山口開放版）"] .galleryRow{
+  margin-left:0 !important;
+  margin-right:0 !important;
+  padding-left:12px !important;
+  padding-right:12px !important;
+  box-sizing:border-box;
+  scroll-padding-left:12px;
+  scroll-padding-right:12px;
+}
+
 @media (max-width: 640px){
   #day4 .tRow{grid-template-columns:72px 1fr;gap:8px;padding:12px}
 }
@@ -901,7 +943,7 @@ details.detailsTight .content{
 
             <div class="galleryWrap" aria-label="Day1 照片">
               <p class="galleryTitle">📷 Day 1 照片</p>
-              <div class="galleryRow" role="list">
+              <div class="galleryRow galleryRow--flush" role="list">
                 <div class="gItem" role="listitem" data-caption="Prince Smart Inn Hakata"><img loading="lazy" src="day1/01.jpg" data-full="day1/01.jpg" alt="Prince Smart Inn Hakata"></div>
                 <div class="gItem" role="listitem" data-caption="燒肉 Hayato 博多站東店"><img loading="lazy" src="day1/02.jpg" data-full="day1/02.jpg" alt="燒肉 Hayato 博多站東店"></div>
                 <div class="gItem" role="listitem" data-caption="店內點菜平板"><img loading="lazy" src="day1/03.jpg" data-full="day1/03.jpg" alt="店內點菜平板"></div>
@@ -998,7 +1040,7 @@ details.detailsTight .content{
 
                 <div class="galleryWrap alignWithMain" aria-label="停車照片">
                   <p class="galleryTitle">📷 停車位置參考</p>
-                  <div class="galleryRow" role="list">
+                  <div class="galleryRow galleryRow--flush" role="list">
                     <div class="gItem" role="listitem" data-caption="湯布院停車場｜外觀與車位"><img loading="lazy" src="day2/1.jpg" data-full="day2/1.jpg" alt="湯布院停車場 外觀"></div>
                     <div class="gItem" role="listitem" data-caption="料金箱｜請自備零錢投幣"><img loading="lazy" src="day2/2.jpg" data-full="day2/2.jpg" alt="料金箱"></div>
                     <div class="gItem" role="listitem" data-caption="金鱗湖入口前駐車場｜入口前小屋"><img loading="lazy" src="day2/3.jpg" data-full="day2/3.jpg" alt="金鱗湖入口前駐車場"></div>
@@ -1601,30 +1643,37 @@ details.detailsTight .content{
         </div>
 
          <div class="tRow">
-          <div class="time">10:50–<br>11:45</div>
-          <div>
-            <div class="place">草千里ヶ浜</div>
-            <div class="meta">為了維持草原生態，通常在 3 月初至 3 月中旬 進行「燒山(野焼き)」儀式，新的綠草要到 4 月中下旬後才會逐漸長出。燒山後的地面會呈現焦黑色，景觀像沙漠或特攝片戰鬥場地。</div>
-            <div class="meta">☕ 草千里咖啡焙煎所 (Kusasenri Coffee Roastery)，大片落地窗可以直接對望火山煙與草原。</div>
-          </div>
-        </div>
+  <div class="time">10:50–<br>11:45</div>
+  <div>
+    <div class="place">草千里之濱</div>
+    <ul class="metaList">
+      <li>進入山區的銜接處有幾個比較大的180度彎道，轉彎時請減速並靠右側行駛。</li>
+      <li>阿蘇山上收訊較差，Google導航先下載離線地圖。</li>
+      <li>導航至草千里之濱停車場，單次收費¥500。</li>
+      <li>建議停在離 New 草千里建築物（咖啡廳所在地）近一點的地方。</li>
+      <li>為了維持草原生態，通常在3月初至3月中旬進行「燒山(野焼き)」儀式，新的綠草要到4月中下旬後才會逐漸長出。燒山後的地面會呈現焦黑色，景觀像沙漠或特攝片戰鬥場地。</li>
+      <li>公共廁所旁的小徑，可通往草千里展望所，登高望遠草千里的風景。</li>
+    </ul>
+  </div>
+</div>
 
-        <div class="galleryRow" aria-label="草千里之濱照片" role="list">
-          <div class="gItem" role="listitem" data-full="day4/13.jpg"><img src="day4/13.jpg" loading="lazy" alt="阿蘇草千里米塚野燒景觀"><div class="gCaption">阿蘇草千里米塚野燒景觀</div></div>
-          <div class="gItem" role="listitem" data-full="day4/14.jpg"><img src="day4/14.jpg" loading="lazy" alt="草千里停車場與山景"><div class="gCaption">草千里停車場與山景</div></div>
-          <div class="gItem" role="listitem" data-full="day4/15.jpg"><img src="day4/15.jpg" loading="lazy" alt="草千里草原3月景觀"><div class="gCaption">草千里草原3月景觀</div></div>
-          <div class="gItem" role="listitem" data-full="day4/16.jpg"><img src="day4/16.jpg" loading="lazy" alt="草千里湖畔放牧馬匹"><div class="gCaption">草千里湖畔放牧馬匹</div></div>
-          <div class="gItem" role="listitem" data-full="day4/17.jpg"><img src="day4/17.jpg" loading="lazy" alt="草千里池塘與牛群"><div class="gCaption">草千里池塘與牛群</div></div>
-          <div class="gItem" role="listitem" data-full="day4/18.jpg"><img src="day4/18.jpg" loading="lazy" alt="草千里綠草季與阿蘇山景"><div class="gCaption">草千里綠草季與阿蘇山景</div></div>
-          <div class="gItem" role="listitem" data-full="day4/19.jpg"><img src="day4/19.jpg" loading="lazy" alt="草千里展望所木棧道"><div class="gCaption">草千里展望所木棧道</div></div>
-          <div class="gItem" role="listitem" data-full="day4/20.jpg"><img src="day4/20.jpg" loading="lazy" alt="阿蘇火山博物館外觀"><div class="gCaption">阿蘇火山博物館外觀</div></div>
-          <div class="gItem" role="listitem" data-full="day4/21.jpg"><img src="day4/21.jpg" loading="lazy" alt="阿蘇火山博物館環景劇場"><div class="gCaption">阿蘇火山博物館環景劇場</div></div>
-          <div class="gItem" role="listitem" data-full="day4/22.jpg"><img src="day4/22.jpg" loading="lazy" alt="阿蘇火山博物館入口大廳"><div class="gCaption">阿蘇火山博物館入口大廳</div></div>
-          <div class="gItem" role="listitem" data-full="day4/23.jpg"><img src="day4/23.jpg" loading="lazy" alt="草千里咖啡焙煎所外觀"><div class="gCaption">草千里咖啡焙煎所外觀</div></div>
-          <div class="gItem" role="listitem" data-full="day4/24.jpg"><img src="day4/24.jpg" loading="lazy" alt="草千里咖啡焙煎所窗景座位"><div class="gCaption">草千里咖啡焙煎所窗景座位</div></div>
-          <div class="gItem" role="listitem" data-full="day4/25.jpg"><img src="day4/25.jpg" loading="lazy" alt="草千里咖啡焙煎所特色飲品"><div class="gCaption">草千里咖啡焙煎所特色飲品</div></div>
-        </div>
-       <div class="tRow">
+<div class="galleryRow" aria-label="草千里之濱照片" role="list">
+  <div class="gItem" role="listitem" data-full="day4/13.jpg"><img src="day4/13.jpg" loading="lazy" alt="阿蘇草千里米塚野燒景觀"><div class="gCaption">阿蘇草千里米塚野燒景觀</div></div>
+  <div class="gItem" role="listitem" data-full="day4/14.jpg"><img src="day4/14.jpg" loading="lazy" alt="草千里停車場與山景"><div class="gCaption">草千里停車場與山景</div></div>
+  <div class="gItem" role="listitem" data-full="day4/15.jpg"><img src="day4/15.jpg" loading="lazy" alt="草千里草原3月景觀"><div class="gCaption">草千里草原3月景觀</div></div>
+  <div class="gItem" role="listitem" data-full="day4/16.jpg"><img src="day4/16.jpg" loading="lazy" alt="草千里湖畔放牧馬匹"><div class="gCaption">草千里湖畔放牧馬匹</div></div>
+  <div class="gItem" role="listitem" data-full="day4/17.jpg"><img src="day4/17.jpg" loading="lazy" alt="草千里池塘與牛群"><div class="gCaption">草千里池塘與牛群</div></div>
+  <div class="gItem" role="listitem" data-full="day4/18.jpg"><img src="day4/18.jpg" loading="lazy" alt="草千里綠草季與阿蘇山景"><div class="gCaption">草千里綠草季與阿蘇山景</div></div>
+  <div class="gItem" role="listitem" data-full="day4/19.jpg"><img src="day4/19.jpg" loading="lazy" alt="草千里展望所木棧道"><div class="gCaption">草千里展望所木棧道</div></div>
+  <div class="gItem" role="listitem" data-full="day4/20.jpg"><img src="day4/20.jpg" loading="lazy" alt="阿蘇火山博物館外觀"><div class="gCaption">阿蘇火山博物館外觀</div></div>
+  <div class="gItem" role="listitem" data-full="day4/21.jpg"><img src="day4/21.jpg" loading="lazy" alt="阿蘇火山博物館環景劇場"><div class="gCaption">阿蘇火山博物館環景劇場</div></div>
+  <div class="gItem" role="listitem" data-full="day4/22.jpg"><img src="day4/22.jpg" loading="lazy" alt="阿蘇火山博物館入口大廳"><div class="gCaption">阿蘇火山博物館入口大廳</div></div>
+  <div class="gItem" role="listitem" data-full="day4/23.jpg"><img src="day4/23.jpg" loading="lazy" alt="草千里咖啡焙煎所外觀"><div class="gCaption">草千里咖啡焙煎所外觀</div></div>
+  <div class="gItem" role="listitem" data-full="day4/24.jpg"><img src="day4/24.jpg" loading="lazy" alt="草千里咖啡焙煎所窗景座位"><div class="gCaption">草千里咖啡焙煎所窗景座位</div></div>
+  <div class="gItem" role="listitem" data-full="day4/25.jpg"><img src="day4/25.jpg" loading="lazy" alt="草千里咖啡焙煎所特色飲品"><div class="gCaption">草千里咖啡焙煎所特色飲品</div></div>
+    </div>
+
+        <div class="tRow">
   <div class="time">13:15–<br>14:00</div>
   <div>
     <div class="place">上色見熊野座神社</div>
@@ -1642,10 +1691,7 @@ details.detailsTight .content{
 
   </div>
 </div>
-
-<div class="galleryWrap" aria-label="上色見熊野座神社照片（火山口開放版）" style="margin-top:10px">
-  <p class="galleryTitle">📷 上色見熊野座神社</p>
-  <div class="galleryRow" role="list">
+     <div class="galleryRow" aria-label="上色見熊野座神社" role="list">
     <div class="gItem" role="listitem" data-full="day4/01.jpg"><img src="day4/01.jpg" loading="lazy" alt="上色見熊野座神社入口鳥居與石階"><div class="gCaption">上色見熊野座神社入口鳥居與石階</div></div>
     <div class="gItem" role="listitem" data-full="day4/02.jpg"><img src="day4/02.jpg" loading="lazy" alt="神社入口附近洗手間"><div class="gCaption">神社入口附近洗手間</div></div>
     <div class="gItem" role="listitem" data-full="day4/03.jpg"><img src="day4/03.jpg" loading="lazy" alt="《螢火之森》海報"><div class="gCaption">《螢火之森》海報</div></div>
@@ -1656,7 +1702,6 @@ details.detailsTight .content{
     <div class="gItem" role="listitem" data-full="day4/08.jpg"><img src="day4/08.jpg" loading="lazy" alt="穿戶岩"><div class="gCaption">穿戶岩</div></div>
     <div class="gItem" role="listitem" data-full="day4/09.jpg"><img src="day4/09.jpg" loading="lazy" alt="上色見熊野座神社御朱印"><div class="gCaption">上色見熊野座神社御朱印</div></div>
   </div>
-</div>
 
 
 
@@ -1671,10 +1716,7 @@ details.detailsTight .content{
   </div>
 </div>
 
-<div class="galleryWrap" aria-label="太宰府天滿宮照片（火山口開放版）" style="margin-top:10px">
-  <p class="galleryTitle">📷 太宰府天滿宮</p>
-
-  <div class="galleryRow" role="list">
+     <div class="galleryRow" aria-label="太宰府天滿宮照片" role="list">
     <div class="gItem" role="listitem" data-full="day4/26.jpg">
       <img src="day4/26.jpg" loading="lazy" alt="太宰府天滿宮參道入口">
       <div class="gCaption">太宰府天滿宮參道入口</div>
