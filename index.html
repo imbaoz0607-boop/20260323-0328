@@ -1,1715 +1,2236 @@
-<!doctype html>
+<!doctype html> 
+<!doctype html> 
 <html lang="zh-Hant">
 <head>
- <meta charset="utf-8" />
- <meta name="viewport" content="width=device-width, initial-scale=1" />
- <title>東京｜主行程模板 v5</title>
- <style>
- :root{
- --bg:#f1f3f7; /* 調整為與福岡行程表接近的冷灰底色 */
- --surface:#ffffff; /* 卡片保持白色，形成福岡那種乾淨層次 */
- --text:#2d2a26;
- --muted:#7a736b;
- --line:#e3e6ee; /* 分隔線改為偏灰藍色系 */
- --accent:#8c6b4f;
- --chip:#f3ece3;
- --shadow:0 10px 30px rgba(0,0,0,.06);
- --radius:20px;
- --gap:14px;
- }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>福岡・由布院・阿蘇</title>
+  <style>
 
- *{box-sizing:border-box;}
- html,body{margin:0;padding:0;}
- body{
- font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
- background:var(--bg);
- color:var(--text);
- line-height:1.65;
- }
+    :root{
+      --bg:#f6f7fb;
+      --surface:#ffffff;
+      --card:#ffffff;
+      --text:#111827;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+      --chip:#f3f4f6;
+      --accent:#2563eb;
+      --shadow:0 8px 24px rgba(0,0,0,.08);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
 
- .container{
- width:min(100%, 980px);
- margin:0 auto;
- padding:20px 14px 48px;
- }
+    /* Memo 提示區塊（左側線設計） */
+    .note{
+      margin:0 0 12px;
+      padding:12px 14px;
+      border:none;
+      border-left:4px solid var(--accent);
+      background:#f8fafc;
+      font-size:13px;
+    }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans TC", "PingFang TC", "Hiragino Sans", "Helvetica Neue", Arial;
+      line-height:1.6;
+    }
+    a{color:inherit}
 
- .hero{
- margin-bottom:18px;
- }
-
- .tabShell{
- margin-bottom:18px;
- background:var(--surface);
- border:1px solid var(--line);
- border-radius:28px;
- box-shadow:var(--shadow);
- overflow:visible; /* 防止桌面版文字被裁切 */
- }
-.topTabs{
- display:flex;
- flex-wrap:nowrap;
- gap:10px;
- padding:18px 14px;
- margin:0;
- background:var(--surface);
- border:0;
- border-radius:0;
- box-shadow:none;
- overflow-x:auto;
- -webkit-overflow-scrolling:touch;
- position:sticky;
- top:0;
- z-index:50;
- }
-
- .topTabs::-webkit-scrollbar{height:6px;}
- .topTabs::-webkit-scrollbar-thumb{background:#d8cfc3;border-radius:999px;}
-
- .tabBtn{
- display:inline-flex;
- align-items:center;
- justify-content:center;
- min-height:50px;
- padding:0 20px;
- border-radius:999px;
- border:1px solid #d6d6db;
- background:#f7f7f9;
- color:#1f2430;
- text-decoration:none;
- font-size:16px;
- line-height:1;
- white-space:nowrap;
- transition:all .18s ease;
+    .wrap{
+  max-width:1100px;
+  margin:0 auto;
+  padding:22px 8px 26px;
 }
-.tabBtn.active{
- border-color:#3b6cff;
- background:#f9fbff;
- box-shadow:inset 0 0 0 1px rgba(59,108,255,.08);
- }
 
- /* tabs 下方分隔線（模板穩定版） */
- .tabsDivider{
- width:100%;
- height:1px;
- background:var(--line);
- }
+    header{
+      display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;
+      margin-bottom:14px;
+    }
+    h1{margin:0;font-size:20px;letter-spacing:.2px}
+    .sub{color:var(--muted);font-size:12px}
 
- .daySection{
- scroll-margin-top:18px;
- }
+    .board{
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:var(--surface);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      /* iOS Safari: allow vertical scroll, let JS handle horizontal swipe */
+      touch-action: pan-y;
+    }
 
- .heroTitleCard{
- background:var(--surface);
- border:1px solid var(--line);
- border-radius:28px;
- padding:22px 18px;
- box-shadow:var(--shadow);
- margin-bottom:14px;
- }
-.heroFlights{
- display:grid;
- grid-template-columns:repeat(2,minmax(0,1fr));
- gap:14px;
- align-items:stretch;
+    /* Tabs */
+    .tabs{
+      display:flex;
+      gap:10px;
+      padding:14px 14px 12px;
+      border-bottom:1px solid var(--line);
+      background:#ffffff;
+      overflow-x:auto;
+    }
+    .tabs::-webkit-scrollbar{height:8px}
+    .tabs::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14);border-radius:999px}
+    .tabs::-webkit-scrollbar-track{background:rgba(255,255,255,.05)}
+
+    .tab{
+      appearance:none;
+      border:1px solid var(--line);
+      background:#ffffff;
+      color:var(--text);
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:13px;
+      cursor:pointer;
+      white-space:nowrap;
+      transition:background .15s ease, border-color .15s ease;
+    }
+    .tab:hover{transform:translateY(-1px)}
+    .tab[aria-selected="true"]{
+      border-color:var(--accent);
+      background:#eef2ff;
+      box-shadow:none;
+    }
+
+    /* Panels */
+    .panel{
+  display:none;
+  padding:16px 8px 18px;
 }
- .heroFlightCard{
- background:#ffffff; /* 航班卡片維持白色卡片層次 */
- border:1px solid var(--line);
- border-radius:24px;
- padding:16px 18px;
- box-shadow:0 8px 24px rgba(0,0,0,.04);
- }
+    .panel.active{display:block}
 
- .heroFlightTitle{
- margin:0 0 10px;
- font-size:18px;
- line-height:1.35;
- font-weight:800;
- color:#1f2430;
- }
- .heroFlightList{
- margin:0;
- padding-left:1.15em;
- }
+    .dayHeader{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+      padding:6px 6px 12px;
+    }
+    .dayHeaderRight{margin-left:auto;padding-top:10px}
+    .dayDateRight{color:var(--text);font-size:18px;font-weight:800;line-height:1.2}
+    .dayTitle{display:flex;gap:12px;align-items:center;}
+    .num{
+      width:40px;height:40px;border-radius:14px;
+      display:grid;place-items:center;
+      border:1px solid rgba(96,165,250,.45);
+      background:rgba(96,165,250,.10);
+      font-weight:800;
+    }
+    .tblock{min-width:0;padding-top:2px}
+    .tblock h2{margin:0;font-size:18px;line-height:1.2}
 
- .heroFlightList li + li{
- margin-top:4px;
- }
+ /* Accordion sections */
+    details{
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:#ffffff;
+      overflow:hidden;
+      margin-top:10px;
+    }
+    summary{
+      list-style:none;
+      cursor:pointer;
+      padding:12px 12px;
+      display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
+      font-weight:700;
+    }
+    /* 修正手機版 summary 文字被擠成直排 */
+    summary span.sumText{
+      flex:1;
+      min-width:0;
+      white-space:normal;
+      word-break:break-word;
+      line-height:1.5;
+    }
+    /* ✅ 需要固定成單行的收合標題（避免兩個收合層高度不一） */
+    summary span.sumText--nowrap{
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    summary::-webkit-details-marker{display:none}
+summary::marker{content:""}
+    .chev{color:var(--muted);transition:transform .15s ease}
+    details[open] .chev{transform:rotate(180deg)}
 
- .heroFlightList strong{
- font-size:15px;
- }
+ .content{padding:0 12px 12px}
 
- .title{
- margin:0;
- font-size:clamp(24px, 4vw, 34px);
- line-height:1.25;
- }
+    /* ✅ Day2「取車前注意事項／行車重點提醒」使用 dContent：增加左側內距但不影響其他區塊 */
+    .dContent{padding:0 14px 12px}
 
- .subtitle{
- margin:8px 0 0;
- color:var(--muted);
- font-size:14px;
- }
+    /* ✅ Day2：三個 gallery 與外框保持安全距離（避免縮圖圓角被裁切；不影響其他天） */
+/* Day2 指定 gallery 改為 alignPad 對齊，這段保留空白避免舊規則干擾 */
 
- .pagePanel{
- display:none;
- margin:0;
- border:0;
- border-radius:0;
- box-shadow:none;
- }
-
- .pagePanel.active{
- display:block;
- }
-
- .card{
- background:var(--surface);
- border:1px solid var(--line);
- border-radius:28px;
- padding:0;
- box-shadow:var(--shadow);
- margin-bottom:18px;
- overflow:hidden;
- }
-
- .tabShell .card{
- margin-bottom:0;
- border:0;
- border-radius:0;
- box-shadow:none;
- }
-
- .dayCardHeader{
- display:flex;
- align-items:center;
- justify-content:space-between;
- gap:14px;
- padding:18px 18px 16px;
- border-bottom:1px solid var(--line);
- padding-bottom:14px; /* 強化標題區與行程區距離 */
- 
- }
-
- .dayHeaderMain{
- display:flex;
- align-items:center;
- gap:14px;
- min-width:0;
- }
-
- .dayIndex{
- display:inline-flex;
- align-items:center;
- justify-content:center;
- width:56px;
- min-width:56px;
- height:52px;
- border-radius:18px;
- border:1px solid #9ec0ff;
- background:#eaf2ff;
- color:#173d7a;
- font-size:18px;
- font-weight:800;
- line-height:1;
- }
-
- .dayHeading{
- min-width:0;
- font-size:20px;
- font-weight:800;
- line-height:1.35;
- color:#16253b;
- }
-
- .dayDate{
- font-size:18px;
- font-weight:800;
- color:#16253b;
- letter-spacing:.4px;
- white-space:nowrap;
- }
-
- .dayBody{
- padding-top:16px; /* 與標題分隔線形成呼吸感 */
-
- padding:18px 16px 18px;
- }
-
- .dayTitle{
- margin:0;
- font-size:22px;
- line-height:1.35;
- }
-
- .dayMeta{
- display:flex;
- flex-wrap:wrap;
- gap:8px;
- margin:0 0 14px;
- padding:0;
- list-style:none;
- }
-
- .chip{
- display:inline-flex;
- align-items:center;
- gap:6px;
- padding:6px 10px;
- background:var(--chip);
- border-radius:999px;
- color:#5f5448;
- font-size:13px;
- }
-
- .timeline{
- display:flex;
- flex-direction:column;
- gap:12px;
- }
+    /* Timeline */
+    .timeline{
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:#ffffff;
+      overflow:hidden;
+    }
+    .tHead{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:10px 12px;
+      border-bottom:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      font-weight:700;
+    }
+    .tHead span{color:var(--muted);font-weight:600;font-size:12px}
 
  .tRow{
- display:grid;
- grid-template-columns:74px minmax(0,1fr);
- gap:12px;
- align-items:start;
- padding:10px 0;
- border-top:1px dashed var(--line);
- }
+      display:grid;
+      grid-template-columns: 92px 1fr;
+      gap:12px;
+      padding:12px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    /* ✅ 讓 grid 子元素可以被縮小，避免內容把整列撐爆導致「看起來不能滑」(iOS 特別常見) */
+    .tRow > *{min-width:0;}
+    /* ✅ 單列全寬（僅在需要的地方加 class，不影響其他天） */
+    .tRow--full{grid-template-columns: 1fr;}
+    .tRow:last-child{border-bottom:none}
+    .time{font-variant-numeric: tabular-nums;font-weight:800}
+    .meta{color:var(--muted);font-size:12px;margin-top:3px;line-height:1.4}
+    .place{font-weight:700}
 
- .tRow:first-child{
- border-top:none;
- padding-top:0;
- }
+    /* ✅ 行程列內的「還車／入住」標籤樣式（字型/大小修正，不影響既有 .tRow grid） */
+    .act{
+      display:inline-block;
+      min-width:2.8em;
+      font-weight:600;
+      font-size:12px;
+      line-height:1.4;
+      color:var(--muted);
+    }
+    /* ✅ 移動段（想要像圖二：標題獨立一行、替代交通同列） */
+    .moveTitle{
+      font-weight:800;
+      font-size:14px;
+      margin:0 0 4px;
+      line-height:1.35;
+    }
 
- .time{
- font-weight:700;
- color:#000;
- letter-spacing:.2px;
- }
+ .moveAlt{
+      margin-top:6px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.4;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .moveDesc{color:var(--muted);font-size:12px;line-height:1.5}
+    .moveTime{font-variant-numeric: tabular-nums;font-weight:800}
+    .moveMode{font-weight:700}
+    .moveDur{color:var(--muted);font-size:12px;margin-top:3px;line-height:1.3}
 
- .place{
- min-width:0;
- }
+    /* ✅ Day5 交通/說明文字：統一字級與緊貼行距 */
+    .noteTransit{margin:14px 0 6px 0;font-size:14px;color:var(--muted);line-height:1.5}
+    .noteTransit--tight{margin-top:10px;line-height:1.5;font-size:14px}
 
- .placeTitle{
- margin:0;
- font-size:16px;
- font-weight:700;
- }
+    /* Small chips */
+    .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .pill{
+      border:1px solid var(--line);
+      background:var(--chip);
+      color:var(--muted);
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+    }
 
- .meta{
- margin:4px 0 0;
- color:var(--muted);
- font-size:14px;
- }
+    .links{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 
- .notes{
- margin:8px 0 0;
- padding-left:1.2em;
- }
+ /* Reusable helpers */
+    .timelinePlain{border:none !important;background:transparent !important;border-radius:0 !important}
+    .linksSection{margin-top:12px}
+    .linksSection--tight{margin:10px 0 6px}
+.navGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin-top:10px}
+.navGrid .btn{width:100%;justify-content:center}
 
- .notes li + li{
- margin-top:4px;
- }
+    /* Gallery */
+    .galleryWrap{margin-top:10px}
 
- .gallery{
- margin-top:12px;
- margin-left:calc(-74px - 12px);
- margin-right:-16px;
+    /* ===== Day3 專用：對齊與路線排版 ===== */
+    .alignTime{padding:0 12px}
+    .alignTime .galleryTitle{padding:0}
+    .alignTime .galleryRow{padding:0 0 6px}
+    .routeList{display:grid;gap:8px}
+    .routeItem{display:grid;grid-template-columns:1.6em 1fr;gap:6px;align-items:start}
+    .routeArrow{display:inline-flex;align-items:flex-start;justify-content:center;line-height:1.7;font-weight:700;color:var(--text)}
+    .routeText{min-width:0}
+    .routeSub{margin-top:2px;padding-left:.2em}
+
+   
+    /* ✅ Day2 需要：時間軸內的右欄對齊主內容（不影響其他天） */
+    .timeline{--timeCol:92px;--tGap:12px;--tPad:12px}
+    .timeline .alignWithMain{margin-left:calc(-1*(var(--timeCol) + var(--tGap) + var(--tPad)));margin-right:calc(-1*var(--tPad))}
+    .timeline .alignPad{margin-left:calc(-1*var(--tPad));margin-right:calc(-1*var(--tPad))}
+
+#day2 .timeline details.alignWithMain{
+  margin-left: calc(-1*(var(--timeCol) + var(--tGap) + var(--tPad)) + 14px);
+  margin-right: calc(-1*var(--tPad) + 14px);
 }
 
-.galleryTitle{
- padding-left:16px;
- padding-right:16px;
- margin:0 0 8px;
- font-size:15px;
- font-weight:700;
- }
+.tRow .subline{grid-column:1 / -1;margin-top:2px}
+    .timeline details > summary{font-size:16px;font-weight:700}
+    .dSplit{padding-top:6px}
+    .dLabel{font-size:12px;font-weight:800;color:var(--text);opacity:.78;letter-spacing:.2px;margin:6px 0 4px}
+    .dList{margin:0;padding-left:18px;color:var(--muted);font-size:13px;line-height:1.6}
 
- .galleryRow{
- display:flex;
- gap:10px;
- overflow-x:auto;
- padding:4px 0 6px;
- scroll-snap-type:x proximity;
- -webkit-overflow-scrolling:touch;
- touch-action:pan-x; /* 鎖定為水平滑動，避免與頁面滑動衝突 */
- overscroll-behavior-x:contain; /* 防止滑動觸發頁面切換 */
+
+/* ✅ 行程說明內：emoji/小圖示與文字對齊（例如 ⚠🌙🛒 三行提醒） */
+.metaList{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.metaList li{display:flex;gap:10px;align-items:flex-start}
+.metaIcon{flex:0 0 1.8em;display:inline-flex;align-items:center;justify-content:center;line-height:1.2}
+.metaText{flex:1;min-width:0}
+    .dDivider{height:1px;background:rgba(0,0,0,.06);margin:10px 0}
+    .galleryTitle{margin:0 0 8px;padding:0 2px;font-weight:800;font-size:13px}
+
+    /* ✅ 單一區塊需要時：讓照片列與外框齊（不影響其他天） */
+    .galleryRow--flush{padding-left:0;padding-right:0;margin-left:0;margin-right:0}
+
+    /* ✅ iOS：讓橫向捲動真的生效（不被 board 的 pan-y 影響） */
+    .galleryRow{
+      display:flex;
+      flex-direction:row;
+      gap:12px;
+      overflow-x:auto;
+      overflow-y:hidden;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-x;
+      overscroll-behavior-x: contain;
+    }
+    .galleryRow::-webkit-scrollbar{height:8px}
+    .galleryRow::-webkit-scrollbar-thumb{background:rgba(17,24,39,.12);border-radius:999px}
+    .galleryRow::-webkit-scrollbar-track{background:transparent}
+    .gItem{
+      flex:0 0 auto;
+      width:220px !important;
+      aspect-ratio:4/3 !important;
+      border-radius:14px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background:#fff;
+      scroll-snap-align:start;
+      box-shadow:0 6px 16px rgba(0,0,0,.06);
+      cursor:pointer;
+      position:relative
+    }
+.gItem img{width:100%;height:100%;object-fit:cover;display:block}
+
+
+/* ✅ 若卡片內已經有 .gCaption，就不要再用 data-caption 疊第二層標籤 */
+    .gItem:has(.gCaption)[data-caption]::after{display:none}
+
+.gItem[data-caption]::after{
+      content: attr(data-caption);
+      position:absolute;
+      left:8px; right:8px; bottom:8px;
+      padding:6px 8px;
+      border-radius:12px;
+      background:rgba(17,24,39,.62);
+      color:#fff;
+      font-size:12px;
+      line-height:1.35;
+      letter-spacing:.2px;
+      pointer-events:none;
+      text-shadow:0 1px 2px rgba(0,0,0,.25);
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
+
+    /* Lightbox */
+    .lbModal{position:fixed;inset:0;z-index:60;display:none}
+    .lbModal.open{display:block}
+    .lbBackdrop{position:absolute;inset:0;background:rgba(17,24,39,.78)}
+    .lbStage{position:absolute;inset:0;display:grid;place-items:center;padding:18px}
+    .lbImg{max-width:min(980px,92vw);max-height:82vh;width:auto;height:auto;border-radius:16px;border:1px solid rgba(255,255,255,.18);box-shadow:0 12px 36px rgba(0,0,0,.35);background:#000;object-fit:contain}
+    .lbClose{position:absolute;top:14px;right:14px;border:1px solid rgba(255,255,255,.22);background:rgba(17,24,39,.55);color:#fff;border-radius:12px;padding:8px 10px;cursor:pointer;font-size:14px;line-height:1;user-select:none}
+    .lbNav{position:absolute;top:14px;left:14px;display:flex;gap:8px;align-items:center}
+    .lbBtn{border:1px solid rgba(255,255,255,.22);background:rgba(17,24,39,.55);color:#fff;border-radius:12px;padding:8px 10px;cursor:pointer;font-size:14px;line-height:1;user-select:none}
+    .lbCount{color:rgba(255,255,255,.85);font-size:12px;margin-left:6px}
+
+    @media (max-width: 640px){
+      .tRow{grid-template-columns: 72px 1fr; gap:8px; padding:12px}
+      /* ✅ 手機版也要維持全寬列（避免 Day5 等區塊被擠窄） */
+      .tRow.tRow--full{grid-template-columns: 1fr;}
+      .num{width:38px;height:38px}
+      .tblock h2{font-size:17px}
+    }
+
+
+/* ====== Day2 紅框區塊額外內距強化 ====== */
+#day2 .card,
+#day2 details,
+#day2 .galleryWrap,
+#day2 .tBlock {
+  padding-left: 14px !important;
+  padding-right: 14px !important;
 }
 
- 
-
- .galleryRow::-webkit-scrollbar{
- height:8px;
- }
-
- .galleryRow::-webkit-scrollbar-thumb{
- background:#d8cfc3;
- border-radius:999px;
- }
-
- .gItem{
- flex:0 0 auto;
- width:180px;
- scroll-snap-align:start;
- }
-
- .gItem img,
- .gItem a.pdfLink{
- display:block;
- width:100%;
- border-radius:14px;
- border:1px solid var(--line);
- background:#faf8f4;
- }
-
- .gItem img{
- aspect-ratio:auto; /* 保持原始比例 */
- object-fit:contain; /* 不裁切圖片 */
- cursor:zoom-in;
- }
-
- .gCaption{
- margin-top:6px;
- color:var(--muted);
- font-size:13px;
- }
-
- details.infoBox{
- margin-top:12px;
- margin-left:calc(-74px - 12px);
- margin-right:-16px;
- border:1px solid var(--line);
- border-left:0;
- border-right:0;
- border-radius:0;
- background:#fcfaf7;
- overflow:hidden;
+/* Day2：一般 galleryRow 先保留小內距（避免貼邊） */
+#day2 .galleryRow {
+  padding-left: 6px;
+  padding-right: 6px;
 }
 
- details.infoBox > summary{
- list-style:none;
- cursor:pointer;
- padding:12px 16px;
- font-weight:700;
- display:flex;
- align-items:center;
- justify-content:space-between;
- gap:12px;
+
+/* ✅ Day2：這四組相簿要像停車建議一樣，直接貼齊左邊框但不超出 */
+#day2 .timeline .galleryWrap[aria-label="由布院照片"],
+#day2 .timeline .galleryWrap[aria-label="由布院小食照片"],
+#day2 .timeline .galleryWrap[aria-label="九重夢大吊橋照片"],
+#day2 .timeline .galleryWrap[aria-label="旅館華柚照片"]{
+  margin-left: calc(-1*var(--tPad)) !important;
+  margin-right: calc(-1*var(--tPad)) !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
- details.infoBox > summary::-webkit-details-marker{display:none;}
-
- .summaryText{min-width:0;}
-.transportLine{display:inline-flex;align-items:center;gap:6px;min-width:0}
-.transportLine a{font-size:16px;text-decoration:none}
-.transportIcon{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;margin-left:4px;border-radius:6px;text-decoration:none;font-size:14px;line-height:1}
-.transportIcon:hover{background:#f1f3f7}
-
-/* 交通子項目樣式（更像設定列表） */
-.infoContent > details.infoBox{
- margin-left:0;
- margin-right:0;
- border:0;
- background:transparent;
+#day2 .timeline .galleryWrap[aria-label="由布院照片"] .galleryRow,
+#day2 .timeline .galleryWrap[aria-label="由布院小食照片"] .galleryRow,
+#day2 .timeline .galleryWrap[aria-label="九重夢大吊橋照片"] .galleryRow,
+#day2 .timeline .galleryWrap[aria-label="旅館華柚照片"] .galleryRow{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  scroll-padding-left: 0;
+  scroll-padding-right: 0;
 }
 
-.infoContent > details.infoBox > summary{
- padding:10px 0;
- border-bottom:1px solid var(--line);
+/* ✅ Day2：停車建議 gallery 貼齊外框但不超出 */
+#day2 .timeline .galleryWrap[aria-label="停車照片"]{
+  box-sizing:border-box;
+  width:calc(100% + 28px);
+  margin-left:-14px !important;
+  margin-right:-14px !important;
+  padding-left:0 !important;
+  padding-right:0 !important;
 }
 
-.infoContent > details.infoBox:last-child > summary{
- border-bottom:none;
+
+#day2 .timeline .galleryWrap[aria-label="停車照片"] .galleryTitle,
+#day2 .timeline .galleryWrap[aria-label="停車照片"] .galleryRow{
+  padding-left:0 !important;
+  padding-right:0 !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+  scroll-padding-left:0;
+  scroll-padding-right:0;
 }
 
- .chev{
- color:var(--muted);
- transition:transform .2s ease;
- flex:0 0 auto;
- }
+/* ✅ Day2：三個 alignWithMain gallery（由布院散策／由布院小食／Day2 照片）
+   在時間軸內會被外框裁到圓角 → 這裡加更大的安全內距
+   （只改 CSS，不動任何結構/版面） */
+/* ====================================== */
 
- details[open] .chev{transform:rotate(180deg);}
 
- .infoContent{
- padding:0 16px 14px;
- color:#4d463f;
+
+/* ✅ Day2：縮短「🍢 由布院小食…」文字段落與「📷 由布院小食」gallery 的間距（約為原來 1/3；不動結構/版面） */
+@supports selector(.tRow:has(.galleryWrap)){
+  #day2 .timeline .tRow:has(.galleryWrap[aria-label="由布院小食照片"]) {
+    padding-top: 2px;   /* 更貼近：原 12px */
+    padding-bottom: 4px;
+  }
+}
+#day2 .timeline .galleryWrap[aria-label="由布院小食照片"]{
+  margin-top: 0px;     /* 更貼近：幾乎緊貼 */
+}
+@supports not selector(.tRow:has(.galleryWrap)){
+  /* 舊瀏覽器 fallback：用負 margin 抵消 tRow 的上方 padding */
+  #day2 .timeline .galleryWrap[aria-label="由布院小食照片"]{ margin-top: -10px; }
 }
 
- .btnRow{
- display:flex;
- flex-wrap:wrap;
- gap:8px;
- margin-top:10px;
- }
 
- .btn{
- display:inline-flex;
- align-items:center;
- justify-content:center;
- min-height:28px;
- padding:4px 8px;
- border-radius:999px;
- border:1px solid var(--line);
- background:#fff;
- color:var(--text);
- text-decoration:none;
- font-size:12px;
- line-height:1;
- }
 
- .flightCard{
- margin-top:12px;
- border:1px solid var(--line);
- border-radius:18px;
- background:#fbfaf7;
- padding:14px;
- }
-
- .flightTop{
- display:flex;
- justify-content:space-between;
- align-items:center;
- gap:10px;
- margin-bottom:8px;
- color:var(--muted);
- font-size:13px;
- }
-
- .flightNo{
- font-weight:700;
- color:var(--text);
- font-size:16px;
- }
-
- .flightBadge{
- display:inline-flex;
- align-items:center;
- justify-content:center;
- min-height:28px;
- padding:4px 10px;
- border-radius:999px;
- background:#eee7dd;
- color:#5f5448;
- font-size:12px;
- font-weight:700;
- white-space:nowrap;
- }
-
- .flightMid{
- display:grid;
- grid-template-columns:minmax(0,1fr) 160px minmax(0,1fr);
- gap:12px;
- align-items:center;
- }
-
- .airportCol{min-width:0;}
- .airportCol.isRight{text-align:right;}
-
- .flightTime{
- font-size:18px;
- font-weight:800;
- line-height:1.2;
- color:var(--text);
- }
-
- .airportCode{
- margin-top:6px;
- font-size:28px;
- line-height:1.1;
- font-weight:900;
- color:#8b3c91;
- letter-spacing:.6px;
- }
-
- .airportName{
- margin-top:6px;
- color:var(--muted);
- font-size:14px;
- }
-
- .terminal{
- margin-top:4px;
- color:var(--accent);
- font-size:13px;
- font-weight:700;
- }
-
- .flightRoute{
- text-align:center;
- color:var(--muted);
- }
-
- .planeLine{
- display:flex;
- align-items:center;
- justify-content:center;
- gap:8px;
- margin:8px 0;
- color:#264255;
- font-size:24px;
- }
-
- .planeLine::before,
- .planeLine::after{
- content:"";
- height:2px;
- background:#264255;
- border-radius:999px;
- flex:1 1 auto;
- min-width:18px;
- }
-
- .flightMetaMain{
- font-size:13px;
- letter-spacing:.2px;
- }
-
- .flightMetaSub{
- margin-top:4px;
- font-size:13px;
- }
-
- .pdfLink{
- min-height:135px;
- padding:14px;
- text-decoration:none;
- color:var(--text);
- align-items:center;
- justify-content:center;
- text-align:center;
- font-weight:700;
- }
-
- .divider{
- margin:18px 0;
- border:none;
- border-top:1px solid var(--line);
- }
-
- .helper{
- margin:10px 0 0;
- font-size:13px;
- color:var(--muted);
- }
-
- .lbModal{
- position:fixed;
- inset:0;
- display:none;
- align-items:center;
- justify-content:center;
- padding:20px;
- z-index:9999;
- }
-
- .lbModal.open{display:flex;}
-
- .lbBackdrop{
- position:absolute;
- inset:0;
- background:rgba(0,0,0,.72);
- }
-
- .lbImg{max-width:100%;max-height:90vh;object-fit:contain;} 
-
- .lbInner{
- position:relative;
- z-index:1;
- width:min(100%, 980px);
- max-height:100%;
- display:flex;
- flex-direction:column;
- align-items:center;
- gap:10px;
- }
-
- .lbNav{
- position:absolute;
- top:50%;
- transform:translateY(-50%);
- z-index:2;
- border:none;
- width:46px;
- height:46px;
- border-radius:999px;
- background:rgba(255,255,255,.92);
- font-size:26px;
- cursor:pointer;
- display:flex;
- align-items:center;
- justify-content:center;
- box-shadow:var(--shadow);
- }
-
- .lbPrev{left:-6px;}
- .lbNext{right:-6px;}
-
- .lbClose{
- position:absolute;
- top:0;
- right:0;
- z-index:2;
- border:none;
- border-radius:999px;
- min-width:42px;
- min-height:42px;
- padding:0 12px;
- font-size:22px;
- line-height:1;
- cursor:pointer;
- background:rgba(255,255,255,.96);
- color:#2d2a26;
- box-shadow:var(--shadow);
- }
-
- @media (max-width:640px){
- /* 航班卡片在手機維持左右並列 */
- .heroFlights{
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:10px;
- }
- .container{padding-inline:10px;}
- .tabShell{
- border-radius:22px;
- }
- .topTabs{
- gap:8px;
- padding:14px 12px;
- scroll-padding-inline:12px;
- }
- .tabBtn{
- min-height:44px;
- padding:0 16px;
- font-size:15px;
- flex:0 0 auto;
- }
- /* keep two columns on mobile so flights stay side-by-side */
- .heroFlights{grid-template-columns:repeat(2,minmax(0,1fr));}
- .dayCardHeader{
- flex-direction:column;
- align-items:flex-start;
- gap:10px;
- }
- .dayHeaderMain{
- width:100%;
- }
- .dayHeading{
- font-size:18px;
- }
- .dayDate{
- font-size:16px;
- }
- .heroTitleCard{border-radius:22px;}
- .card{padding:16px 12px;}
- .tRow{grid-template-columns:1fr;gap:6px;}
- .time{font-size:14px;}
- .gallery,
- details.infoBox{
- margin-left:-12px;
- margin-right:-12px;
- }
- .galleryTitle,
- details.infoBox > summary,
- .infoContent{
- padding-left:12px;
- padding-right:12px;
- }
- .gItem{width:156px;}
- .flightMid{grid-template-columns:1fr; gap:10px;}
- .airportCol.isRight,
- .flightRoute{text-align:left;}
- .airportCode{font-size:24px;}
- }
- /* 參考時刻表 table 美化 */
-.infoContent table{
- width:100%;
- border-collapse:collapse;
- font-size:14px;
- margin-top:8px;
+/* ✅ Day2：讓「📍 由布院介紹」→「📷 由布院散策」gallery 的間距
+   與「由布院小食」區塊相同（壓縮為原本約 1/3；不動結構） */
+@supports selector(.tRow:has(.galleryWrap)){
+  #day2 .timeline .tRow:has(.galleryWrap[aria-label="由布院照片"]) {
+    padding-top: 0px;
+    padding-bottom: 2px;
+  }
+}
+#day2 .timeline .galleryWrap[aria-label="由布院照片"]{
+  margin-top: -10px;   /* ✅ 再貼近：把上方空隙拉掉一截 */
 }
 
-.infoContent th{
- text-align:center;
- background:#f4f6fb;
- padding:8px 6px;
- border-bottom:1px solid var(--line);
- font-weight:700;
+/* ✅ Day2：指定三組 gallery 緊貼左邊框，但不超出外框 */
+#day2 .timeline .galleryWrap.alignWithMain[aria-label="由布院照片"],
+#day2 .timeline .galleryWrap.alignWithMain[aria-label="九重夢大吊橋照片"],
+#day2 .timeline .galleryWrap.alignWithMain[aria-label="旅館華柚照片"]{
+  margin-left: calc(-1*(var(--timeCol) + var(--tGap) + var(--tPad))) !important;
+  margin-right: calc(-1*var(--tPad)) !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
-.infoContent td{
- padding:8px 6px;
- border-bottom:1px solid var(--line);
- text-align:center;
+#day2 .timeline .galleryWrap.alignWithMain[aria-label="由布院照片"] .galleryRow,
+#day2 .timeline .galleryWrap.alignWithMain[aria-label="九重夢大吊橋照片"] .galleryRow,
+#day2 .timeline .galleryWrap.alignWithMain[aria-label="旅館華柚照片"] .galleryRow{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  scroll-padding-left: 0;
+  scroll-padding-right: 0;
+}
+@supports not selector(.tRow:has(.galleryWrap)){
+  #day2 .timeline .galleryWrap[aria-label="由布院照片"]{ margin-top: -10px; }
+}
+/* ✅ Day2：四組相簿真正貼齊左邊框（含 subline 結構） */
+#day2 .timeline .tRow .subline > .galleryWrap[aria-label="由布院照片"],
+#day2 .timeline .tRow .subline > .galleryWrap[aria-label="九重夢大吊橋照片"],
+#day2 .timeline .tRow .subline > .galleryWrap[aria-label="旅館華柚照片"],
+#day2 .timeline .tRow > div > .galleryWrap[aria-label="由布院小食照片"]{
+  box-sizing:border-box;
+  width: calc(100% + (var(--tPad) * 2));
+  margin-left: calc(-1 * var(--tPad)) !important;
+  margin-right: calc(-1 * var(--tPad)) !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
-.infoContent tr:hover td{
- background:#fafbff;
+
+#day2 .timeline .tRow .subline > .galleryWrap[aria-label="由布院照片"] .galleryTitle,
+#day2 .timeline .tRow .subline > .galleryWrap[aria-label="九重夢大吊橋照片"] .galleryTitle,
+#day2 .timeline .tRow .subline > .galleryWrap[aria-label="旅館華柚照片"] .galleryTitle,
+#day2 .timeline .tRow > div > .galleryWrap[aria-label="由布院小食照片"] .galleryTitle,
+#day2 .timeline .tRow .subline > .galleryWrap[aria-label="由布院照片"] .galleryRow,
+#day2 .timeline .tRow .subline > .galleryWrap[aria-label="九重夢大吊橋照片"] .galleryRow,
+#day2 .timeline .tRow .subline > .galleryWrap[aria-label="旅館華柚照片"] .galleryRow,
+#day2 .timeline .tRow > div > .galleryWrap[aria-label="由布院小食照片"] .galleryRow{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  scroll-padding-left: 0;
+  scroll-padding-right: 0;
 }
 
-.infoContent td:last-child{
- text-align:left;
- font-weight:600;
+/* ✅ 導航控制鈕（恢復膠囊按鈕樣式） */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:10px 16px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:#eef2f7;
+  color:var(--text);
+  text-decoration:none;
+  font-size:13px;
+  font-weight:600;
+  line-height:1.2;
+  white-space:nowrap;
+  transition:background .15s ease, transform .15s ease;
 }
 
-@media (max-width:640px){
- .infoContent table{font-size:13px}
+
+.btn:hover{
+  background:#e5e7eb;
+  transform:translateY(-1px);
 }
+
+.btn:active{
+  transform:translateY(0);
+}
+
+/* 按鈕容器 */
+.links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:10px;
+}
+
+
+/* ✅ Mapcode 集中頁：極簡清單（不走時間軸，避免跑版） */
+.mapPage .mapSection{margin-top:12px}
+.mapPage .mapSection > summary{padding:12px 12px; font-size:15px}
+.mapList{display:flex;flex-direction:column;gap:10px}
+.mapItem{border:1px solid var(--line);border-radius:14px;background:#fff;padding:10px 12px}
+.mapName{font-weight:800;line-height:1.35}
+.mapMeta{margin-top:6px;color:var(--muted);font-size:14px;line-height:1.6}
+
+/* ✅ 通用外框：避免某些瀏覽器/預覽模式下外框消失 */
+.frame{border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden}
+.framePad{padding:12px}
+.edgeBleed{
+  margin-left:-12px !important;
+  margin-right:-12px !important;
+  width:calc(100% + 24px);
+}
+.edgeBleed.galleryWrap .galleryTitle,
+.edgeBleed.galleryWrap .galleryRow,
+.edgeBleed.links{
+  padding-left:0;
+  padding-right:0;
+}
+.edgeBleed.detailsTight,
+details.edgeBleed{
+  border-radius:12px;
+}
+details.detailsTight{
+  margin-top:6px;
+}
+details.detailsTight summary{
+  padding:10px 12px;
+}
+details.detailsTight .content{
+  padding:0 12px 10px;
+}
+
+/* ===== Day4 專用樣式（獨立編輯頁回填主行程） ===== */
+#day4 .timeline{padding:12px}
+#day4 .tRow{grid-template-columns:74px 1fr;gap:2px;padding:9px 4px;border-bottom:none;align-items:start}
+#day4 .tRow > div:last-child{padding-top:0}
+#day4 .time{line-height:1.05;display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;text-align:left;margin-top:0}
+#day4 .place{line-height:1.18}
+#day4 .meta{font-size:11.5px;line-height:1.6;margin:2px 0 0 0;padding-left:16px;text-indent:-16px;display:block}
+#day4 .metaList{color:var(--muted);font-size:11.5px;line-height:1.6;margin:2px 0 0 0;padding-left:0;list-style:none;display:block;gap:0}
+#day4 .metaList li{position:relative;margin:2px 0;padding-left:16px;display:block}
+#day4 .metaList li::before{content:"•";position:absolute;left:0;top:0.1em;width:16px;text-align:center;color:var(--muted)}
+#day4 .navGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin-top:10px}
+#day4 .navGrid .btn{width:100%;justify-content:center}
+#day4 .linksSection--tight{margin:10px 0 6px}
+#day4 .warningCard{margin:6px 0 14px;border:1px solid #dbe3f0;border-radius:18px;background:linear-gradient(180deg,#f8fbff 0%, #f3f7fd 100%);padding:14px 16px;box-shadow:0 4px 14px rgba(37,99,235,.06)}
+#day4 .warningHead{display:flex;align-items:center;gap:8px;font-weight:900;font-size:16px;margin-bottom:6px;letter-spacing:.2px}
+#day4 .warningIcon{width:28px;height:28px;border-radius:999px;display:grid;place-items:center;background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.24);flex:0 0 28px}
+#day4 .warningText{color:var(--muted);font-size:13px;margin:0 0 10px}
+#day4 .galleryRow{gap:8px;padding:0;margin:8px -12px 14px -12px;scroll-padding:12px}
+#day4 .gItem{width:240px !important;border-radius:16px}
+#day4 .gCaption{position:absolute;left:8px;right:8px;bottom:8px;background:rgba(17,24,39,.55);color:#fff;font-size:12px;padding:6px 10px;border-radius:999px;backdrop-filter:blur(2px)}
+#day4 details{margin-top:10px}
+#day4 .timeline details{margin-left:-12px;margin-right:-12px}
+#day4 .timeline details .galleryRow{margin-top:0}
+
+/* ✅ Day4：只修主行程白川水源與火山口開放收合層外框 */
+#day4 > .dayBody > .content > .timeline > details{
+  box-sizing:border-box;
+  margin-left:-12px !important;
+  margin-right:-12px !important;
+  overflow:hidden;
+}
+#day4 > .dayBody > .content > .timeline > details > .galleryRow,
+#day4 > .dayBody > .content > .timeline > details[style*="白川水源"] > .galleryRow{
+  margin-left:-14px !important;
+  margin-right:-14px !important;
+  padding-left:14px !important;
+  padding-right:14px !important;
+  box-sizing:border-box;
+  scroll-padding-left:14px;
+  scroll-padding-right:14px;
+}
+
+/* ✅ Day4：火山口開放版內，兩組相簿真正貼齊左右且不吃邊框 */
+#day4 .galleryWrap[aria-label="上色見熊野座神社照片（火山口開放版）"],
+#day4 .galleryWrap[aria-label="太宰府天滿宮照片（火山口開放版）"]{
+  margin-left:-12px !important;
+  margin-right:-12px !important;
+  width:calc(100% + 24px);
+}
+#day4 .galleryWrap[aria-label="上色見熊野座神社照片（火山口開放版）"] .galleryTitle,
+#day4 .galleryWrap[aria-label="太宰府天滿宮照片（火山口開放版）"] .galleryTitle{
+  padding-left:12px !important;
+  padding-right:12px !important;
+}
+#day4 .galleryWrap[aria-label="上色見熊野座神社照片（火山口開放版）"] .galleryRow,
+#day4 .galleryWrap[aria-label="太宰府天滿宮照片（火山口開放版）"] .galleryRow{
+  margin-left:0 !important;
+  margin-right:0 !important;
+  padding-left:12px !important;
+  padding-right:12px !important;
+  box-sizing:border-box;
+  scroll-padding-left:12px;
+  scroll-padding-right:12px;
+}
+
+@media (max-width: 640px){
+  #day4 .tRow{grid-template-columns:72px 1fr;gap:8px;padding:12px}
+}
+/* 🔊 語音高亮效果 */
+.speaking span{
+  color: var(--accent);
+  font-weight: 700;
+}
+
+
 </style>
 </head>
 <body>
- <main class="container">
- <section class="hero" id="memo">
- 
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>福岡・由布院・阿蘇 <a href="https://www.google.com/maps/d/viewer?mid=14d0NUVU1_hLuYWMW2iugAFUnhmY5kg8" target="_blank" rel="noopener" style="text-decoration:none;margin-left:6px">🗺️</a><a href="https://tenki.jp/week/9/" target="_blank" rel="noopener" style="margin-left:6px;color:#2563eb;font-weight:600;font-size:13px;text-decoration:none;">🌞一週天氣</a></h1>
+      </div>
+      <div class="sub">03/23（一）→ 03/28（六）</div>
+    </header>
+<section style="margin-bottom:14px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="border:1px solid var(--line);border-radius:16px;padding:12px;background:rgba(255,255,255,.03)">
+          <strong>✈️ 去程（03/23 一）虎航IT720</strong>
+          <ul style="margin:8px 0 0;padding-left:18px">
+            <li>⏰ 預計 10:00 抵達機場</li>
+            <li>🛫 13:40　出發 TPE 桃園國際機場（第一航廈）</li>
+            <li>🛬 16:55　抵達 FUK 福岡機場</li>
+          </ul>
+        </div>
+        <div style="border:1px solid var(--line);border-radius:16px;padding:12px;background:rgba(255,255,255,.03)">
+          <strong>✈️ 回程（03/28 六）虎航IT241</strong>
+          <ul style="margin:8px 0 0;padding-left:18px">
+            <li>⏰ 預計 07:30 抵達機場</li>
+            <li>🛫 10:55　出發 FUK 福岡機場</li>
+            <li>🛬 12:40　抵達 TPE 桃園國際機場（第一航廈）</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
- <div class="heroFlights">
- <section class="heroFlightCard" aria-label="去程航班資訊">
- <h2 class="heroFlightTitle">✈️ 去程（04/20 一）JX802</h2>
- <ul class="heroFlightList">
- <li>⏰ 預計 <strong>07:40</strong> 抵達機場</li>
- <li>🛫 <strong>10:40</strong>　出發 TPE 桃園國際機場（第一航廈）</li>
- <li>🛬 <strong>15:05</strong>　抵達 NRT 成田機場（第二航廈）</li>
- </ul>
- </section>
+    <div class="board">
+      <nav class="tabs" role="tablist" aria-label="行程日切換">
+  <button class="tab" role="tab" aria-selected="false" data-day="overview">Memo</button>
+  <button class="tab" role="tab" aria-selected="true" data-day="day1">Day 1</button>
+  <button class="tab" role="tab" aria-selected="false" data-day="day2">Day 2</button>
+  <button class="tab" role="tab" aria-selected="false" data-day="day3">Day 3</button>
+  <button class="tab" role="tab" aria-selected="false" data-day="day4">Day 4</button>
+  <button class="tab" role="tab" aria-selected="false" data-day="day5">Day 5</button>
+  <button class="tab" role="tab" aria-selected="false" data-day="day6">Day 6</button>
+  <button class="tab" role="tab" aria-selected="false" data-day="mapcodes">Mapcode</button>
+</nav>
 
- <section class="heroFlightCard" aria-label="回程航班資訊">
- <h2 class="heroFlightTitle">✈️ 回程（04/24 五）JX805</h2>
- <ul class="heroFlightList">
- <li>⏰ 預計 <strong>17:40</strong> 抵達機場</li>
- <li>🛫 <strong>20:40</strong>　出發 NRT 成田機場（第二航廈）</li>
- <li>🛬 <strong>23:20</strong>　抵達 TPE 桃園國際機場（第一航廈）</li>
- </ul>
- </section>
- </div>
- </section>
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    var tabs = document.querySelectorAll('.tab');
+    var panels = document.querySelectorAll('.panel');
 
- <section class="tabShell">
- <nav class="topTabs" aria-label="行程頁籤">
- <a class="tabBtn active" href="#day1" data-target="day1">Day 1</a>
- <a class="tabBtn" href="#day2" data-target="day2">Day 2</a>
- <a class="tabBtn" href="#day3" data-target="day3">Day 3</a>
- <a class="tabBtn" href="#day4" data-target="day4">Day 4</a>
- <a class="tabBtn" href="#day5" data-target="day5">Day 5</a>
- <a class="tabBtn" href="#memoPanel" data-target="memoPanel">Memo</a>
- <a class="tabBtn" href="#editorPanel" data-target="editorPanel">單日編輯器</a>
- <a class="tabBtn" href="#" id="addDayBtn">＋新增 Day</a>
- </nav>
+    function hydrateLockedPanels(){
+      document.querySelectorAll('[data-lock-template]').forEach(function(panel){
+        var tplId = panel.getAttribute('data-lock-template');
+        var tpl = tplId ? document.getElementById(tplId) : null;
+        if(!tpl || !tpl.content) return;
+        if(panel.children.length === 0){
+          panel.appendChild(tpl.content.cloneNode(true));
+        }
+      });
+    }
 
- <div class="tabsDivider"></div>
+    function setActive(day){
+      tabs.forEach(function(t){
+        t.setAttribute('aria-selected', String(t.getAttribute('data-day') === day));
+      });
+      panels.forEach(function(p){
+        p.classList.toggle('active', p.id === day);
+      });
+    }
 
- <section class="card pagePanel" id="editorPanel">
- <div class="dayCardHeader">
- <div class="dayHeaderMain">
- <div class="dayIndex">E</div>
- <h2 class="dayTitle">單日行程編輯器</h2>
- </div>
- <div class="dayDate">Quick Builder</div>
- </div>
- <div class="dayBody">
- <p class="meta">輸入時間與地點後按「生成行程」，會自動產生 tRow HTML，可貼回任一天。</p>
- <div style="display:grid;gap:10px;max-width:420px;margin-top:10px;">
- <input id="editTime" placeholder="時間，例如 09:00" style="padding:8px;border:1px solid var(--line);border-radius:8px;">
- <input id="editPlace" placeholder="地點，例如 淺草寺" style="padding:8px;border:1px solid var(--line);border-radius:8px;">
- <input id="editMeta" placeholder="說明，例如 逛雷門、仲見世" style="padding:8px;border:1px solid var(--line);border-radius:8px;">
- <button id="buildRow" style="padding:10px;border-radius:10px;border:1px solid var(--line);background:#fff;cursor:pointer;">生成行程</button>
- </div>
- <textarea id="rowOutput" style="margin-top:12px;width:100%;height:140px;border:1px solid var(--line);border-radius:10px;padding:10px;font-family:monospace"></textarea>
- </div>
- </section>
+    hydrateLockedPanels();
 
- <section class="card pagePanel" id="memoPanel">
- <div class="dayCardHeader">
- <div class="dayHeaderMain">
- <div class="dayIndex">M</div>
- <h2 class="dayTitle">Memo</h2>
- </div>
- <div class="dayDate">Travel Notes</div>
- </div>
+    tabs.forEach(function(tab){
+      tab.addEventListener('click', function(){
+        var day = tab.getAttribute('data-day');
+        setActive(day);
+      });
+    });
 
- <div class="dayBody">
- <div class="timeline">
- <div class="tRow">
- <div class="time">Memo</div>
- <div class="place">
- <p class="placeTitle">請把這次旅行的重要備忘填在這裡</p>
- <p class="meta">例如票券、餐廳預約、購物清單、天氣提醒、重要地址。</p>
- </div>
- </div>
- </div>
- </div>
- </section>
+    var activePanel = document.querySelector('.panel.active');
+    if(activePanel){
+      setActive(activePanel.id);
+    }else if(panels.length){
+      setActive(panels[0].id);
+    }
+  });
+</script>
 
- <section class="card daySection pagePanel active" id="day1">
- <div class="dayCardHeader">
- <div class="dayHeaderMain">
- <div class="dayIndex">1</div>
- <h2 class="dayTitle">抵達東京｜進市區、入住赤坂</h2>
- </div>
- <div class="dayDate">04/20（一）</div>
- </div>
+      <div class="panelsWrap">
 
- <div class="dayBody">
- <div class="timeline">
- <div class="tRow">
- <div class="time">07:40</div>
- <div class="place">
- <p class="placeTitle">抵達桃園機場 T1</p>
- <p class="meta">待填</p>
- </div>
- </div>
+<template id="tpl-overview">
+          <div class="dayHeader">
+            <div class="dayTitle">
+              <div class="num">★</div>
+              <div class="tblock"><h2>Memo</h2></div>
+            </div>
+          </div>
 
- <div class="tRow">
- <div class="time">16:00</div>
- <div class="place">
- <p class="placeTitle">入境、領行李後前往東京市區</p>
- <p class="meta">待填</p>
+          <div class="dayBody">
+            <div class="content">
 
- <details class="infoBox">
- <summary>
- <span class="summaryText">交通資訊</span>
- <span class="chev">⌄</span>
- </summary>
- <div class="infoContent">
- 
- <details class="infoBox">
-<summary>
-<span class="summaryText">🕒參考時刻表</span>
-<span class="chev">⌄</span>
-</summary>
-<div class="infoContent">
+<details>
+  <summary>
+    <span>🚗 租車資訊</span>
+    <span>⌄</span>
+  </summary>
 
-<table>
-<tr>
-<th>T2出發</th>
-<th>抵達</th>
-<th>下車站</th>
-<th>交通工具</th>
-</tr>
+                <div style="padding:0 12px 12px">
+                 
+                    <div class="tRow">
+                      <div><div class="time">預約</div></div>
+                      <div>
+                        <div class="place">Budget 租車預約資訊</div>
+                        <div class="meta">預約號碼：140758336</div>
+                        <div class="meta">密碼：e363db9d</div>
+                      </div>
+                    </div>
+                    <div class="tRow">
+                      <div><div class="time">顧客</div></div>
+                      <div>
+                        <div class="meta">姓名：呂弘鈞</div>
+                        <div class="meta">姓名（英文）：LU HUNG CHUN</div>
+                        <div class="meta">Email：kidrock0228@gmail.com</div>
+                        <div class="meta">電話：0975729889</div>
+                        <div class="meta">搭乘人數：4</div>
+                      </div>
+                    </div>
+                    <div class="tRow">
+                      <div><div class="time">租車</div></div>
+                      <div>
+                        <div class="meta">取車時間：2026/03/24 (二) 08:00</div>
+                        <div class="meta">還車時間：2026/03/26 (四) 20:00</div>
+                        <div class="meta">租車公司：Budget Rent-a-Car</div>
+                        <div class="meta">車型：Serena 同級 (WA)</div>
+                        <div class="meta">車輛：禁煙車</div>
+                      </div>
+                    </div>
+                    <div class="tRow">
+                      <div><div class="time">取車</div></div>
+                      <div>
+                        <div class="place">博多祇園店</div>
+                        <div class="meta">地址：福岡県福岡市博多区博多駅前2-11-19</div>
+                        <div class="meta">電話：092-473-0543</div>
+                      </div>
+                    </div>
+                    <div class="tRow">
+                      <div><div class="time">還車</div></div>
+                      <div>
+                        <div class="place"><s>天神渡辺通</s> → 天神北店</div>
+                        <div class="meta">地址：<s>福岡県福岡市中央区渡辺通5-22-3</s> 福岡縣福岡市中央區舞鶴1丁目2番3號</div>
+                        <div class="meta">電話：<s>092-722-0543</s> / 0570-054-317</div>
+                      </div>
+                    </div>
+                    <div class="tRow">
+                      <div><div class="time">費用</div></div>
+                      <div>
+                        <div class="meta">基本費用：47,000 日圓</div>
+                        <div class="meta">早鳥優惠：-9,000 日圓</div>
+                        <div class="meta">ETC卡租用：330 日圓</div>
+                        <div class="meta"><strong>總費用：38,330 日圓</strong></div>
+                        <div class="navGrid">
+                          <a class="btn" href="Budget租車預約資料.pdf" target="_blank" rel="noopener">📄 Budget租車預約資料</a>
+                          <a class="btn" href="還車地點變更.jpg" target="_blank" rel="noopener">🚗 還車地點變更訊息</a>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </details>
 
-<tr><td>16:02</td><td>16:43</td><td>京成上野</td><td>🚄 Skyliner 46</td></tr>
-<tr><td>16:10</td><td>18:35</td><td>赤坂見附</td><td>🚌 利木津巴士</td></tr>
-<tr><td>16:16</td><td>17:16</td><td>東京</td><td>🚆 N'EX 34</td></tr>
-<tr><td>16:22</td><td>17:03</td><td>京成上野</td><td>🚄 Skyliner 48</td></tr>
-<tr><td>16:30</td><td>18:45</td><td>赤坂見附</td><td>🚌 利木津巴士</td></tr>
-<tr><td>16:42</td><td>17:23</td><td>京成上野</td><td>🚄 Skyliner 50</td></tr>
-<tr><td>16:44</td><td>17:43</td><td>東京</td><td>🚆 N'EX 36</td></tr>
-<tr><td>17:02</td><td>17:43</td><td>京成上野</td><td>🚄 Skyliner 52</td></tr>
-<tr><td>17:16</td><td>18:16</td><td>東京</td><td>🚆 N'EX 38</td></tr>
-<tr><td>17:20</td><td>19:45</td><td>赤坂見附</td><td>🚌 利木津巴士</td></tr>
-<tr><td>17:22</td><td>18:04</td><td>京成上野</td><td>🚄 Skyliner 54</td></tr>
-<tr><td>17:43</td><td>18:26</td><td>京成上野</td><td>🚄 Skyliner 56</td></tr>
-<tr><td>17:44</td><td>18:43</td><td>東京</td><td>🚆 N'EX 40</td></tr>
-<tr><td>18:03</td><td>18:47</td><td>京成上野</td><td>🚄 Skyliner 58</td></tr>
-<tr><td>19:00</td><td>21:15</td><td>赤坂見附</td><td>🚌 利木津巴士</td></tr>
+              <details>
+                <summary><span>🚗 駕駛用日文會話</span><span>⌄</span></summary>
+                <div style="padding:0 12px 12px">
+                  <div class="meta" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+                    <span>予約した呂です 👉 我是呂先生，已預約</span>
+                    <button class="speak" data-text="予約した呂です">🔊</button>
+                  </div>
 
-</table>
+                  <div class="meta" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+                    <span>これは免許証と日本の翻訳文です 👉 這是我的駕照／日文譯本</span>
+                    <button class="speak" data-text="これは免許証と日本の翻訳文です">🔊</button>
+                  </div>
 
-<p style="margin-top:8px;color:#7a736b;">
-備註：<br>
-• Skyliner → 京成上野轉乘東京Metro銀座線（往澀谷方向）約 +30 分可到赤坂見附<br>
-• N'EX → 東京站轉乘東京Metro丸之內線（往池袋方向）約 +15 分可到赤坂見附<br>
-• 兩種方式最終抵達的都是同一站：赤坂見附站（G05 / M13）<br>
-• 利木津巴士 → 於赤坂見附附近下車，步行約3–5分鐘到 OMO3 東京赤坂
-</p>
+                  <div class="meta" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+                    <span>左（ひだり）👉 左</span>
+                    <button class="speak" data-text="ひだり">🔊</button>
+                  </div>
+
+                  <div class="meta" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+                    <span>右（みぎ）👉 右</span>
+                    <button class="speak" data-text="みぎ">🔊</button>
+                  </div>
+
+                  <div class="meta" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+                    <span>左折（させつ）👉 左轉</span>
+                    <button class="speak" data-text="左折">🔊</button>
+                  </div>
+
+                  <div class="meta" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+                    <span>右折（うせつ）👉 右轉</span>
+                    <button class="speak" data-text="右折">🔊</button>
+                  </div>
+
+<div class="meta" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+                    <span>直進（ちょくしん）👉 直行</span>
+                    <button class="speak" data-text="直進">🔊</button>
+                  </div>
+
+                  <div class="meta" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+                    <span>交差点（こうさてん）👉 十字路口</span>
+                    <button class="speak" data-text="交差点">🔊</button>
+                  </div>
+
+                  <div class="meta" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+                    <span>間もなく、左方向です 👉 即將轉左</span>
+                    <button class="speak" data-text="間もなく、左方向です">🔊</button>
+                  </div>
+
+                  <div class="meta" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+                    <span>間もなく、右方向です 👉 即將轉右</span>
+                    <button class="speak" data-text="間もなく、右方向です">🔊</button>
+                  </div>
+
+                  <div class="meta" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+                    <span>前方、信号を左折です 👉 前方十字路口左轉</span>
+                    <button class="speak" data-text="前方、信号を左折です">🔊</button>
+                  </div>
+
+                  <div class="meta" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+                    <span>400メートル先、左方向です。続いて、100メートル先、右方向です 👉 400公尺後左轉，接著100公尺後右轉</span>
+                    <button class="speak" data-text="400メートル先、左方向です。続いて、100メートル先、右方向です">🔊</button>
+                  </div>
+
+                  <div class="meta" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+                    <span>200メートル先、目的地です 👉 200公尺前方是目的地</span>
+                    <button class="speak" data-text="200メートル先、目的地です">🔊</button>
+                  </div>
+
+                  <div class="meta" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+                    <span>間もなく、目的地です 👉 即將到達目的地</span>
+                    <button class="speak" data-text="間もなく、目的地です">🔊</button>
+                  </div>
+                </div>
+              </details>
+            </div>
+          </div>
+        </template>
+
+
+
+
+<section class="panel" id="overview" role="tabpanel" aria-label="旅行總覽" data-lock-template="tpl-overview"></section>
+
+
+
+<template id="tpl-day1">
+        <div class="dayHeader">
+          <div class="dayTitle">
+            <div class="num">1</div>
+            <div class="tblock"><h2>抵達福岡｜博多市區散步</h2></div>
+          </div>
+          <div class="dayHeaderRight"><div class="dayDateRight">03/23（一）</div></div>
+        </div>
+
+        <div class="dayBody">
+          <div class="content">
+            <div class="timeline">
+              <div class="tRow">
+                <div><div class="time">16:55</div><div class="meta">抵達</div></div>
+                <div><div class="place">福岡機場（FUK）</div><div class="meta">入境／取行李</div></div>
+              </div>
+              <div class="tRow">
+                <div><div class="time">18:10</div><div class="meta">移動</div></div>
+                <div><div class="place">前往博多市區</div><div class="meta">🚕機場至飯店距離約4–4.5公里💰4人約¥1,800 – ¥2,500／🚇搭乘機場線至福岡站下車後步行約10分鐘/550公尺💰¥260*4人</div></div>
+              </div>
+              <div class="tRow">
+                <div><div class="time">18:50</div><div class="meta">入住</div></div>
+                <div><div class="place">🏨 Prince Smart Inn Hakata</div><div class="meta">3-21-4, Hakataekimae, Hakata-ku, Fukuoka, 812-0011, Japan</div></div>
+              </div>
+              <div class="tRow">
+                <div><div class="time">19:00</div><div class="meta">晚餐（已預約）</div></div>
+                <div>
+                  <div class="place">🥩燒肉 Hayato 博多站東店</div>
+                  <div class="meta">提供中文介面以平板進行點餐｜💰套餐 ¥5,280 日圓（含稅）<br>
+                  特等牛舌、特選牛排拼盤、內臟拼盤、豬里脊＆赤雞拼盤、特選五花肉、特選牛里脊、泡菜拼盤、醋醬拌高麗菜、烤蔬菜（3 種每天變換）、韓式泡飯／湯品／韓式拌飯／白飯（4 選 1）</div>
 
 </div>
+              </div>
+            </div>
+
+            <div class="galleryWrap" aria-label="Day1 照片">
+              <p class="galleryTitle">📷 Day 1 照片</p>
+              <div class="galleryRow galleryRow--flush" role="list">
+                <div class="gItem" role="listitem" data-caption="Prince Smart Inn Hakata"><img loading="lazy" src="day1/01.jpg" data-full="day1/01.jpg" alt="Prince Smart Inn Hakata"></div>
+                <div class="gItem" role="listitem" data-caption="燒肉 Hayato 博多站東店"><img loading="lazy" src="day1/02.jpg" data-full="day1/02.jpg" alt="燒肉 Hayato 博多站東店"></div>
+                <div class="gItem" role="listitem" data-caption="店內點菜平板"><img loading="lazy" src="day1/03.jpg" data-full="day1/03.jpg" alt="店內點菜平板"></div>
+                <div class="gItem" role="listitem" data-caption="此為兩人份量"><img loading="lazy" src="day1/04.jpg" data-full="day1/04.jpg" alt="此為兩人份量"></div>
+              </div>
+
+              <div style="margin:10px 0 6px;padding:10px 12px;border:1px dashed var(--line);border-radius:14px;background:#fafafa;font-size:13px;line-height:1.6;color:var(--text)">
+                📝<br>
+                Dacomecca 麵包｜營業時間 07:00–19:00<br>
+                飯店至取車點約 <strong>550 公尺</strong>／步行時間約 <strong>8 分鐘</strong>
+              </div>
+
+              <div class="links">
+  <a class="btn" href="day1/福岡導覽手冊.pdf" target="_blank" rel="noopener">📄 福岡導覽手冊</a>
+</div>
+          </div>
+        </div>
+      </template>
+
+      <section class="panel active" id="day1" role="tabpanel" aria-label="Day 1 行程" data-lock-template="tpl-day1"></section>
+
+      <section class="panel" id="day2" role="tabpanel" aria-label="Day 2 行程">
+         <div class="dayHeader">
+    <div class="dayTitle">
+      <div class="num">2</div>
+      <div class="tblock"><h2>由布院溫泉鄉・九重高原</h2></div>
+    </div>
+    <div class="dayHeaderRight"><div class="dayDateRight">03/24（二）</div></div>
+  </div>
+  <div class="dayBody">
+    <div class="content">
+
+<div class="timeline">
+        <div class="tRow">
+          <div><div class="time">08:00–08:30</div></div>
+          <div>
+            <div class="place">Budget Car Rental Hakata Gion 取車</div>
+            <div class="meta">上博多東或半道橋交流道 → 接大分自動車道</div>
+          </div>
+        </div>
+<div class="tRow">
+          <div><div class="time"></div></div>
+          <div class="subline">
+           <details class="alignPad" style="margin-top:-12px">
+              <summary><span class="sumText">🚗 取車前注意事項 / 行車重點提醒</span><span class="chev">⌄</span></summary>
+              <div class="dContent">
+                <div class="dSplit">
+                  <div class="dLabel">取車前注意事項</div>
+                  <ul class="dList">
+                    <li><strong>取車時間預估：</strong>(總計約 30 - 60 分鐘)。</li>
+                    <li><strong>ETC 卡確認：</strong>現場取車時請務必確認 ETC 卡是否已插入機器並能正常運作。</li>
+                    <li><strong>外觀拍照錄影：</strong>取車時與店員巡視車身，若有任何細微刮痕或凹痕應立即提出，並建議自行拍照或錄影存證，避免還車糾紛。</li>
+                    <li><strong>功能確認：</strong>檢查燈光（頭燈、轉向燈）、雨刷、空調是否正常，並熟悉導航系統的操作。</li>
+                    <li><strong>油品種類/油量確認：</strong>通常是加Regular（レギュラー，紅色油槍），確認油箱是否有加滿。</li>
+                    <li><strong>應急處理：</strong>索取中文緊急聯絡卡、確認三角架位置。</li>
+                  </ul>
+
+                  <div class="dDivider" role="separator" aria-hidden="true"></div>
+<div class="dLabel">行車重點提醒</div>
+                  <ul class="dList">
+                    <li>日本為右駕。請隨時默念口訣：<strong style="color:#2563eb">「左小轉、右大轉」</strong>。</li>
+                    <li>高速路段為主：注意速限與測速照相，保持車距。</li>
+                    <li>經過收費站時，務必找有紫色「ETC」標誌的車道，並減速至 20km/h 以下讓感應器讀取。</li>
+                    <li>在山路彎道或叉路時，特別容易因為習慣而開錯車道，務必跟著前車或注意地面箭頭標示。</li>
+                  </ul>
+                </div>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="tRow">
+          <div><div class="time">09:20–<br>09:40</div></div>
+          <div>
+            <div class="place">山田服務區（首選）／玖珠（第2選擇）</div>
+            <div class="meta">山田SA限定：推薦那裡的「巨峰葡萄」相關產品或當地產的乳製品。</div>
+          </div>
+        </div>
+
+        <div class="tRow">
+          <div><div class="time">10:30–<br>13:30</div></div>
+          <div>
+            <div class="place">由布院 ＆ 金鱗湖</div>
+            <div class="meta">下「由布院 IC」交流道後，市區車流較慢，預留停車時間。</div>
+          </div>
+          <div class="subline">
+            <details class="alignPad" style="margin-top:0">
+              <summary><span class="sumText">🅿 停車建議</span><span class="chev">⌄</span></summary>
+              <div class="dContent">
+                <ul class="dList">
+                  <li>至湯布院中央児童公園，周邊：湯布院停車場 (Yufuin Parking Lot)，不限時平日￥300，需自行準備零錢投進料金箱，步行至觀光大街約 3 分鐘。如遇停滿：NPC24H 湯布院湯之坪街道停車場。</li>
+                  <li>金鱗湖入口處：金鱗湖入口前駐車場 (Kinrinkoiriguchizen Parking Lot)，位置在湖畔入口正對面，單日￥400，進場道路較窄，行駛時請多加留意行人。如遇停滿：Times 湯布院金鱗湖 (Times Yufuin Lake Kinrin)、湯布院停車場 (Yufuin Parking Lot)。</li>
+                </ul>
+
+                <div class="galleryWrap alignWithMain" aria-label="停車照片">
+                  <p class="galleryTitle">📷 停車位置參考</p>
+                  <div class="galleryRow galleryRow--flush" role="list">
+                    <div class="gItem" role="listitem" data-caption="湯布院停車場｜外觀與車位"><img loading="lazy" src="day2/1.jpg" data-full="day2/1.jpg" alt="湯布院停車場 外觀"></div>
+                    <div class="gItem" role="listitem" data-caption="料金箱｜請自備零錢投幣"><img loading="lazy" src="day2/2.jpg" data-full="day2/2.jpg" alt="料金箱"></div>
+                    <div class="gItem" role="listitem" data-caption="金鱗湖入口前駐車場｜入口前小屋"><img loading="lazy" src="day2/3.jpg" data-full="day2/3.jpg" alt="金鱗湖入口前駐車場"></div>
+                    <div class="gItem" role="listitem" data-caption="金鱗湖停車｜單日￥400 指示牌"><img loading="lazy" src="day2/4.jpg" data-full="day2/4.jpg" alt="金鱗湖停車 400円"></div>
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+        </div>
+        <div class="tRow">
+          <div class="alignPad" style="grid-column:1 / -1; padding:6px 12px 2px 12px; font-size:16px; font-weight:600; color:var(--text); opacity:.85; line-height:1.6;">
+            <div style="font-size:14px; line-height:1.8; color:var(--text);">
+📍由布院（又稱湯布院），是日本湧泉量第二大的著名溫泉勝地。<br>
+<div style="font-size:13px; line-height:1.8; color:var(--text);">
+
+．金鱗湖 (Kinrin Lake)：由布院最著名的地標，因湖底湧出溫泉與清水，在冬日的清晨容易形成夢幻的晨霧。湖畔還有特別的水上鳥居（天祖神社）。<br>
+
+．湯之坪街道 (Yunotsubo Kaido)：連接車站與金鱗湖的主要商店街，沿途充滿各式在地小吃、甜點與特色工藝品店。<br>
+
+．由布院童話村 (Yufuin Floral Village)：以英國科茨沃爾德為藍本打造的童話小鎮，風格唯美，適合拍照打卡。<br>
+
+．由布岳 (Mount Yufu)：由布院的象徵，外形優美有「豐後富士」之稱，是登山客與風景攝影的焦點。
+
+</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tRow">
+          <div><div class="time"></div></div>
+          <div class="subline">
+            <div class="galleryWrap alignPad" aria-label="由布院照片">
+              
+              <div class="galleryRow galleryRow--flush" role="list">
+                <div class="gItem" role="listitem" data-caption="由布院導覽手冊(中文)">
+                  <a href="day2/由布院導覽手冊(中文).pdf" target="_blank" rel="noopener" style="display:block;width:100%;height:100%;text-decoration:none">
+                    <img loading="lazy" src="day2/封面.jpg" alt="由布院導覽手冊 封面" data-no-lightbox="1">
+                 </a>
+                </div>
+                <div class="gItem" role="listitem" data-caption="湯之坪街道與由布岳"><img loading="lazy" src="day2/5.jpg" data-full="day2/5.jpg" alt="湯之坪街道與由布岳"></div>
+                <div class="gItem" role="listitem" data-caption="金鱗湖鳥居與湖景"><img loading="lazy" src="day2/6.jpg" data-full="day2/6.jpg" alt="金鱗湖鳥居"></div>
+                <div class="gItem" role="listitem" data-caption="童話風小店街景"><img loading="lazy" src="day2/7.jpg" data-full="day2/7.jpg" alt="由布院特色小店"></div>
+                <div class="gItem" role="listitem" data-caption="湯之坪街道散策"><img loading="lazy" src="day2/8.jpg" data-full="day2/8.jpg" alt="湯之坪街道"></div>
+                <div class="gItem" role="listitem" data-caption="湯布院花卉村"><img loading="lazy" src="day2/9.jpg" data-full="day2/9.jpg" alt="湯布院花卉村"></div>
+              </div>
+            </div>
+          </div>
+       </div>
+<div class="tRow">
+  <div class="alignPad" style="grid-column:1 / -1; padding:6px 12px 2px 12px;">
+    <details class="alignPad" style="margin-top:0">
+      <summary>
+        <span class="sumText">🍢 由布院午餐、小食</span>
+        <span class="chev">⌄</span>
+      </summary>
+
+<div class="dContent" style="font-size:13px;line-height:1.6;color:var(--muted)">
+        <div style="font-weight:700;color:var(--text);margin-bottom:4px">🍱 午餐推薦</div>
+        <div><strong>由布まぶし 心 (金鱗湖店)</strong>｜由布院最紅一鍋三吃(原味、配料、茶泡飯)，可選豐後牛、鰻魚或地雞，餐廳在金鱗湖入口前駐車場旁，停好車先衝去餐廳現場登記(寫名字/抽號)。</div>
+
+<div style="height:6px"></div>
+        <div style="font-weight:700;color:var(--text);margin-bottom:4px">🍡 邊走邊吃</div>
+        <div><strong>金賞可樂餅</strong>｜本店位置較靠近金鱗湖，招牌必點是「金賞可樂餅」。</div>
+        <div><strong>花麴菊家</strong>｜布丁銅鑼燒 (Pudding Dorayaki) 是該店最人氣商品，3 月常有季節限定口味（如草莓布丁或甘王草莓內餡）。</div>
+        <div><strong>B-SPEAK 蛋糕卷</strong>｜小份 (1/3) 通常在 11:00 前售罄，若 10:30 以後才到由布院，建議停好車先去預約或購買，再回來逛街。</div>
+
+        <div class="galleryWrap alignPad" aria-label="由布院小食照片">
+          <div class="galleryRow galleryRow--flush" role="list">
+            <div class="gItem" role="listitem" data-caption="湯之坪街道美食地圖"><img loading="lazy" src="day2/10.jpg" data-full="day2/10.jpg" alt="湯之坪街道地圖"></div>
+            <div class="gItem" role="listitem" data-caption="由布まぶし 心｜一鍋三吃"><img loading="lazy" src="day2/11.jpg" data-full="day2/11.jpg" alt="由布まぶし 心 料理"></div>
+            <div class="gItem" role="listitem" data-caption="B-SPEAK 本店｜蛋糕卷"><img loading="lazy" src="day2/12.jpg" data-full="day2/12.jpg" alt="B-SPEAK 蛋糕卷"></div>
+            <div class="gItem" role="listitem" data-caption="金賞可樂餅｜現炸熱食"><img loading="lazy" src="day2/13.jpg" data-full="day2/13.jpg" alt="金賞可樂餅"></div>
+            <div class="gItem" role="listitem" data-caption="花麴菊家｜布丁銅鑼燒"><img loading="lazy" src="day2/14.jpg" data-full="day2/14.jpg" alt="花麴菊家 布丁銅鑼燒"></div>
+            <div class="gItem" role="listitem" data-caption="SNOOPY 茶屋｜由布院"><img loading="lazy" src="day2/15.jpg" data-full="day2/15.jpg" alt="SNOOPY 茶屋 由布院"></div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+</div>
+
+        <div class="tRow">
+          <div><div class="time">13:45–<br>14:15</div></div>
+          <div>
+            <div class="place">狭霧台</div>
+            <div class="meta">由布院往九重方向是上坡，狹霧台位於左手邊，是俯瞰由布院盆地的最佳位置，3月底氣溫仍低，下車拍照記得穿外套。</div>
+          </div>
+        </div>
+
+        <div class="tRow">
+          <div><div class="time">15:00–<br>16:00</div></div>
+          <div>
+            <div class="place">九重「夢」大吊橋</div>
+            <div class="meta">從由布院 ➝ 九重，經由被選為「日本百名道」之一的「山並快速道路(縣道 11 號)」前往，部分路段彎道角度大有視覺盲點，直線道亦非常直，皆需特別注意時速表。另傍晚時分偶爾會有野生動物（如鹿或野兔）出沒。<div style="margin-top:6px;line-height:1.6;color:var(--muted)">📸 最美路段 長者原｜筆直的公路正對著冒煙的硫磺山與九重連山，視覺震撼力極強是全路段最著名的景點，可在那裡稍微停留約 5 分鐘拍照。</div><div style="margin-top:6px;line-height:1.6;color:var(--muted)">🌉 九重「夢」大吊橋｜為日本最高的人行吊橋，成人門票￥500可體驗如同在天上行走一般的感受，最後入場時間通常是 16:30（17:00 關門）。九重一帶午後易起霧，若天氣不佳可縮短吊橋停留。</div></div>
+          </div>
+        </div>
+
+        <div class="tRow">
+          <div><div class="time"></div></div>
+          <div class="subline">
+           <div class="galleryWrap alignWithMain" aria-label="九重夢大吊橋照片" style="margin-top:4px">
+                    <div class="galleryRow" role="list">
+                <div class="gItem" role="listitem" data-caption="長者原｜阿蘇九重國立公園入口"><img loading="lazy" src="day2/16.jpg" data-full="day2/16.jpg" alt="長者原入口"></div>
+                <div class="gItem" role="listitem" data-caption="長者原地標｜CHOJABARU"><img loading="lazy" src="day2/17.jpg" data-full="day2/17.jpg" alt="長者原地標"></div>
+                <div class="gItem" role="listitem" data-caption="山並快速道路草原高原景觀"><img loading="lazy" src="day2/18.jpg" data-full="day2/18.jpg" alt="山並快速道路"></div>
+                <div class="gItem" role="listitem" data-caption="山並快速道路直線景觀"><img loading="lazy" src="day2/19.jpg" data-full="day2/19.jpg" alt="九重高原公路"></div>
+                <div class="gItem" role="listitem" data-caption="山並快速道路秋景與芒草"><img loading="lazy" src="day2/20.jpg" data-full="day2/20.jpg" alt="山並快速道路秋景"></div>
+                <div class="gItem" role="listitem" data-caption="九重夢大吊橋｜遠景"><img loading="lazy" src="day2/21.jpg" data-full="day2/21.jpg" alt="九重夢大吊橋"></div>
+                <div class="gItem" role="listitem" data-caption="九重夢大吊橋｜紅葉季"><img loading="lazy" src="day2/22.jpg" data-full="day2/22.jpg" alt="九重夢大吊橋紅葉"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<div class="tRow">
+  <div>
+    <div class="time">18:00</div>
+  </div>
+
+  <div>
+    <div class="place">抵達 旅館華柚</div>
+
+    <div class="meta">
+      <ul class="metaList" style="gap:4px;font-size:12px;line-height:1.2">
+
+        <li>
+          <span class="metaIcon">⚠</span>
+          <span class="metaText">
+          狹窄路段：從國道 442 號轉進旅館華柚最後1–2公里，路寬會明顯變窄(僅能容納 1.5 台車寬），且兩側多為樹林。若對向有來車，請找稍寬處減速會車。
+          </span>
+        </li>
+
+        <li>
+          <span class="metaIcon">🌙</span>
+          <span class="metaText">
+          夜間視線：這區域屬於溫泉秘境，路燈少入夜視線較差；如果 17:30 後離開吊橋，抵達旅館時天色已暗，務必開啟遠光燈（對向有車時記得切換回近光燈）。
+          </span>
+        </li>
+
+        <li>
+          <span class="metaIcon">🛒</span>
+          <span class="metaText">
+          補給提醒：附近沒有便利商店，建議在瀨之本休息站（Senomoto Rest House）購足所需物品。
+          </span>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="tRow">
+          <div><div class="time"></div></div>
+          <div class="subline">
+            <div class="galleryWrap alignPad" aria-label="旅館華柚照片">
+              <p class="galleryTitle">📷 旅館華柚</p>
+              <div class="galleryRow galleryRow--flush" role="list">
+                <div class="gItem" role="listitem" data-caption="瀨之本休息站｜外觀"><img loading="lazy" src="day2/23.jpg" data-full="day2/23.jpg" alt="瀨之本休息站"></div>
+                <div class="gItem" role="listitem" data-caption="旅館華柚｜庭園入口"><img loading="lazy" src="day2/24.jpg" data-full="day2/24.jpg" alt="旅館華柚 庭園"></div>
+                <div class="gItem" role="listitem" data-caption="旅館華柚｜日式庭園與建築"><img loading="lazy" src="day2/25.jpg" data-full="day2/25.jpg" alt="旅館華柚 建築"></div>
+                <div class="gItem" role="listitem" data-caption="旅館華柚｜露天溫泉"><img loading="lazy" src="day2/26.jpg" data-full="day2/26.jpg" alt="旅館華柚 溫泉"></div>
+                <div class="gItem" role="listitem" data-caption="九重高原櫻花景色"><img loading="lazy" src="day2/27.jpg" data-full="day2/27.jpg" alt="九重高原櫻花"></div>
+             </div>
+            </div>
+          </div>
+        </div>
+
+<details class="edgeBleed" style="margin-top:10px">
+  <summary><span class="sumText">☔ 雨天備案</span><span class="chev">⌄</span></summary>
+  <div class="dContent">
+    <ul class="dList">
+      <li><strong>由布院：</strong>改走室內，如 COMICO美術館、彩色玻璃美術館；或是享用甜點：專賣抹茶與地酒義式冰淇淋的由布院之森（Telato）、室內空間舒適適合躲雨享用銅鑼燒的 鞠智 cucuchi。</li>
+      <li><strong>九重：</strong>若霧大看不見瀑布，直接放棄吊橋，直奔 <strong>瀨之本休息站</strong> 採買。</li>
+      <li><strong>終點：</strong>提早 Check-in 旅館華柚，享受雨中露天溫泉。</li>
+    </ul>
+  </div>
 </details>
+      <div class="navGrid linksSection">
+        <div style="grid-column:1 / -1;font-weight:700;font-size:12px;margin:2px 0 6px;color:var(--muted)">🚗 Google 行程導航</div>
+        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E5%B1%B1%E7%94%B0%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%A8%E3%83%AA%E3%82%A2%20%28%E4%B8%8B%E3%82%82%E3%82%8A%29&travelmode=driving">🚗 休息站｜山田SA（建議）</a>
+        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E7%8E%96%E7%8F%A0%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%A8%E3%83%AA%E3%82%A2%20%28%E4%B8%8B%E3%82%82%E3%82%8A%29&travelmode=driving">🚗 休息站｜玖珠SA（次要）</a>
+        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E6%B9%AF%E5%B8%83%E9%99%A2%E4%B8%AD%E5%A4%AE%E5%85%90%E7%AB%A5%E5%85%AC%E5%9C%92&travelmode=driving">🚗 中央児童公園</a>
+        <a class="btn" target="_blank" rel="noopener" href="https://maps.google.com/?daddr=%E9%87%91%E9%B1%97%E6%B9%96&directionsmode=driving">🚗 金鱗湖</a>
+        <a class="btn" target="_blank" rel="noopener" href="https://maps.google.com/?daddr=%E7%8B%AD%E9%9C%A7%E5%8F%B0&directionsmode=driving">🚗 狭霧台</a>
+        <a class="btn" target="_blank" rel="noopener" href="https://maps.google.com/?daddr=%E4%B9%9D%E9%87%8D%E5%A4%A2%E5%A4%A7%E5%90%8A%E6%A9%8B&directionsmode=driving">🚗 九重夢大吊橋</a>
+        <a class="btn" target="_blank" rel="noopener" href="https://maps.google.com/?daddr=%E7%80%AC%E3%81%AE%E6%9C%AC%E3%83%AC%E3%82%B9%E3%83%88%E3%83%8F%E3%82%A6%E3%82%B9&directionsmode=driving">🚗 瀨之本休息站</a>
+        <a class="btn" target="_blank" rel="noopener" href="https://maps.google.com/?daddr=%E6%97%85%E9%A4%A8%E8%8F%AF%E6%9F%9A%20%E7%94%B1%E5%B8%83%E9%99%A2&directionsmode=driving">🚗 旅館華柚</a>
+      </div>
 
-<details class="infoBox">
- <summary>
- <span class="summaryText">🚌 利木津巴士</span>
- <span class="chev">⌄</span>
- </summary>
- <div class="infoContent">
- <ul class="notes">
- <li>成田T2→赤坂見附→OMO3東京赤坂 </li>
- <li><a href="https://www.limousinebus.co.jp/zh-tw/" target="_blank" style="text-decoration:underline">官網購票</a> 💰¥3,600、第二航廈的巴士(Limousine Bus)購票處在1樓入境大廳(Arrival Hall)，南口(A)或北口(B)的橘色櫃檯巴士售票櫃檯或自動售票機購票。</li>
- </ul>
+    </div>
+  </div>
+</section>
 
- <div class="gallery" style="margin-left:0;margin-right:0">
- <div class="galleryRow" role="list">
- <div class="gItem" role="listitem">
- 
- </div>
- 
- </div>
- </div>
- </div>
- </details>
+<section class="panel" id="day3" role="tabpanel" aria-label="Day 3 行程">
+  <section class="day3Tpl">
 
-  <details class="infoBox">
- <summary>
- <span class="summaryText">🚄 Skyliner ＋Metro銀座線</span>
- <span class="chev">⌄</span>
- </summary>
- <div class="infoContent">
- <ul class="notes">
-<li>成田機場T2→京成上野出站→經地下連通道→至地鐵銀座線(往澀谷方向)→赤坂見附(10號出口)→OMO3東京赤坂。</li>
- <li><a href="https://www.keisei.co.jp/keisei/tetudou/skyliner/e-ticket/zht/" target="_blank" style="text-decoration:underline">官網購票</a> 💰2,310</li>
- </ul>
+    <div class="dayHeader">
+    <div class="dayTitle">
+      <div class="num">3</div>
+      <div class="tblock"><h2>黑川溫泉散策・阿蘇高原</h2></div>
+    </div>
+    <div class="dayHeaderRight"><div class="dayDateRight">03/25（三）</div></div>
+  </div>
 
- <div class="gallery" style="margin-left:0;margin-right:0">
- <div class="galleryRow" role="list">
- <div class="gItem" role="listitem">
- 
- </div>
- <div class="gItem" role="listitem">
- 
- </div>
- </div>
- </div>
+  <div class="dayBody">
+    <div class="content">
+      <div class="timeline">
 
- </div>
- </details>
+        <div class="tRow">
+          <div><div class="time">10:00</div><div class="meta"></div></div>
+          <div><div class="place">旅館華柚</div><div class="meta">早餐後退房</div></div>
+        </div>
 
- <details class="infoBox">
- <summary>
- <span class="summaryText">🚆 成田特快(N'EX) ＋Metro丸ノ內線</span>
- <span class="chev">⌄</span>
- </summary>
-  <div class="infoContent">
- <ul class="notes">
- <li>成田機場T2→東京站→轉地鐵丸ノ內線(往池袋)→赤坂見附(10號出口)→OMO3東京赤坂。</li>
- <li><a href="https://www.eki-net.com/zh-CHT/jreast-train-reservation/Top/Index" target="_blank" style="text-decoration:underline">官網購票</a></li>
- <li>可使用 Suica / PASMO 直接搭乘。</li>
- </ul>
+        <div class="tRow">
+          <div><div class="time">10:25–10:50</div><div class="meta"></div></div>
+          <div><div class="place">夫妻瀑布</div><div class="meta">日本唯一兩條不同來源的河流在同一地點匯合形成瀑布的奇景，被視為緣結與愛情的象徵；左側男瀧 (O-daki)高約 15 公尺，右側女瀧 (Me-daki)高約 12 公尺。</div></div>
+        </div>
 
- <div class="gallery" style="margin-left:0;margin-right:0">
- <div class="galleryRow" role="list">
- <div class="gItem" role="listitem">
- 
- </div>
- </div>
- </div>
+        <div class="galleryWrap" aria-label="夫妻瀑布 照片">
+          <div class="galleryRow" role="list">
+            <div class="gItem" role="listitem" data-caption="夫婦滝"><img loading="lazy" src="day3/20.jpg" data-full="day3/20.jpg" alt="夫婦滝"></div>
+            <div class="gItem" role="listitem" data-caption="女滝"><img loading="lazy" src="day3/21.jpg" data-full="day3/21.jpg" alt="女滝"></div>
+            <div class="gItem" role="listitem" data-caption="男滝"><img loading="lazy" src="day3/22.jpg" data-full="day3/22.jpg" alt="男滝"></div>
+            <div class="gItem" role="listitem" data-caption="夫婦滝告示牌"><img loading="lazy" src="day3/23.jpg" data-full="day3/23.jpg" alt="夫婦滝告示牌"></div>
+          </div>
+        </div>
 
- </div>
- </details>
+        <div class="tRow">
+          <div><div class="time">11:40–13:10</div><div class="meta"></div></div>
+          <div>
+            <div class="place">黑川溫泉新停車場</div>
+            <div class="meta">黑川溫泉新停車場雖距離較遠(約950m~1.1Km，步行時間15分鐘)，但位置最順路、車位最充足且不需開進狹窄危險的溫泉街小巷。</div>
+          </div>
+        </div>
+<div class="galleryWrap" aria-label="黑川溫泉新停車場 照片">
+          <p class="galleryTitle">📷 黑川溫泉新停車場</p>
+          <div class="galleryRow" role="list">
+            <div class="gItem" role="listitem" data-pdf-href="day3/黑川溫泉地圖.pdf" data-caption="📄 Map（PDF）｜點擊開啟">
+              <img loading="lazy" src="day3/03.jpg" data-full="day3/03.jpg" alt="黑川溫泉地圖（PDF）封面">
+            </div>
+            <div class="gItem" role="listitem" data-caption="黑川溫泉新停車場位置示意地圖"><img loading="lazy" src="day3/01.jpg" data-full="day3/01.jpg" alt="黑川溫泉新停車場地圖"></div>
+            <div class="gItem" role="listitem" data-caption="黑川溫泉新停車場空拍"><img loading="lazy" src="day3/02.jpg" data-full="day3/02.jpg" alt="黑川溫泉新停車場空拍"></div>
+          </div>
+        </div>
 
- </div>
- </details>
- </div>
- </div>
+        <div style="margin-top:12px;padding:0 12px">
 
- <div class="tRow">
- <div class="time">18:00</div>
- <div class="place">
- <p class="placeTitle">入住 OMO3 東京赤坂 <a class="btn" href="#">🔗 飯店官網</a></p>
- <p class="meta">先放行李、稍作休息，之後可安排赤坂周邊晚餐或散步</p>
+          <p style="margin:0 0 8px;font-weight:700">📍 黑川溫泉周邊散步重點</p>
+          <div class="routeList" style="color:var(--muted);font-size:13px;line-height:1.7">
+              <div class="routeItem">
+                <span class="routeArrow">⇢</span>
+                <div class="routeText"><strong>風之舍(服務中心)</strong> 停車場下來第一站作為起點，可購買入湯手形(用在地小國杉木製成的圓形木牌「溫泉三入通行證」，¥1500可用來泡溫泉*2+指定店家兌換伴手禮、飲料或點心*1，購買日起6個月有效)、紀念品，這裡的地圖很齊全。</div>
+              </div>
+              <div class="routeItem">
+                <span class="routeArrow">⇢</span>
+                <div class="routeText"><strong>地藏尊</strong> 在風之舍隔壁，這有著名的顏湯(用溫泉蒸汽蒸臉)，路邊有賣溫泉蛋很有氛圍。</div>
+              </div>
+              <div class="routeItem">
+                <span class="routeArrow">⇢</span>
+                <div class="routeText">
+                  <strong>いご坂(伊後坂)</strong> 這是一段很有風情的下坡階梯，兩旁是木造旅館，有神隱少女的感覺。
+                  <div class="routeSub"><strong>人氣甜點｜Pâtisserie Roku</strong> 可先買泡芙。</div>
+                  <div class="routeSub"><strong>午餐首選｜わろく屋 (Warokuya)</strong>：古民風格餐廳＆咖啡廳，最受歡迎的餐點是熊本縣產豬肉製成的炸豬排黑咖哩（可先去登記用餐）。</div>
+                </div>
+              </div>
+              <div class="routeItem">
+                <span class="routeArrow">⇢</span>
+                <div class="routeText"><strong>丸鈴橋(核心地標)</strong> 必拍景點！這裡就是看「湯明」點燈最美的地方，橋上可以俯瞰田之原川，兩岸全是鞠燈籠。</div>
+              </div>
+              <div class="routeItem">
+                <span class="routeArrow">⇢</span>
+                <div class="routeText"><strong>川端通り(老街核心)</strong> 沿著河邊的小路，街道以傳統木造建築與石板路為主，保留濃厚的日式懷舊氛圍。</div>
+              </div>
+          </div>
 
- <div class="gallery">
- <p class="galleryTitle">📷 飯店 / 周邊示意</p>
- <div class="galleryRow" role="list">
- <div class="gItem" role="listitem">
- <img src="https://placehold.co/800x600?text=OMO3+Akasaka" alt="OMO3 東京赤坂">
- <div class="gCaption">OMO3 東京赤坂</div>
- </div>
- <div class="gItem" role="listitem">
- <img src="https://placehold.co/800x600?text=Akasaka+Area" alt="赤坂周邊">
- <div class="gCaption">赤坂周邊</div>
- </div>
- </div>
- </div>
+<div class="links edgeBleed" style="margin:10px 0 8px">
+              <a class="btn" target="_blank" rel="noopener" href="day3/日文版官方簡介.pdf">📄日文版官方簡介</a>
+              <a class="btn" target="_blank" rel="noopener" href="day3/散步地圖.pdf">📄 散步地圖（PDF）</a>
+              <a class="btn" target="_blank" rel="noopener" href="day3/Warokuya菜單.pdf">📄 Warokuya菜單</a>
+          </div>
+<details class="edgeBleed detailsTight" style="border:1px dashed var(--line);background:#fafafa">
+          <summary><span class="sumText">🍽 黑川溫泉 午餐・咖啡其他選擇</span><span class="chev">⌄</span></summary>
+          <div class="content">
+            <p style="margin:0 0 6px;font-weight:700">⭐ 午餐</p>
+            <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
+              <li><strong>Tsuji no Chaya</strong>｜傳統日式定食與輕食，節奏慢，適合悠閒用餐。</li>
+              <li><strong>nez（ネズ）</strong>｜小而美的和食店，料理細緻、評價高，想吃得有質感可選。</li>
+              <li><strong>うな北 黒川温泉店</strong>｜鰻魚飯／天丼份量扎實，早上走景點較累時補體力。</li>
+              <li>❌<strong>Yamatake - Natural Root Vegetable Cuisine（Yama no Ibuki）</strong>｜自然薯與在地蔬菜料理，清爽不油。</li>
+              <li>❌<strong>黑川溫泉 予祝 (よしゅく)</strong>｜以熊本和牛料理聞名，熊本赤牛漢堡排是招牌必點美食，每日限量 15 份。</li>
+            </ul>
+
+            <p style="margin:10px 0 6px;font-weight:700">☕ 咖啡・甜點・輕食</p>
+            <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
+              <li><strong>Au Pan & Coffee</strong>｜麵包＋咖啡為主的輕食型選擇，位在第四停車場附近，離老街中心(丸鈴橋)走路約 10 分鐘以上。</li>
+              <li>❌<strong>SLOW WALK CAFE</strong>｜咖啡＋輕食，適合拉長休息時間或下雨備用。</li>
+            </ul>
+          </div>
+        </details>
+
+        <div class="galleryWrap edgeBleed" aria-label="黑川溫泉 景點照片">
+          <div class="galleryRow" role="list">
+            <div class="gItem" role="listitem" data-caption="風之舍（服務中心）"><img loading="lazy" src="day3/04.jpg" data-full="day3/04.jpg" alt="風之舍（服務中心）"></div>
+            <div class="gItem" role="listitem" data-caption="入湯手形紀念"><img loading="lazy" src="day3/05.jpg" data-full="day3/05.jpg" alt="入湯手形紀念"></div>
+            <div class="gItem" role="listitem" data-caption="黑川地藏尊"><img loading="lazy" src="day3/06.jpg" data-full="day3/06.jpg" alt="黑川地藏尊"></div>
+            <div class="gItem" role="listitem" data-caption="溫泉蛋"><img loading="lazy" src="day3/07.jpg" data-full="day3/07.jpg" alt="溫泉蛋"></div>
+            <div class="gItem" role="listitem" data-caption="河邊足湯"><img loading="lazy" src="day3/08.jpg" data-full="day3/08.jpg" alt="河邊足湯"></div>
+            <div class="gItem" role="listitem" data-caption="いご坂石階"><img loading="lazy" src="day3/09.jpg" data-full="day3/09.jpg" alt="いご坂石階"></div>
+            <div class="gItem" role="listitem" data-caption="丸鈴橋與旅館景觀"><img loading="lazy" src="day3/10.jpg" data-full="day3/10.jpg" alt="丸鈴橋與旅館景觀"></div>
+            <div class="gItem" role="listitem" data-caption="川端通り街景"><img loading="lazy" src="day3/11.jpg" data-full="day3/11.jpg" alt="川端通り街景"></div>
+            <div class="gItem" role="listitem" data-caption="わろく屋 (Warokuya)"><img loading="lazy" src="day3/12.jpg" data-full="day3/12.jpg" alt="わろく屋 (Warokuya)"></div>
+            <div class="gItem" role="listitem" data-caption="Pâtisserie Roku 泡芙"><img loading="lazy" src="day3/13.jpg" data-full="day3/13.jpg" alt="Pâtisserie Roku 泡芙"></div>
+            <div class="gItem" role="listitem" data-caption="湯明（湯あかり）夜間河景"><img loading="lazy" src="day3/14.jpg" data-full="day3/14.jpg" alt="湯明（湯あかり）夜間河景"></div>
+            <div class="gItem" role="listitem" data-caption="湯明竹燈與鞠燈籠"><img loading="lazy" src="day3/15.jpg" data-full="day3/15.jpg" alt="湯明竹燈與鞠燈籠"></div>
+          </div>
+        </div>
+<div style="margin-top:8px;padding:0 12px;font-size:12px;line-height:1.7;color:var(--text)">
+          📌 黑川溫泉・湯明（湯あかり）我覺得很漂亮，但時間應該無法配合，先看看照片。<br>
+          點燈時間：每天傍晚 17:00–21:30<br>
+          活動期間：2025/12/20（六） 至 2026/3/31（二）<br>
+          溫泉街上會擺放約 300 個由當地旅館與商店人員手工製作的球狀「鞠燈籠」，以及高約 2 公尺的筒狀竹燈籠，是冬季限定的浪漫夜間景色（見上方最後2張照片）。
+        </div>
+
+        <div class="tRow">
+          <div><div class="time">13:50–14:30</div><div class="meta"></div></div>
+          <div><div class="place">池山水源</div><div class="meta">日本環境省選為「日本名水百選」之一，每分鐘湧出量高達 30 噸，水溫常年維持在約 13.5℃。<br>💧 可帶空寶特瓶(或在現場商店購買)裝泉水帶回，惟此地泉水也作為當地居民的飲用水源，嚴禁將手腳伸入主水源池內。<br>每年夏天限定的「點燈活動」將青苔覆蓋的溪畔、清澈見底的湧泉與四周的森林，整個區域都會被水和光的夢幻空間所圍繞。
+</div></div>
+        </div>
+
+        <div class="galleryWrap edgeBleed" aria-label="池山水源 照片">
+          <div class="galleryRow" role="list">
+            <div class="gItem" role="listitem" data-caption="池山水源清澈湧泉"><img loading="lazy" src="day3/16.jpg" data-full="day3/16.jpg" alt="池山水源清澈湧泉"></div>
+            <div class="gItem" role="listitem" data-caption="池山水源森林倒影"><img loading="lazy" src="day3/17.jpg" data-full="day3/17.jpg" alt="池山水源森林倒影"></div>
+            <div class="gItem" role="listitem" data-caption="池山水源夜間燈景"><img loading="lazy" src="day3/18.jpg" data-full="day3/18.jpg" alt="池山水源夜間燈景"></div>
+            <div class="gItem" role="listitem" data-caption="池山水源橋與水景"><img loading="lazy" src="day3/19.jpg" data-full="day3/19.jpg" alt="池山水源橋與水景"></div>
+          </div>
+        </div>
+        </div>
+<div class="tRow">
+          <div><div class="time">15:00–15:20</div><div class="meta"></div></div>
+          <div><div class="place">Kamenoi Hotel Aso</div><div class="meta" style="margin-top:4px"><ul class="metaList" style="gap:4px;font-size:12px;line-height:1.2">
+  <li><span class="metaIcon">🌄</span><span class="metaText">產山村高原大草原，下坡段可遠眺「阿蘇五岳」震撼全景。</span></li>
+  <li><span class="metaIcon">⚠</span><span class="metaText">持續長下坡，請換入低速檔 (B/L檔) 利用引擎煞車，避免煞車過熱。</span></li>
+  <li><span class="metaIcon">⚠</span><span class="metaText">沿國道 212 走大路最順，傍晚山區易起霧且無路燈，建議 17:00 前下山，嚴防野生動物（鹿）出沒。</span></li>
+  <li><span class="metaIcon">🛒</span><span class="metaText">補給：進飯店前可先去 Lawson 阿蘇一之宮店補給。</span></li>
+</ul></div></div>
+        </div>
+        </div><!-- /.timeline -->
+
+        <details class="detailsTight" style="border:1px solid var(--line);border-radius:12px;background:#fff;margin:10px 0 0">
+          <summary><span class="sumText">🌧️ 雨天備案（Day3）</span><span class="chev">⌄</span></summary>
+          <div class="content">
+            <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13px">
+              <li>夫妻瀑布雨勢大：改為黑川溫泉街散步＋用餐拉長</li>
+              <li>池山水源：視雨勢與路況縮短或略過</li>
+              <li>提早抵達飯店休息泡湯</li>
+            </ul>
+          </div>
+        </details>
+
+      </div><!-- /.content -->
+    </div><!-- /.dayBody -->
+
+    <div class="navGrid" style="margin-top:12px;padding:0 12px">
+      <div style="grid-column:1 / -1;font-weight:700;font-size:12px;margin:2px 0 6px;color:var(--muted)">🚗 Google 行程導航</div>
+      <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Manganji%2C%20Minamioguni%2C%20Aso%20District%2C%20Kumamoto%20869-2402%2C%20Japan&travelmode=driving">🚗 夫妻瀑布</a>
+      <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E9%BB%92%E5%B7%9D%E6%B8%A9%E6%B3%89%20%E7%AC%AC%E4%B8%89%E9%A7%90%E8%BB%8A%E5%A0%B4&travelmode=driving">🚗 黑川溫泉新停車場</a>
+      <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E6%B1%A0%E5%B1%B1%E6%B0%B4%E6%BA%90&travelmode=driving">🚗 池山水源</a>
+      <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Lawson%20%E9%98%BF%E8%98%87%E4%B8%80%E4%B9%8B%E5%AE%AE%E5%BA%97&travelmode=driving">🚗 Lawson 阿蘇一之宮店</a>
+      <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Kamenoi%20Hotel%20Aso&travelmode=driving">🚗 Kamenoi Hotel Aso</a>
+    </div>
+
+  </section>
+</section>
+
+<section class="panel" id="day4" role="tabpanel" aria-label="Day 4 行程">
+  <div class="dayHeader">
+    <div class="dayTitle"><div class="num">4</div><div class="tblock"><h2>阿蘇・太宰府天滿宮</h2></div></div>
+    <div class="dayHeaderRight"><div class="dayDateRight">03/26（四）</div></div>
+  </div>
+
+  <div class="dayBody"><div class="content">
+    <div class="timeline">
+      <div class="tRow">
+        <div class="time">09:00~</div>
+        <div>
+          <div class="place">Kamenoi Hotel Aso</div>
+          <div class="meta">退房前往上色見熊野座神社。會翻越阿蘇的外輪山，先走一段上坡進入山區，S型彎道較多，再下坡進入南阿(高森町)。</div>
+        </div>
+      </div>
+
+      <div class="tRow">
+        <div class="time">09:40–<br>10:40</div>
+        <div>
+          <div class="place">上色見熊野座神社</div>
+          <ul class="metaList">
+            <li>停車場走至神社（入口處有登山杖可自行使用），從停車場開始走到神社來回約30–40分鐘，到穿戶岩則來回約抓1小時。</li>
+            <li>共400多公尺，280個石階梯，97個石燈籠。</li>
+            <li>人氣動漫《螢火蟲之森》原型，青苔、藤蔓、石階與高聳杉木交織，形成令人難以言喻的綠色奇景。</li>
+          </ul>
+          <div class="meta">📸 拍照點：通往異世界階梯的石階與杉木林景色；進入參道後的第二個鳥居（二之鳥居）與長長石階同時入鏡。</div>
+          <div class="meta">⚠️ 石階多部分坡度陡且濕滑，務必小心行走。</div>
+          <div class="meta">⚠️ 停車場自助蔬果販賣處可購買御朱印。</div>
+          <div class="meta">⚠️ 洗手間在停車場附近，鳥居入口旁邊。</div>
+        </div>
+      </div>
+
+      <div class="galleryRow" aria-label="上色見熊野座神社照片" role="list">
+        <div class="gItem" role="listitem" data-full="day4/01.jpg"><img src="day4/01.jpg" loading="lazy" alt="上色見熊野座神社入口鳥居與石階"><div class="gCaption">上色見熊野座神社入口鳥居與石階</div></div>
+        <div class="gItem" role="listitem" data-full="day4/02.jpg"><img src="day4/02.jpg" loading="lazy" alt="神社入口附近洗手間"><div class="gCaption">神社入口附近洗手間</div></div>
+        <div class="gItem" role="listitem" data-full="day4/03.jpg"><img src="day4/03.jpg" loading="lazy" alt="《螢火之森》海報"><div class="gCaption">《螢火之森》海報</div></div>
+        <div class="gItem" role="listitem" data-full="day4/04.jpg"><img src="day4/04.jpg" loading="lazy" alt="動畫場景階梯"><div class="gCaption">動畫場景階梯</div></div>
+        <div class="gItem" role="listitem" data-full="day4/05.jpg"><img src="day4/05.jpg" loading="lazy" alt="石燈籠參道與鳥居"><div class="gCaption">石燈籠參道與鳥居</div></div>
+        <div class="gItem" role="listitem" data-full="day4/06.jpg"><img src="day4/06.jpg" loading="lazy" alt="通往神社的石階與鳥居"><div class="gCaption">通往神社的石階與鳥居</div></div>
+        <div class="gItem" role="listitem" data-full="day4/07.jpg"><img src="day4/07.jpg" loading="lazy" alt="上色見熊野座神社本殿"><div class="gCaption">上色見熊野座神社本殿</div></div>
+        <div class="gItem" role="listitem" data-full="day4/08.jpg"><img src="day4/08.jpg" loading="lazy" alt="穿戶岩"><div class="gCaption">穿戶岩</div></div>
+        <div class="gItem" role="listitem" data-full="day4/09.jpg"><img src="day4/09.jpg" loading="lazy" alt="上色見熊野座神社御朱印"><div class="gCaption">上色見熊野座神社御朱印</div></div>
+      </div>
+
+      <details style="border:1px dashed #cbd5e1;border-radius:14px;background:#fafafa;padding:10px 14px">
+        <summary style="font-weight:800;cursor:pointer">💧 白川水源(視情況前往)</summary>
+        <div class="tRow">
+          <div class="time">10:40–<br>11:30</div>
+          <div>
+            <div class="place">白川水源</div>
+            <ul class="metaList">
+              <li>車程約20分鐘，從高森町往南阿蘇方向行駛即可抵達。</li>
+              <li>南阿蘇最知名的湧水地，每分鐘湧出約60噸清澈地下水，水質非常清澈。</li>
+              <li>與池山水源同為日本名水百選之一，可直接飲用或自備水瓶裝水回去。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="galleryRow" aria-label="白川水源照片" role="list" style="margin-top:0">
+          <div class="gItem" role="listitem" data-full="day4/10.jpg"><img src="day4/10.jpg" loading="lazy" alt="白川水源入口"><div class="gCaption">白川水源入口</div></div>
+          <div class="gItem" role="listitem" data-full="day4/11.jpg"><img src="day4/11.jpg" loading="lazy" alt="白川水源湧泉"><div class="gCaption">白川水源湧泉</div></div>
+          <div class="gItem" role="listitem" data-full="day4/12.jpg"><img src="day4/12.jpg" loading="lazy" alt="裝水取泉"><div class="gCaption">裝水取泉</div></div>
+        </div>
+      </details>
+
+      <div class="tRow">
+        <div class="time">12:10–<br>12:50</div>
+        <div>
+          <div class="place">草千里之濱</div>
+          <ul class="metaList">
+            <li>進入山區的銜接處有幾個比較大的180度彎道，轉彎時請減速並靠右側行駛。</li>
+            <li>阿蘇山上收訊較差，Google導航先下載離線地圖。</li>
+            <li>導航至草千里之濱停車場，單次收費¥500。</li>
+            <li>建議停在離 New 草千里建築物（咖啡廳所在地）近一點的地方。</li>
+            <li>為了維持草原生態，通常在3月初至3月中旬進行「燒山(野焼き)」儀式，新的綠草要到4月中下旬後才會逐漸長出。燒山後的地面會呈現焦黑色，景觀像沙漠或特攝片戰鬥場地。</li>
+            <li>公共廁所旁的小徑，可空往草千里展望所，登高望遠草千里的風景。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tRow">
+        <div class="time">12:50–<br>14:30</div>
+        <div>
+          <div class="place">阿蘇火山博物館　<a href="https://asomuse.jp/" target="_blank" rel="noopener">🌎</a></div>
+          <ul class="metaList">
+            <li>成人門票¥1300，3F可透過大型螢幕自由操控鏡頭，即時觀察火山口內部的噴煙與地熱狀況。</li>
+            <li>五面環繞全景劇場(有中文字幕)、地質與岩石展示，一樓區域免費參觀，有觀光諮詢櫃台、餐廳及販售熊本與阿蘇土產的商店。</li>
+          </ul>
+          <div class="place" style="margin-top:6px">千里咖啡焙煎所</div>
+          <div class="meta">☕ 草千里咖啡焙煎所 (Kusasenri Coffee Roastery)，大片落地窗可以直接對望火山煙與草原。</div>
+        </div>
+      </div>
+
+      <div class="galleryRow" aria-label="草千里之濱照片" role="list">
+        <div class="gItem" role="listitem" data-full="day4/13.jpg"><img src="day4/13.jpg" loading="lazy" alt="阿蘇草千里米塚野燒景觀"><div class="gCaption">阿蘇草千里米塚野燒景觀</div></div>
+        <div class="gItem" role="listitem" data-full="day4/14.jpg"><img src="day4/14.jpg" loading="lazy" alt="草千里停車場與山景"><div class="gCaption">草千里停車場與山景</div></div>
+        <div class="gItem" role="listitem" data-full="day4/15.jpg"><img src="day4/15.jpg" loading="lazy" alt="草千里草原3月景觀"><div class="gCaption">草千里草原3月景觀</div></div>
+        <div class="gItem" role="listitem" data-full="day4/16.jpg"><img src="day4/16.jpg" loading="lazy" alt="草千里湖畔放牧馬匹"><div class="gCaption">草千里湖畔放牧馬匹</div></div>
+        <div class="gItem" role="listitem" data-full="day4/17.jpg"><img src="day4/17.jpg" loading="lazy" alt="草千里池塘與牛群"><div class="gCaption">草千里池塘與牛群</div></div>
+        <div class="gItem" role="listitem" data-full="day4/18.jpg"><img src="day4/18.jpg" loading="lazy" alt="草千里綠草季與阿蘇山景"><div class="gCaption">草千里綠草季與阿蘇山景</div></div>
+        <div class="gItem" role="listitem" data-full="day4/19.jpg"><img src="day4/19.jpg" loading="lazy" alt="草千里展望所木棧道"><div class="gCaption">草千里展望所木棧道</div></div>
+        <div class="gItem" role="listitem" data-full="day4/20.jpg"><img src="day4/20.jpg" loading="lazy" alt="阿蘇火山博物館外觀"><div class="gCaption">阿蘇火山博物館外觀</div></div>
+        <div class="gItem" role="listitem" data-full="day4/21.jpg"><img src="day4/21.jpg" loading="lazy" alt="阿蘇火山博物館環景劇場"><div class="gCaption">阿蘇火山博物館環景劇場</div></div>
+        <div class="gItem" role="listitem" data-full="day4/22.jpg"><img src="day4/22.jpg" loading="lazy" alt="阿蘇火山博物館入口大廳"><div class="gCaption">阿蘇火山博物館入口大廳</div></div>
+        <div class="gItem" role="listitem" data-full="day4/23.jpg"><img src="day4/23.jpg" loading="lazy" alt="草千里咖啡焙煎所外觀"><div class="gCaption">草千里咖啡焙煎所外觀</div></div>
+        <div class="gItem" role="listitem" data-full="day4/24.jpg"><img src="day4/24.jpg" loading="lazy" alt="草千里咖啡焙煎所窗景座位"><div class="gCaption">草千里咖啡焙煎所窗景座位</div></div>
+        <div class="gItem" role="listitem" data-full="day4/25.jpg"><img src="day4/25.jpg" loading="lazy" alt="草千里咖啡焙煎所特色飲品"><div class="gCaption">草千里咖啡焙煎所特色飲品</div></div>
+      </div>
+
+      <details style="border:1px dashed #cbd5e1;border-radius:14px;background:#fafafa;padding:10px 14px">
+        <summary style="font-weight:800;cursor:pointer">⛩️前往太宰府天滿宮</summary>
+        <div class="tRow">
+          <div class="time">14:30–<br>16:30</div>
+          <div>
+            <div class="place">前往太宰府</div>
+            <ul class="metaList">
+              <li>推薦路線：縣道111號(阿蘇Panorama Line)下山 → 往熊本 / 大津方向 → 熊本IC或益城熊本空港IC進入九州自動車道（福岡方向） → 太宰府 IC下交流道。車程約1小時50分。</li>
+            </ul>
+            <div class="meta">🚗 建議停靠：廣川服務區（SA，上行／福岡方向）。</div>
+          </div>
+        </div>
+
+        <div class="tRow">
+          <div class="time">16:30–<br>18:00</div>
+          <div>
+            <div class="place">太宰府天滿宮<a href="https://www.dazaifutenmangu.or.jp/tw/discover-dazaifu-tenmangu/" target="_blank" rel="noopener">🌎</a></div>
+            <ul class="metaList">
+              <li>建議停車：太宰府駐車中心 (Dazaifu Parking Center)，位於太宰府站南側，停車後步行即可看到天滿宮參道入口。</li>
+              <li>天滿宮主祭神為菅原道真，又稱「天神」，是日本最重要的學問之神。</li>
+              <li>周邊商店約 17:00–17:30 陸續關門：梅枝餅、明太子烤飯糰、天山草莓大福夾心餅、Starbucks (20:00)。</li>
+              <li>本殿參拜入口關閉時間：19:00。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="galleryRow" aria-label="太宰府天滿宮照片" role="list">
+          <div class="gItem" role="listitem" data-full="day4/26.jpg"><img src="day4/26.jpg" loading="lazy" alt="太宰府天滿宮境內導覽圖"><div class="gCaption">太宰府天滿宮境內導覽圖</div></div>
+          <div class="gItem" role="listitem" data-full="day4/27.jpg"><img src="day4/27.jpg" loading="lazy" alt="太宰府天滿宮參道與商店街地圖"><div class="gCaption">太宰府天滿宮參道與商店街地圖</div></div>
+          <div class="gItem" role="listitem" data-full="day4/28.jpg"><img src="day4/28.jpg" loading="lazy" alt="太宰府天滿宮樓門"><div class="gCaption">太宰府天滿宮樓門</div></div>
+          <div class="gItem" role="listitem" data-full="day4/29.jpg"><img src="day4/29.jpg" loading="lazy" alt="太宰府天滿宮御神木梅花"><div class="gCaption">太宰府天滿宮御神木梅花</div></div>
+          <div class="gItem" role="listitem" data-full="day4/30.jpg"><img src="day4/30.jpg" loading="lazy" alt="太宰府天滿宮御神牛"><div class="gCaption">太宰府天滿宮御神牛</div></div>
+          <div class="gItem" role="listitem" data-full="day4/31.jpg"><img src="day4/31.jpg" loading="lazy" alt="梅枝餅"><div class="gCaption">梅枝餅</div></div>
+          <div class="gItem" role="listitem" data-full="day4/32.jpg"><img src="day4/32.jpg" loading="lazy" alt="福太郎明太子飯糰"><div class="gCaption">福太郎明太子飯糰</div></div>
+          <div class="gItem" role="listitem" data-full="day4/33.jpg"><img src="day4/33.jpg" loading="lazy" alt="草莓大福"><div class="gCaption">草莓大福</div></div>
+          <div class="gItem" role="listitem" data-full="day4/34.jpg"><img src="day4/34.jpg" loading="lazy" alt="太宰府星巴克"><div class="gCaption">太宰府星巴克</div></div>
+          <div class="gItem" role="listitem" data-full="day4/35.jpg"><img src="day4/35.jpg" loading="lazy" alt="一蘭拉麵太宰府參道店"><div class="gCaption">一蘭拉麵太宰府參道店
+       </div>
+      </details>
+
+      <details style="border:1px dashed #cbd5e1;border-radius:14px;background:#fafafa;padding:10px 14px">
+        <summary style="font-weight:800;cursor:pointer">🛍️ 前往鳥栖 Premium Outlets</summary>
+        <div class="tRow">
+          <div class="time">14:30-<br>18:20</div>
+          <div>
+            <div class="place">前往鳥栖 Premium Outlets <a href="https://www.premiumoutlets.co.jp/cht/tosu/" target="_blank" rel="noopener">🌎</a></div>
+            <div class="meta">．推薦路線：縣道111號(阿蘇Panorama Line)下山，往熊本/大津方向行駛，從熊本IC或益城熊本空港IC進入九州自動車道 (往福岡方向)，鳥栖 IC 下交流道。</div>
+            <div class="meta">．最晚18:20離開返回天神北加油還車。</div>
+          </div>
+        </div>
+      </details>
+
+<div class="tRow">
+        <div class="time">18:00–<br>20:00</div>
+        <div>
+          <div class="place">Budget Rent-a-car Tenjin-kit 還車</div>
+          <div class="meta">• 預留塞車及加油時間，最晚18:00離開。</div>
+          <div class="meta">• 建議路線：建議走福岡都市高速(Urban Expressway)，從太宰府 IC上去，從天神北出口下來。</div>
+          <div class="meta">⛽首選：ENEOS須崎SS(Dr.Drive)，福岡市中央区須崎町13-1，距離還車地點最近約300公尺。</div>
+          <div class="meta">⛽備選：ENEOS渡邊通SS(福岡中央石油)，福岡市中央区渡辺通5丁目22-1。</div>
+          <div class="meta">🏨 <strong>入住 Cross Life 博多柳橋</strong></div>
+        </div>
+      </div>
 
 
- <details class="infoBox">
- <summary>
- <span class="summaryText">🏨 入住提醒</span>
- <span class="chev">⌄</span>
- </summary>
- <div class="infoContent">
- <ul class="notes">
- <li>可在這裡補 Check-in 時間與寄放行李資訊。</li>
- <li>若要接著排晚餐，也可以直接把餐廳放在下一個 tRow。</li>
- </ul>
- </div>
- </details>
- </div>
- </div>
- </div>
- </div>
- </section>
- <section class="card daySection pagePanel" id="day2">
- <div class="dayCardHeader">
- <div class="dayHeaderMain">
- <div class="dayIndex">2</div>
- <h2 class="dayTitle">東京｜Day 2 行程</h2>
- </div>
- <div class="dayDate">04/21（二）</div>
- </div>
+    <details style="margin:16px 0 6px;border:1px dashed #cbd5e1;border-radius:14px;background:#fafafa;padding:12px 14px">
+      <summary style="font-weight:800;cursor:pointer">🌋阿蘇火山口如遇正常開放</summary>
+      <div class="timeline" style="padding:12px">
+        <div class="warningCard">
+          <div class="warningHead"><span class="warningIcon">⚠️</span><span>火山警戒與天氣</span></div>
+          <p class="warningText">阿蘇中岳火山口常因噴氣過量關閉，出發前一小時／抵達收費前皆務必查看 <strong>阿蘇火山火口規制情報</strong>。</p>
+          <div class="links linksSection--tight" style="margin-top:4px">
+            <a class="btn" href="https://www.jma.go.jp/bosai/volcano/" target="_blank" rel="noopener">🌋 日本氣象廳｜火山資訊</a>
+            <a class="btn" href="https://www.aso-volcano.jp/chinese/index.html" target="_blank" rel="noopener">🏔 阿蘇火山情報</a>
+            <a class="btn" href="https://emergency-weather.yahoo.co.jp/weather/zh-TW/volcano/503/" target="_blank" rel="noopener">🔴 阿蘇火山即時影像</a>
+            <a class="btn" href="day4/阿蘇觀光導覽手冊.pdf" target="_blank" rel="noopener">📄 阿蘇觀光導覽手冊</a>
+          </div>
+        </div>
 
- <div class="dayBody">
- <div class="timeline">
- <div class="tRow">
- <div class="time">09:00</div>
- <div class="place">
- <p class="placeTitle">請填入 Day 2 第一個行程</p>
- <p class="meta">可在這裡填地點、交通、預估停留時間。</p>
- </div>
- </div>
- </div>
- </div>
- </section>
+        <div class="tRow">
+          <div class="time">08:30–<br>09:00</div>
+          <div>
+            <div class="place">Kamenoi Hotel Aso</div>
+            <div class="meta">退房後前往阿蘇火山</div>
+            <ul class="metaList">
+              <li>山路爬坡極度耗油。出發前請確認油箱至少有 1/3 以上，避免在山上受困。</li>
+              <li>導航直接設定最靠近火山口的「阿蘇火山火口避難休憩所停車場 (Aso Volcano Crater Shelter Parking)」。</li>
+              <li>阿蘇公園道路需在半山腰的收費站支付現金 ¥1,000（內含往返與停車費）。</li>
+              <li>停車場旁即是避難休憩所，火口區域內唯一的公共廁所在這。</li>
+            </ul>
+          </div>
+        </div>
 
- <section class="card daySection pagePanel" id="day3">
- <div class="dayCardHeader">
- <div class="dayHeaderMain">
- <div class="dayIndex">3</div>
- <h2 class="dayTitle">東京｜Day 3 行程</h2>
- </div>
- <div class="dayDate">04/22（三）</div>
- </div>
+        <div class="galleryRow" aria-label="阿蘇照片" role="list">
+          <div class="gItem" role="listitem" data-full="day4/37.jpg"><img src="day4/37.jpg" alt="阿蘇公園道路" loading="lazy"><div class="gCaption">阿蘇公園道路（左側白色建築為阿蘇火山博物館）</div></div>
+          <div class="gItem" role="listitem" data-full="day4/38.jpg"><img src="day4/38.jpg" alt="阿蘇收費站" loading="lazy"><div class="gCaption">阿蘇收費站</div></div>
+          <div class="gItem" role="listitem" data-full="day4/39.jpg"><img src="day4/39.jpg" alt="火山避難壕周邊步道" loading="lazy"><div class="gCaption">火山避難壕周邊步道</div></div>
+          <div class="gItem" role="listitem" data-full="day4/40.jpg"><img src="day4/40.jpg" alt="火山避難休憩所" loading="lazy"><div class="gCaption">火山避難休憩所</div></div>
+          <div class="gItem" role="listitem" data-full="day4/41.jpg"><img src="day4/41.jpg" alt="阿蘇中岳火山口外圍景觀" loading="lazy"><div class="gCaption">阿蘇中岳火山口外圍景觀</div></div>
+        </div>
 
- <div class="dayBody">
- <div class="timeline">
- <div class="tRow">
- <div class="time">09:00</div>
- <div class="place">
- <p class="placeTitle">請填入 Day 3 第一個行程</p>
- <p class="meta">之後直接複製 tRow 新增更多行程即可。</p>
- </div>
- </div>
- </div>
- </div>
- </section>
+        <div class="tRow">
+          <div class="time">09:40–<br>10:40</div>
+          <div>
+            <div class="place">阿蘇中岳火山口</div>
+            <div class="meta">火山口海拔高約 1,200m，氣溫會比平地低約5~8 ℃且風力強勁，下車前記得加外套。</div>
+            <div class="meta">🌋 參觀亮點與地圖指引<br><strong>第一火山口 (Nakadake No.1 Crater)</strong>：天氣晴朗且氣體濃度低時可清晰看見碧綠色火口湖。<br><strong>B區 (一般參觀區 B1、B2)</strong>：停車場出來即可抵達的近距離觀景台。<br><strong>E區 (管制備案區)</strong>：當 B 區因氣體濃度過高關閉時，可搭乘專用巴士前往此區參觀，距離火山口更近。<br><strong>砂千里ヶ浜</strong>：位於火山口旁的黑色火山灰平原，景觀宛如外星地表。</div>
+          </div>
+        </div>
 
- <section class="card daySection pagePanel" id="day4">
- <div class="dayCardHeader">
- <div class="dayHeaderMain">
- <div class="dayIndex">4</div>
- <h2 class="dayTitle">東京｜Day 4 行程</h2>
- </div>
- <div class="dayDate">04/23（四）</div>
- </div>
+        <div class="galleryRow" aria-label="阿蘇火山口照片" role="list">
+          <div class="gItem" role="listitem" onclick="event.stopPropagation();window.open('day4/阿蘇中岳火山口參觀.pdf','_blank')"><img src="day4/42.jpg" alt="阿蘇中岳火山口參觀 PDF 封面" loading="lazy" data-no-lightbox="1"><div class="gCaption">📄 阿蘇中岳火山口參觀（PDF）</div></div>
+          <div class="gItem" role="listitem" data-full="day4/43.jpg"><img src="day4/43.jpg" loading="lazy" alt="阿蘇火山口步道"><div class="gCaption">火山口步道</div></div>
+          <div class="gItem" role="listitem" data-full="day4/44.jpg"><img src="day4/44.jpg" loading="lazy" alt="火山口步道遠景"><div class="gCaption">火山口步道遠景</div></div>
+          <div class="gItem" role="listitem" data-full="day4/45.jpg"><img src="day4/45.jpg" loading="lazy" alt="阿蘇火山口標誌"><div class="gCaption">阿蘇火山口標誌</div></div>
+          <div class="gItem" role="listitem" data-full="day4/46.jpg"><img src="day4/46.jpg" loading="lazy" alt="中岳火山口"><div class="gCaption">中岳火山口</div></div>
+          <div class="gItem" role="listitem" data-full="day4/47.jpg"><img src="day4/47.jpg" loading="lazy" alt="中岳火山口空拍"><div class="gCaption">中岳火山口空拍</div></div>
+        </div>
 
- <div class="dayBody">
- <div class="timeline">
- <div class="tRow">
- <div class="time">09:00</div>
- <div class="place">
- <p class="placeTitle">請填入 Day 4 第一個行程</p>
- <p class="meta">這一頁也做成和上面一樣的日行程卡格式。</p>
- </div>
- </div>
- </div>
- </div>
- </section>
-
- <section class="card daySection pagePanel" id="day5">
- <div class="dayCardHeader">
- <div class="dayHeaderMain">
- <div class="dayIndex">5</div>
- <h2 class="dayTitle">東京｜Day 5 行程</h2>
- </div>
- <div class="dayDate">04/24（五）</div>
- </div>
-
- <div class="dayBody">
- <div class="timeline">
- <div class="tRow">
- <div class="time">09:00</div>
- <div class="place">
- <p class="placeTitle">請填入 Day 5 第一個行程</p>
- <p class="meta">可視需要加入相簿、收合層、地圖按鈕。</p>
- </div>
- </div>
- </div>
- </div>
- </section>
-
- 
- </section>
-
- 
-
-<!-- Day1 隱藏相簿（只給 lightbox 使用，不顯示在行程表） -->
-<div id="day1Album" style="display:none">
- <!-- Day1 圖片放置規則（建議） -->
- <!-- 檔案位置：img/Day1/ -->
- <!-- 檔名：1.jpg、2.jpg、3.jpg... 依順序增加 -->
- <!-- 範例： -->
- <!--
- <img src="./img/Day1/1.jpg" alt="利木津巴士乘車處">
- <img src="./img/Day1/2.jpg" alt="Skyliner 月台指示">
- <img src="./img/Day1/3.jpg" alt="京成上野轉乘路線">
- -->
+         <div class="tRow">
+  <div class="time">10:50–<br>11:45</div>
+  <div>
+    <div class="place">草千里之濱</div>
+    <ul class="metaList">
+      <li>進入山區的銜接處有幾個比較大的180度彎道，轉彎時請減速並靠右側行駛。</li>
+      <li>阿蘇山上收訊較差，Google導航先下載離線地圖。</li>
+      <li>導航至草千里之濱停車場，單次收費¥500。</li>
+      <li>建議停在離 New 草千里建築物（咖啡廳所在地）近一點的地方。</li>
+      <li>為了維持草原生態，通常在3月初至3月中旬進行「燒山(野焼き)」儀式，新的綠草要到4月中下旬後才會逐漸長出。燒山後的地面會呈現焦黑色，景觀像沙漠或特攝片戰鬥場地。</li>
+      <li>公共廁所旁的小徑，可通往草千里展望所，登高望遠草千里的風景。</li>
+    </ul>
+  </div>
 </div>
 
-<!-- Day2 隱藏相簿（之後這一天的圖片也統一放這裡，不顯示在行程表） -->
-<div id="day2Album" style="display:none">
- <!-- 例如：
- <img src="5.jpg" alt="Day2 圖片1">
- <img src="6.jpg" alt="Day2 圖片2">
- -->
+<div class="galleryRow" aria-label="草千里之濱照片" role="list">
+  <div class="gItem" role="listitem" data-full="day4/13.jpg"><img src="day4/13.jpg" loading="lazy" alt="阿蘇草千里米塚野燒景觀"><div class="gCaption">阿蘇草千里米塚野燒景觀</div></div>
+  <div class="gItem" role="listitem" data-full="day4/14.jpg"><img src="day4/14.jpg" loading="lazy" alt="草千里停車場與山景"><div class="gCaption">草千里停車場與山景</div></div>
+  <div class="gItem" role="listitem" data-full="day4/15.jpg"><img src="day4/15.jpg" loading="lazy" alt="草千里草原3月景觀"><div class="gCaption">草千里草原3月景觀</div></div>
+  <div class="gItem" role="listitem" data-full="day4/16.jpg"><img src="day4/16.jpg" loading="lazy" alt="草千里湖畔放牧馬匹"><div class="gCaption">草千里湖畔放牧馬匹</div></div>
+  <div class="gItem" role="listitem" data-full="day4/17.jpg"><img src="day4/17.jpg" loading="lazy" alt="草千里池塘與牛群"><div class="gCaption">草千里池塘與牛群</div></div>
+  <div class="gItem" role="listitem" data-full="day4/18.jpg"><img src="day4/18.jpg" loading="lazy" alt="草千里綠草季與阿蘇山景"><div class="gCaption">草千里綠草季與阿蘇山景</div></div>
+  <div class="gItem" role="listitem" data-full="day4/19.jpg"><img src="day4/19.jpg" loading="lazy" alt="草千里展望所木棧道"><div class="gCaption">草千里展望所木棧道</div></div>
+  <div class="gItem" role="listitem" data-full="day4/20.jpg"><img src="day4/20.jpg" loading="lazy" alt="阿蘇火山博物館外觀"><div class="gCaption">阿蘇火山博物館外觀</div></div>
+  <div class="gItem" role="listitem" data-full="day4/21.jpg"><img src="day4/21.jpg" loading="lazy" alt="阿蘇火山博物館環景劇場"><div class="gCaption">阿蘇火山博物館環景劇場</div></div>
+  <div class="gItem" role="listitem" data-full="day4/22.jpg"><img src="day4/22.jpg" loading="lazy" alt="阿蘇火山博物館入口大廳"><div class="gCaption">阿蘇火山博物館入口大廳</div></div>
+  <div class="gItem" role="listitem" data-full="day4/23.jpg"><img src="day4/23.jpg" loading="lazy" alt="草千里咖啡焙煎所外觀"><div class="gCaption">草千里咖啡焙煎所外觀</div></div>
+  <div class="gItem" role="listitem" data-full="day4/24.jpg"><img src="day4/24.jpg" loading="lazy" alt="草千里咖啡焙煎所窗景座位"><div class="gCaption">草千里咖啡焙煎所窗景座位</div></div>
+  <div class="gItem" role="listitem" data-full="day4/25.jpg"><img src="day4/25.jpg" loading="lazy" alt="草千里咖啡焙煎所特色飲品"><div class="gCaption">草千里咖啡焙煎所特色飲品</div></div>
+    </div>
+
+        <div class="tRow">
+  <div class="time">13:15–<br>14:00</div>
+  <div>
+    <div class="place">上色見熊野座神社</div>
+
+    <ul class="metaList">
+      <li>停車場走至神社（入口處有登山杖可自行使用），從停車場開始走到神社來回約30–40分鐘，到穿戶岩則來回約抓1小時。</li>
+      <li>共400多公尺，280個石階梯，97個石燈籠。</li>
+      <li>人氣動漫《螢火蟲之森》原型，青苔、藤蔓、石階與高聳杉木交織，形成令人難以言喻的綠色奇景。</li>
+    </ul>
+
+    <div class="meta">📸 拍照點：通往異世界階梯的石階與杉木林景色；進入參道後的第二個鳥居（二之鳥居）與長長石階同時入鏡。</div>
+    <div class="meta">⚠️ 石階多部分坡度陡且濕滑，務必小心行走。</div>
+    <div class="meta">⚠️ 停車場自助蔬果販賣處可購買御朱印。</div>
+    <div class="meta">⚠️ 洗手間在停車場附近，鳥居入口旁邊。</div>
+
+  </div>
+</div>
+     <div class="galleryRow" aria-label="上色見熊野座神社" role="list">
+    <div class="gItem" role="listitem" data-full="day4/01.jpg"><img src="day4/01.jpg" loading="lazy" alt="上色見熊野座神社入口鳥居與石階"><div class="gCaption">上色見熊野座神社入口鳥居與石階</div></div>
+    <div class="gItem" role="listitem" data-full="day4/02.jpg"><img src="day4/02.jpg" loading="lazy" alt="神社入口附近洗手間"><div class="gCaption">神社入口附近洗手間</div></div>
+    <div class="gItem" role="listitem" data-full="day4/03.jpg"><img src="day4/03.jpg" loading="lazy" alt="《螢火之森》海報"><div class="gCaption">《螢火之森》海報</div></div>
+    <div class="gItem" role="listitem" data-full="day4/04.jpg"><img src="day4/04.jpg" loading="lazy" alt="動畫場景階梯"><div class="gCaption">動畫場景階梯</div></div>
+    <div class="gItem" role="listitem" data-full="day4/05.jpg"><img src="day4/05.jpg" loading="lazy" alt="石燈籠參道與鳥居"><div class="gCaption">石燈籠參道與鳥居</div></div>
+    <div class="gItem" role="listitem" data-full="day4/06.jpg"><img src="day4/06.jpg" loading="lazy" alt="通往神社的石階與鳥居"><div class="gCaption">通往神社的石階與鳥居</div></div>
+    <div class="gItem" role="listitem" data-full="day4/07.jpg"><img src="day4/07.jpg" loading="lazy" alt="上色見熊野座神社本殿"><div class="gCaption">上色見熊野座神社本殿</div></div>
+    <div class="gItem" role="listitem" data-full="day4/08.jpg"><img src="day4/08.jpg" loading="lazy" alt="穿戶岩"><div class="gCaption">穿戶岩</div></div>
+    <div class="gItem" role="listitem" data-full="day4/09.jpg"><img src="day4/09.jpg" loading="lazy" alt="上色見熊野座神社御朱印"><div class="gCaption">上色見熊野座神社御朱印</div></div>
+  </div>
+
+
+
+<div class="tRow">
+  <div class="time">16:15–<br>17:45</div>
+  <div>
+            <div class="place">太宰府天滿宮<a href="https://www.dazaifutenmangu.or.jp/tw/discover-dazaifu-tenmangu/" target="_blank" rel="noopener">🌎</a></div>
+            <ul class="metaList">
+              <li>建議停車：太宰府駐車中心 (Dazaifu Parking Center)，位於太宰府站南側，停車後步行即可看到天滿宮參道入口。</li>
+              <li>天滿宮主祭神為菅原道真，又稱「天神」，是日本最重要的學問之神。</li>
+              <li>周邊商店約 17:00–17:30 陸續關門：梅枝餅、明太子烤飯糰、天山草莓大福夾心餅、Starbucks (20:00)。</li>
+              <li>本殿參拜入口關閉時間：19:00。</li>
+            </ul>
+          </div>
+        </div>
+
+
+     <div class="galleryRow" aria-label="太宰府天滿宮照片" role="list">
+    <div class="gItem" role="listitem" data-full="day4/26.jpg"><img src="day4/26.jpg" loading="lazy" alt="太宰府天滿宮境內導覽圖"><div class="gCaption">太宰府天滿宮境內導覽圖</div></div>
+          <div class="gItem" role="listitem" data-full="day4/27.jpg"><img src="day4/27.jpg" loading="lazy" alt="太宰府天滿宮參道與商店街地圖"><div class="gCaption">太宰府天滿宮參道與商店街地圖</div></div>
+          <div class="gItem" role="listitem" data-full="day4/28.jpg"><img src="day4/28.jpg" loading="lazy" alt="太宰府天滿宮樓門"><div class="gCaption">太宰府天滿宮樓門</div></div>
+          <div class="gItem" role="listitem" data-full="day4/29.jpg"><img src="day4/29.jpg" loading="lazy" alt="太宰府天滿宮御神木梅花"><div class="gCaption">太宰府天滿宮御神木梅花</div></div>
+          <div class="gItem" role="listitem" data-full="day4/30.jpg"><img src="day4/30.jpg" loading="lazy" alt="太宰府天滿宮御神牛"><div class="gCaption">太宰府天滿宮御神牛</div></div>
+          <div class="gItem" role="listitem" data-full="day4/31.jpg"><img src="day4/31.jpg" loading="lazy" alt="梅枝餅"><div class="gCaption">梅枝餅</div></div>
+          <div class="gItem" role="listitem" data-full="day4/32.jpg"><img src="day4/32.jpg" loading="lazy" alt="福太郎明太子飯糰"><div class="gCaption">福太郎明太子飯糰</div></div>
+          <div class="gItem" role="listitem" data-full="day4/33.jpg"><img src="day4/33.jpg" loading="lazy" alt="草莓大福"><div class="gCaption">草莓大福</div></div>
+          <div class="gItem" role="listitem" data-full="day4/34.jpg"><img src="day4/34.jpg" loading="lazy" alt="太宰府星巴克"><div class="gCaption">太宰府星巴克</div></div>
+          <div class="gItem" role="listitem" data-full="day4/35.jpg"><img src="day4/35.jpg" loading="lazy" alt="一蘭拉麵太宰府參道店"><div class="gCaption">一蘭拉麵太宰府參道店
+    </div>
+  </div>
 </div>
 
-<!-- Day3 隱藏相簿（之後這一天的圖片也統一放這裡，不顯示在行程表） -->
-<div id="day3Album" style="display:none">
- <!-- 例如：
- <img src="7.jpg" alt="Day3 圖片1">
- <img src="8.jpg" alt="Day3 圖片2">
- -->
+<div class="tRow">
+  <div class="time">18:00–<br>20:00</div>
+ <div>
+          <div class="place">Budget Rent-a-car Tenjin-kit 還車</div>
+          <div class="meta">• 預留塞車及加油時間，最晚18:00離開。</div>
+          <div class="meta">• 建議路線：建議走福岡都市高速(Urban Expressway)，從太宰府 IC上去，從天神北出口下來。</div>
+          <div class="meta">⛽首選：ENEOS須崎SS(Dr.Drive)，福岡市中央区須崎町13-1，距離還車地點最近約300公尺。</div>
+          <div class="meta">⛽備選：ENEOS渡邊通SS(福岡中央石油)，福岡市中央区渡辺通5丁目22-1。</div>
+          <div class="meta">🏨 <strong>入住 Cross Life 博多柳橋</strong></div>
+</div>
+</div>
+      
+    </details>
+  </div></div>
+</section>
+
+<section class="panel" id="day5" role="tabpanel" aria-label="Day 5 行程">
+  <div class="dayHeader">
+    <div class="dayTitle"><div class="num">5</div><div class="tblock"><h2>福岡市區散步｜天神・博多</h2></div></div>
+    <div class="dayHeaderRight"><div class="dayDateRight">03/27（五）</div></div>
+  </div>
+  <div class="dayBody"><div class="content">
+
+    <div class="timeline">
+
+      <div class="tRow">
+        <div><div class="time">10:00</div><div class="meta">早／午餐</div></div>
+        <div>
+          <div class="place">柳橋連合市場｜食堂 光
+            <a href="https://www.instagram.com/shokudou_mitsu/" target="_blank" rel="noopener" style="margin-left:10px;color:#2563eb;font-weight:600;font-size:13px;">IG</a>
+            <a href="https://reurl.cc/9WzmyY" target="_blank" rel="noopener" style="margin-left:10px;color:#2563eb;font-weight:600;font-size:13px;">訂位/只能訂PM5:30以後</a>
+          </div>
+          <div class="meta">在地市場食堂，以新鮮海鮮定食、生魚片丼為主；10點開始營業，9點多可以先到店門口的候位表填寫資料。</div>
+        </div>
+      </div>
+
+      <div class="tRow tRow--full" style="padding:6px 12px;">
+        <div class="galleryWrap" aria-label="柳橋連合市場｜食堂光 照片" style="margin-top:0">
+          <p class="galleryTitle">📷 柳橋連合市場｜食堂 光</p>
+          <div class="galleryRow galleryRow--flush" role="list">
+            <div class="gItem" role="listitem" data-caption="柳橋連合市場 外觀"><img loading="lazy" src="day5/01.jpg" data-full="day5/01.jpg" alt="柳橋連合市場 外觀"></div>
+            <div class="gItem" role="listitem" data-caption="市場內部"><img loading="lazy" src="day5/02.jpg" data-full="day5/02.jpg" alt="市場內部"></div>
+            <div class="gItem" role="listitem" data-caption="海鮮攤位"><img loading="lazy" src="day5/03.jpg" data-full="day5/03.jpg" alt="海鮮攤位"></div>
+            <div class="gItem" role="listitem" data-caption="食堂 光 外觀"><img loading="lazy" src="day5/04.jpg" data-full="day5/04.jpg" alt="食堂 光 外觀"></div>
+            <div class="gItem" role="listitem" data-caption="海鮮丼定食"><img loading="lazy" src="day5/05.jpg" data-full="day5/05.jpg" alt="海鮮丼定食"></div>
+            <div class="gItem" role="listitem" data-caption="豪華鮪魚丼"><img loading="lazy" src="day5/06.jpg" data-full="day5/06.jpg" alt="豪華鮪魚丼"></div>
+            <div class="gItem" role="listitem" data-caption="午間菜單"><img loading="lazy" src="day5/07.jpg" data-full="day5/07.jpg" alt="午間菜單"></div>
+          </div>
+        </div>
+      </div>
+
+<div class="tRow tRow--full" style="padding:6px 12px;border-bottom:0">
+        <div style="margin:0">
+          <details style="margin-top:0;">
+            <summary style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;">
+              <span style="font-weight:800;font-size:16px;">往櫛田神社、冷泉公園、真言宗 東長寺 →</span>
+              <span class="chev">⌄</span>
+            </summary>
+            <div class="content" style="padding-top:0">
+<div style="margin-top:10px; line-height:1.7; font-size:14px;">
+                🚶‍♂️ 步行　經春吉街區－位於天神與博多之間，在地生活氣息濃厚的巷弄小店與靜謐住宅區。距離約 1.5 公里／步行時間約 20–25 分鐘。<br>
+                🚌 公車　／　🚇 地鐵　／　🚕 計程車
+              </div>
+
+              <div class="tRow" style="padding-left:0;padding-right:0">
+                <div><div class="time">11:20</div></div>
+                <div>
+                  <div class="place">櫛田神社</div>
+                  <div class="meta">擁有古老歷史的櫛田神社為博多總鎮守(守護神)，以櫛田桑的暱稱受當地居民愛戴。櫻花數量不多屬於點綴型，垂櫻與八重櫻在滿開時在傳統建築的襯托下非常精緻。</div>
+                </div>
+              </div>
+
+<div class="tRow tRow--full" style="padding-left:0;padding-right:0">
+                <div class="galleryWrap" aria-label="櫛田神社 照片" style="margin-top:0">
+                  <p class="galleryTitle">📷 櫛田神社</p>
+                  <div class="galleryRow galleryRow--flush" role="list">
+                    <div class="gItem" role="listitem" data-caption="櫛田神社鳥居與櫻花"><img loading="lazy" src="day5/08.jpg" data-full="day5/08.jpg" alt="櫛田神社鳥居與櫻花"></div>
+                    <div class="gItem" role="listitem" data-caption="如同柳樹枝條般向下垂落的垂櫻"><img loading="lazy" src="day5/09.jpg" data-full="day5/09.jpg" alt="如同柳樹枝條般向下垂落的枝垂櫻"></div>
+                    <div class="gItem" role="listitem" data-caption="五瓣品種，樹齡可達數百年以上"><img loading="lazy" src="day5/10.jpg" data-full="day5/10.jpg" alt="五瓣品種，樹齡可達數百年以上"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tRow" style="padding-left:0;padding-right:0">
+                <div><div class="time">11:50</div></div>
+                <div>
+                  <div class="place">冷泉公園</div>
+                  <div class="meta">神社旁的小型市區公園，櫻花以吉野櫻居多，櫻花盛開的時候，許多人會坐在櫻花樹下野餐。</div>
+                </div>
+              </div>
+
+              <div class="tRow tRow--full" style="padding-left:0;padding-right:0">
+                <div class="galleryWrap" aria-label="冷泉公園 照片" style="margin-top:0">
+                  <p class="galleryTitle">📷 冷泉公園</p>
+                  <div class="galleryRow galleryRow--flush" role="list">
+                    <div class="gItem" role="listitem" data-caption="櫻花步道"><img loading="lazy" src="day5/11.jpg" data-full="day5/11.jpg" alt="冷泉公園櫻花步道"></div>
+                    <div class="gItem" role="listitem" data-caption="鐘塔與櫻花"><img loading="lazy" src="day5/12.jpg" data-full="day5/12.jpg" alt="冷泉公園鐘塔與櫻花"></div>
+                  </div>
+                </div>
+              </div>
+
+<div class="tRow" style="padding-left:0;padding-right:0">
+                <div><div class="time">12:10</div></div>
+                <div>
+                  <div class="place">真言宗 東長寺</div>
+                  <div class="meta">可參拜日本最大木造坐像的佛像(高10.8ｍ，重30t)及體驗地獄極樂巡禮，費用約為 ¥100-¥300、觀賞櫻花。</div>
+                </div>
+              </div>
+
+              <div class="tRow tRow--full" style="padding-left:0;padding-right:0">
+                <div class="galleryWrap" aria-label="真言宗 東長寺 照片" style="margin-top:0">
+                  <p class="galleryTitle">📷 真言宗 東長寺</p>
+                  <div class="galleryRow galleryRow--flush" role="list">
+                    <div class="gItem" role="listitem" data-caption="福岡大佛"><img loading="lazy" src="day5/13.jpg" data-full="day5/13.jpg" alt="福岡大佛"></div>
+                    <div class="gItem" role="listitem" data-caption="東長寺入口超大櫻花樹"><img loading="lazy" src="day5/14.jpg" data-full="day5/14.jpg" alt="東長寺入口超大櫻花樹"></div>
+                    <div class="gItem" role="listitem" data-caption="五重塔與櫻花"><img loading="lazy" src="day5/15.jpg" data-full="day5/15.jpg" alt="五重塔與櫻花"></div>
+                    <div class="gItem" role="listitem" data-caption="櫻花與五重塔"><img loading="lazy" src="day5/16.jpg" data-full="day5/16.jpg" alt="櫻花與五重塔"></div>
+                    <div class="gItem" role="listitem" data-caption="櫻花特寫"><img loading="lazy" src="day5/17.jpg" data-full="day5/17.jpg" alt="櫻花特寫"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="noteTransit">
+                🚇 <strong>真言宗 東長寺 → 天神地下街：</strong><br>
+                由「祇園站」（空港線）搭乘 1 站至「天神站」，約 5 分鐘（210 円）。
+              </div>
+
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <div class="tRow tRow--full" style="padding:6px 12px;">
+        <div style="margin:0">
+          <details style="margin-top:0;">
+            <summary style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;">
+              <span style="font-weight:800;font-size:16px;">往舞鶴公園／福岡城跡 →</span>
+              <span class="chev">⌄</span>
+            </summary>
+            <div class="content" style="padding-top:0">
+<div class="noteTransit--tight">
+                <div>搭乘公車／地鐵步行時間仍長，進入公園也要走，故直接搭乘計程車 🚕。</div>
+                <div>行車時間：約 12–20 分／費用：約 1500–2000 円（實際依交通、時間略有差）</div>
+              </div>
+
+              <div class="tRow" style="padding-left:0;padding-right:0">
+                <div><div class="time">11:30</div></div>
+                <div>
+                  <div class="place">舞鶴公園
+                    <a href="https://www-midorimachi-jp.translate.goog/maiduru/?_x_tr_sl=ja&_x_tr_tl=zh-TW&_x_tr_hl=ja" target="_blank" rel="noopener" style="margin-left:10px;font-size:13px;font-weight:600;color:#2563eb;">官網</a>
+                  </div>
+                  <div class="meta">以福岡城址為其象徵，自然景色四季分明，1000顆櫻花是福岡市內賞櫻最為知名的公園。園內並設有田徑場等運動設施，鄰接大濠公園和福岡市立美術館。2026預估「 」開花、「 」盛開｜夜間點燈：2026/ / 開始</div>
+                </div>
+              </div>
+
+<div class="tRow tRow--full" style="padding-left:0;padding-right:0">
+                <div class="galleryWrap" aria-label="舞鶴公園／福岡城跡 照片" style="margin-top:0">
+                  <p class="galleryTitle">📷 舞鶴公園／福岡城跡</p>
+                  <div class="galleryRow galleryRow--flush" role="list">
+                    <div class="gItem" role="listitem" data-caption="舞鶴公園櫻花地圖（PDF）">
+                      <a href="day5/舞鶴公園櫻花地圖.pdf" target="_blank" rel="noopener">
+                        <img loading="lazy" src="day5/18.jpg" alt="舞鶴公園櫻花地圖">
+                      </a>
+                    </div>
+                    <div class="gItem" role="listitem" data-caption="櫻花步道"><img loading="lazy" src="day5/19.jpg" data-full="day5/19.jpg" alt="櫻花步道"></div>
+                    <div class="gItem" role="listitem" data-caption="舞鶴公園草地"><img loading="lazy" src="day5/20.jpg" data-full="day5/20.jpg" alt="舞鶴公園草地"></div>
+                    <div class="gItem" role="listitem" data-caption="福岡城跡"><img loading="lazy" src="day5/21.jpg" data-full="day5/21.jpg" alt="福岡城跡"></div>
+                    <div class="gItem" role="listitem" data-caption="櫻花與城跡"><img loading="lazy" src="day5/22.jpg" data-full="day5/22.jpg" alt="櫻花與城跡"></div>
+                    <div class="gItem" role="listitem" data-caption="公園遠景"><img loading="lazy" src="day5/23.jpg" data-full="day5/23.jpg" alt="公園遠景"></div>
+                    <div class="gItem" role="listitem" data-caption="櫻花開放日期預測"><img loading="lazy" src="day5/24.jpg" data-full="day5/24.jpg" alt="城跡高處視角"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="noteTransit">
+                🚇 <strong>舞鶴公園 → 天神地下街：</strong><br>
+                由「赤坂站」（空港線）搭乘 1 站至「天神站」，約 5 分鐘（210 円）。步行約 15–20 分鐘。
+              </div>
+
+              <div class="desc">
+                🔎 <strong>補充：</strong>
+                可順遊 <strong>大濠公園</strong>（與舞鶴公園相連，步行約 5–10 分鐘）。
+                最美湖景星巴克／草間彌生的南瓜。
+              </div>
+
+              <div class="galleryWrap" aria-label="大濠公園 照片" style="margin-top:12px">
+                <p class="galleryTitle">📷 大濠公園</p>
+                <div class="galleryRow galleryRow--flush" role="list">
+                  <div class="gItem" role="listitem" data-caption="大濠公園地圖"><img loading="lazy" src="day5/25.jpg" data-full="day5/25.jpg" alt="大濠公園地圖"></div>
+                  <div class="gItem" role="listitem" data-caption="湖畔步道"><img loading="lazy" src="day5/26.jpg" data-full="day5/26.jpg" alt="湖畔步道"></div>
+                  <div class="gItem" role="listitem" data-caption="春日湖景"><img loading="lazy" src="day5/27.jpg" data-full="day5/27.jpg" alt="春日湖景"></div>
+                  <div class="gItem" role="listitem" data-caption="舞鶴橋景色"><img loading="lazy" src="day5/28.jpg" data-full="day5/28.jpg" alt="舞鶴橋景色"></div>
+                  <div class="gItem" role="listitem" data-caption="湖景星巴克"><img loading="lazy" src="day5/29.jpg" data-full="day5/29.jpg" alt="湖景星巴克"></div>
+                  <div class="gItem" role="listitem" data-caption="星巴克窗景"><img loading="lazy" src="day5/30.jpg" data-full="day5/30.jpg" alt="星巴克窗景"></div>
+                  <div class="gItem" role="listitem" data-caption="草間彌生南瓜"><img loading="lazy" src="day5/31.jpg" data-full="day5/31.jpg" alt="草間彌生南瓜"></div>
+                </div>
+              </div>
+
+              <div class="noteTransit">
+                🚇 <strong>大濠公園 → 天神地下街：</strong><br>
+                由「大濠公園站」（空港線）搭乘 1 站至「天神站」，約 3 分鐘（210 円）。出站後可直接銜接天神地下街。<br>
+                🚶‍♂️ 步行：約 1.8–2 公里／約 25–30 分鐘。<br>
+                🚕 計程車：約 10–15 分鐘／約 1200–1800 円（依交通狀況略有差異）。
+              </div>
+
+</div>
+          </details>
+        </div>
+      </div>
+
+      <div class="tRow tRow--full">
+        <div>
+          <div class="place">🛍 天神站附近｜逛街地圖</div>
+          <div class="meta">以天神地下街為起點：天神地下街 → PARCO → Solaria Plaza → 三越 → 大丸。</div>
+
+          <div style="margin-top:10px;line-height:1.8;font-size:14px;color:var(--text)">
+            📍 <strong>天神地下街</strong>：地下商店街，雨天好走，藥妝／雜貨／伴手禮齊全，連接各大百貨。<br>
+            🛍 <strong>PARCO（天神）</strong>：年輕潮流感強，動漫聯名、Loft、無印良品，流行品牌多。<br>
+            🛍 <strong>Solaria Plaza</strong>：設計感與質感路線，女裝品牌多，咖啡廳好坐。<br>
+            🛍 <strong>福岡三越</strong>：傳統高級百貨，精品與地下美食街、禮盒伴手禮選擇多。<br>
+            🛍 <strong>大丸天神</strong>：穩重型百貨，地下食品區很強，甜點熟食好買。
+          </div>
+
+          <div class="navGrid" style="margin-top:10px;">
+            <div style="grid-column:1 / -1;font-weight:700;font-size:12px;margin:2px 0 6px;color:var(--muted)">🚶 購物地圖 / 步行導航</div>
+            <a class="btn" target="_blank" rel="noopener" href="day5/天神地下街.pdf">📄 天神地下街（PDF）</a>
+            <a class="btn" target="_blank" rel="noopener" href="day5/百貨公司位置圖.pdf">📄 百貨公司位置圖（PDF）</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E5%A4%A9%E7%A5%9E%E5%9C%B0%E4%B8%8B%E8%A1%97&travelmode=walking">🚶 天神地下街</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=PARCO%20Fukuoka%20Tenjin&travelmode=walking">🚶 PARCO（天神）</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Solaria%20Plaza%20Fukuoka&travelmode=walking">🚶 Solaria Plaza</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Fukuoka%20Mitsukoshi&travelmode=walking">🚶 三越（福岡天神）</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Daimaru%20Fukuoka%20Tenjin&travelmode=walking">🚶 大丸（福岡天神）</a>
+          </div>
+        </div>
+      </div>
+
 </div>
 
-<!-- Day4 隱藏相簿（之後這一天的圖片也統一放這裡，不顯示在行程表） -->
-<div id="day4Album" style="display:none">
- <!-- 例如：
- <img src="9.jpg" alt="Day4 圖片1">
- <img src="10.jpg" alt="Day4 圖片2">
- -->
+  </div></div>
+</section>
+<section class="panel" id="day6" role="tabpanel" aria-label="Day 6 行程">
+  <div class="dayHeader">
+    <div class="dayTitle"><div class="num">6</div><div class="tblock"><h2>回程｜福岡機場 → 桃園</h2></div></div>
+    <div class="dayHeaderRight"><div class="dayDateRight">03/28（六）</div></div>
+  </div>
+  <div class="dayBody"><div class="content">
+    <div class="frame framePad">
+      <div class="timeline timelinePlain">
+        <div class="tRow"><div><div class="time">06:00</div><div class="meta">起床</div></div><div><div class="place">飯店</div><div class="meta">退房準備／確認護照、機票、行李</div></div></div>
+        <div class="tRow"><div><div class="time">07:00</div><div class="meta">出發</div></div><div><div class="place">前往福岡機場（FUK）</div><div class="meta">預計 07:30 抵達機場</div></div></div>
+        <div class="tRow"><div><div class="time">07:30</div><div class="meta">抵達</div></div><div><div class="place">福岡機場</div><div class="meta">報到／托運／安檢</div></div></div>
+        <div class="tRow"><div><div class="time">10:55</div><div class="meta">起飛</div></div><div><div class="place">虎航 IT241</div><div class="meta">FUK → TPE</div></div></div>
+        <div class="tRow"><div><div class="time">12:40</div></div><div><div class="place">桃園國際機場（TPE）</div><div class="meta">第一航廈</div></div></div>
+      </div>
+    </div>
+    
+  </div></div>
+</section>
+
+<section class="panel" id="mapcodes" role="tabpanel" aria-label="Mapcode 集中頁">
+  <div class="dayHeader">
+    <div class="dayTitle">
+      <div class="num">★</div>
+      <div class="tblock"><h2>Mapcode｜<a href="https://www.mapion.co.jp/" target="_blank" rel="noopener">查詢按這裡</a></h2></div>
+    </div>
+    <div class="dayHeaderRight"><div class="dayDateRight"></div></div>
+  </div>
+
+  <div class="dayBody">
+    <div class="content mapPage">
+      <div class="frame framePad">
+
+        <details class="mapSection">
+          <summary><span class="sumText sumText--nowrap">Day 2｜由布院・九重</span><span class="chev">⌄</span></summary>
+          <div class="content">
+            <div class="mapList">
+              <div class="mapItem"><div class="mapName">山田服務區 (Yamada SA)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">166 626 503*52</code></div></div>
+              <div class="mapItem"><div class="mapName">玖珠服務區 (Kusu SA)</div><div class="mapMeta">Mapcode：<code style="font-weight:800">269 095 861*85</code></div></div>
+              <div class="mapItem"><div class="mapName">湯布院中央兒童公園</div><div class="mapMeta">Mapcode：<code style="font-weight:800">269 358 469*18</code></div></div>
+              <div class="mapItem"><div class="mapName">金鱗湖</div><div class="mapMeta">Mapcode：<code style="font-weight:800">377 319 293*55</code></div></div>
+              <div class="mapItem"><div class="mapName">狭霧台</div><div class="mapMeta">Mapcode：<code style="font-weight:800">302 798 233*66</code></div></div>
+              <div class="mapItem"><div class="mapName">九重夢大吊橋</div><div class="mapMeta">Mapcode：<code style="font-weight:800">377 023 247*63</code></div></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="mapSection">
+          <summary><span class="sumText sumText--nowrap">Day 3｜黑川溫泉・阿蘇</span><span class="chev">⌄</span></summary>
+          <div class="content">
+            <div class="mapList">
+              <div class="mapItem"><div class="mapName">夫妻瀑布</div><div class="mapMeta">Mapcode：<code style="font-weight:800">256 456 771*20</code></div></div>
+              <div class="mapItem"><div class="mapName">黑川溫泉停車場</div><div class="mapMeta">Mapcode：<code style="font-weight:800">440 542 811*17</code></div></div>
+              <div class="mapItem"><div class="mapName">池山水源</div><div class="mapMeta">Mapcode：<code style="font-weight:800">256 801 799*55</code></div></div>
+              <div class="mapItem"><div class="mapName">Kamenoi Hotel Aso</div><div class="mapMeta">Mapcode：<code style="font-weight:800">256 551 569*74</code></div></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="mapSection">
+          <summary><span class="sumText sumText--nowrap">Day 4｜阿蘇・太宰府・博多</span><span class="chev">⌄</span></summary>
+          <div class="content">
+            <div class="mapList">
+              <div class="mapItem"><div class="mapName">上色見熊野座神社</div><div class="mapMeta">Mapcode：<code style="font-weight:800">256 547 232*77</code></div></div>
+              <div class="mapItem"><div class="mapName">白川水源</div><div class="mapMeta">Mapcode：<code style="font-weight:800">256 460 589*26</code></div></div>
+              <div class="mapItem"><div class="mapName">阿蘇火山</div><div class="mapMeta">Mapcode：<code style="font-weight:800">449 576 626*12</code></div></div>
+              <div class="mapItem"><div class="mapName">草千里</div><div class="mapMeta">Mapcode：<code style="font-weight:800">449 575 012*63</code></div></div>
+              <div class="mapItem"><div class="mapName">太宰府天滿宮</div><div class="mapMeta">Mapcode：<code style="font-weight:800">55 452 706*41</code></div></div>
+              <div class="mapItem"><div class="mapName">Cross Life 博多柳橋</div><div class="mapMeta">Mapcode：<code style="font-weight:800">13 290 880*21</code></div></div>
+            </div>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div>
+</section>
+
 </div>
-
-<!-- Day5 隱藏相簿（之後這一天的圖片也統一放這裡，不顯示在行程表） -->
-<div id="day5Album" style="display:none">
- <!-- 例如：
- <img src="11.jpg" alt="Day5 圖片1">
- <img src="12.jpg" alt="Day5 圖片2">
- -->
-</div>
-
-</main>
-
- <div class="lbModal" id="lightbox" aria-hidden="true">
- <div class="lbBackdrop" data-close="lightbox"></div>
- <div class="lbInner" role="dialog" aria-modal="true" aria-label="圖片預覽">
- <button class="lbClose" type="button" id="lbClose" aria-label="關閉圖片">×</button>
- <button class="lbNav lbPrev" id="lbPrev" aria-label="上一張">‹</button>
- <img class="lbImg" id="lbImg" alt="放大圖片">
- <button class="lbNav lbNext" id="lbNext" aria-label="下一張">›</button>
- <div class="lbCaption" id="lbCaption"></div>
- </div>
- </div>
+    </div>
+  </div>
 
  <script>
 (function(){
- const modal = document.getElementById('lightbox');
- const modalImg = document.getElementById('lbImg');
- const modalCaption = document.getElementById('lbCaption');
- const closeBtn = document.getElementById('lbClose');
- const prevBtn = document.getElementById('lbPrev');
- const nextBtn = document.getElementById('lbNext');
- const tabButtons = document.querySelectorAll('.tabBtn[data-target]');
- const pagePanels = document.querySelectorAll('.pagePanel');
- const addDayBtn = document.getElementById('addDayBtn');
- let currentIndex = -1;
- let currentGroup = [];
- let startX = 0;
- let endX = 0;
 
- function getCaption(img){
-  const item = img.closest('.gItem');
-  const cap = item ? item.querySelector('.gCaption') : null;
-  return cap ? cap.textContent.trim() : (img.alt || '');
- }
+  function qs(sel, root){ return (root || document).querySelector(sel); }
+  function qsa(sel, root){ return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
 
- function showImage(index){
-  if(index < 0 || index >= currentGroup.length) return;
-  currentIndex = index;
-  const img = currentGroup[index];
-  modalImg.src = img.currentSrc || img.src;
-  modalImg.alt = img.alt || '';
-  modalCaption.textContent = getCaption(img);
- }
-
- function openLightbox(img){
-  const row = img.closest('.galleryRow');
-  if(!row) return;
-  currentGroup = Array.from(row.querySelectorAll('img'));
-  currentIndex = currentGroup.indexOf(img);
-  showImage(currentIndex);
-  modal.classList.add('open');
-  modal.setAttribute('aria-hidden','false');
-  document.body.style.overflow = 'hidden';
- }
-
- function closeLightbox(){
-  modal.classList.remove('open');
-  modal.setAttribute('aria-hidden','true');
-  modalImg.removeAttribute('src');
-  modalCaption.textContent = '';
-  document.body.style.overflow = '';
- }
-
- function nextImage(){
-  if(currentIndex < currentGroup.length - 1){
-   showImage(currentIndex + 1);
-  }
- }
-
- function prevImage(){
-  if(currentIndex > 0){
-   showImage(currentIndex - 1);
-  }
- }
-
- let lastDayId = 'day1';
-
- function activateTab(targetId, updateHash){
-  if(targetId.startsWith('day')){
-   lastDayId = targetId;
-  }
-  tabButtons.forEach(btn=>{
-   btn.classList.toggle('active', btn.dataset.target === targetId);
-  });
-
-  pagePanels.forEach(panel=>{
-   panel.classList.toggle('active', panel.id === targetId);
-  });
-
-  if(updateHash){
-   history.replaceState(null,'','#'+targetId);
-  }
- }
-
- document.querySelectorAll('.galleryRow img').forEach(function(img){
-  img.loading = 'lazy';
-  img.addEventListener('click',function(){
-   openLightbox(img);
-  });
- });
-
- tabButtons.forEach(function(btn){
-  btn.addEventListener('click',function(e){
-   e.preventDefault();
-   activateTab(btn.dataset.target,true);
-  });
- });
-
- const initialHash = window.location.hash ? window.location.hash.slice(1) : '';
- const hasInitialPanel = Array.from(pagePanels).some(p=>p.id===initialHash);
- activateTab(hasInitialPanel ? initialHash : 'day1', false);
-
- modal.addEventListener('click',function(e){
-  if(e.target === modal || e.target.dataset.close === 'lightbox'){
-   closeLightbox();
-  }
- });
-
- closeBtn.addEventListener('click',closeLightbox);
- prevBtn.addEventListener('click',prevImage);
- nextBtn.addEventListener('click',nextImage);
-
- document.addEventListener('keydown',function(e){
-  if(!modal.classList.contains('open')) return;
-  if(e.key === 'Escape') closeLightbox();
-  if(e.key === 'ArrowRight') nextImage();
-  if(e.key === 'ArrowLeft') prevImage();
- });
-
- modalImg.addEventListener('touchstart',e=>{
-  startX = e.touches[0].clientX;
- });
-
- modalImg.addEventListener('touchend',e=>{
-  endX = e.changedTouches[0].clientX;
-  const diff = startX - endX;
-  if(Math.abs(diff) < 40) return;
-  if(diff > 0) nextImage();
-  else prevImage();
- });
-
- const tripConfig = {
-  tripName: '東京旅行',
-  startDate: '2026-04-20',
- };
-
- function formatDate(date){
-  const d = new Date(date);
-  const m = String(d.getMonth()+1).padStart(2,'0');
-  const day = String(d.getDate()).padStart(2,'0');
-  const w = ['日','一','二','三','四','五','六'][d.getDay()];
-  return `${m}/${day}（${w}）`;
- }
-
- function applyAutoDates(){
-  const start = new Date(tripConfig.startDate);
-  const days = document.querySelectorAll('.daySection');
-  days.forEach((section,i)=>{
-   const d = new Date(start);
-   d.setDate(start.getDate()+i);
-   const el = section.querySelector('.dayDate');
-   if(el && (el.textContent.includes('請填日期') || el.textContent.trim()==='')){
-    el.textContent = formatDate(d);
-   }
-  });
- }
-
- applyAutoDates();
-
- function applyTripName(){
-  if(tripConfig.tripName){
-   document.title = tripConfig.tripName + '｜行程';
-   const dayTitles = document.querySelectorAll('.daySection .dayTitle');
-   dayTitles.forEach((el,i)=>{
-    if(i > 0 && el.textContent.includes('Day')){
-     el.textContent = tripConfig.tripName + '｜Day ' + (i+1) + ' 行程';
+  function initLightbox(){
+    if(!qs('.lbModal')){
+      var lb = document.createElement('div');
+      lb.className = 'lbModal';
+      lb.innerHTML = ''
+        + '<div class="lbBackdrop" data-lb-close></div>'
+        + '<div class="lbStage"><img class="lbImg" alt="" /></div>'
+        + '<div class="lbNav">'
+        + '  <button class="lbBtn" type="button" data-lb-prev aria-label="上一張">‹</button>'
+        + '  <button class="lbBtn" type="button" data-lb-next aria-label="下一張">›</button>'
+        + '  <span class="lbCount" data-lb-count>0/0</span>'
+        + '</div>'
+        + '<button class="lbClose" type="button" data-lb-close aria-label="關閉">✕</button>';
+      document.body.appendChild(lb);
     }
-   });
-  }
- }
 
- applyTripName();
+    var modal = qs('.lbModal');
+    var stage = qs('.lbStage', modal);
+    var imgEl = qs('.lbImg', modal);
+    var countEl = qs('[data-lb-count]', modal);
 
- if(addDayBtn){
-  addDayBtn.addEventListener('click',function(e){
-   e.preventDefault();
+    var list = [];
+    var idx = 0;
 
-   if(e.shiftKey || e.detail===2){
-    const days = Array.from(document.querySelectorAll('.daySection'));
-    if(days.length<=5) return;
+    function openAt(i){
+      if(!list.length) return;
+      idx = (i + list.length) % list.length;
+      imgEl.src = list[idx];
+      countEl.textContent = String(idx + 1) + '/' + String(list.length);
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
 
-    const last = days[days.length-1];
-    const lastId = last.id;
-    last.remove();
+    function close(){
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
 
-    const tab = document.querySelector(`.tabBtn[data-target="${lastId}"]`);
-    if(tab) tab.remove();
+    function next(){ openAt(idx + 1); }
+    function prev(){ openAt(idx - 1); }
 
-    activateTab('day5',true);
-    return;
-   }
-
-   const daySections = Array.from(document.querySelectorAll('.daySection'));
-   const last = daySections[daySections.length-1];
-   const newIndex = daySections.length + 1;
-
-   const clone = last.cloneNode(true);
-   clone.id = 'day'+newIndex;
-
-   const indexEl = clone.querySelector('.dayIndex');
-   if(indexEl) indexEl.textContent = newIndex;
-
-   const titleEl = clone.querySelector('.dayTitle');
-   if(titleEl) titleEl.textContent = tripConfig.tripName + '｜Day '+newIndex+' 行程';
-
-   const dateEl = clone.querySelector('.dayDate');
-   if(dateEl){
-    const start = new Date(tripConfig.startDate);
-    const d = new Date(start);
-    d.setDate(start.getDate() + (newIndex-1));
-    dateEl.textContent = formatDate(d);
-   }
-
-   const timeline = clone.querySelector('.timeline');
-   if(timeline){
-    timeline.innerHTML = `
-    <div class="tRow">
-     <div class="time">09:00</div>
-     <div class="place">
-      <p class="placeTitle">請填入 Day ${newIndex} 第一個行程</p>
-      <p class="meta">新增行程可複製這一列 tRow。</p>
-     </div>
-    </div>`;
-   }
-
-   clone.classList.remove('active');
-   document.querySelector('.tabShell').appendChild(clone);
-
-   const tab = document.createElement('a');
-   tab.className = 'tabBtn';
-   tab.href = '#day'+newIndex;
-   tab.dataset.target = 'day'+newIndex;
-   tab.textContent = 'Day '+newIndex;
-
-   const memoTab = document.querySelector('.tabBtn[data-target="memoPanel"]');
-   document.querySelector('.topTabs').insertBefore(tab, memoTab);
-
-   tab.addEventListener('click',function(ev){
-    ev.preventDefault();
-    activateTab('day'+newIndex,true);
-   });
-  });
- }
-
- const buildBtn = document.getElementById('buildRow');
- if(buildBtn){
-  buildBtn.addEventListener('click',()=>{
-   const t = document.getElementById('editTime').value || '09:00';
-   const p = document.getElementById('editPlace').value || '地點';
-   const m = document.getElementById('editMeta').value || '';
-
-   const html = `<div class="tRow">
- <div class="time">${t}</div>
- <div class="place">
- <p class="placeTitle">${p}</p>
- <p class="meta">${m}</p>
- </div>
-</div>`;
-
-   document.getElementById('rowOutput').value = html;
-  });
- }
-
-
-// ===== 行程拖曳排序（桌面）=====
-
-// ===== 匯出目前 HTML（拖曳後可取得最新結構）=====
-(function enableHTMLExport(){
- const editor = document.getElementById('editorPanel');
- if(!editor) return;
-
- const btnRow = document.createElement('div');
- btnRow.style.marginTop = '14px';
- btnRow.style.display = 'flex';
- btnRow.style.flexWrap = 'wrap';
- btnRow.style.gap = '8px';
-
- function makeBtn(label){
-  const b = document.createElement('button');
-  b.type = 'button';
-  b.textContent = label;
-  b.style.padding = '8px 12px';
-  b.style.border = '1px solid var(--line)';
-  b.style.borderRadius = '10px';
-  b.style.background = '#fff';
-  b.style.cursor = 'pointer';
-  return b;
- }
-
- const exportDayBtn = makeBtn('複製目前 Day HTML');
- const exportAllBtn = makeBtn('複製全部行程 HTML');
- const copyPageBtn = makeBtn('複製完整頁面 HTML');
-
- btnRow.append(exportDayBtn, exportAllBtn, copyPageBtn);
-
- const body = editor.querySelector('.dayBody');
- body.appendChild(btnRow);
-
- const output = document.getElementById('rowOutput');
-
- function getActiveTimeline(){
-  // 如果現在在 Day 頁面
-  const activeDay = document.querySelector('.daySection.active');
-  if(activeDay) return activeDay.querySelector('.timeline');
-
-  // 如果現在在「單日編輯器」，使用最後查看的 Day
-  const lastDay = document.getElementById(lastDayId);
-  if(lastDay) return lastDay.querySelector('.timeline');
-
-  return null;
- }
-
- async function copyText(text, successMessage){
-  output.value = text;
-  output.scrollTop = 0;
-
-  try{
-   await navigator.clipboard.writeText(text);
-  }catch(err){
-   output.focus();
-   output.select();
-   document.execCommand('copy');
-  }
-
-  alert(successMessage);
- }
-
- exportDayBtn.addEventListener('click', async ()=>{
-  const timeline = getActiveTimeline();
-  if(!timeline) return;
-  const html = timeline.innerHTML.trim();
-  await copyText(html, '目前 Day HTML 已複製');
- });
-
- exportAllBtn.addEventListener('click', async ()=>{
-  const days = document.querySelectorAll('.daySection');
-  let html = '';
-
-  days.forEach(day=>{
-   const id = day.id;
-   const timeline = day.querySelector('.timeline');
-   if(timeline){
-    html += `
-<!-- ${id} -->
-${timeline.innerHTML.trim()}
-`;
-   }
-  });
-
-  await copyText(html.trim(), '全部行程 HTML 已複製');
- });
-
- copyPageBtn.addEventListener('click', async ()=>{
-  const fullHTML = document.documentElement.outerHTML;
-  await copyText(fullHTML, '完整 HTML 已複製，可直接貼回主行程檔');
- });
-})();
-
-// ===== 行程拖曳排序（桌面）=====
-(function enableDragSort(){
- const timelines = document.querySelectorAll('.timeline');
- timelines.forEach(timeline=>{
-  let dragItem = null;
-
-  timeline.addEventListener('dragstart',e=>{
-   const row = e.target.closest('.tRow');
-   if(!row) return;
-   dragItem = row;
-   row.style.opacity = '0.4';
-   e.dataTransfer.effectAllowed = 'move';
-  });
-
-  timeline.addEventListener('dragend',e=>{
-   const row = e.target.closest('.tRow');
-   if(row) row.style.opacity = '1';
-   dragItem = null;
-  });
-
-  timeline.addEventListener('dragover',e=>{
-   e.preventDefault();
-   const row = e.target.closest('.tRow');
-   if(!row || !dragItem || row===dragItem) return;
-
-   const rect = row.getBoundingClientRect();
-   const offset = e.clientY - rect.top;
-
-   if(offset > rect.height/2){
-     row.after(dragItem);
-   }else{
-     row.before(dragItem);
-   }
-  });
-
-  timeline.querySelectorAll('.tRow').forEach(row=>{
-    row.draggable = false;
-
-    const handle = row.querySelector('.time');
-    if(!handle) return;
-
-    handle.style.cursor = 'grab';
-    handle.style.userSelect = 'none';
-
-    handle.addEventListener('mousedown',()=>{
-      row.draggable = true;
+    modal.addEventListener('click', function(e){
+      if(e.target && e.target.closest && e.target.closest('[data-lb-close]')) close();
     });
 
-    handle.addEventListener('mouseup',()=>{
-      row.draggable = false;
+    qs('[data-lb-next]', modal).addEventListener('click', function(e){
+      e.stopPropagation();
+      next();
     });
 
-    handle.addEventListener('mouseleave',()=>{
-      row.draggable = false;
+    qs('[data-lb-prev]', modal).addEventListener('click', function(e){
+      e.stopPropagation();
+      prev();
     });
+
+    window.addEventListener('keydown', function(e){
+      if(!modal.classList.contains('open')) return;
+      if(e.key === 'Escape') close();
+      if(e.key === 'ArrowRight') next();
+      if(e.key === 'ArrowLeft') prev();
+    });
+
+    document.addEventListener('click', function(e){
+      var thumb = e.target && e.target.closest && e.target.closest('.galleryRow .gItem img');
+      if(!thumb) return;
+      if(thumb.getAttribute('data-no-lightbox') === '1') return;
+
+      var row = thumb.closest('.galleryRow');
+      var imgs = qsa('.gItem img', row).filter(function(x){
+        return x.getAttribute('data-no-lightbox') !== '1';
+      });
+
+      list = imgs.map(function(x){
+        return x.getAttribute('data-full') || x.currentSrc || x.src;
+      });
+
+      openAt(imgs.indexOf(thumb));
+    }, { passive: true });
+
+    var tsx = 0, tsy = 0, tlx = 0, tly = 0, tracking = false;
+    var LB_TH = 50;
+
+    stage.addEventListener('touchstart', function(e){
+      if(!modal.classList.contains('open')) return;
+      if(!e.touches || e.touches.length !== 1) return;
+      var t = e.touches[0];
+      tsx = tlx = t.clientX;
+      tsy = tly = t.clientY;
+      tracking = true;
+    }, { passive: true });
+
+    stage.addEventListener('touchmove', function(e){
+      if(!tracking || !e.touches || e.touches.length !== 1) return;
+      var t = e.touches[0];
+      tlx = t.clientX;
+      tly = t.clientY;
+    }, { passive: true });
+
+    stage.addEventListener('touchend', function(){
+      if(!tracking) return;
+      var dx = tlx - tsx;
+      var dy = tly - tsy;
+      if(Math.abs(dx) > LB_TH && Math.abs(dx) > Math.abs(dy) * 1.2){
+        if(dx < 0) next();
+        else prev();
+      }
+      tracking = false;
+    }, { passive: true });
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    initLightbox();
   });
- });
-})();
-
-// ===== 行程圖片自動分配系統 =====
-// Day1 圖片規則：
-// 1.jpg → 利木津巴士
-// 2.jpg 3.jpg → Skyliner
-// 4.jpg → N'EX
-(function autoAlbum(){
- const loadImg = (src, alt)=>{
-  const img = new Image();
-  img.src = src;
-  img.alt = alt || '';
-  img.loading = 'lazy';
-  return img;
- };
-
- // Day1 galleries
- const day1 = document.querySelector('#day1');
- if(day1){
-  const galleries = day1.querySelectorAll('.galleryRow');
-
-  // 利木津
-  if(galleries[0]){
-   const g = galleries[0];
-   const img = loadImg('./img/Day1/1.jpg','利木津巴士乘車處');
-   img.onload = ()=>{
-    const item = document.createElement('div');
-    item.className = 'gItem';
-    item.appendChild(img);
-    g.appendChild(item);
-   };
-  }
-
-  // Skyliner (2,3)
-  if(galleries[1]){
-   [2,3].forEach(i=>{
-    const img = loadImg(`./img/Day1/${i}.jpg`,`Skyliner 圖片${i}`);
-    img.onload = ()=>{
-     const item = document.createElement('div');
-     item.className = 'gItem';
-     item.appendChild(img);
-     galleries[1].appendChild(item);
-    };
-   });
-  }
-
-  // NEX
-  if(galleries[2]){
-   const img = loadImg('./img/Day1/4.jpg','NEX 指示');
-   img.onload = ()=>{
-    const item = document.createElement('div');
-    item.className = 'gItem';
-    item.appendChild(img);
-    galleries[2].appendChild(item);
-   };
-  }
- }
-})();
-
-// ===== 下一班車自動標示系統（抓最接近的 3 個班次，不分交通工具） =====
-(function highlightNextTrains(){
- const rows = Array.from(document.querySelectorAll('.infoContent table tr')).slice(1);
- if(!rows.length) return;
-
- // 基準時間為 16:00，但如果實際時間更晚則使用實際時間
- const now = new Date();
- const realNowMin = now.getHours()*60 + now.getMinutes();
- const nowMin = Math.max(16*60, realNowMin);
-
- const list = [];
-
- rows.forEach(row=>{
-  const tds = row.querySelectorAll('td');
-  if(tds.length<4) return;
-
-  const time = tds[0].textContent.trim();
-  const [h,m] = time.split(':').map(Number);
-  const minutes = h*60 + m;
-
-  if(minutes >= nowMin){
-   list.push({row,minutes});
-  }
- });
-
- // 按時間排序
- list.sort((a,b)=>a.minutes-b.minutes);
-
- // 取最接近的三班
- const nextThree = list.slice(0,3);
-
- nextThree.forEach((item,index)=>{
-  const td = item.row.querySelectorAll('td')[3];
-
-  // 第一名：建議搭乘
-  if(index===0){
-   td.innerHTML += ' ⭐ 建議搭乘';
-   item.row.style.background = '#e8f7e8';
-   item.row.style.fontWeight = '700';
-  }
-  // 其他兩班：備用
-  else{
-   td.innerHTML += ' ⭐';
-   item.row.style.background = '#fff9e8';
-  }
- });
-})();
-
-// ===== 自動讓外部連結開新分頁 =====
-(function autoExternalLinks(){
- const links = document.querySelectorAll('a[href^="http"]');
- links.forEach(link=>{
-  link.setAttribute('target','_blank');
-  link.setAttribute('rel','noopener');
- });
-})();
 
 })();
+
+// iOS / 手機語音初始化
+let voicesLoaded = false;
+function loadVoices(){
+  return new Promise(resolve => {
+    const voices = speechSynthesis.getVoices();
+    if(voices.length){
+      voicesLoaded = true;
+      resolve(voices);
+    }else{
+      speechSynthesis.onvoiceschanged = () => {
+        voicesLoaded = true;
+        resolve(speechSynthesis.getVoices());
+      };
+    }
+  });
+}
+
+// 使用者第一次互動時喚醒語音（iOS 必要）
+document.addEventListener('click', function initOnce(){
+  loadVoices();
+  document.removeEventListener('click', initOnce);
+});
+
+// 播放語音 + 高亮
+document.addEventListener('click', function(e){
+  const btn = e.target.closest('.speak');
+  if(!btn) return;
+
+  const text = btn.getAttribute('data-text');
+  if(!text) return;
+
+  const row = btn.closest('.meta');
+
+  document.querySelectorAll('.meta').forEach(el => el.classList.remove('speaking'));
+  if(row) row.classList.add('speaking');
+
+  speechSynthesis.cancel();
+
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'ja-JP';
+  utter.rate = 0.75;
+  utter.pitch = 1;
+
+  const voices = speechSynthesis.getVoices();
+  const jaVoice = voices.find(v => v.lang === 'ja-JP');
+  if(jaVoice) utter.voice = jaVoice;
+
+  utter.onend = () => {
+    if(row) row.classList.remove('speaking');
+  };
+
+  speechSynthesis.speak(utter);
+});
 </script>
 </body>
 </html>
