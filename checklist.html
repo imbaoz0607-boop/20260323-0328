@@ -140,9 +140,8 @@
           <button class="switch-btn" id="travelBtn">打包清單</button>
           <button class="switch-btn" id="drugstoreBtn">購物清單</button>
         </div>
-        <button class="primary" id="expandBtn">全部展開</button>
-        <button id="collapseBtn">全部收合</button>
-        <button id="resetBtn">全部重設</button>
+        <button class="primary" id="toggleExpandBtn">展開全部 ▼</button>
+        
       </div>
     </section>
 
@@ -492,32 +491,23 @@ ${(()=>{const m=itemName.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<spa
         });
       });
 
-      document.getElementById("expandBtn").onclick = function(){
-        currentList().groups.forEach(group => state.open[keyForOpen(state.activeList, group.title)] = true);
+      document.getElementById("toggleExpandBtn").onclick = function(){
+        const groups = currentList().groups;
+        const allOpen = groups.every(g => state.open[keyForOpen(state.activeList, g.title)] === true);
+
+        if(allOpen){
+          groups.forEach(g => state.open[keyForOpen(state.activeList, g.title)] = false);
+          this.textContent = "展開全部 ▼";
+        }else{
+          groups.forEach(g => state.open[keyForOpen(state.activeList, g.title)] = true);
+          this.textContent = "收合全部 ▲";
+        }
+
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
         render();
       };
 
-      document.getElementById("collapseBtn").onclick = function(){
-        currentList().groups.forEach(group => state.open[keyForOpen(state.activeList, group.title)] = false);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-        render();
-      };
-
-      document.getElementById("resetBtn").onclick = function(){
-        if(!confirm("要清空目前這份清單的勾選與收合紀錄嗎？")) return;
-        const list = currentList();
-        list.groups.forEach(group => {
-          const flattenedItems = group.items.flatMap(item => item?.covermark ? (item.items || []) : [item]);
-          flattenedItems.forEach(item => {
-            const itemName = item?.name ?? item;
-            delete state.checked[keyForItem(state.activeList, group.title, itemName)];
-          });
-          delete state.open[keyForOpen(state.activeList, group.title)];
-        });
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-        render();
-      };
+      
 
       document.getElementById("travelBtn").onclick = function(){
         state.activeList = "travel";
