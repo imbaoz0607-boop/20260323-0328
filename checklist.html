@@ -76,7 +76,7 @@
     .group summary::-webkit-details-marker{ display:none; }
     .summary-main{ display:flex; align-items:center; gap:12px; flex:1; min-width:0; }
     .title-area{ min-width:0; flex:1; }
-    .title-row{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+   .title-row{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
     .group-title{ font-size:17px; font-weight:800; }
     .group-meta{ margin-top:4px; color:var(--muted); font-size:12px; }
     .badge{ display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; font-size:12px; font-weight:700; background:var(--accent-soft); color:var(--accent); border:1px solid rgba(37,99,235,.12); }
@@ -338,19 +338,12 @@ ${(()=>{const m=itemName.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<spa
 
             ${itemsHtml}
 
-            ${state.activeList === "drugstore" ? `
-            <div class="editor-row drugstore-editor">
-              <input class="editor-input" type="text" placeholder="新增 ${group.title} 物品" data-add-input="${group.title}">
-              <label class="tiny-btn file-btn" for="file-${idx}">選擇圖片</label>
-              <input type="file" id="file-${idx}" accept="image/*" data-add-file="${group.title}" style="display:none">
-              <button class="tiny-btn" type="button" data-add-btn="${group.title}">新增</button>
-            </div>
-            ` : `
+            ${state.activeList !== "drugstore" ? `
             <div class="editor-row">
               <input class="editor-input" type="text" placeholder="新增 ${group.title} 物品" data-add-input="${group.title}">
               <button class="tiny-btn" type="button" data-add-btn="${group.title}">新增</button>
             </div>
-            `}
+            ` : ``}
           </details>
         `;
       }).join("");
