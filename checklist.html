@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🐯 小尾巴</title>
+  <title>小尾巴</title>
   <meta name="theme-color" content="#2563eb" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -167,17 +167,17 @@
       travel: {
         title: "📜 List",
         groups: [
-          { title: "重要物品", icon: "📘", items: ["護照","日文駕照翻譯本、台灣駕照","現金"] },
-          { title: "清潔", icon: "🧼", items: ["卸妝油","洗面乳","洗髮精","護髮膜","快乾擦髮巾"] },
-          { title: "保養品、底妝", icon: "💄", items: ["前導精華","痘膚潤","痘痘藥","化妝水","眼霜","保濕精華液","面霜","擦拭行化妝水","化妝棉","防曬","CC霜","妝前霜","蜜粉","多效精華液","身體乳液","熱活精華","護髮油"] },
-          { title: "生活物品", icon: "🏠", items: ["牙刷、牙膏","牙線棒","棉花棒","濕紙巾","暈車藥","暖暖包","鯊魚夾","瀏海貼","口罩","袖珍面紙","購物袋","垃圾袋","凡士林","眼藥水","眼鏡","睡覺穿厚襪","藥品","雨傘"] },
-          { title: "其他", icon: "🔌", items: ["充電頭、充電線","行動電源","耳機","酒精"] }
+          { title: "重要物品", items: ["護照","日文駕照翻譯本、台灣駕照","現金"] },
+          { title: "清潔", items: ["卸妝油","洗面乳","洗髮精","護髮膜","快乾擦髮巾"] },
+          { title: "保養品、底妝", items: ["前導精華","痘膚潤","痘痘藥","化妝水","眼霜","保濕精華液","面霜","擦拭行化妝水","化妝棉","防曬","CC霜","妝前霜","蜜粉","多效精華液","身體乳液","熱活精華","護髮油"] },
+          { title: "生活物品", items: ["牙刷、牙膏","牙線棒","棉花棒","濕紙巾","暈車藥","暖暖包","鯊魚夾","瀏海貼","口罩","袖珍面紙","購物袋","垃圾袋","凡士林","眼藥水","眼鏡","睡覺穿厚襪","藥品","雨傘"] },
+          { title: "其他", items: ["充電頭、充電線","行動電源","耳機","酒精"] }
         ]
       },
       drugstore: {
         title: "📜 List",
         groups: [
-          { title: "藥品", icon: "🛒", items: [
+          { title: "藥品", items: [
             { name:"EVE止痛藥", img:"images/1.jpg" },
             { name:"大正漢方便秘藥", img:"images/2.jpg" },
             { name:"SVELTY黑薑", img:"images/3.jpg" },
@@ -188,7 +188,7 @@
             { name:"樂敦V眼藥水", img:"images/15.jpg" },
             { name:"acnes labo痘痘貼+藥膏", img:"images/16.jpg" }
           ] },
-          { title: "保養/化妝", icon: "🧴", items: [
+          { title: "保養/化妝", items: [
             { name:"COVERMARK", covermark:true, items:[
               { name:"200ml+30ml クレンジング オイル3,300円(税込)", img:"images/8.jpg" },
               { name:"モイスチュア チャージ セラム9,900円(税込)", img:"images/9.jpg" },
@@ -196,12 +196,12 @@
               { name:"モイスチュア リッチ リンクル クリーム6,380円(税込)", img:"images/11.jpg" }
             ] }
           ] },
-          { title: "其他", icon: "🛍️", items: [
+          { title: "其他", items: [
             { name:"TADAS[タダス] 2,916円(税込)", img:"images/5.jpg" },
             { name:"ビトアス　マイパーフェクション9,350円(税込)", img:"images/6.jpg" },
             { name:"ビトアス　マイパーフェクション　ブライトニング＆リンクル9,900円(税込)", img:"images/7.jpg" }
           ] },
-          { title: "安全帽", icon: "<img src='images/helmet.png' style='width:18px;height:18px;object-fit:contain'>", items: [
+          { title: "安全帽", items: [
             { name:"SHOEI", img:"" }
           ] }
         ]
@@ -327,7 +327,7 @@ ${(()=>{const m=itemName.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<spa
                 <input type="checkbox" class="group-checkbox" data-group="${group.title}" ${allDone ? "checked" : ""}>
                 <div class="title-area">
                   <div class="title-row">
-                    <div class="group-title">${group.icon} ${group.title}</div>
+                    <div class="group-title">${group.title}</div>
                     <div class="badge ${allDone ? "done" : ""}">${allDone ? "已完成" : `剩 ${total - done} 項`}</div>
                   </div>
                   <div class="group-meta">${done} / ${total} 已完成</div>
