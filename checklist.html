@@ -107,10 +107,15 @@
 .cover-brand-grid::-webkit-scrollbar-track{background:transparent}
 .image-modal{position:fixed;inset:0;background:rgba(15,23,42,.72);display:flex;align-items:center;justify-content:center;padding:20px;z-index:100;opacity:0;pointer-events:none;transition:.2s ease}
 .image-modal.show{opacity:1;pointer-events:auto}
-.modal-card{position:relative;max-width:min(92vw,720px);max-height:88vh;background:#fff;border-radius:24px;padding:16px;box-shadow:0 20px 60px rgba(0,0,0,.28)}
+.modal-card{position:relative;max-width:min(92vw,720px);max-height:88vh;background:#fff;border-radius:24px;padding:16px 52px;box-shadow:0 20px 60px rgba(0,0,0,.28)}
 .modal-card img{display:block;max-width:100%;max-height:72vh;object-fit:contain;border-radius:16px}
 .modal-close{position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:22px;line-height:1;cursor:pointer;box-shadow:none}
 .modal-title{margin-top:10px;text-align:center;font-size:14px;color:var(--muted)}
+.modal-nav{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:24px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:none;z-index:2}
+.modal-prev{left:10px}
+.modal-next{right:10px}
+.modal-nav[disabled]{opacity:.35;cursor:not-allowed}
+.modal-counter{margin-top:6px;text-align:center;font-size:12px;color:var(--muted)}
     .item{ display:flex; align-items:flex-start; gap:10px; min-height:40px; padding:7px 0; }
     .item .text{ flex:1; line-height:1.55; padding-top:1px; }
     .item.checked .text{ color:#9ca3af; text-decoration:line-through; }
@@ -118,7 +123,7 @@
     .footer{ text-align:center; color:var(--muted); font-size:12px; line-height:1.7; margin-top:18px; }
     .toast{ position:fixed; left:50%; bottom:22px; transform:translateX(-50%) translateY(12px); background:rgba(17,24,39,.92); color:#fff; padding:10px 14px; border-radius:999px; font-size:13px; opacity:0; pointer-events:none; transition:.2s ease; z-index:50; white-space:nowrap; }
     .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
-    @media (max-width:640px){ .wrap{ padding:14px 12px 34px; } h1{ font-size:24px; } .group summary{ padding:14px; } .items{ padding:4px 14px 14px 46px; } .group-title{ font-size:16px; } .stats .stat .num{ font-size:22px; } .card-item{flex:0 0 140px;min-width:140px} }
+    @media (max-width:640px){ .wrap{ padding:14px 12px 34px; } h1{ font-size:24px; } .group summary{ padding:14px; } .items{ padding:4px 14px 14px 46px; } .group-title{ font-size:16px; } .stats .stat .num{ font-size:22px; } .card-item{flex:0 0 140px;min-width:140px} .modal-card{padding:16px 44px} .modal-nav{width:34px;height:34px;font-size:22px} }
   </style>
 </head>
 <body>
@@ -159,8 +164,11 @@
   <div class="image-modal" id="imageModal" aria-hidden="true">
     <div class="modal-card">
       <button class="modal-close" id="modalClose" type="button" aria-label="關閉">×</button>
+      <button class="modal-nav modal-prev" id="modalPrev" type="button" aria-label="上一張">‹</button>
+      <button class="modal-nav modal-next" id="modalNext" type="button" aria-label="下一張">›</button>
       <img id="modalImage" src="" alt="商品圖片放大預覽">
       <div class="modal-title" id="modalTitle"></div>
+      <div class="modal-counter" id="modalCounter"></div>
     </div>
   </div>
 
@@ -244,6 +252,13 @@
     const modalImage = document.getElementById("modalImage");
     const modalTitle = document.getElementById("modalTitle");
     const modalClose = document.getElementById("modalClose");
+    const modalPrev = document.getElementById("modalPrev");
+    const modalNext = document.getElementById("modalNext");
+    const modalCounter = document.getElementById("modalCounter");
+    let modalGallery = [];
+    let modalIndex = 0;
+    let touchStartX = 0;
+    let touchEndX = 0;
 
     function keyForItem(listKey, groupTitle, item){ return `${listKey}||${groupTitle}||${item}`; }
     function keyForOpen(listKey, groupTitle){ return `${listKey}||${groupTitle}`; }
@@ -394,7 +409,13 @@ ${(()=>{const m=itemName.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<spa
         img.addEventListener("click", function(e){
           e.preventDefault();
           e.stopPropagation();
-          openImageModal(this.dataset.full || this.src, this.dataset.title || this.alt || "");
+          const scope = this.closest('.cover-brand-grid, .card-grid');
+          const gallery = [...(scope?.querySelectorAll('.zoomable-image') || [])].map(node => ({
+            src: node.dataset.full || node.src,
+            title: node.dataset.title || node.alt || ""
+          }));
+          const index = Math.max(0, [...(scope?.querySelectorAll('.zoomable-image') || [])].indexOf(this));
+          openImageModal(gallery, index);
         });
       });
 
@@ -554,28 +575,73 @@ ${(()=>{const m=itemName.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<spa
       showToast._timer = setTimeout(() => toast.classList.remove("show"), 1200);
     }
 
-    function openImageModal(src, title){
-      modalImage.src = src;
-      modalTitle.textContent = title;
+    function updateModalView(){
+      const current = modalGallery[modalIndex];
+      if(!current) return;
+      modalImage.src = current.src;
+      modalTitle.textContent = current.title;
+      modalCounter.textContent = modalGallery.length > 1 ? `${modalIndex + 1} / ${modalGallery.length}` : "";
+      modalPrev.disabled = modalGallery.length <= 1;
+      modalNext.disabled = modalGallery.length <= 1;
+    }
+
+    function openImageModal(gallery, index = 0){
+      modalGallery = Array.isArray(gallery) ? gallery : [];
+      modalIndex = index;
+      updateModalView();
       imageModal.classList.add("show");
       imageModal.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
+    }
+
+    function showPrevImage(){
+      if(modalGallery.length <= 1) return;
+      modalIndex = (modalIndex - 1 + modalGallery.length) % modalGallery.length;
+      updateModalView();
+    }
+
+    function showNextImage(){
+      if(modalGallery.length <= 1) return;
+      modalIndex = (modalIndex + 1) % modalGallery.length;
+      updateModalView();
     }
 
     function closeImageModal(){
       imageModal.classList.remove("show");
       imageModal.setAttribute("aria-hidden", "true");
       modalImage.src = "";
+      modalGallery = [];
+      modalIndex = 0;
+      modalCounter.textContent = "";
       document.body.style.overflow = "";
     }
 
     modalClose.addEventListener("click", closeImageModal);
+    modalPrev.addEventListener("click", function(e){ e.stopPropagation(); showPrevImage(); });
+    modalNext.addEventListener("click", function(e){ e.stopPropagation(); showNextImage(); });
     imageModal.addEventListener("click", function(e){
       if(e.target === imageModal) closeImageModal();
     });
     document.addEventListener("keydown", function(e){
-      if(e.key === "Escape" && imageModal.classList.contains("show")) closeImageModal();
+      if(!imageModal.classList.contains("show")) return;
+      if(e.key === "Escape") closeImageModal();
+      if(e.key === "ArrowLeft") showPrevImage();
+      if(e.key === "ArrowRight") showNextImage();
     });
+
+    imageModal.addEventListener('touchstart', function(e){
+      if(!imageModal.classList.contains('show')) return;
+      touchStartX = e.changedTouches[0].clientX;
+    }, { passive:true });
+
+    imageModal.addEventListener('touchend', function(e){
+      if(!imageModal.classList.contains('show')) return;
+      touchEndX = e.changedTouches[0].clientX;
+      const delta = touchEndX - touchStartX;
+      if(Math.abs(delta) < 40) return;
+      if(delta > 0) showPrevImage();
+      else showNextImage();
+    }, { passive:true });
 
     function addItem(groupTitle){
       const input = document.querySelector(`[data-add-input="${groupTitle}"]`);
