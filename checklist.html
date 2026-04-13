@@ -86,19 +86,25 @@
     .items{ border-top:1px solid #f1f5f9; padding:4px 16px 16px 52px; display:grid; gap:6px; }
 
 /* Card style (for drugstore) */
-.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;padding:14px 16px 18px 16px;border-top:1px solid #f1f5f9}
-.card-item{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 10px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.04);position:relative;cursor:pointer}
+.card-grid{display:flex;gap:12px;padding:14px 16px 18px 16px;border-top:1px solid #f1f5f9;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.card-grid::-webkit-scrollbar{height:8px}
+.card-grid::-webkit-scrollbar-thumb{background:#d7deea;border-radius:999px}
+.card-grid::-webkit-scrollbar-track{background:transparent}
+.card-item{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 10px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.04);position:relative;cursor:pointer;flex:0 0 160px;min-width:160px;scroll-snap-align:start}
 .card-item.checked{background:var(--done-soft);border-color:#bbf7d0}
 .card-item input{position:absolute;top:8px;right:8px}
 .card-item .text{display:block;font-size:13px;margin-top:6px;line-height:1.3}
 .card-item .price{display:block;font-size:12px;color:var(--muted);margin-top:2px}
 .card-item img{width:70px;height:70px;object-fit:contain;display:block;margin:8px auto 4px;cursor:zoom-in}
-.cover-brand{grid-column:1 / -1;background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,.04)}
+.cover-brand{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,.04);flex:0 0 100%;min-width:100%}
 .cover-brand summary{list-style:none;display:flex;align-items:center;justify-content:space-between;padding:16px 18px;cursor:default;font-weight:800;color:var(--text);user-select:text}
 .cover-brand summary::-webkit-details-marker{display:none}
 .cover-brand-caret{width:10px;height:10px;border-right:2px solid #94a3b8;border-bottom:2px solid #94a3b8;transform:rotate(45deg);transition:.18s ease;flex:0 0 auto}
 .cover-brand[open] .cover-brand-caret{transform:rotate(225deg);margin-top:6px}
-.cover-brand-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;padding:14px 16px 18px 16px;border-top:1px solid #f1f5f9}
+.cover-brand-grid{display:flex;gap:12px;padding:14px 16px 18px 16px;border-top:1px solid #f1f5f9;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.cover-brand-grid::-webkit-scrollbar{height:8px}
+.cover-brand-grid::-webkit-scrollbar-thumb{background:#d7deea;border-radius:999px}
+.cover-brand-grid::-webkit-scrollbar-track{background:transparent}
 .image-modal{position:fixed;inset:0;background:rgba(15,23,42,.72);display:flex;align-items:center;justify-content:center;padding:20px;z-index:100;opacity:0;pointer-events:none;transition:.2s ease}
 .image-modal.show{opacity:1;pointer-events:auto}
 .modal-card{position:relative;max-width:min(92vw,720px);max-height:88vh;background:#fff;border-radius:24px;padding:16px;box-shadow:0 20px 60px rgba(0,0,0,.28)}
@@ -112,7 +118,7 @@
     .footer{ text-align:center; color:var(--muted); font-size:12px; line-height:1.7; margin-top:18px; }
     .toast{ position:fixed; left:50%; bottom:22px; transform:translateX(-50%) translateY(12px); background:rgba(17,24,39,.92); color:#fff; padding:10px 14px; border-radius:999px; font-size:13px; opacity:0; pointer-events:none; transition:.2s ease; z-index:50; white-space:nowrap; }
     .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
-    @media (max-width:640px){ .wrap{ padding:14px 12px 34px; } h1{ font-size:24px; } .group summary{ padding:14px; } .items{ padding:4px 14px 14px 46px; } .group-title{ font-size:16px; } .stats .stat .num{ font-size:22px; } }
+    @media (max-width:640px){ .wrap{ padding:14px 12px 34px; } h1{ font-size:24px; } .group summary{ padding:14px; } .items{ padding:4px 14px 14px 46px; } .group-title{ font-size:16px; } .stats .stat .num{ font-size:22px; } .card-item{flex:0 0 140px;min-width:140px} }
   </style>
 </head>
 <body>
