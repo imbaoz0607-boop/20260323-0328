@@ -144,11 +144,11 @@
         
       </div>
     </section>
+<div id="groupContainer"></div>
 
-    <div id="groupContainer"></div>
-
-    
-  </div>
+</body>
+</html>
+</div>
 
   <div class="toast" id="toast">已儲存</div>
 
@@ -201,9 +201,12 @@
             { name:"ビトアス　マイパーフェクション9,350円(税込)", img:"images/6.jpg" },
             { name:"ビトアス　マイパーフェクション　ブライトニング＆リンクル9,900円(税込)", img:"images/7.jpg" }
           ] },
+          { title: "saint james", items: [
+            { name:"OUESSANT SOLID ウェッソン［無地］", covermark:true, items:[] }
+          ] },
           { title: "安全帽", items: [
-            { name:"SHOEI X‑Fifteen MATT BLACK", img:"images/123.jpg" },
-            { name:"SHOEI X‑Fifteen BLACK", img:"images/223.jpg" }
+            { name:"SHOEI X‑Fifteen MATT BLACK", img:"images/11.jpg" },
+            { name:"SHOEI X‑Fifteen BLACK", img:"images/22.jpg" }
           ] }
         ]
       }
@@ -271,8 +274,8 @@
                   <details class="cover-brand">
                     <summary>
                       <div style="display:flex;align-items:center;gap:10px">
-                        <input type="checkbox" class="brand-checkbox" data-brand="COVERMARK">
-                        <span>COVERMARK</span>
+                        <input type="checkbox" class="brand-checkbox" data-brand="${item.name}">
+                        <span>${item.name}</span>
                       </div>
                       <span class="cover-brand-caret"></span>
                     </summary>
