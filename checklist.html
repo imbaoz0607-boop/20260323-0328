@@ -72,7 +72,7 @@
     button.primary{ background:var(--accent); color:#fff; border-color:var(--accent); }
     button:active{ transform:translateY(1px); }
     .group{ background:var(--card); border:1px solid var(--line); border-radius:24px; box-shadow:var(--shadow); overflow:hidden; margin-bottom:14px; }
-    .group summary{ list-style:none; display:flex; align-items:center; gap:12px; cursor:pointer; padding:16px; user-select:none; }
+    .group summary{ list-style:none; display:flex; align-items:center; gap:12px; cursor:default; padding:16px; user-select:text; }
     .group summary::-webkit-details-marker{ display:none; }
     .summary-main{ display:flex; align-items:center; gap:12px; flex:1; min-width:0; }
     .title-area{ min-width:0; flex:1; }
@@ -94,7 +94,7 @@
 .card-item .price{display:block;font-size:12px;color:var(--muted);margin-top:2px}
 .card-item img{width:70px;height:70px;object-fit:contain;display:block;margin:8px auto 4px;cursor:zoom-in}
 .cover-brand{grid-column:1 / -1;background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,.04)}
-.cover-brand summary{list-style:none;display:flex;align-items:center;justify-content:space-between;padding:16px 18px;cursor:pointer;font-weight:800;color:var(--text)}
+.cover-brand summary{list-style:none;display:flex;align-items:center;justify-content:space-between;padding:16px 18px;cursor:default;font-weight:800;color:var(--text);user-select:text}
 .cover-brand summary::-webkit-details-marker{display:none}
 .cover-brand-caret{width:10px;height:10px;border-right:2px solid #94a3b8;border-bottom:2px solid #94a3b8;transform:rotate(45deg);transition:.18s ease;flex:0 0 auto}
 .cover-brand[open] .cover-brand-caret{transform:rotate(225deg);margin-top:6px}
@@ -146,9 +146,7 @@
     </section>
 <div id="groupContainer"></div>
 
-</body>
-</html>
-</div>
+
 
   <div class="toast" id="toast">已儲存</div>
 
@@ -202,7 +200,13 @@
             { name:"ビトアス　マイパーフェクション　ブライトニング＆リンクル9,900円(税込)", img:"images/7.jpg" }
           ] },
           { title: "saint james", items: [
-            { name:"OUESSANT SOLID ウェッソン［無地］", covermark:true, items:[] }
+            { name:"OUESSANTウェッソン(縮水2cm)", covermark:true, items:[
+              { name:"ウェッソン・無地 NOIR［黒］14,300円(税込)", img:"images/17.jpg" },
+              { name:"ウェッソン・無地 NEIGE［白］14,300円(税込)", img:"images/18.jpg" },
+              { name:"ウェッソン・ボーダー NEIGE/GRISCLAIR［白/霜降りペールグレー］14,300円(税込)", img:"images/19.jpg" },
+              { name:"ウェッソン・ボーダー GRIS/NEIGE［杢グレー/白］14,300円(税込)", img:"images/20.jpg" },
+              { name:"ウェッソン・ボーダー NAVY/PIN［ネイビー/ダークグリーン］14,300円(税込)", img:"images/21.jpg" }
+            ] }
           ] },
           { title: "安全帽", items: [
             { name:"SHOEI X‑Fifteen MATT BLACK", img:"images/11.jpg" },
@@ -274,7 +278,7 @@
                   <details class="cover-brand">
                     <summary>
                       <div style="display:flex;align-items:center;gap:10px">
-                        <input type="checkbox" class="brand-checkbox" data-brand="${item.name}">
+                        
                         <span>${item.name}</span>
                       </div>
                       <span class="cover-brand-caret"></span>
@@ -310,7 +314,7 @@ ${(()=>{const m=itemName.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<spa
               ${group.items.map(item => {
                 const checked = !!state.checked[keyForItem(state.activeList, group.title, item)];
                 return `
-                  <label class="item ${checked ? "checked" : ""}" draggable="true" data-item="${item}">
+                  <label class="item ${checked ? "checked" : ""}" data-item="${item}">
                     <div class="item-main">
                       <input type="checkbox" class="item-checkbox" data-group="${group.title}" data-item="${item}" ${checked ? "checked" : ""}>
                       <span class="text">${item}</span>
@@ -488,6 +492,24 @@ ${(()=>{const m=itemName.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<spa
         });
       });
 
+      document.querySelectorAll('.group > summary').forEach(summary => {
+        summary.addEventListener('click', function(e){
+          if(e.target.closest('input, button, .title-area, .group-title, .group-meta, .badge')) return;
+          e.preventDefault();
+          const detail = this.parentElement;
+          detail.open = !detail.open;
+        });
+      });
+
+      document.querySelectorAll('.cover-brand > summary').forEach(summary => {
+        summary.addEventListener('click', function(e){
+          if(e.target.closest('input, button, span')) return;
+          e.preventDefault();
+          const detail = this.parentElement;
+          detail.open = !detail.open;
+        });
+      });
+
       document.getElementById("toggleExpandBtn").onclick = function(){
         const groups = currentList().groups;
         const allOpen = groups.every(g => state.open[keyForOpen(state.activeList, g.title)] === true);
@@ -608,35 +630,74 @@ ${(()=>{const m=itemName.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<spa
     }
 
     function enableDragSort(){
+      const isDesktop = window.matchMedia('(pointer:fine)').matches;
+
       document.querySelectorAll('.items').forEach(listEl => {
         let draggingEl = null;
         let holdTimer = null;
+        let dragEnabled = false;
         const groupTitle = listEl.dataset.group;
 
         listEl.querySelectorAll('.item').forEach(item => {
+          item.setAttribute('draggable', 'false');
 
-          /* Desktop drag */
-          item.addEventListener('dragstart', () => {
+          const enableDesktopDrag = () => {
+            dragEnabled = true;
             draggingEl = item;
+            item.setAttribute('draggable', 'true');
             item.classList.add('dragging');
-          });
+          };
 
-          item.addEventListener('dragend', () => {
-            item.classList.remove('dragging');
-            draggingEl = null;
-            persistOrder(groupTitle, listEl);
-          });
+          const disableDesktopDrag = () => {
+            clearTimeout(holdTimer);
+            if(draggingEl === item){
+              item.classList.remove('dragging');
+              draggingEl = null;
+            }
+            item.setAttribute('draggable', 'false');
+            dragEnabled = false;
+          };
 
-          /* Mobile long‑press drag */
+          if(isDesktop){
+            item.addEventListener('mousedown', e => {
+              if(e.target.closest('input, button')) return;
+              holdTimer = setTimeout(() => {
+                enableDesktopDrag();
+              }, 220);
+            });
+
+            item.addEventListener('mouseup', () => {
+              clearTimeout(holdTimer);
+              if(!dragEnabled) return;
+              persistOrder(groupTitle, listEl);
+              disableDesktopDrag();
+            });
+
+            item.addEventListener('mouseleave', () => {
+              clearTimeout(holdTimer);
+            });
+
+            item.addEventListener('dragstart', () => {
+              if(!dragEnabled){
+                item.setAttribute('draggable', 'false');
+                return;
+              }
+              draggingEl = item;
+              item.classList.add('dragging');
+            });
+
+            item.addEventListener('dragend', () => {
+              persistOrder(groupTitle, listEl);
+              disableDesktopDrag();
+            });
+          }
+
           item.addEventListener('touchstart', e => {
             holdTimer = setTimeout(()=>{
               draggingEl = item;
               item.classList.add('dragging');
-
-              /* vibration feedback if supported */
               if(navigator.vibrate) navigator.vibrate(10);
-
-            }, 220); // long press delay
+            }, 220);
           },{passive:true});
 
           item.addEventListener('touchend', ()=>{
@@ -655,11 +716,11 @@ ${(()=>{const m=itemName.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<spa
         });
 
         listEl.addEventListener('dragover', e => {
+          if(!draggingEl) return;
           e.preventDefault();
           const after = [...listEl.querySelectorAll('.item:not(.dragging)')]
             .find(el => e.clientY <= el.getBoundingClientRect().top + el.offsetHeight / 2);
 
-          if(!draggingEl) return;
           if(!after) listEl.appendChild(draggingEl);
           else listEl.insertBefore(draggingEl, after);
         });
