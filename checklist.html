@@ -81,6 +81,7 @@
     .items{ border-top:1px solid #f1f5f9; padding:4px 16px 16px 52px; display:grid; gap:6px; }
     .card-grid{display:flex;gap:12px;padding:14px 16px 18px 16px;border-top:1px solid #f1f5f9;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
     .brand-stack{display:flex;flex-direction:column;gap:12px;padding:14px 16px 18px 16px;border-top:1px solid #f1f5f9;}
+    .card-wrap-grid{display:flex;flex-wrap:wrap;gap:12px;padding:14px 16px 18px 16px;border-top:1px solid #f1f5f9;overflow:visible}
     .card-grid::-webkit-scrollbar,.cover-brand-grid::-webkit-scrollbar{height:8px}
     .card-grid::-webkit-scrollbar-thumb,.cover-brand-grid::-webkit-scrollbar-thumb{background:#d7deea;border-radius:999px}
     .card-grid::-webkit-scrollbar-track,.cover-brand-grid::-webkit-scrollbar-track{background:transparent}
@@ -406,7 +407,8 @@
 
     function renderDrugstoreItems(group){
       const isBrandStack = group.title === "saint james" || group.title === "保養/化妝";
-      const groupClass = isBrandStack ? "brand-stack" : "card-grid";
+      const isWrapGrid = group.title === "MUJI" || group.title === "藥品";
+      const groupClass = isBrandStack ? "brand-stack" : (isWrapGrid ? "card-wrap-grid" : "card-grid");
       return `
         <div class="${groupClass}" data-group="${group.title}">
           ${group.items.map(item => item?.covermark ? renderDrugstoreBrand(group.title, item) : renderDrugstoreItem(group.title, item)).join("")}
@@ -881,10 +883,11 @@
       console.assert(DEFAULT_LISTS.drugstore.groups.some(g => g.title === '安全帽'), '安全帽 group should exist');
       console.assert(DEFAULT_LISTS.drugstore.groups.some(g => g.title === 'MUJI'), 'MUJI group should exist');
       console.assert(DEFAULT_LISTS.drugstore.groups.some(g => g.title === '藥品'), '藥品 group should exist');
+      console.assert(renderDrugstoreItems(DEFAULT_LISTS.drugstore.groups.find(g => g.title === '藥品')).includes('card-wrap-grid'), '藥品 should use card-wrap-grid');
       console.assert(splitPrice('モイスチュア チャージ セラム9,900円(税込)').price === '9,900円(税込)', 'price parser should extract price');
       console.assert(splitPrice('EVE止痛藥').text === 'EVE止痛藥', 'price parser should keep plain name');
       console.assert(getFlattenedItems(DEFAULT_LISTS.drugstore.groups.find(g => g.title === '保養/化妝')).length === 6, '保養/化妝 should flatten 6 items');
-      console.assert(renderDrugstoreItems(DEFAULT_LISTS.drugstore.groups.find(g => g.title === 'MUJI')).includes('card-grid'), 'MUJI should use card-grid');
+      console.assert(renderDrugstoreItems(DEFAULT_LISTS.drugstore.groups.find(g => g.title === 'MUJI')).includes('card-wrap-grid'), 'MUJI should use card-wrap-grid');
       console.assert(renderDrugstoreItems(DEFAULT_LISTS.drugstore.groups.find(g => g.title === 'saint james')).includes('brand-stack'), 'saint james should use brand-stack');
     }
 
