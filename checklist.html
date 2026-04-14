@@ -79,7 +79,7 @@
     .caret{ width:12px; height:12px; border-right:2px solid #94a3b8; border-bottom:2px solid #94a3b8; transform:rotate(45deg); transition:.18s ease; margin-right:4px; flex:0 0 auto; }
     details[open] .caret{ transform:rotate(225deg); margin-top:6px; }
     .items{ border-top:1px solid #f1f5f9; padding:4px 16px 16px 52px; display:grid; gap:6px; }
-    .card-grid{display:flex;gap:12px;padding:14px 16px 18px 16px;border-top:1px solid #f1f5f9;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+    .card-grid{display:flex;gap:12px;padding:14px 24px 18px 24px;border-top:1px solid #f1f5f9;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scroll-padding-left:24px;scroll-padding-right:24px}
     .brand-stack{display:flex;flex-direction:column;gap:12px;padding:14px 16px 18px 16px;border-top:1px solid #f1f5f9;}
     .card-wrap-grid{display:flex;flex-wrap:wrap;gap:12px;padding:14px 16px 18px 16px;border-top:1px solid #f1f5f9;overflow:visible}
     .card-grid::-webkit-scrollbar,.cover-brand-grid::-webkit-scrollbar{height:8px}
@@ -407,8 +407,7 @@
 
     function renderDrugstoreItems(group){
       const isBrandStack = group.title === "saint james" || group.title === "保養/化妝";
-      const isWrapGrid = group.title === "MUJI" || group.title === "藥品";
-      const groupClass = isBrandStack ? "brand-stack" : (isWrapGrid ? "card-wrap-grid" : "card-grid");
+      const groupClass = isBrandStack ? "brand-stack" : "card-grid";
       return `
         <div class="${groupClass}" data-group="${group.title}">
           ${group.items.map(item => item?.covermark ? renderDrugstoreBrand(group.title, item) : renderDrugstoreItem(group.title, item)).join("")}
