@@ -177,10 +177,10 @@
       travel: {
         title: "📜 List",
         groups: [
-          { title: "重要物品", items: ["護照","現金"] },
+          { title: "重要物品", items: ["護照","日文駕照翻譯本、台灣駕照","現金"] },
           { title: "清潔", items: ["卸妝油","洗面乳","洗髮精","護髮膜","快乾擦髮巾"] },
-          { title: "保養品、底妝", items: ["前導精華","痘膚潤","痘痘藥","化妝水","眼霜","保濕精華液","面霜","擦拭型化妝水","化妝棉","防曬","CC霜","妝前霜","蜜粉","多效精華液","身體乳液","熱活精華","護髮油"] },
-          { title: "生活物品", items: ["牙刷、牙膏","牙線棒","棉花棒","濕紙巾","鯊魚夾","瀏海貼","口罩","袖珍面紙","購物袋","垃圾袋","凡士林","眼藥水","眼鏡","藥品","雨傘"] },
+          { title: "保養品、底妝", items: ["前導精華","痘膚潤","痘痘藥","化妝水","眼霜","保濕精華液","面霜","擦拭行化妝水","化妝棉","防曬","CC霜","妝前霜","蜜粉","多效精華液","身體乳液","熱活精華","護髮油"] },
+          { title: "生活物品", items: ["牙刷、牙膏","牙線棒","棉花棒","濕紙巾","暈車藥","暖暖包","鯊魚夾","瀏海貼","口罩","袖珍面紙","購物袋","垃圾袋","凡士林","眼藥水","眼鏡","睡覺穿厚襪","藥品","雨傘"] },
           { title: "其他", items: ["充電頭、充電線","行動電源","耳機","酒精"] }
         ]
       },
@@ -302,35 +302,366 @@
     let modalIndex = 0;
     let touchStartX = 0;
     let touchEndX = 0;
-    let isZoomGesture = false;
+
+    function keyForItem(listKey, groupTitle, item){ return `${listKey}||${groupTitle}||${item}`; }
+    function keyForOpen(listKey, groupTitle){ return `${listKey}||${groupTitle}`; }
+    function currentList(){ return state.lists[state.activeList]; }
+
+    function splitPrice(name){
+      const match = String(name).match(/(.+?)([0-9,]+円\(税込\))/);
+      if(match){
+        return { text: match[1].trim(), price: match[2] };
+      }
+      return { text: String(name), price: "" };
+    }
+
+    function getFlattenedItems(group){
+      return group.items.flatMap(item => item?.covermark ? (item.items || []) : [item]);
+    }
+
+    function getCounts(group){
+      const flattenedItems = getFlattenedItems(group);
+      const total = flattenedItems.length;
+      const done = flattenedItems.filter(item => {
+        const itemName = item?.name ?? item;
+        return !!state.checked[keyForItem(state.activeList, group.title, itemName)];
+      }).length;
+      return { total, done, allDone: total > 0 && done === total };
+    }
+
+    function renderDrugstoreItem(groupTitle, item){
+      const itemName = item.name ?? item;
+      const itemImg = item.img ?? "";
+      const checked = !!state.checked[keyForItem(state.activeList, groupTitle, itemName)];
+      const parts = splitPrice(itemName);
+      return `
+        <label class="card-item ${checked ? "checked" : ""}" data-item="${itemName}">
+          <input type="checkbox" class="item-checkbox" data-group="${groupTitle}" data-item="${itemName}" ${checked ? "checked" : ""}>
+          ${itemImg ? `<img src="${itemImg}" alt="${itemName}" class="zoomable-image" data-full="${itemImg}" data-title="${itemName}">` : ""}
+          <span class="text">${parts.text}</span>
+          ${parts.price ? `<span class="price">${parts.price}</span>` : ""}
+          <button class="delete-btn" type="button" data-group="${groupTitle}" data-item="${itemName}" style="position:absolute;bottom:6px;right:6px">×</button>
+        </label>
+      `;
+    }
+
+    function renderDrugstoreBrand(groupTitle, item){
+      return `
+        <details class="cover-brand">
+          <summary>
+            <div style="display:flex;align-items:center;gap:10px">
+              <span>${item.name}</span>
+            </div>
+            <span class="cover-brand-caret"></span>
+          </summary>
+          <div class="cover-brand-grid">
+            ${(item.items || []).map(sub => renderDrugstoreItem(groupTitle, sub)).join("")}
+          </div>
+        </details>
+      `;
+    }
+
+    function render(){
+      const list = currentList();
+      document.querySelector("h1").textContent = list.title;
+      document.getElementById("travelBtn").classList.toggle("active", state.activeList === "travel");
+      document.getElementById("drugstoreBtn").classList.toggle("active", state.activeList === "drugstore");
+
+      container.innerHTML = list.groups.map((group, idx) => {
+        const { total, done, allDone } = getCounts(group);
+        const open = state.open[keyForOpen(state.activeList, group.title)];
+        const shouldOpen = open === undefined ? !allDone : !!open;
+
+        const itemsHtml = state.activeList === "drugstore"
+          ? `
+            <div class="${(group.title === 'saint james' || group.title === '保養/化妝') ? 'brand-stack' : 'card-grid'}" data-group="${group.title}">
+              ${group.items.map(item => item?.covermark ? renderDrugstoreBrand(group.title, item) : renderDrugstoreItem(group.title, item)).join("")}
+            </div>
+          `
+          : `
+            <div class="items" data-group="${group.title}">
+              ${group.items.map(item => {
+                const checked = !!state.checked[keyForItem(state.activeList, group.title, item)];
+                return `
+                  <label class="item ${checked ? "checked" : ""}" data-item="${item}">
+                    <div class="item-main">
+                      <input type="checkbox" class="item-checkbox" data-group="${group.title}" data-item="${item}" ${checked ? "checked" : ""}>
+                      <span class="text">${item}</span>
+                    </div>
+                    <div class="item-actions">
+                      <button class="delete-btn" type="button" title="刪除" data-group="${group.title}" data-item="${item}">×</button>
+                    </div>
+                  </label>
+                `;
+              }).join("")}
+            </div>
+          `;
+
+        return `
+          <details class="group" id="group-${idx}" ${shouldOpen ? "open" : ""}>
+            <summary>
+              <div class="summary-main">
+                <input type="checkbox" class="group-checkbox" data-group="${group.title}" ${allDone ? "checked" : ""}>
+                <div class="title-area">
+                  <div class="title-row">
+                    <div class="group-title">${group.title}</div>
+                    <div class="badge ${allDone ? "done" : ""}">${allDone ? "已完成" : `剩 ${total - done} 項`}</div>
+                  </div>
+                  <div class="group-meta">${done} / ${total} 已完成</div>
+                </div>
+              </div>
+              <div class="caret"></div>
+            </summary>
+
+            ${itemsHtml}
+
+            ${state.activeList !== "drugstore" ? `
+              <div class="editor-row">
+                <input class="editor-input" type="text" placeholder="新增 ${group.title} 物品" data-add-input="${group.title}">
+                <button class="tiny-btn" type="button" data-add-btn="${group.title}">新增</button>
+              </div>
+            ` : ""}
+          </details>
+        `;
+      }).join("");
+
+      bindEvents();
+      enableDragSort();
+      refreshStats();
+    }
+
+    function bindEvents(){
+      document.querySelectorAll(".zoomable-image").forEach(img => {
+        img.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          const scope = this.closest('.cover-brand-grid, .card-grid');
+          const nodes = [...(scope?.querySelectorAll('.zoomable-image') || [])];
+          const gallery = nodes.map(node => ({
+            src: node.dataset.full || node.src,
+            title: node.dataset.title || node.alt || ""
+          }));
+          const index = Math.max(0, nodes.indexOf(this));
+          openImageModal(gallery, index);
+        });
+      });
+
+      document.querySelectorAll(".item-checkbox").forEach(cb => {
+        cb.addEventListener("click", function(e){ e.stopPropagation(); });
+        cb.addEventListener("change", function(){
+          const groupTitle = this.dataset.group;
+          const item = this.dataset.item;
+          state.checked[keyForItem(state.activeList, groupTitle, item)] = this.checked;
+          const label = this.closest(".item, .card-item");
+          if(label) label.classList.toggle("checked", this.checked);
+          syncGroup(groupTitle, true);
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+          refreshStats();
+        });
+      });
+
+      document.querySelectorAll(".delete-btn").forEach(btn => {
+        let holdTimer = null;
+
+        const startHold = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const groupTitle = btn.dataset.group;
+          const item = btn.dataset.item;
+
+          holdTimer = setTimeout(() => {
+            const group = currentList().groups.find(g => g.title === groupTitle);
+            if(!group) return;
+
+            group.items = group.items
+              .map(entry => {
+                if(entry?.covermark){
+                  return {
+                    ...entry,
+                    items: (entry.items || []).filter(sub => (sub?.name ?? sub) !== item)
+                  };
+                }
+                return entry;
+              })
+              .filter(entry => {
+                if(entry?.covermark){
+                  return (entry.items || []).length > 0;
+                }
+                return (entry?.name ?? entry) !== item;
+              });
+
+            delete state.checked[keyForItem(state.activeList, groupTitle, item)];
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+            showToast("已刪除物品");
+            render();
+          }, 700);
+        };
+
+        const cancelHold = () => clearTimeout(holdTimer);
+
+        btn.addEventListener("mousedown", startHold);
+        btn.addEventListener("touchstart", startHold, { passive:false });
+        btn.addEventListener("mouseup", cancelHold);
+        btn.addEventListener("mouseleave", cancelHold);
+        btn.addEventListener("touchend", cancelHold);
+        btn.addEventListener("touchcancel", cancelHold);
+      });
+
+      document.querySelectorAll("[data-add-btn]").forEach(btn => {
+        btn.addEventListener("click", function(){ addItem(this.dataset.addBtn); });
+      });
+
+      document.querySelectorAll("[data-add-input]").forEach(input => {
+        input.addEventListener("keydown", function(e){
+          if(e.key === "Enter") addItem(this.dataset.addInput);
+        });
+      });
+
+      document.querySelectorAll(".group-checkbox").forEach(cb => {
+        cb.addEventListener("click", e => e.stopPropagation());
+        cb.addEventListener("change", function(){
+          const groupTitle = this.dataset.group;
+          const group = currentList().groups.find(g => g.title === groupTitle);
+          if(!group) return;
+
+          getFlattenedItems(group).forEach(item => {
+            const itemName = item?.name ?? item;
+            state.checked[keyForItem(state.activeList, groupTitle, itemName)] = this.checked;
+          });
+
+          state.open[keyForOpen(state.activeList, groupTitle)] = !this.checked;
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+          render();
+        });
+      });
+
+      document.querySelectorAll(".group").forEach(detail => {
+        detail.addEventListener("toggle", function(){
+          const groupCheckbox = this.querySelector(".group-checkbox");
+          if(!groupCheckbox) return;
+          state.open[keyForOpen(state.activeList, groupCheckbox.dataset.group)] = this.open;
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        });
+      });
+
+      document.querySelectorAll('.group > summary').forEach(summary => {
+        summary.addEventListener('click', function(e){
+          if(e.target.closest('input, button, .title-area, .group-title, .group-meta, .badge')) return;
+          e.preventDefault();
+          const detail = this.parentElement;
+          detail.open = !detail.open;
+        });
+      });
+
+      document.querySelectorAll('.cover-brand > summary').forEach(summary => {
+        summary.addEventListener('click', function(e){
+          if(e.target.closest('input, button')) return;
+          e.preventDefault();
+          const detail = this.parentElement;
+          detail.open = !detail.open;
+        });
+      });
+
+      document.getElementById("toggleExpandBtn").onclick = function(){
+        const groups = currentList().groups;
+        const allOpen = groups.every(g => state.open[keyForOpen(state.activeList, g.title)] === true);
+
+        if(allOpen){
+          groups.forEach(g => state.open[keyForOpen(state.activeList, g.title)] = false);
+          this.textContent = "展開全部 ▼";
+        }else{
+          groups.forEach(g => state.open[keyForOpen(state.activeList, g.title)] = true);
+          this.textContent = "收合全部 ▲";
+        }
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        render();
+      };
+
+      document.getElementById("travelBtn").onclick = function(){
+        state.activeList = "travel";
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        render();
+      };
+
+      document.getElementById("drugstoreBtn").onclick = function(){
+        state.activeList = "drugstore";
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        render();
+      };
+    }
+
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.classList.add("show");
+      clearTimeout(showToast._timer);
+      showToast._timer = setTimeout(() => toast.classList.remove("show"), 1200);
+    }
+
+    function updateModalView(){
+      const current = modalGallery[modalIndex];
+      if(!current) return;
+      modalImage.src = current.src;
+      modalTitle.textContent = current.title;
+      modalCounter.textContent = modalGallery.length > 1 ? `${modalIndex + 1} / ${modalGallery.length}` : "";
+      modalPrev.disabled = modalGallery.length <= 1;
+      modalNext.disabled = modalGallery.length <= 1;
+    }
+
+    function openImageModal(gallery, index = 0){
+      modalGallery = Array.isArray(gallery) ? gallery : [];
+      modalIndex = index;
+      updateModalView();
+      imageModal.classList.add("show");
+      imageModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function showPrevImage(){
+      if(modalGallery.length <= 1) return;
+      modalIndex = (modalIndex - 1 + modalGallery.length) % modalGallery.length;
+      updateModalView();
+    }
+
+    function showNextImage(){
+      if(modalGallery.length <= 1) return;
+      modalIndex = (modalIndex + 1) % modalGallery.length;
+      updateModalView();
+    }
+
+    function closeImageModal(){
+      imageModal.classList.remove("show");
+      imageModal.setAttribute("aria-hidden", "true");
+      modalImage.src = "";
+      modalGallery = [];
+      modalIndex = 0;
+      modalCounter.textContent = "";
+      document.body.style.overflow = "";
+    }
+
+    modalClose.addEventListener("click", closeImageModal);
+    modalPrev.addEventListener("click", function(e){ e.stopPropagation(); showPrevImage(); });
+    modalNext.addEventListener("click", function(e){ e.stopPropagation(); showNextImage(); });
+    imageModal.addEventListener("click", function(e){
+      if(e.target === imageModal) closeImageModal();
+    });
+    document.addEventListener("keydown", function(e){
+      if(!imageModal.classList.contains("show")) return;
+      if(e.key === "Escape") closeImageModal();
+      if(e.key === "ArrowLeft") showPrevImage();
+      if(e.key === "ArrowRight") showNextImage();
+    });
 
     imageModal.addEventListener('touchstart', function(e){
       if(!imageModal.classList.contains('show')) return;
-
-      // 如果是兩指以上，代表使用者在縮放圖片
-      if(e.touches.length > 1){
-        isZoomGesture = true;
-        return;
-      }
-
-      isZoomGesture = false;
       touchStartX = e.changedTouches[0].clientX;
     }, { passive:true });
 
     imageModal.addEventListener('touchend', function(e){
       if(!imageModal.classList.contains('show')) return;
-
-      // 如果剛剛是縮放手勢，就不要觸發左右滑動
-      if(isZoomGesture){
-        isZoomGesture = false;
-        return;
-      }
-
       touchEndX = e.changedTouches[0].clientX;
       const delta = touchEndX - touchStartX;
-
       if(Math.abs(delta) < 40) return;
-
       if(delta > 0) showPrevImage();
       else showNextImage();
     }, { passive:true });
@@ -516,201 +847,8 @@
       console.assert(splitPrice('EVE止痛藥').text === 'EVE止痛藥', 'price parser should keep plain name');
     }
 
-    function splitPrice(text){
-  if(!text) return {text:"",price:""};
-  const m = text.match(/(.*?)(\d[\d,]*円[^ ]*)$/);
-  if(!m) return {text:text,price:""};
-  return {text:m[1].trim(),price:m[2].trim()};
-}
-
-runSelfTests();
-
-function currentList(){
-  return state.lists[state.activeList];
-}
-
-function keyForItem(list,group,item){
-  return `${list}::${group}::${item}`;
-}
-
-function keyForOpen(list,group){
-  return `${list}::open::${group}`;
-}
-
-function getFlattenedItems(group){
-  const out=[];
-  group.items.forEach(it=>{
-    if(it && typeof it==='object' && it.items){
-      it.items.forEach(x=>out.push(x));
-    }else{
-      out.push(it);
-    }
-  });
-  return out;
-}
-
-function bindTopLevelControls(){
-  const travelBtn = document.getElementById('travelBtn');
-  const drugstoreBtn = document.getElementById('drugstoreBtn');
-  const toggleExpandBtn = document.getElementById('toggleExpandBtn');
-
-  if(travelBtn && !travelBtn.dataset.bound){
-    travelBtn.dataset.bound = '1';
-    travelBtn.addEventListener('click', ()=>{
-      state.activeList = 'travel';
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      render();
-    });
-  }
-
-  if(drugstoreBtn && !drugstoreBtn.dataset.bound){
-    drugstoreBtn.dataset.bound = '1';
-    drugstoreBtn.addEventListener('click', ()=>{
-      state.activeList = 'drugstore';
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      render();
-    });
-  }
-
-  if(toggleExpandBtn && !toggleExpandBtn.dataset.bound){
-    toggleExpandBtn.dataset.bound = '1';
-    toggleExpandBtn.addEventListener('click', ()=>{
-      const groups = currentList().groups || [];
-      const allOpen = groups.length > 0 && groups.every(g => !!state.open[keyForOpen(state.activeList, g.title)]);
-      groups.forEach(g => {
-        state.open[keyForOpen(state.activeList, g.title)] = !allOpen;
-      });
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      render();
-    });
-  }
-}
-
-function render(){
-  const list=currentList();
-  container.innerHTML="";
-
-  document.querySelector('h1').textContent = list.title || '📜 List';
-  const travelBtn = document.getElementById('travelBtn');
-  const drugstoreBtn = document.getElementById('drugstoreBtn');
-  const toggleExpandBtn = document.getElementById('toggleExpandBtn');
-  if(travelBtn) travelBtn.classList.toggle('active', state.activeList === 'travel');
-  if(drugstoreBtn) drugstoreBtn.classList.toggle('active', state.activeList === 'drugstore');
-  if(toggleExpandBtn){
-    const groups = list.groups || [];
-    const allOpen = groups.length > 0 && groups.every(g => !!state.open[keyForOpen(state.activeList, g.title)]);
-    toggleExpandBtn.textContent = allOpen ? '收合全部 ▲' : '展開全部 ▼';
-  }
-
-  list.groups.forEach(group=>{
-    const detail=document.createElement('details');
-    detail.className='group';
-
-    const openKey=keyForOpen(state.activeList,group.title);
-    detail.open = state.open[openKey] ?? false;
-
-    const summary=document.createElement('summary');
-    summary.innerHTML=`
-      <div class="caret"></div>
-      <div class="summary-main">
-        <div class="title-area">
-          <div class="title-row">
-            <div class="group-title">${group.title}</div>
-            <span class="badge">0</span>
-          </div>
-          <div class="group-meta">0 / 0 已完成</div>
-        </div>
-      </div>`;
-
-    summary.addEventListener('click',e=>{
-      e.preventDefault();
-      detail.open=!detail.open;
-      state.open[openKey]=detail.open;
-      localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
-    });
-
-    detail.appendChild(summary);
-
-    const itemsWrap=document.createElement('div');
-    itemsWrap.className='items';
-    itemsWrap.dataset.group=group.title;
-
-    group.items.forEach(item=>{
-      if(item && typeof item==='object' && item.items){
-        const brand=document.createElement('details');
-        brand.className='cover-brand';
-
-        const sum=document.createElement('summary');
-        sum.innerHTML=`<span>${item.name}</span><div class="cover-brand-caret"></div>`;
-        brand.appendChild(sum);
-
-        const grid=document.createElement('div');
-        grid.className='cover-brand-grid';
-
-        item.items.forEach(sub=>{
-          const card=document.createElement('div');
-          card.className='card-item';
-
-          const {text,price}=splitPrice(sub.name);
-          const key=keyForItem(state.activeList,group.title,sub.name);
-
-          const checked=!!state.checked[key];
-          if(checked) card.classList.add('checked');
-
-          card.innerHTML=`
-            <input type="checkbox" ${checked?'checked':''}>
-            <img src="${sub.img}" />
-            <span class="text">${text}</span>
-            <span class="price">${price}</span>`;
-
-          const cb=card.querySelector('input');
-          cb.addEventListener('change',()=>{
-            state.checked[key]=cb.checked;
-            localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
-            render();
-          });
-
-          grid.appendChild(card);
-        });
-
-        brand.appendChild(grid);
-        itemsWrap.appendChild(brand);
-
-      }else{
-        const name=item?.name ?? item;
-        const key=keyForItem(state.activeList,group.title,name);
-
-        const row=document.createElement('div');
-        row.className='item';
-
-        const checked=!!state.checked[key];
-
-        row.innerHTML=`
-          <input type="checkbox" class="item-checkbox" ${checked?'checked':''}>
-          <div class="text">${name}</div>`;
-
-        const cb=row.querySelector('input');
-        cb.addEventListener('change',()=>{
-          state.checked[key]=cb.checked;
-          localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
-          render();
-        });
-
-        if(checked) row.classList.add('checked');
-
-        itemsWrap.appendChild(row);
-      }
-    });
-
-    detail.appendChild(itemsWrap);
-    container.appendChild(detail);
-  });
-
-  refreshStats();
-}
-
-bindTopLevelControls();
-render();
-</script>
+    runSelfTests();
+    render();
+  </script>
 </body>
 </html>
