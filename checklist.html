@@ -80,6 +80,7 @@
     details[open] .caret{ transform:rotate(225deg); margin-top:6px; }
     .items{ border-top:1px solid #f1f5f9; padding:4px 16px 16px 52px; display:grid; gap:6px; }
     .card-grid{display:flex;gap:12px;padding:14px 24px 18px 24px;border-top:1px solid #f1f5f9;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scroll-padding-left:24px;scroll-padding-right:24px}
+.card-grid::before,.card-grid::after{content:"";flex:0 0 12px}
     .brand-stack{display:flex;flex-direction:column;gap:12px;padding:14px 16px 18px 16px;border-top:1px solid #f1f5f9;}
     .card-wrap-grid{display:flex;flex-wrap:wrap;gap:12px;padding:14px 16px 18px 16px;border-top:1px solid #f1f5f9;overflow:visible}
     .card-grid::-webkit-scrollbar,.cover-brand-grid::-webkit-scrollbar{height:8px}
@@ -431,7 +432,7 @@
           <details class="group" id="group-${idx}" ${shouldOpen ? "open" : ""}>
             <summary>
               <div class="summary-main">
-                <input type="checkbox" class="group-checkbox" data-group="${group.title}" ${allDone ? "checked" : ""}>
+                ${group.title === "安全帽" ? "" : `<input type="checkbox" class="group-checkbox" data-group="${group.title}" ${allDone ? "checked" : ""}>`}
                 <div class="title-area">
                   <div class="title-row">
                     <div class="group-title">${group.title}</div>
