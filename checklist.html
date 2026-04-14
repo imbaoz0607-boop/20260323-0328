@@ -23,6 +23,7 @@
       --done-soft:#dcfce7;
       --shadow:0 12px 30px rgba(15,23,42,.08);
       --radius:20px;
+      --list-padding:16px;
     }
     *{ box-sizing:border-box; }
     html,body{ margin:0; padding:0; }
@@ -79,8 +80,16 @@
     .caret{ width:12px; height:12px; border-right:2px solid #94a3b8; border-bottom:2px solid #94a3b8; transform:rotate(45deg); transition:.18s ease; margin-right:4px; flex:0 0 auto; }
     details[open] .caret{ transform:rotate(225deg); margin-top:6px; }
     .items{ border-top:1px solid #f1f5f9; padding:4px 16px 16px 52px; display:grid; gap:6px; }
-    .card-grid{display:flex;gap:12px;padding:14px 24px 18px 24px;border-top:1px solid #f1f5f9;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scroll-padding-left:24px;scroll-padding-right:24px}
-.card-grid::before,.card-grid::after{content:"";flex:0 0 12px}
+    .card-grid{display:flex;gap:12px;padding:14px var(--list-padding) 18px var(--list-padding);border-top:1px solid #f1f5f9;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scroll-padding-left:var(--list-padding);scroll-padding-right:var(--list-padding)}
+.card-grid::before,.card-grid::after{content:"";flex:0 0 0}
+
+/* 只調整「安全帽」與「其他」收合層左邊距離，使其與其他收合層對齊 */
+.card-grid[data-group="安全帽"],
+.card-grid[data-group="其他"]{
+  /* 微調左邊距離，讓卡片與其他區塊視覺對齊 */
+  padding-left:6px;
+  scroll-padding-left:6px;
+}
     .brand-stack{display:flex;flex-direction:column;gap:12px;padding:14px 16px 18px 16px;border-top:1px solid #f1f5f9;}
     .card-wrap-grid{display:flex;flex-wrap:wrap;gap:12px;padding:14px 16px 18px 16px;border-top:1px solid #f1f5f9;overflow:visible}
     .card-grid::-webkit-scrollbar,.cover-brand-grid::-webkit-scrollbar{height:8px}
@@ -97,7 +106,7 @@
     .cover-brand summary::-webkit-details-marker{display:none}
     .cover-brand-caret{width:10px;height:10px;border-right:2px solid #94a3b8;border-bottom:2px solid #94a3b8;transform:rotate(45deg);transition:.18s ease;flex:0 0 auto}
     .cover-brand[open] .cover-brand-caret{transform:rotate(225deg);margin-top:6px}
-    .cover-brand-grid{display:flex;gap:12px;padding:14px 24px 18px 24px;border-top:1px solid #f1f5f9;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scroll-padding-left:24px;scroll-padding-right:24px}
+    .cover-brand-grid{display:flex;gap:12px;padding:14px var(--list-padding) 18px var(--list-padding);border-top:1px solid #f1f5f9;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scroll-padding-left:var(--list-padding);scroll-padding-right:var(--list-padding)}
     .image-modal{position:fixed;inset:0;background:rgba(15,23,42,.72);display:flex;align-items:center;justify-content:center;padding:20px;z-index:100;opacity:0;pointer-events:none;transition:.2s ease}
     .image-modal.show{opacity:1;pointer-events:auto}
     .modal-card{position:relative;max-width:min(92vw,720px);max-height:88vh;background:#fff;border-radius:24px;padding:16px 52px;box-shadow:0 20px 60px rgba(0,0,0,.28)}
@@ -432,7 +441,7 @@
           <details class="group" id="group-${idx}" ${shouldOpen ? "open" : ""}>
             <summary>
               <div class="summary-main">
-                ${group.title === "安全帽" ? "" : `<input type="checkbox" class="group-checkbox" data-group="${group.title}" ${allDone ? "checked" : ""}>`}
+                <input type="checkbox" class="group-checkbox" data-group="${group.title}" ${allDone ? "checked" : ""}>
                 <div class="title-area">
                   <div class="title-row">
                     <div class="group-title">${group.title}</div>
