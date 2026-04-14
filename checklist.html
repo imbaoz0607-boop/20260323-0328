@@ -80,6 +80,7 @@
     details[open] .caret{ transform:rotate(225deg); margin-top:6px; }
     .items{ border-top:1px solid #f1f5f9; padding:4px 16px 16px 52px; display:grid; gap:6px; }
     .card-grid{display:flex;gap:12px;padding:14px 16px 18px 16px;border-top:1px solid #f1f5f9;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+    .brand-stack{display:flex;flex-direction:column;gap:12px;padding:14px 16px 18px 16px;border-top:1px solid #f1f5f9;}
     .card-grid::-webkit-scrollbar{height:8px}
     .card-grid::-webkit-scrollbar-thumb{background:#d7deea;border-radius:999px}
     .card-grid::-webkit-scrollbar-track{background:transparent}
@@ -362,7 +363,7 @@
 
         const itemsHtml = state.activeList === "drugstore"
           ? `
-            <div class="card-grid" data-group="${group.title}">
+            <div class="${group.title === 'saint james' ? 'brand-stack' : 'card-grid'}" data-group="${group.title}">
               ${group.items.map(item => item?.covermark ? renderDrugstoreBrand(group.title, item) : renderDrugstoreItem(group.title, item)).join("")}
             </div>
           `
