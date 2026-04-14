@@ -81,9 +81,9 @@
     .items{ border-top:1px solid #f1f5f9; padding:4px 16px 16px 52px; display:grid; gap:6px; }
     .card-grid{display:flex;gap:12px;padding:14px 16px 18px 16px;border-top:1px solid #f1f5f9;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
     .brand-stack{display:flex;flex-direction:column;gap:12px;padding:14px 16px 18px 16px;border-top:1px solid #f1f5f9;}
-    .card-grid::-webkit-scrollbar{height:8px}
-    .card-grid::-webkit-scrollbar-thumb{background:#d7deea;border-radius:999px}
-    .card-grid::-webkit-scrollbar-track{background:transparent}
+    .card-grid::-webkit-scrollbar,.cover-brand-grid::-webkit-scrollbar{height:8px}
+    .card-grid::-webkit-scrollbar-thumb,.cover-brand-grid::-webkit-scrollbar-thumb{background:#d7deea;border-radius:999px}
+    .card-grid::-webkit-scrollbar-track,.cover-brand-grid::-webkit-scrollbar-track{background:transparent}
     .card-item{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 10px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.04);position:relative;cursor:pointer;flex:0 0 160px;min-width:160px;scroll-snap-align:start}
     .card-item.checked{background:var(--done-soft);border-color:#bbf7d0}
     .card-item input{position:absolute;top:8px;right:8px}
@@ -96,9 +96,6 @@
     .cover-brand-caret{width:10px;height:10px;border-right:2px solid #94a3b8;border-bottom:2px solid #94a3b8;transform:rotate(45deg);transition:.18s ease;flex:0 0 auto}
     .cover-brand[open] .cover-brand-caret{transform:rotate(225deg);margin-top:6px}
     .cover-brand-grid{display:flex;gap:12px;padding:14px 16px 18px 16px;border-top:1px solid #f1f5f9;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
-    .cover-brand-grid::-webkit-scrollbar{height:8px}
-    .cover-brand-grid::-webkit-scrollbar-thumb{background:#d7deea;border-radius:999px}
-    .cover-brand-grid::-webkit-scrollbar-track{background:transparent}
     .image-modal{position:fixed;inset:0;background:rgba(15,23,42,.72);display:flex;align-items:center;justify-content:center;padding:20px;z-index:100;opacity:0;pointer-events:none;transition:.2s ease}
     .image-modal.show{opacity:1;pointer-events:auto}
     .modal-card{position:relative;max-width:min(92vw,720px);max-height:88vh;background:#fff;border-radius:24px;padding:16px 52px;box-shadow:0 20px 60px rgba(0,0,0,.28)}
@@ -153,7 +150,7 @@
         <button class="primary" id="toggleExpandBtn">展開全部 ▼</button>
       </div>
     </section>
-      <div id="groupContainer"></div>
+    <div id="groupContainer"></div>
   </div>
 
   <div class="toast" id="toast">已儲存</div>
@@ -179,7 +176,7 @@
           { title: "重要物品", items: ["護照","現金"] },
           { title: "清潔", items: ["卸妝油","洗面乳","洗髮精","護髮膜","快乾毛巾"] },
           { title: "保養品、底妝", items: ["前導精華","痘膚潤","痘痘藥","化妝水","眼霜","保濕精華液","面霜","擦拭型化妝水","化妝棉","防曬","CC霜","妝前霜","蜜粉","多效精華液","身體乳液","熱活精華","護髮油"] },
-          { title: "生活物品", items: ["牙刷、牙膏","牙線棒","棉花棒","濕紙巾","鯊魚夾","瀏海貼","口罩","袖珍面紙","購物袋","垃圾袋","凡士林","眼藥水","眼鏡","睡覺穿厚襪","藥品","雨傘"] },
+          { title: "生活物品", items: ["牙刷、牙膏","牙線棒","棉花棒","濕紙巾","鯊魚夾","瀏海貼","口罩","袖珍面紙","購物袋","垃圾袋","凡士林","眼藥水","眼鏡","藥品","雨傘"] },
           { title: "其他", items: ["充電頭、充電線","行動電源","耳機","酒精"] }
         ]
       },
@@ -220,8 +217,7 @@
                   { name:"ラディアント スキン リファイナー 本体200mL 4,500円(税抜)", img:"images/29.jpg" },
                   { name:"ザ ファースト セラムa 6,000円(税抜)", img:"images/30.jpg" }
                 ]
-              },
-              
+              }
             ]
           },
           {
@@ -236,7 +232,6 @@
               { name:"エイジングケア乳液 200mL 2,290円", img:"images/39.jpg" }
             ]
           },
-          
           {
             title: "其他",
             items: [
@@ -277,8 +272,8 @@
           {
             title: "安全帽",
             items: [
-              { name:"SHOEI X‑Fifteen MATT BLACK", img:"images/22.jpg" },
-              { name:"SHOEI X‑Fifteen BLACK", img:"images/23.jpg" }
+              { name:"SHOEI X‑Fifteen MATT BLACK", img:"images/31.jpg" },
+              { name:"SHOEI X‑Fifteen BLACK", img:"images/32.jpg" }
             ]
           }
         ]
@@ -294,10 +289,11 @@
           activeList: saved?.activeList || "travel",
           lists: clone(DEFAULT_LISTS),
           checked: saved?.checked || {},
-          open: saved?.open || {}
+          open: saved?.open || {},
+          brandOpen: saved?.brandOpen || {}
         };
       }catch(e){
-        return { activeList: "travel", lists: clone(DEFAULT_LISTS), checked: {}, open: {} };
+        return { activeList: "travel", lists: clone(DEFAULT_LISTS), checked: {}, open: {}, brandOpen: {} };
       }
     }
 
@@ -316,8 +312,18 @@
     let touchStartX = 0;
     let touchEndX = 0;
 
+    function saveState(){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        activeList: state.activeList,
+        checked: state.checked,
+        open: state.open,
+        brandOpen: state.brandOpen
+      }));
+    }
+
     function keyForItem(listKey, groupTitle, item){ return `${listKey}||${groupTitle}||${item}`; }
     function keyForOpen(listKey, groupTitle){ return `${listKey}||${groupTitle}`; }
+    function keyForBrandOpen(listKey, groupTitle, brandTitle){ return `${listKey}||${groupTitle}||${brandTitle}`; }
     function currentList(){ return state.lists[state.activeList]; }
 
     function splitPrice(name){
@@ -359,8 +365,10 @@
     }
 
     function renderDrugstoreBrand(groupTitle, item){
+      const brandKey = keyForBrandOpen(state.activeList, groupTitle, item.name);
+      const isOpen = state.brandOpen[brandKey] ?? false;
       return `
-        <details class="cover-brand">
+        <details class="cover-brand" data-brand-group="${groupTitle}" data-brand-title="${item.name}" ${isOpen ? "open" : ""}>
           <summary>
             <div style="display:flex;align-items:center;gap:10px">
               <span>${item.name}</span>
@@ -374,6 +382,38 @@
       `;
     }
 
+    function renderTravelItems(group){
+      return `
+        <div class="items" data-group="${group.title}">
+          ${group.items.map(item => {
+            const itemName = item?.name ?? item;
+            const checked = !!state.checked[keyForItem(state.activeList, group.title, itemName)];
+            return `
+              <div class="item ${checked ? "checked" : ""}" draggable="true" data-item="${itemName}">
+                <div class="item-main">
+                  <input type="checkbox" class="item-checkbox" data-group="${group.title}" data-item="${itemName}" ${checked ? "checked" : ""}>
+                  <div class="text">${itemName}</div>
+                </div>
+                <div class="item-actions">
+                  <button class="delete-btn" type="button" data-group="${group.title}" data-item="${itemName}">×</button>
+                </div>
+              </div>
+            `;
+          }).join("")}
+        </div>
+      `;
+    }
+
+    function renderDrugstoreItems(group){
+      const isBrandStack = group.title === "saint james" || group.title === "保養/化妝";
+      const groupClass = isBrandStack ? "brand-stack" : "card-grid";
+      return `
+        <div class="${groupClass}" data-group="${group.title}">
+          ${group.items.map(item => item?.covermark ? renderDrugstoreBrand(group.title, item) : renderDrugstoreItem(group.title, item)).join("")}
+        </div>
+      `;
+    }
+
     function render(){
       const list = currentList();
       document.querySelector("h1").textContent = list.title;
@@ -384,31 +424,7 @@
         const { total, done, allDone } = getCounts(group);
         const open = state.open[keyForOpen(state.activeList, group.title)];
         const shouldOpen = open === undefined ? !allDone : !!open;
-
-        const itemsHtml = state.activeList === "drugstore"
-          ? `
-            <div class="${(group.title === 'saint james' || group.title === '保養/化妝') ? 'brand-stack' : 'card-grid'}" data-group="${group.title}">
-              ${group.items.map(item => item?.covermark ? renderDrugstoreBrand(group.title, item) : renderDrugstoreItem(group.title, item)).join("")}
-            </div>
-          `
-          : `
-            <div class="items" data-group="${group.title}">
-              ${group.items.map(item => {
-                const checked = !!state.checked[keyForItem(state.activeList, group.title, item)];
-                return `
-                  <label class="item ${checked ? "checked" : ""}" data-item="${item}">
-                    <div class="item-main">
-                      <input type="checkbox" class="item-checkbox" data-group="${group.title}" data-item="${item}" ${checked ? "checked" : ""}>
-                      <span class="text">${item}</span>
-                    </div>
-                    <div class="item-actions">
-                      <button class="delete-btn" type="button" title="刪除" data-group="${group.title}" data-item="${item}">×</button>
-                    </div>
-                  </label>
-                `;
-              }).join("")}
-            </div>
-          `;
+        const itemsHtml = state.activeList === "drugstore" ? renderDrugstoreItems(group) : renderTravelItems(group);
 
         return `
           <details class="group" id="group-${idx}" ${shouldOpen ? "open" : ""}>
@@ -468,7 +484,7 @@
           const label = this.closest(".item, .card-item");
           if(label) label.classList.toggle("checked", this.checked);
           syncGroup(groupTitle, true);
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+          saveState();
           refreshStats();
         });
       });
@@ -504,7 +520,7 @@
               });
 
             delete state.checked[keyForItem(state.activeList, groupTitle, item)];
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+            saveState();
             showToast("已刪除物品");
             render();
           }, 700);
@@ -543,7 +559,7 @@
           });
 
           state.open[keyForOpen(state.activeList, groupTitle)] = !this.checked;
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+          saveState();
           render();
         });
       });
@@ -553,7 +569,7 @@
           const groupCheckbox = this.querySelector(".group-checkbox");
           if(!groupCheckbox) return;
           state.open[keyForOpen(state.activeList, groupCheckbox.dataset.group)] = this.open;
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+          saveState();
         });
       });
 
@@ -575,6 +591,16 @@
         });
       });
 
+      document.querySelectorAll('.cover-brand').forEach(detail => {
+        detail.addEventListener('toggle', function(){
+          const brandTitle = this.dataset.brandTitle;
+          const groupTitle = this.dataset.brandGroup;
+          if(!brandTitle || !groupTitle) return;
+          state.brandOpen[keyForBrandOpen(state.activeList, groupTitle, brandTitle)] = this.open;
+          saveState();
+        });
+      });
+
       document.getElementById("toggleExpandBtn").onclick = function(){
         const groups = currentList().groups;
         const allOpen = groups.every(g => state.open[keyForOpen(state.activeList, g.title)] === true);
@@ -587,19 +613,19 @@
           this.textContent = "收合全部 ▲";
         }
 
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        saveState();
         render();
       };
 
       document.getElementById("travelBtn").onclick = function(){
         state.activeList = "travel";
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        saveState();
         render();
       };
 
       document.getElementById("drugstoreBtn").onclick = function(){
         state.activeList = "drugstore";
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        saveState();
         render();
       };
     }
@@ -665,6 +691,10 @@
       if(e.key === "ArrowRight") showNextImage();
     });
 
+    imageModal.addEventListener('touchmove', e => {
+      if(imageModal.classList.contains('show')) e.preventDefault();
+    }, { passive:false });
+
     imageModal.addEventListener('touchstart', function(e){
       if(!imageModal.classList.contains('show')) return;
       touchStartX = e.changedTouches[0].clientX;
@@ -674,7 +704,7 @@
       if(!imageModal.classList.contains('show')) return;
       touchEndX = e.changedTouches[0].clientX;
       const delta = touchEndX - touchStartX;
-      if(Math.abs(delta) < 40) return;
+      if(Math.abs(delta) < 60) return;
       if(delta > 0) showPrevImage();
       else showNextImage();
     }, { passive:true });
@@ -692,7 +722,7 @@
 
       group.items.push(value);
       if(input) input.value = "";
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      saveState();
       showToast("已新增物品");
       render();
     }
@@ -700,26 +730,19 @@
     function syncGroup(groupTitle, autoCollapse){
       const detail = [...document.querySelectorAll(".group")].find(el => el.querySelector(".group-checkbox")?.dataset.group === groupTitle);
       if(!detail) return;
-      const itemBoxes = detail.querySelectorAll(".item-checkbox");
-      const doneBoxes = detail.querySelectorAll(".item-checkbox:checked");
+      const group = currentList().groups.find(g => g.title === groupTitle);
+      if(!group) return;
+      const { total, done, allDone } = getCounts(group);
       const groupBox = detail.querySelector(".group-checkbox");
       const badge = detail.querySelector(".badge");
       const meta = detail.querySelector(".group-meta");
-      const total = itemBoxes.length;
-      const done = doneBoxes.length;
-      const allDone = total > 0 && total === done;
       groupBox.checked = allDone;
       badge.textContent = allDone ? "已完成" : `剩 ${total - done} 項`;
       badge.classList.toggle("done", allDone);
       meta.textContent = `${done} / ${total} 已完成`;
       if(autoCollapse){
-        if(allDone){
-          detail.open = false;
-          state.open[keyForOpen(state.activeList, groupTitle)] = false;
-        }else{
-          detail.open = true;
-          state.open[keyForOpen(state.activeList, groupTitle)] = true;
-        }
+        detail.open = !allDone;
+        state.open[keyForOpen(state.activeList, groupTitle)] = !allDone;
       }
     }
 
@@ -834,7 +857,7 @@
       const group = currentList().groups.find(g => g.title === groupTitle);
       if(!group) return;
       group.items = [...listEl.querySelectorAll('.item')].map(el => el.dataset.item);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      saveState();
       render();
     }
 
@@ -856,82 +879,17 @@
       console.assert(Array.isArray(DEFAULT_LISTS.drugstore.groups), 'drugstore groups should be an array');
       console.assert(DEFAULT_LISTS.drugstore.groups.some(g => g.title === 'saint james'), 'saint james group should exist');
       console.assert(DEFAULT_LISTS.drugstore.groups.some(g => g.title === '安全帽'), '安全帽 group should exist');
+      console.assert(DEFAULT_LISTS.drugstore.groups.some(g => g.title === 'MUJI'), 'MUJI group should exist');
+      console.assert(DEFAULT_LISTS.drugstore.groups.some(g => g.title === '藥品'), '藥品 group should exist');
       console.assert(splitPrice('モイスチュア チャージ セラム9,900円(税込)').price === '9,900円(税込)', 'price parser should extract price');
       console.assert(splitPrice('EVE止痛藥').text === 'EVE止痛藥', 'price parser should keep plain name');
+      console.assert(getFlattenedItems(DEFAULT_LISTS.drugstore.groups.find(g => g.title === '保養/化妝')).length === 6, '保養/化妝 should flatten 6 items');
+      console.assert(renderDrugstoreItems(DEFAULT_LISTS.drugstore.groups.find(g => g.title === 'MUJI')).includes('card-grid'), 'MUJI should use card-grid');
+      console.assert(renderDrugstoreItems(DEFAULT_LISTS.drugstore.groups.find(g => g.title === 'saint james')).includes('brand-stack'), 'saint james should use brand-stack');
     }
 
-    /* ==== UX upgrades ==== */
-
-/* 1️⃣ Lock background scroll & swipe when image modal open */
-imageModal.addEventListener('touchmove',e=>{
-  if(imageModal.classList.contains('show')) e.preventDefault();
-},{passive:false});
-
-/* 2️⃣ Stronger gallery swipe handling */
-let galleryTouchStart=0;
-imageModal.addEventListener('touchstart',e=>{
-  if(!imageModal.classList.contains('show')) return;
-  galleryTouchStart=e.changedTouches[0].clientX;
-},{passive:true});
-
-imageModal.addEventListener('touchend',e=>{
-  if(!imageModal.classList.contains('show')) return;
-  const delta=e.changedTouches[0].clientX-galleryTouchStart;
-  if(Math.abs(delta)<60) return;
-  if(delta>0) showPrevImage();
-  else showNextImage();
-},{passive:true});
-
-/* 3️⃣ Brand collapse memory */
-state.brandOpen = state.brandOpen || {};
-
-document.addEventListener('toggle',e=>{
-  const el=e.target;
-  if(!el.classList?.contains('cover-brand')) return;
-  const title=el.querySelector('summary span')?.textContent;
-  if(!title) return;
-  state.brandOpen[title]=el.open;
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
-},true);
-
-/* restore brand states after render */
-function restoreBrandStates(){
-  document.querySelectorAll('.cover-brand').forEach(el=>{
-    const title=el.querySelector('summary span')?.textContent;
-    if(title && state.brandOpen?.[title]!==undefined){
-      el.open=state.brandOpen[title];
-    }
-  });
-}
-
-const _oldRender = render;
-render = function(){
-  _oldRender();
-  restoreBrandStates();
-};
-
-/* 4️⃣ More stable drag detection (desktop + mobile) */
-document.addEventListener('pointerdown',e=>{
-  const item=e.target.closest('.item');
-  if(!item) return;
-  if(e.target.closest('input,button')) return;
-  item.dataset.pointerDown=Date.now();
-});
-
-document.addEventListener('pointerup',e=>{
-  const item=e.target.closest('.item');
-  if(!item) return;
-  const t=item.dataset.pointerDown;
-  if(!t) return;
-  const held=Date.now()-t;
-  if(held>180){
-    item.classList.add('dragging');
-  }
-});
-
-runSelfTests();
+    runSelfTests();
     render();
   </script>
 </body>
 </html>
-
