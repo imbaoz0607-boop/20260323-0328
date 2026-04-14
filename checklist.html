@@ -9,7 +9,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="小尾巴" />
   <meta name="mobile-web-app-capable" content="yes" />
-  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="apple-touch-icon" href="icon.png" />
   <style>
     :root{
       --bg:#f4f7fb;
@@ -45,7 +45,6 @@
       margin-bottom:16px;
     }
     h1{ margin:0; font-size:28px; line-height:1.2; letter-spacing:.2px; }
-    .sub{ margin-top:8px; color:var(--muted); font-size:14px; line-height:1.7; }
     .stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:16px; }
     .stat{ background:#fff; border:1px solid var(--line); border-radius:18px; padding:14px 10px; text-align:center; }
     .stat .num{ font-weight:800; font-size:24px; line-height:1.1; margin-bottom:4px; }
@@ -54,9 +53,7 @@
     .switcher{ display:flex; gap:8px; flex-wrap:wrap; }
     .switch-btn{ background:#fff; }
     .switch-btn.active{ background:var(--accent); color:#fff; border-color:var(--accent); }
-    .group-actions{ display:flex; gap:8px; flex-wrap:wrap; padding:0 16px 14px 52px; }
     .tiny-btn{ appearance:none; border:none; border-radius:999px; padding:8px 10px; font-size:12px; cursor:pointer; background:#fff; color:var(--text); border:1px solid var(--line); }
-    .tiny-btn.danger{ color:#b91c1c; border-color:#fecaca; background:#fff5f5; }
     .item{ display:flex; align-items:flex-start; gap:10px; min-height:40px; padding:7px 0; }
     .item.dragging{ opacity:.45; }
     .item-main{ display:flex; align-items:flex-start; gap:10px; flex:1; min-width:0; }
@@ -65,8 +62,6 @@
     .delete-btn:hover{ background:#f8fafc; color:#b91c1c; }
     .item .text{ flex:1; line-height:1.55; padding-top:1px; }
     .editor-row{ display:flex; gap:8px; padding:0 16px 16px 52px; }
-    .editor-row.drugstore-editor{flex-wrap:wrap;align-items:center;padding:0 16px 16px 16px}
-    .file-btn{display:inline-flex;align-items:center;justify-content:center;min-width:110px}
     .editor-input{ flex:1; border:1px solid var(--line); border-radius:12px; padding:10px 12px; font-size:14px; }
     button{ appearance:none; border:none; border-radius:999px; padding:11px 14px; font-size:14px; cursor:pointer; background:#fff; color:var(--text); border:1px solid var(--line); box-shadow:0 3px 10px rgba(15,23,42,.04); }
     button.primary{ background:var(--accent); color:#fff; border-color:var(--accent); }
@@ -76,7 +71,7 @@
     .group summary::-webkit-details-marker{ display:none; }
     .summary-main{ display:flex; align-items:center; gap:12px; flex:1; min-width:0; }
     .title-area{ min-width:0; flex:1; }
-   .title-row{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+    .title-row{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
     .group-title{ font-size:17px; font-weight:800; }
     .group-meta{ margin-top:4px; color:var(--muted); font-size:12px; }
     .badge{ display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; font-size:12px; font-weight:700; background:var(--accent-soft); color:var(--accent); border:1px solid rgba(37,99,235,.12); }
@@ -84,54 +79,57 @@
     .caret{ width:12px; height:12px; border-right:2px solid #94a3b8; border-bottom:2px solid #94a3b8; transform:rotate(45deg); transition:.18s ease; margin-right:4px; flex:0 0 auto; }
     details[open] .caret{ transform:rotate(225deg); margin-top:6px; }
     .items{ border-top:1px solid #f1f5f9; padding:4px 16px 16px 52px; display:grid; gap:6px; }
-
-/* Card style (for drugstore) */
-.card-grid{display:flex;gap:12px;padding:14px 16px 18px 16px;border-top:1px solid #f1f5f9;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
-.card-grid::-webkit-scrollbar{height:8px}
-.card-grid::-webkit-scrollbar-thumb{background:#d7deea;border-radius:999px}
-.card-grid::-webkit-scrollbar-track{background:transparent}
-.card-item{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 10px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.04);position:relative;cursor:pointer;flex:0 0 160px;min-width:160px;scroll-snap-align:start}
-.card-item.checked{background:var(--done-soft);border-color:#bbf7d0}
-.card-item input{position:absolute;top:8px;right:8px}
-.card-item .text{display:block;font-size:13px;margin-top:6px;line-height:1.3}
-.card-item .price{display:block;font-size:12px;color:var(--muted);margin-top:2px}
-.card-item img{width:70px;height:70px;object-fit:contain;display:block;margin:8px auto 4px;cursor:zoom-in}
-.cover-brand{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,.04);flex:0 0 100%;min-width:100%}
-.cover-brand summary{list-style:none;display:flex;align-items:center;justify-content:space-between;padding:16px 18px;cursor:default;font-weight:800;color:var(--text);user-select:text}
-.cover-brand summary::-webkit-details-marker{display:none}
-.cover-brand-caret{width:10px;height:10px;border-right:2px solid #94a3b8;border-bottom:2px solid #94a3b8;transform:rotate(45deg);transition:.18s ease;flex:0 0 auto}
-.cover-brand[open] .cover-brand-caret{transform:rotate(225deg);margin-top:6px}
-.cover-brand-grid{display:flex;gap:12px;padding:14px 16px 18px 16px;border-top:1px solid #f1f5f9;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
-.cover-brand-grid::-webkit-scrollbar{height:8px}
-.cover-brand-grid::-webkit-scrollbar-thumb{background:#d7deea;border-radius:999px}
-.cover-brand-grid::-webkit-scrollbar-track{background:transparent}
-.image-modal{position:fixed;inset:0;background:rgba(15,23,42,.72);display:flex;align-items:center;justify-content:center;padding:20px;z-index:100;opacity:0;pointer-events:none;transition:.2s ease}
-.image-modal.show{opacity:1;pointer-events:auto}
-.modal-card{position:relative;max-width:min(92vw,720px);max-height:88vh;background:#fff;border-radius:24px;padding:16px 52px;box-shadow:0 20px 60px rgba(0,0,0,.28)}
-.modal-card img{display:block;max-width:100%;max-height:72vh;object-fit:contain;border-radius:16px}
-.modal-close{position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:22px;line-height:1;cursor:pointer;box-shadow:none}
-.modal-title{margin-top:10px;text-align:center;font-size:14px;color:var(--muted)}
-.modal-nav{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:24px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:none;z-index:2}
-.modal-prev{left:10px}
-.modal-next{right:10px}
-.modal-nav[disabled]{opacity:.35;cursor:not-allowed}
-.modal-counter{margin-top:6px;text-align:center;font-size:12px;color:var(--muted)}
-    .item{ display:flex; align-items:flex-start; gap:10px; min-height:40px; padding:7px 0; }
-    .item .text{ flex:1; line-height:1.55; padding-top:1px; }
+    .card-grid{display:flex;gap:12px;padding:14px 16px 18px 16px;border-top:1px solid #f1f5f9;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+    .card-grid::-webkit-scrollbar{height:8px}
+    .card-grid::-webkit-scrollbar-thumb{background:#d7deea;border-radius:999px}
+    .card-grid::-webkit-scrollbar-track{background:transparent}
+    .card-item{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 10px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.04);position:relative;cursor:pointer;flex:0 0 160px;min-width:160px;scroll-snap-align:start}
+    .card-item.checked{background:var(--done-soft);border-color:#bbf7d0}
+    .card-item input{position:absolute;top:8px;right:8px}
+    .card-item .text{display:block;font-size:13px;margin-top:6px;line-height:1.3}
+    .card-item .price{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+    .card-item img{width:70px;height:70px;object-fit:contain;display:block;margin:8px auto 4px;cursor:zoom-in}
+    .cover-brand{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,.04);flex:0 0 100%;min-width:100%}
+    .cover-brand summary{list-style:none;display:flex;align-items:center;justify-content:space-between;padding:16px 18px;cursor:default;font-weight:800;color:var(--text);user-select:text}
+    .cover-brand summary::-webkit-details-marker{display:none}
+    .cover-brand-caret{width:10px;height:10px;border-right:2px solid #94a3b8;border-bottom:2px solid #94a3b8;transform:rotate(45deg);transition:.18s ease;flex:0 0 auto}
+    .cover-brand[open] .cover-brand-caret{transform:rotate(225deg);margin-top:6px}
+    .cover-brand-grid{display:flex;gap:12px;padding:14px 16px 18px 16px;border-top:1px solid #f1f5f9;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+    .cover-brand-grid::-webkit-scrollbar{height:8px}
+    .cover-brand-grid::-webkit-scrollbar-thumb{background:#d7deea;border-radius:999px}
+    .cover-brand-grid::-webkit-scrollbar-track{background:transparent}
+    .image-modal{position:fixed;inset:0;background:rgba(15,23,42,.72);display:flex;align-items:center;justify-content:center;padding:20px;z-index:100;opacity:0;pointer-events:none;transition:.2s ease}
+    .image-modal.show{opacity:1;pointer-events:auto}
+    .modal-card{position:relative;max-width:min(92vw,720px);max-height:88vh;background:#fff;border-radius:24px;padding:16px 52px;box-shadow:0 20px 60px rgba(0,0,0,.28)}
+    .modal-card img{display:block;max-width:100%;max-height:72vh;object-fit:contain;border-radius:16px}
+    .modal-close{position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:22px;line-height:1;cursor:pointer;box-shadow:none}
+    .modal-title{margin-top:10px;text-align:center;font-size:14px;color:var(--muted)}
+    .modal-nav{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:24px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:none;z-index:2}
+    .modal-prev{left:10px}
+    .modal-next{right:10px}
+    .modal-nav[disabled]{opacity:.35;cursor:not-allowed}
+    .modal-counter{margin-top:6px;text-align:center;font-size:12px;color:var(--muted)}
     .item.checked .text{ color:#9ca3af; text-decoration:line-through; }
     input[type="checkbox"]{ width:22px; height:22px; accent-color:var(--accent); cursor:pointer; flex:0 0 auto; margin:0; }
-    .footer{ text-align:center; color:var(--muted); font-size:12px; line-height:1.7; margin-top:18px; }
     .toast{ position:fixed; left:50%; bottom:22px; transform:translateX(-50%) translateY(12px); background:rgba(17,24,39,.92); color:#fff; padding:10px 14px; border-radius:999px; font-size:13px; opacity:0; pointer-events:none; transition:.2s ease; z-index:50; white-space:nowrap; }
     .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
-    @media (max-width:640px){ .wrap{ padding:14px 12px 34px; } h1{ font-size:24px; } .group summary{ padding:14px; } .items{ padding:4px 14px 14px 46px; } .group-title{ font-size:16px; } .stats .stat .num{ font-size:22px; } .card-item{flex:0 0 140px;min-width:140px} .modal-card{padding:16px 44px} .modal-nav{width:34px;height:34px;font-size:22px} }
+    @media (max-width:640px){
+      .wrap{ padding:14px 12px 34px; }
+      h1{ font-size:24px; }
+      .group summary{ padding:14px; }
+      .items{ padding:4px 14px 14px 46px; }
+      .group-title{ font-size:16px; }
+      .stats .stat .num{ font-size:22px; }
+      .card-item{flex:0 0 140px;min-width:140px}
+      .modal-card{padding:16px 44px}
+      .modal-nav{width:34px;height:34px;font-size:22px}
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
     <section class="hero">
       <h1>📜 List</h1>
-      
-
       <div class="stats">
         <div class="stat">
           <div class="num" id="doneCount">0</div>
@@ -152,12 +150,11 @@
           <button class="switch-btn" id="drugstoreBtn">購物清單</button>
         </div>
         <button class="primary" id="toggleExpandBtn">展開全部 ▼</button>
-        
       </div>
     </section>
-<div id="groupContainer"></div>
 
-
+    <div id="groupContainer"></div>
+  </div>
 
   <div class="toast" id="toast">已儲存</div>
 
@@ -166,7 +163,7 @@
       <button class="modal-close" id="modalClose" type="button" aria-label="關閉">×</button>
       <button class="modal-nav modal-prev" id="modalPrev" type="button" aria-label="上一張">‹</button>
       <button class="modal-nav modal-next" id="modalNext" type="button" aria-label="下一張">›</button>
-      <img id="modalImage" src="" alt="商品圖片放大預覽">
+      <img id="modalImage" src="" alt="商品圖片放大預覽" />
       <div class="modal-title" id="modalTitle"></div>
       <div class="modal-counter" id="modalCounter"></div>
     </div>
@@ -189,48 +186,82 @@
       drugstore: {
         title: "📜 List",
         groups: [
-          { title: "藥品", items: [
-            { name:"EVE止痛藥", img:"images/1.jpg" },
-            { name:"大正漢方便秘藥", img:"images/2.jpg" },
-            { name:"SVELTY黑薑", img:"images/3.jpg" },
-            { name:"SVELTY3倍酵母", img:"images/4.jpg" },
-            { name:"QualityFirst眼膜", img:"images/12.jpg" },
-            { name:"LOXONIN EX貼布", img:"images/13.jpg" },
-            { name:"LOXONIN EX凝膠", img:"images/14.jpg" },
-            { name:"樂敦V眼藥水", img:"images/15.jpg" },
-            { name:"acnes labo痘痘貼+藥膏", img:"images/16.jpg" }
-          ] },
-          { title: "保養/化妝", items: [
-            { name:"COVERMARK", covermark:true, items:[
-              { name:"200ml+30ml クレンジング オイル3,300円(税込)", img:"images/8.jpg" },
-              { name:"モイスチュア チャージ セラム9,900円(税込)", img:"images/9.jpg" },
-              { name:"モイスチュア チャージ セラム(リフィル)9,350円(税込)", img:"images/10.jpg" },
-              { name:"モイスチュア リッチ リンクル クリーム6,380円(税込)", img:"images/11.jpg" }
-            ] }
-          ] },
-          { title: "其他", items: [
-            { name:"TADAS[タダス] 2,916円(税込)", img:"images/5.jpg" },
-            { name:"ビトアス　マイパーフェクション9,350円(税込)", img:"images/6.jpg" },
-            { name:"ビトアス　マイパーフェクション　ブライトニング＆リンクル9,900円(税込)", img:"images/7.jpg" }
-          ] },
-          { title: "saint james", items: [
-            { name:"OUESSANTウェッソン(縮水2cm)", covermark:true, items:[
-              { name:"ウェッソン・無地 NOIR［黒］14,300円(税込)", img:"images/17.jpg" },
-              { name:"ウェッソン・無地 NEIGE［白］14,300円(税込)", img:"images/18.jpg" },
-              { name:"ウェッソン・ボーダー NEIGE/GRISCLAIR［白/霜降りペールグレー］14,300円(税込)", img:"images/19.jpg" },
-              { name:"ウェッソン・ボーダー GRIS/NEIGE［杢グレー/白］14,300円(税込)", img:"images/20.jpg" },
-              { name:"ウェッソン・ボーダー NAVY/PIN［ネイビー/ダークグリーン］14,300円(税込)", img:"images/21.jpg" }
-            ] }
-          ] },
-          { title: "安全帽", items: [
-            { name:"SHOEI X‑Fifteen MATT BLACK", img:"images/22.jpg" },
-            { name:"SHOEI X‑Fifteen BLACK", img:"images/23.jpg" }
-          ] }
+          {
+            title: "藥品",
+            items: [
+              { name:"EVE止痛藥", img:"images/1.jpg" },
+              { name:"大正漢方便秘藥", img:"images/2.jpg" },
+              { name:"SVELTY黑薑", img:"images/3.jpg" },
+              { name:"SVELTY3倍酵母", img:"images/4.jpg" },
+              { name:"QualityFirst眼膜", img:"images/12.jpg" },
+              { name:"LOXONIN EX貼布", img:"images/13.jpg" },
+              { name:"LOXONIN EX凝膠", img:"images/14.jpg" },
+              { name:"樂敦V眼藥水", img:"images/15.jpg" },
+              { name:"acnes labo痘痘貼+藥膏", img:"images/16.jpg" }
+            ]
+          },
+          {
+            title: "保養/化妝",
+            items: [
+              {
+                name:"COVERMARK",
+                covermark:true,
+                items:[
+                  { name:"200ml+30ml クレンジング オイル3,300円(税込)", img:"images/8.jpg" },
+                  { name:"モイスチュア チャージ セラム9,900円(税込)", img:"images/9.jpg" },
+                  { name:"モイスチュア チャージ セラム(リフィル)9,350円(税込)", img:"images/10.jpg" },
+                  { name:"モイスチュア リッチ リンクル クリーム6,380円(税込)", img:"images/11.jpg" }
+                ]
+              }
+            ]
+          },
+          {
+            title: "其他",
+            items: [
+              { name:"TADAS[タダス] 2,916円(税込)", img:"images/5.jpg" },
+              { name:"ビトアス　マイパーフェクション9,350円(税込)", img:"images/6.jpg" },
+              { name:"ビトアス　マイパーフェクション　ブライトニング＆リンクル9,900円(税込)", img:"images/7.jpg" }
+            ]
+          },
+          {
+            title: "saint james",
+            items: [
+              {
+                name:"OUESSANTウェッソン(縮水2cm)",
+                covermark:true,
+                items:[
+                  { name:"ウェッソン・無地 NOIR［黒］14,300円(税込)", img:"images/17.jpg" },
+                  { name:"ウェッソン・無地 NEIGE［白］14,300円(税込)", img:"images/18.jpg" },
+                  { name:"ウェッソン・ボーダー NEIGE/GRISCLAIR［白/霜降りペールグレー］14,300円(税込)", img:"images/19.jpg" },
+                  { name:"ウェッソン・ボーダー GRIS/NEIGE［杢グレー/白］14,300円(税込)", img:"images/20.jpg" },
+                  { name:"ウェッソン・ボーダー NAVY/PIN［ネイビー/ダークグリーン］14,300円(税込)", img:"images/21.jpg" },
+                  { name:"OUESSANT 追加", img:"images/22.jpg" }
+                ]
+              },
+              {
+                name:"MORLAIX モーレ(縮水2cm)",
+                covermark:true,
+                items:[
+                  { name:"モーレ NOIR［黒］12,100円(税込)", img:"images/23.jpg" },
+                  { name:"モーレ NEIGE［白］12,100円(税込)", img:"images/24.jpg" },
+                  { name:"モーレ 追加", img:"images/15.jpg" }
+                ]
+              }
+            ]
+          },
+          {
+            title: "安全帽",
+            items: [
+              { name:"SHOEI X‑Fifteen MATT BLACK", img:"images/22.jpg" },
+              { name:"SHOEI X‑Fifteen BLACK", img:"images/23.jpg" }
+            ]
+          }
         ]
       }
     };
 
     function clone(obj){ return JSON.parse(JSON.stringify(obj)); }
+
     function loadState(){
       try{
         const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
@@ -240,12 +271,12 @@
           checked: saved?.checked || {},
           open: saved?.open || {}
         };
-      }catch(e){}
-      return { activeList: "travel", lists: clone(DEFAULT_LISTS), checked: {}, open: {} };
+      }catch(e){
+        return { activeList: "travel", lists: clone(DEFAULT_LISTS), checked: {}, open: {} };
+      }
     }
 
     const state = loadState();
-
     const container = document.getElementById("groupContainer");
     const toast = document.getElementById("toast");
     const imageModal = document.getElementById("imageModal");
@@ -262,17 +293,60 @@
 
     function keyForItem(listKey, groupTitle, item){ return `${listKey}||${groupTitle}||${item}`; }
     function keyForOpen(listKey, groupTitle){ return `${listKey}||${groupTitle}`; }
-
     function currentList(){ return state.lists[state.activeList]; }
 
+    function splitPrice(name){
+      const match = String(name).match(/(.+?)([0-9,]+円\(税込\))/);
+      if(match){
+        return { text: match[1].trim(), price: match[2] };
+      }
+      return { text: String(name), price: "" };
+    }
+
+    function getFlattenedItems(group){
+      return group.items.flatMap(item => item?.covermark ? (item.items || []) : [item]);
+    }
+
     function getCounts(group){
-      const flattenedItems = group.items.flatMap(item => item?.covermark ? (item.items || []) : [item]);
+      const flattenedItems = getFlattenedItems(group);
       const total = flattenedItems.length;
       const done = flattenedItems.filter(item => {
         const itemName = item?.name ?? item;
         return !!state.checked[keyForItem(state.activeList, group.title, itemName)];
       }).length;
       return { total, done, allDone: total > 0 && done === total };
+    }
+
+    function renderDrugstoreItem(groupTitle, item){
+      const itemName = item.name ?? item;
+      const itemImg = item.img ?? "";
+      const checked = !!state.checked[keyForItem(state.activeList, groupTitle, itemName)];
+      const parts = splitPrice(itemName);
+      return `
+        <label class="card-item ${checked ? "checked" : ""}" data-item="${itemName}">
+          <input type="checkbox" class="item-checkbox" data-group="${groupTitle}" data-item="${itemName}" ${checked ? "checked" : ""}>
+          ${itemImg ? `<img src="${itemImg}" alt="${itemName}" class="zoomable-image" data-full="${itemImg}" data-title="${itemName}">` : ""}
+          <span class="text">${parts.text}</span>
+          ${parts.price ? `<span class="price">${parts.price}</span>` : ""}
+          <button class="delete-btn" type="button" data-group="${groupTitle}" data-item="${itemName}" style="position:absolute;bottom:6px;right:6px">×</button>
+        </label>
+      `;
+    }
+
+    function renderDrugstoreBrand(groupTitle, item){
+      return `
+        <details class="cover-brand">
+          <summary>
+            <div style="display:flex;align-items:center;gap:10px">
+              <span>${item.name}</span>
+            </div>
+            <span class="cover-brand-caret"></span>
+          </summary>
+          <div class="cover-brand-grid">
+            ${(item.items || []).map(sub => renderDrugstoreItem(groupTitle, sub)).join("")}
+          </div>
+        </details>
+      `;
     }
 
     function render(){
@@ -289,45 +363,7 @@
         const itemsHtml = state.activeList === "drugstore"
           ? `
             <div class="card-grid" data-group="${group.title}">
-              ${group.items.map(item => {
-                const itemName = item.name ?? item;
-                const itemImg = item.img ?? null;
-                const isCovermark = item.covermark === true;
-                const checked = !!state.checked[keyForItem(state.activeList, group.title, itemName)];
-                if(isCovermark){
-                  return `
-                  <details class="cover-brand">
-                    <summary>
-                      <div style="display:flex;align-items:center;gap:10px">
-                        
-                        <span>${item.name}</span>
-                      </div>
-                      <span class="cover-brand-caret"></span>
-                    </summary>
-                    <div class="cover-brand-grid">
-                      ${(item.items||[]).map(sub => {
-                        const subChecked = !!state.checked[keyForItem(state.activeList, group.title, sub.name)];
-                        return `
-                        <label class="card-item ${subChecked ? "checked" : ""}" data-item="${sub.name}">
-                          <input type="checkbox" class="item-checkbox" data-group="${group.title}" data-item="${sub.name}" ${subChecked ? "checked" : ""}>
-                          ${sub.img ? `<img src="${sub.img}" alt="${sub.name}" class="zoomable-image" data-full="${sub.img}" data-title="${sub.name}">` : ""}
-                          ${(()=>{const m=sub.name.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<span class="text">${m[1].trim()}</span><span class="price">${m[2]}</span>`;}return `<span class="text">${sub.name}</span>`;})()}
-                        </label>
-                      `;
-                      }).join("")}
-                    </div>
-                  </details>
-                  `;
-                }
-                return `
-                  <label class="card-item ${checked ? "checked" : ""}" data-item="${itemName}">
-                    <input type="checkbox" class="item-checkbox" data-group="${group.title}" data-item="${itemName}" ${checked ? "checked" : ""}>
-                    ${itemImg ? `<img src="${itemImg}" alt="${itemName}" class="zoomable-image" data-full="${itemImg}" data-title="${itemName}">` : ""}
-${(()=>{const m=itemName.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<span class="text">${m[1].trim()}</span><span class="price">${m[2]}</span>`;}return `<span class="text">${itemName}</span>`;})()}
-                    <button class="delete-btn" type="button" data-group="${group.title}" data-item="${itemName}" style="position:absolute;bottom:6px;right:6px">×</button>
-                  </label>
-                `;
-              }).join("")}
+              ${group.items.map(item => item?.covermark ? renderDrugstoreBrand(group.title, item) : renderDrugstoreItem(group.title, item)).join("")}
             </div>
           `
           : `
@@ -368,11 +404,11 @@ ${(()=>{const m=itemName.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<spa
             ${itemsHtml}
 
             ${state.activeList !== "drugstore" ? `
-            <div class="editor-row">
-              <input class="editor-input" type="text" placeholder="新增 ${group.title} 物品" data-add-input="${group.title}">
-              <button class="tiny-btn" type="button" data-add-btn="${group.title}">新增</button>
-            </div>
-            ` : ``}
+              <div class="editor-row">
+                <input class="editor-input" type="text" placeholder="新增 ${group.title} 物品" data-add-input="${group.title}">
+                <button class="tiny-btn" type="button" data-add-btn="${group.title}">新增</button>
+              </div>
+            ` : ""}
           </details>
         `;
       }).join("");
@@ -383,38 +419,17 @@ ${(()=>{const m=itemName.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<spa
     }
 
     function bindEvents(){
-      document.querySelectorAll(".brand-checkbox").forEach(cb => {
-        const detail = cb.closest("details");
-        const itemBoxes = detail?.querySelectorAll(".cover-brand-grid .item-checkbox") || [];
-        if(itemBoxes.length){
-          cb.checked = [...itemBoxes].every(box => box.checked);
-        }
-        cb.addEventListener("click", e => e.stopPropagation());
-        cb.addEventListener("change", function(){
-          const boxes = this.closest("details").querySelectorAll(".cover-brand-grid .item-checkbox");
-          boxes.forEach(box => {
-            box.checked = this.checked;
-            const name = box.dataset.item;
-            state.checked[keyForItem(state.activeList, "保養", name)] = this.checked;
-            const card = box.closest(".card-item");
-            if(card) card.classList.toggle("checked", this.checked);
-          });
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-          syncGroup("保養", false);
-          refreshStats();
-        });
-      });
-
       document.querySelectorAll(".zoomable-image").forEach(img => {
         img.addEventListener("click", function(e){
           e.preventDefault();
           e.stopPropagation();
           const scope = this.closest('.cover-brand-grid, .card-grid');
-          const gallery = [...(scope?.querySelectorAll('.zoomable-image') || [])].map(node => ({
+          const nodes = [...(scope?.querySelectorAll('.zoomable-image') || [])];
+          const gallery = nodes.map(node => ({
             src: node.dataset.full || node.src,
             title: node.dataset.title || node.alt || ""
           }));
-          const index = Math.max(0, [...(scope?.querySelectorAll('.zoomable-image') || [])].indexOf(this));
+          const index = Math.max(0, nodes.indexOf(this));
           openImageModal(gallery, index);
         });
       });
@@ -427,16 +442,6 @@ ${(()=>{const m=itemName.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<spa
           state.checked[keyForItem(state.activeList, groupTitle, item)] = this.checked;
           const label = this.closest(".item, .card-item");
           if(label) label.classList.toggle("checked", this.checked);
-
-          const brandDetail = this.closest(".cover-brand");
-          if(brandDetail){
-            const brandBox = brandDetail.querySelector(".brand-checkbox");
-            const boxes = brandDetail.querySelectorAll(".cover-brand-grid .item-checkbox");
-            if(brandBox && boxes.length){
-              brandBox.checked = [...boxes].every(box => box.checked);
-            }
-          }
-
           syncGroup(groupTitle, true);
           localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
           refreshStats();
@@ -455,7 +460,24 @@ ${(()=>{const m=itemName.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<spa
           holdTimer = setTimeout(() => {
             const group = currentList().groups.find(g => g.title === groupTitle);
             if(!group) return;
-            group.items = group.items.filter(i => (i?.name ?? i) !== item);
+
+            group.items = group.items
+              .map(entry => {
+                if(entry?.covermark){
+                  return {
+                    ...entry,
+                    items: (entry.items || []).filter(sub => (sub?.name ?? sub) !== item)
+                  };
+                }
+                return entry;
+              })
+              .filter(entry => {
+                if(entry?.covermark){
+                  return (entry.items || []).length > 0;
+                }
+                return (entry?.name ?? entry) !== item;
+              });
+
             delete state.checked[keyForItem(state.activeList, groupTitle, item)];
             localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
             showToast("已刪除物品");
@@ -483,14 +505,6 @@ ${(()=>{const m=itemName.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<spa
         });
       });
 
-      document.querySelectorAll("[data-add-file]").forEach(fileInput => {
-        fileInput.addEventListener("change", function(){
-          const file = this.files && this.files[0];
-          if(!file) return;
-          showToast(`已選擇圖片：${file.name}`);
-        });
-      });
-
       document.querySelectorAll(".group-checkbox").forEach(cb => {
         cb.addEventListener("click", e => e.stopPropagation());
         cb.addEventListener("change", function(){
@@ -498,13 +512,12 @@ ${(()=>{const m=itemName.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<spa
           const group = currentList().groups.find(g => g.title === groupTitle);
           if(!group) return;
 
-          const flattenedItems = group.items.flatMap(item => item?.covermark ? (item.items || []) : [item]);
-          flattenedItems.forEach(item => {
+          getFlattenedItems(group).forEach(item => {
             const itemName = item?.name ?? item;
             state.checked[keyForItem(state.activeList, groupTitle, itemName)] = this.checked;
           });
 
-          state.open[keyForOpen(state.activeList, groupTitle)] = this.checked ? false : true;
+          state.open[keyForOpen(state.activeList, groupTitle)] = !this.checked;
           localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
           render();
         });
@@ -530,7 +543,7 @@ ${(()=>{const m=itemName.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<spa
 
       document.querySelectorAll('.cover-brand > summary').forEach(summary => {
         summary.addEventListener('click', function(e){
-          if(e.target.closest('input, button, span')) return;
+          if(e.target.closest('input, button')) return;
           e.preventDefault();
           const detail = this.parentElement;
           detail.open = !detail.open;
@@ -552,8 +565,6 @@ ${(()=>{const m=itemName.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<spa
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
         render();
       };
-
-      
 
       document.getElementById("travelBtn").onclick = function(){
         state.activeList = "travel";
@@ -645,7 +656,6 @@ ${(()=>{const m=itemName.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<spa
 
     function addItem(groupTitle){
       const input = document.querySelector(`[data-add-input="${groupTitle}"]`);
-      const fileInput = document.querySelector(`[data-add-file="${groupTitle}"]`);
       const value = input?.value.trim();
       if(!value) return;
       const group = currentList().groups.find(g => g.title === groupTitle);
@@ -655,28 +665,10 @@ ${(()=>{const m=itemName.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<spa
         return;
       }
 
-      const isDrugstore = state.activeList === "drugstore";
-      const file = fileInput?.files?.[0];
-
-      if(isDrugstore && file){
-        const reader = new FileReader();
-        reader.onload = function(){
-          group.items.push({ name:value, img:reader.result });
-          if(input) input.value = "";
-          if(fileInput) fileInput.value = "";
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-          showToast("已新增品項與圖片");
-          render();
-        };
-        reader.readAsDataURL(file);
-        return;
-      }
-
       group.items.push(value);
       if(input) input.value = "";
-      if(fileInput) fileInput.value = "";
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      showToast(isDrugstore ? "已新增品項" : "已新增物品");
+      showToast("已新增物品");
       render();
     }
 
@@ -696,8 +688,13 @@ ${(()=>{const m=itemName.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<spa
       badge.classList.toggle("done", allDone);
       meta.textContent = `${done} / ${total} 已完成`;
       if(autoCollapse){
-        if(allDone){ detail.open = false; state.open[keyForOpen(state.activeList, groupTitle)] = false; }
-        else{ detail.open = true; state.open[keyForOpen(state.activeList, groupTitle)] = true; }
+        if(allDone){
+          detail.open = false;
+          state.open[keyForOpen(state.activeList, groupTitle)] = false;
+        }else{
+          detail.open = true;
+          state.open[keyForOpen(state.activeList, groupTitle)] = true;
+        }
       }
     }
 
@@ -733,9 +730,7 @@ ${(()=>{const m=itemName.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<spa
           if(isDesktop){
             item.addEventListener('mousedown', e => {
               if(e.target.closest('input, button')) return;
-              holdTimer = setTimeout(() => {
-                enableDesktopDrag();
-              }, 220);
+              holdTimer = setTimeout(enableDesktopDrag, 220);
             });
 
             item.addEventListener('mouseup', () => {
@@ -764,15 +759,15 @@ ${(()=>{const m=itemName.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<spa
             });
           }
 
-          item.addEventListener('touchstart', e => {
-            holdTimer = setTimeout(()=>{
+          item.addEventListener('touchstart', () => {
+            holdTimer = setTimeout(() => {
               draggingEl = item;
               item.classList.add('dragging');
               if(navigator.vibrate) navigator.vibrate(10);
             }, 220);
-          },{passive:true});
+          }, { passive:true });
 
-          item.addEventListener('touchend', ()=>{
+          item.addEventListener('touchend', () => {
             clearTimeout(holdTimer);
             if(draggingEl){
               draggingEl.classList.remove('dragging');
@@ -781,7 +776,7 @@ ${(()=>{const m=itemName.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<spa
             }
           });
 
-          item.addEventListener('touchcancel', ()=>{
+          item.addEventListener('touchcancel', () => {
             clearTimeout(holdTimer);
             draggingEl = null;
           });
@@ -800,15 +795,13 @@ ${(()=>{const m=itemName.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<spa
         listEl.addEventListener('touchmove', e => {
           if(!draggingEl) return;
           const touch = e.touches[0];
-
           const after = [...listEl.querySelectorAll('.item:not(.dragging)')]
             .find(el => touch.clientY <= el.getBoundingClientRect().top + el.offsetHeight / 2);
 
           if(!after) listEl.appendChild(draggingEl);
           else listEl.insertBefore(draggingEl, after);
-
           e.preventDefault();
-        },{passive:false});
+        }, { passive:false });
       });
     }
 
@@ -822,17 +815,27 @@ ${(()=>{const m=itemName.match(/(.+?)([0-9,]+円\(税込\))/);if(m){return `<spa
 
     function refreshStats(){
       const list = currentList();
-      const total = list.groups.reduce((sum, group) => sum + group.items.flatMap(item => item?.covermark ? (item.items || []) : [item]).length, 0);
-      const done = list.groups.reduce((sum, group) => sum + group.items.flatMap(item => item?.covermark ? (item.items || []) : [item]).filter(item => {
+      const total = list.groups.reduce((sum, group) => sum + getFlattenedItems(group).length, 0);
+      const done = list.groups.reduce((sum, group) => sum + getFlattenedItems(group).filter(item => {
         const itemName = item?.name ?? item;
         return !!state.checked[keyForItem(state.activeList, group.title, itemName)];
       }).length, 0);
       const percent = total ? Math.round((done / total) * 100) : 0;
-      document.getElementById("doneCount").textContent = done;
-      document.getElementById("totalCount").textContent = total;
-      document.getElementById("percentCount").textContent = percent + "%";
+      document.getElementById("doneCount").textContent = String(done);
+      document.getElementById("totalCount").textContent = String(total);
+      document.getElementById("percentCount").textContent = `${percent}%`;
     }
 
+    function runSelfTests(){
+      console.assert(Array.isArray(DEFAULT_LISTS.travel.groups), 'travel groups should be an array');
+      console.assert(Array.isArray(DEFAULT_LISTS.drugstore.groups), 'drugstore groups should be an array');
+      console.assert(DEFAULT_LISTS.drugstore.groups.some(g => g.title === 'saint james'), 'saint james group should exist');
+      console.assert(DEFAULT_LISTS.drugstore.groups.some(g => g.title === '安全帽'), '安全帽 group should exist');
+      console.assert(splitPrice('モイスチュア チャージ セラム9,900円(税込)').price === '9,900円(税込)', 'price parser should extract price');
+      console.assert(splitPrice('EVE止痛藥').text === 'EVE止痛藥', 'price parser should keep plain name');
+    }
+
+    runSelfTests();
     render();
   </script>
 </body>
