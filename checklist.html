@@ -466,7 +466,7 @@
         img.addEventListener("click", function(e){
           e.preventDefault();
           e.stopPropagation();
-          const scope = this.closest('.cover-brand-grid, .card-grid');
+          const scope = this.closest('.cover-brand-grid, .card-grid, .card-wrap-grid');
           const nodes = [...(scope?.querySelectorAll('.zoomable-image') || [])];
           const gallery = nodes.map(node => ({
             src: node.dataset.full || node.src,
