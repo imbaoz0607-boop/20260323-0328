@@ -273,7 +273,8 @@
           {
             title: "其他",
             items: [
-          { name:"DANTON ポリオックスフォード シャツワンピース", price:"17,050円(税込)", img:"images/80.jpg" },
+          { name:"DANTON ポリオックスフォード シャツワンピース", price:"17,050円(税込)", img:"images/80.jpg", url:"https://bshop-inc.com/shop/ec/item/view/shop_product_id/41641" },
+          { name:"DANTON ドリル カラーレス ジャケット MEN 25,300円(税込)", img:"images/81.jpg", url:"https://bshop-inc.com/shop/ec/item/view/shop_product_id/41633" },
           { name:"POLO RALPH LAUREN ポロシャツ", img:"images/83.jpg", url:"https://www.ralphlauren.co.jp/%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%8B%E3%83%83%E3%82%AF-%E3%83%A1%E3%83%83%E3%82%B7%E3%83%A5-%E3%83%9D%E3%83%AD%E3%82%B7%E3%83%A3%E3%83%84-401481.html" },
        ]
           },
@@ -309,8 +310,8 @@
           {
             title: "安全帽",
             items: [
-              { name:"SHOEI X‑Fifteen MATT BLACK", img:"images/81.jpg" },
-              { name:"SHOEI X‑Fifteen BLACK", img:"images/82.jpg" }
+              { name:"SHOEI X‑Fifteen MATT BLACK", img:"images/90.jpg" },
+              { name:"SHOEI X‑Fifteen BLACK", img:"images/91.jpg" }
             ]
           }
         ]
@@ -501,7 +502,7 @@
         let pressTimer = null;
         let longPress = false;
 
-        img.addEventListener("mousedown", function(e){
+        const startPress = function(){
           const url = this.dataset.url;
           if(!url) return;
           longPress = false;
@@ -509,10 +510,16 @@
             longPress = true;
             window.open(url, "_blank");
           }, 500);
-        });
+        };
 
-        img.addEventListener("mouseup", ()=> clearTimeout(pressTimer));
-        img.addEventListener("mouseleave", ()=> clearTimeout(pressTimer));
+        const cancelPress = ()=> clearTimeout(pressTimer);
+
+        img.addEventListener("mousedown", startPress);
+        img.addEventListener("touchstart", startPress, {passive:true});
+        img.addEventListener("mouseup", cancelPress);
+        img.addEventListener("mouseleave", cancelPress);
+        img.addEventListener("touchend", cancelPress);
+        img.addEventListener("touchcancel", cancelPress);
 
         img.addEventListener("click", function(e){
           if(longPress) return;
