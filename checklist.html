@@ -274,6 +274,7 @@
             title: "其他",
             items: [
           { name:"DANTON ポリオックスフォード シャツワンピース", price:"17,050円(税込)", img:"images/80.jpg" },
+          { name:"POLO RALPH LAUREN ポロシャツ", img:"images/83.jpg", url:"https://www.ralphlauren.co.jp/%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%8B%E3%83%83%E3%82%AF-%E3%83%A1%E3%83%83%E3%82%B7%E3%83%A5-%E3%83%9D%E3%83%AD%E3%82%B7%E3%83%A3%E3%83%84-401481.html" },
        ]
           },
           {
@@ -392,7 +393,7 @@
       return `
         <label class="card-item ${checked ? "checked" : ""}" data-item="${itemName}">
           <input type="checkbox" class="item-checkbox" data-group="${groupTitle}" data-item="${itemName}" ${checked ? "checked" : ""}>
-          ${itemImg ? `<img src="${itemImg}" alt="${itemName}" class="zoomable-image" data-full="${itemImg}" data-title="${itemName}">` : ""}
+          ${itemImg ? `<img src="${itemImg}" alt="${itemName}" class="zoomable-image" data-full="${itemImg}" data-title="${itemName}" data-url="${item.url || ""}">` : ""}
           <span class="text">${parts.text}</span>
           ${parts.price ? `<span class="price">${parts.price}</span>` : ""}
           <button class="delete-btn" type="button" data-group="${groupTitle}" data-item="${itemName}" style="position:absolute;bottom:6px;right:6px">×</button>
@@ -497,9 +498,27 @@
 
     function bindEvents(){
       document.querySelectorAll(".zoomable-image").forEach(img => {
+        let pressTimer = null;
+        let longPress = false;
+
+        img.addEventListener("mousedown", function(e){
+          const url = this.dataset.url;
+          if(!url) return;
+          longPress = false;
+          pressTimer = setTimeout(()=>{
+            longPress = true;
+            window.open(url, "_blank");
+          }, 500);
+        });
+
+        img.addEventListener("mouseup", ()=> clearTimeout(pressTimer));
+        img.addEventListener("mouseleave", ()=> clearTimeout(pressTimer));
+
         img.addEventListener("click", function(e){
+          if(longPress) return;
           e.preventDefault();
           e.stopPropagation();
+
           const scope = this.closest('.cover-brand-grid, .card-grid, .card-wrap-grid');
           const nodes = [...(scope?.querySelectorAll('.zoomable-image') || [])];
           const gallery = nodes.map(node => ({
